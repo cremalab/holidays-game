@@ -629,7 +629,19 @@ module.exports = Avatar = (function(_super) {
       this.stopMovementDirection(left);
     }
     if (blocked_right) {
-      return this.stopMovementDirection(right);
+      this.stopMovementDirection(right);
+    }
+    if (blocked_up) {
+      console.log('blocked_up');
+    }
+    if (blocked_down) {
+      console.log('blocked_down');
+    }
+    if (blocked_left) {
+      console.log('blocked_left');
+    }
+    if (blocked_right) {
+      return console.log('blocked_right');
     }
   };
 
@@ -690,34 +702,40 @@ module.exports = MapView = (function(_super) {
   };
 
   MapView.prototype.checkPlayerPosition = function(player, avatar) {
-    var pan_down, pan_left, pan_right, pan_up, px, py, within_rect, within_x, within_y;
+    var new_x, new_y, pan_down, pan_left, pan_right, pan_up, px, py, within_rect, within_x, within_y;
     px = player.get('x_position');
     py = player.get('y_position');
     if (this.canMoveTo(px, py, avatar)) {
       avatar.collision = false;
-      within_x = px > this.viewport.left && px < this.viewport.right;
-      within_y = py > this.viewport.top && py < this.viewport.bottom;
-      within_rect = within_x && within_y;
-      pan_right = px > ((this.viewport.right - this.offset_x) - avatar.width);
-      pan_left = px < (this.viewport.left - this.offset_x);
-      pan_down = py > ((this.viewport.bottom - this.offset_y) - avatar.height);
-      pan_up = py < (this.viewport.top - this.offset_y);
-      if (pan_left) {
-        this.offset_x = this.rect.left + (this.viewport.left - px);
-      }
-      if (pan_right) {
-        this.offset_x = this.rect.left + ((this.viewport.right - avatar.width) - px);
-      }
-      if (pan_up) {
-        this.offset_y = this.rect.top + (this.viewport.top - py);
-      }
-      if (pan_down) {
-        this.offset_y = this.rect.top + ((this.viewport.bottom - avatar.height) - py);
-      }
-      return this.repositionMap(this.offset_x, this.offset_y);
-    } else {
-      return avatar.collision = true;
     }
+    within_x = px > this.viewport.left && px < this.viewport.right;
+    within_y = py > this.viewport.top && py < this.viewport.bottom;
+    within_rect = within_x && within_y;
+    pan_right = px > ((this.viewport.right - this.offset_x) - avatar.width);
+    pan_left = px < (this.viewport.left - this.offset_x);
+    pan_down = py > ((this.viewport.bottom - this.offset_y) - avatar.height);
+    pan_up = py < (this.viewport.top - this.offset_y);
+    new_x = this.offset_x;
+    new_y = this.offset_y;
+    if (pan_left) {
+      new_x = this.rect.left + (this.viewport.left - px);
+    }
+    if (pan_right) {
+      new_x = this.rect.left + ((this.viewport.right - avatar.width) - px);
+    }
+    if (pan_up) {
+      new_y = this.rect.top + (this.viewport.top - py);
+    }
+    if (pan_down) {
+      new_y = this.rect.top + ((this.viewport.bottom - avatar.height) - py);
+    }
+    if (!((new_x + this.offset_x) >= 0)) {
+      this.offset_x = new_x;
+    }
+    if (!((new_y + this.offset_y) >= 0)) {
+      this.offset_y = new_y;
+    }
+    return this.repositionMap(this.offset_x, this.offset_y);
   };
 
   MapView.prototype.repositionMap = function(left, top) {

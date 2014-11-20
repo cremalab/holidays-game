@@ -33,27 +33,34 @@ module.exports = class MapView extends View
     if @canMoveTo(px, py, avatar)
       avatar.collision = false
 
-      within_x = px > @viewport.left and px < @viewport.right
-      within_y = py > @viewport.top and py < @viewport.bottom
-      within_rect = within_x and within_y
+    within_x = px > @viewport.left and px < @viewport.right
+    within_y = py > @viewport.top and py < @viewport.bottom
+    within_rect = within_x and within_y
 
-      pan_right = px > ((@viewport.right - @offset_x) - avatar.width)
-      pan_left  = px < (@viewport.left - @offset_x)
-      pan_down  = py > ((@viewport.bottom - @offset_y) - avatar.height)
-      pan_up    = py < (@viewport.top - @offset_y)
+    pan_right = px > ((@viewport.right - @offset_x) - avatar.width)
+    pan_left  = px < (@viewport.left - @offset_x)
+    pan_down  = py > ((@viewport.bottom - @offset_y) - avatar.height)
+    pan_up    = py < (@viewport.top - @offset_y)
 
-      if pan_left
-        @offset_x = @rect.left + (@viewport.left - px)
-      if pan_right
-        @offset_x = @rect.left + ((@viewport.right - avatar.width) - px)
-      if pan_up
-        @offset_y = @rect.top + (@viewport.top - py)
-      if pan_down
-        @offset_y = @rect.top + ((@viewport.bottom - avatar.height) - py)
+    new_x = @offset_x
+    new_y = @offset_y
 
-      @repositionMap(@offset_x, @offset_y)
-    else
-      avatar.collision = true
+    if pan_left
+      new_x = @rect.left + (@viewport.left - px)
+    if pan_right
+      new_x = @rect.left + ((@viewport.right - avatar.width) - px)
+    if pan_up
+      new_y = @rect.top + (@viewport.top - py)
+    if pan_down
+      new_y = @rect.top + ((@viewport.bottom - avatar.height) - py)
+
+    # Don't pan if it will reveal beyond the edge of the map
+    unless (new_x + @offset_x) >= 0
+      @offset_x = new_x
+    unless (new_y + @offset_y) >= 0
+      @offset_y = new_y
+
+    @repositionMap(@offset_x, @offset_y)
 
 
   repositionMap: (left, top) ->

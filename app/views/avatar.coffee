@@ -170,6 +170,11 @@ module.exports = class Avatar extends View
     @stopMovementDirection(left) if blocked_left
     @stopMovementDirection(right) if blocked_right
 
+    console.log 'blocked_up' if blocked_up
+    console.log 'blocked_down' if blocked_down
+    console.log 'blocked_left' if blocked_left
+    console.log 'blocked_right' if blocked_right
+
     # @collision = true
 
       # @stopMovement()
