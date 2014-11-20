@@ -1,0 +1,17 @@
+{
+  "name": "Cremalab-Holidays",
+  "version": "0.1.0",
+  "main": "public/javascripts/application.js",
+  "dependencies": {
+    "exoskeleton": ">= 0.7.0",
+    "backbone.nativeview": ">= 0.3.2",
+    "backbone.nativeajax": ">= 0.2.0"
+  },
+  "overrides": {
+    "backbone.nativeview": {
+      "dependencies": {
+        "exoskeleton": "*"
+      }
+    }
+  }
+}
