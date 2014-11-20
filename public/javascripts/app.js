@@ -398,11 +398,33 @@ module.exports = Player = (function(_super) {
 });
 
 ;require.register("views/avatar", function(exports, require, module) {
-var Avatar, View, _ref,
+var Avatar, View, directionsByCode, directionsByName, down, left, right, up, _ref,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
 View = require('./view');
+
+left = 37;
+
+up = 38;
+
+right = 39;
+
+down = 40;
+
+directionsByName = {
+  left: left,
+  up: up,
+  right: right,
+  down: down
+};
+
+directionsByCode = {
+  37: "left",
+  38: "up",
+  39: "right",
+  40: "down"
+};
 
 module.exports = Avatar = (function(_super) {
   __extends(Avatar, _super);
@@ -418,11 +440,13 @@ module.exports = Avatar = (function(_super) {
 
   Avatar.prototype.movementInc = 5;
 
+  Avatar.prototype.movementLoopInc = 20;
+
   Avatar.prototype.moving = false;
 
   Avatar.prototype.activeMovementKeys = [];
 
-  Avatar.prototype.movementKeys = [37, 38, 39, 40];
+  Avatar.prototype.movementKeys = [left, up, right, down];
 
   Avatar.prototype.render = function() {
     Avatar.__super__.render.apply(this, arguments);
@@ -431,67 +455,118 @@ module.exports = Avatar = (function(_super) {
 
   Avatar.prototype.bindEvents = function() {
     var _this = this;
-    console.log('bind');
     document.addEventListener('keydown', function(e) {
       if (_this.isMovementKey(e)) {
         return _this.handleKeyDown(e);
       }
     });
     return document.addEventListener('keyup', function(e) {
-      if (_this.isMovementKey(e)) {
-        return _this.stopMovement(e);
-      }
+      return _this.stopMovement(e);
     });
   };
 
   Avatar.prototype.handleKeyDown = function(e) {
     var _this = this;
     e.stopPropagation();
-    this.stopMovement();
     if (this.isMovementKey(e) && this.activeMovementKeys.indexOf(e.keyCode) < 0) {
       this.activeMovementKeys.push(e.keyCode);
-      if (!this.moving) {
+      if (!(this.moving || this.movementLoop)) {
+        this.clearMovementClasses();
         return this.movementLoop = setInterval(function() {
           return _this.move();
-        }, 20);
+        }, this.movementLoopInc);
       }
     }
   };
 
   Avatar.prototype.move = function(keys) {
-    var down, left, right, up;
-    left = this.activeMovementKeys.indexOf(37) > -1;
-    up = this.activeMovementKeys.indexOf(38) > -1;
-    right = this.activeMovementKeys.indexOf(39) > -1;
-    down = this.activeMovementKeys.indexOf(40) > -1;
     this.moving = true;
-    if (up) {
+    if (!this.isMovingDirection(up) && !this.isMovingDirection(down) && !this.isMovingDirection(left) && !this.isMovingDirection(right)) {
+      this.moving = false;
+      this.stopMovementLoop();
+    }
+    if (this.isMovingDirection(up)) {
       this.model.set('y_position', this.model.get('y_position') + -this.movementInc);
     }
-    if (down) {
+    if (this.isMovingDirection(down)) {
       this.model.set('y_position', this.model.get('y_position') + this.movementInc);
     }
-    if (left) {
+    if (this.isMovingDirection(left)) {
       this.model.set('x_position', this.model.get('x_position') + -this.movementInc);
     }
-    if (right) {
+    if (this.isMovingDirection(right)) {
       this.model.set('x_position', this.model.get('x_position') + this.movementInc);
     }
+    this.setMovementClasses();
     return this.el.style.webkitTransform = "translate3d(" + (this.model.position()) + ", 0)";
   };
 
   Avatar.prototype.stopMovement = function(e) {
-    if (e && e.keyCode && this.isMovementKey(e)) {
-      this.activeMovementKeys.splice(this.activeMovementKeys.indexOf(e.keyCode), 1);
-      if (!this.activeMovementKeys.length) {
-        this.moving = false;
-        return clearInterval(this.movementLoop);
+    if (e && e.keyCode) {
+      if (this.activeMovementKeys.indexOf(e.keyCode) > -1) {
+        console.log(this.activeMovementKeys.splice(this.activeMovementKeys.indexOf(e.keyCode), 1));
       }
+      if (this.activeMovementKeys.length === 0) {
+        this.stopMovementLoop();
+        this.moving = false;
+      }
+      if (this.moving) {
+        this.el.classList.remove(directionsByCode[e.keyCode]);
+      }
+    } else {
+      this.stopMovementLoop();
+      this.activeMovementKeys = [];
+      this.moving = false;
     }
+    return this.setMovementClasses();
   };
 
   Avatar.prototype.isMovementKey = function(e) {
     return this.movementKeys.indexOf(e.keyCode) > -1;
+  };
+
+  Avatar.prototype.isMovingDirection = function(keyCode) {
+    return this.activeMovementKeys.indexOf(keyCode) > -1;
+  };
+
+  Avatar.prototype.setMovementClasses = function() {
+    var classList;
+    classList = this.el.classList;
+    if (this.moving) {
+      classList.add('moving');
+    } else {
+      classList.remove('moving');
+    }
+    if (this.isMovingDirection(up)) {
+      classList.add('up');
+      classList.remove('down');
+    }
+    if (this.isMovingDirection(down)) {
+      classList.add('down');
+      classList.remove('up');
+    }
+    if (this.isMovingDirection(left)) {
+      classList.add('left');
+      classList.remove('right');
+    }
+    if (this.isMovingDirection(right)) {
+      classList.add('right');
+      return classList.remove('left');
+    }
+  };
+
+  Avatar.prototype.clearMovementClasses = function() {
+    var classList;
+    classList = this.el.classList;
+    classList.remove('up');
+    classList.remove('down');
+    classList.remove('left');
+    return classList.remove('right');
+  };
+
+  Avatar.prototype.stopMovementLoop = function() {
+    clearInterval(this.movementLoop);
+    return this.movementLoop = null;
   };
 
   return Avatar;
