@@ -20,21 +20,36 @@ directionsByCode =
 module.exports = class Avatar extends View
   template: require './templates/avatar'
   autoRender: false
-  movementInc: 5
-  movementLoopInc: 20
+  className: 'avatar'
+  movementInc: 10
+  movementLoopInc: 30
   moving: false
   activeMovementKeys: []
   movementKeys: [left, up, right, down]
+  availableDirections:
+    left: true
+    right: true
+    up: true
+    down: true
+
+  initialize: ->
+    super
+    @listenTo @model, "change:x_position change:y_position", @broadCastMove
 
   render: ->
     super
+    @positionOnMap()
     @bindEvents()
+    @setDimensions()
 
   bindEvents: ->
     document.addEventListener 'keydown', (e) =>
       @handleKeyDown(e) if @isMovementKey(e)
     document.addEventListener 'keyup', (e) =>
       @stopMovement(e)
+
+  broadCastMove: (player) ->
+    @trigger('playerMove', player, @)
 
   handleKeyDown: (e) ->
     e.stopPropagation()
@@ -50,8 +65,10 @@ module.exports = class Avatar extends View
 
 
   move: (keys) ->
+
     @moving = true
 
+    @checkCollision()
     if !@isMovingDirection(up) and 
       !@isMovingDirection(down) and 
       !@isMovingDirection(left) and 
@@ -71,12 +88,17 @@ module.exports = class Avatar extends View
 
     @setMovementClasses()
 
+    @positionOnMap()
+
+  positionOnMap: ->
+    @position_x = @model.get('x_position')
+    @position_y = @model.get('y_position')
     @el.style.webkitTransform = "translate3d(#{@model.position()}, 0)"
 
   stopMovement: (e) ->
     if e and e.keyCode
       if @activeMovementKeys.indexOf(e.keyCode) > -1
-        console.log @activeMovementKeys.splice(@activeMovementKeys.indexOf(e.keyCode), 1)
+        @stopMovementDirection(e.keyCode)
 
       if @activeMovementKeys.length is 0
         @stopMovementLoop()
@@ -87,7 +109,6 @@ module.exports = class Avatar extends View
       @stopMovementLoop()
       @activeMovementKeys = []
       @moving = false
-
 
     @setMovementClasses()
 
@@ -128,6 +149,33 @@ module.exports = class Avatar extends View
     clearInterval(@movementLoop)
     @movementLoop = null
 
+  stopMovementDirection: (keyCode) ->
+    @activeMovementKeys.splice(@activeMovementKeys.indexOf(keyCode), 1)
 
+  setDimensions: ->
+    setTimeout(=>
+      avatar_rect = @el.getClientRects()[0]
+      @width = avatar_rect.right - avatar_rect.left
+      @height = avatar_rect.bottom - avatar_rect.top
+    , 0)
 
+  checkCollision: ->
+    blocked_up    = @isMovingDirection(up) and !@availableDirections.up
+    blocked_down  = @isMovingDirection(down) and !@availableDirections.down
+    blocked_left  = @isMovingDirection(left) and !@availableDirections.left
+    blocked_right = @isMovingDirection(right) and !@availableDirections.right
+
+    @stopMovementDirection(up) if blocked_up
+    @stopMovementDirection(down) if blocked_down
+    @stopMovementDirection(left) if blocked_left
+    @stopMovementDirection(right) if blocked_right
+
+    console.log 'blocked_up' if blocked_up
+    console.log 'blocked_down' if blocked_down
+    console.log 'blocked_left' if blocked_left
+    console.log 'blocked_right' if blocked_right
+
+    # @collision = true
+
+      # @stopMovement()
 

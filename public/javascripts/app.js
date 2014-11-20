@@ -132,7 +132,7 @@ module.exports = GameController = (function() {
   GameController.prototype.setupMap = function() {
     this.mapView = new MapView({
       className: 'map',
-      container: document.getElementById("map"),
+      el: document.getElementById("map"),
       autoRender: true
     });
     return this.addPlayer();
@@ -142,11 +142,14 @@ module.exports = GameController = (function() {
     var avatar, player;
     player = new Player({
       id: 1,
-      name: "Ross"
+      name: "Ross",
+      x_position: 400,
+      y_position: 400
     });
     avatar = new Avatar({
       model: player
     });
+    this.mapView.listenTo(avatar, 'playerMove', this.mapView.checkPlayerPosition);
     return this.mapView.spawnPlayer(player, avatar);
   };
 
@@ -438,9 +441,11 @@ module.exports = Avatar = (function(_super) {
 
   Avatar.prototype.autoRender = false;
 
-  Avatar.prototype.movementInc = 5;
+  Avatar.prototype.className = 'avatar';
 
-  Avatar.prototype.movementLoopInc = 20;
+  Avatar.prototype.movementInc = 10;
+
+  Avatar.prototype.movementLoopInc = 30;
 
   Avatar.prototype.moving = false;
 
@@ -448,9 +453,23 @@ module.exports = Avatar = (function(_super) {
 
   Avatar.prototype.movementKeys = [left, up, right, down];
 
+  Avatar.prototype.availableDirections = {
+    left: true,
+    right: true,
+    up: true,
+    down: true
+  };
+
+  Avatar.prototype.initialize = function() {
+    Avatar.__super__.initialize.apply(this, arguments);
+    return this.listenTo(this.model, "change:x_position change:y_position", this.broadCastMove);
+  };
+
   Avatar.prototype.render = function() {
     Avatar.__super__.render.apply(this, arguments);
-    return this.bindEvents();
+    this.positionOnMap();
+    this.bindEvents();
+    return this.setDimensions();
   };
 
   Avatar.prototype.bindEvents = function() {
@@ -463,6 +482,10 @@ module.exports = Avatar = (function(_super) {
     return document.addEventListener('keyup', function(e) {
       return _this.stopMovement(e);
     });
+  };
+
+  Avatar.prototype.broadCastMove = function(player) {
+    return this.trigger('playerMove', player, this);
   };
 
   Avatar.prototype.handleKeyDown = function(e) {
@@ -481,6 +504,7 @@ module.exports = Avatar = (function(_super) {
 
   Avatar.prototype.move = function(keys) {
     this.moving = true;
+    this.checkCollision();
     if (!this.isMovingDirection(up) && !this.isMovingDirection(down) && !this.isMovingDirection(left) && !this.isMovingDirection(right)) {
       this.moving = false;
       this.stopMovementLoop();
@@ -498,13 +522,19 @@ module.exports = Avatar = (function(_super) {
       this.model.set('x_position', this.model.get('x_position') + this.movementInc);
     }
     this.setMovementClasses();
+    return this.positionOnMap();
+  };
+
+  Avatar.prototype.positionOnMap = function() {
+    this.position_x = this.model.get('x_position');
+    this.position_y = this.model.get('y_position');
     return this.el.style.webkitTransform = "translate3d(" + (this.model.position()) + ", 0)";
   };
 
   Avatar.prototype.stopMovement = function(e) {
     if (e && e.keyCode) {
       if (this.activeMovementKeys.indexOf(e.keyCode) > -1) {
-        console.log(this.activeMovementKeys.splice(this.activeMovementKeys.indexOf(e.keyCode), 1));
+        this.stopMovementDirection(e.keyCode);
       }
       if (this.activeMovementKeys.length === 0) {
         this.stopMovementLoop();
@@ -569,6 +599,52 @@ module.exports = Avatar = (function(_super) {
     return this.movementLoop = null;
   };
 
+  Avatar.prototype.stopMovementDirection = function(keyCode) {
+    return this.activeMovementKeys.splice(this.activeMovementKeys.indexOf(keyCode), 1);
+  };
+
+  Avatar.prototype.setDimensions = function() {
+    var _this = this;
+    return setTimeout(function() {
+      var avatar_rect;
+      avatar_rect = _this.el.getClientRects()[0];
+      _this.width = avatar_rect.right - avatar_rect.left;
+      return _this.height = avatar_rect.bottom - avatar_rect.top;
+    }, 0);
+  };
+
+  Avatar.prototype.checkCollision = function() {
+    var blocked_down, blocked_left, blocked_right, blocked_up;
+    blocked_up = this.isMovingDirection(up) && !this.availableDirections.up;
+    blocked_down = this.isMovingDirection(down) && !this.availableDirections.down;
+    blocked_left = this.isMovingDirection(left) && !this.availableDirections.left;
+    blocked_right = this.isMovingDirection(right) && !this.availableDirections.right;
+    if (blocked_up) {
+      this.stopMovementDirection(up);
+    }
+    if (blocked_down) {
+      this.stopMovementDirection(down);
+    }
+    if (blocked_left) {
+      this.stopMovementDirection(left);
+    }
+    if (blocked_right) {
+      this.stopMovementDirection(right);
+    }
+    if (blocked_up) {
+      console.log('blocked_up');
+    }
+    if (blocked_down) {
+      console.log('blocked_down');
+    }
+    if (blocked_left) {
+      console.log('blocked_left');
+    }
+    if (blocked_right) {
+      return console.log('blocked_right');
+    }
+  };
+
   return Avatar;
 
 })(View);
@@ -595,9 +671,90 @@ module.exports = MapView = (function(_super) {
 
   MapView.prototype.className = "map";
 
+  MapView.prototype.viewport_padding = 100;
+
+  MapView.prototype.offset_x = 0;
+
+  MapView.prototype.offset_y = 0;
+
+  MapView.prototype.height = 5000;
+
+  MapView.prototype.width = 5000;
+
+  MapView.prototype.render = function() {
+    MapView.__super__.render.apply(this, arguments);
+    return this.setDimensions();
+  };
+
+  MapView.prototype.setDimensions = function() {
+    this.rect = document.body.getClientRects()[0];
+    return this.viewport = {
+      left: this.rect.left + this.viewport_padding,
+      top: this.rect.top + this.viewport_padding,
+      right: this.rect.right - this.viewport_padding,
+      bottom: this.rect.bottom - this.viewport_padding
+    };
+  };
+
   MapView.prototype.spawnPlayer = function(player, avatar) {
     avatar.container = this.el;
     return avatar.render();
+  };
+
+  MapView.prototype.checkPlayerPosition = function(player, avatar) {
+    var new_x, new_y, pan_down, pan_left, pan_right, pan_up, px, py, within_rect, within_x, within_y;
+    px = player.get('x_position');
+    py = player.get('y_position');
+    if (this.canMoveTo(px, py, avatar)) {
+      avatar.collision = false;
+    }
+    within_x = px > this.viewport.left && px < this.viewport.right;
+    within_y = py > this.viewport.top && py < this.viewport.bottom;
+    within_rect = within_x && within_y;
+    pan_right = px > ((this.viewport.right - this.offset_x) - avatar.width);
+    pan_left = px < (this.viewport.left - this.offset_x);
+    pan_down = py > ((this.viewport.bottom - this.offset_y) - avatar.height);
+    pan_up = py < (this.viewport.top - this.offset_y);
+    new_x = this.offset_x;
+    new_y = this.offset_y;
+    if (pan_left) {
+      new_x = this.rect.left + (this.viewport.left - px);
+    }
+    if (pan_right) {
+      new_x = this.rect.left + ((this.viewport.right - avatar.width) - px);
+    }
+    if (pan_up) {
+      new_y = this.rect.top + (this.viewport.top - py);
+    }
+    if (pan_down) {
+      new_y = this.rect.top + ((this.viewport.bottom - avatar.height) - py);
+    }
+    if (!((new_x + this.offset_x) >= 0)) {
+      this.offset_x = new_x;
+    }
+    if (!((new_y + this.offset_y) >= 0)) {
+      this.offset_y = new_y;
+    }
+    return this.repositionMap(this.offset_x, this.offset_y);
+  };
+
+  MapView.prototype.repositionMap = function(left, top) {
+    return this.el.style.webkitTransform = "translate3d(" + left + "px, " + top + "px, 0)";
+  };
+
+  MapView.prototype.canMoveTo = function(x, y, avatar) {
+    var can_down, can_left, can_right, can_up;
+    can_right = x < this.width;
+    can_left = x > 0;
+    can_up = y > 0;
+    can_down = y < this.width;
+    avatar.availableDirections = {
+      right: can_right,
+      left: can_left,
+      up: can_up,
+      down: can_down
+    };
+    return can_left && can_right && can_up && can_down;
   };
 
   return MapView;
