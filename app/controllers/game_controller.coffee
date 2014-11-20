@@ -12,7 +12,7 @@ module.exports = class GameController
   setupMap: ->
     @mapView = new MapView
       className: 'map'
-      container: document.getElementById("map")
+      el: document.getElementById("map")
       autoRender: true
     @addPlayer()
 
@@ -20,7 +20,12 @@ module.exports = class GameController
     player = new Player
       id: 1
       name: "Ross"
+      x_position: 400
+      y_position: 400
     avatar = new Avatar
       model: player
+
+    @mapView.listenTo avatar, 'playerMove', @mapView.checkPlayerPosition
+
 
     @mapView.spawnPlayer(player, avatar)

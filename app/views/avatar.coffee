@@ -20,21 +20,31 @@ directionsByCode =
 module.exports = class Avatar extends View
   template: require './templates/avatar'
   autoRender: false
-  movementInc: 5
+  className: 'avatar'
+  movementInc: 10
   movementLoopInc: 20
   moving: false
   activeMovementKeys: []
   movementKeys: [left, up, right, down]
 
+  initialize: ->
+    super
+    @listenTo @model, "change:x_position change:y_position", @broadCastMove
+
   render: ->
     super
+    @positionOnMap()
     @bindEvents()
+    @setDimensions()
 
   bindEvents: ->
     document.addEventListener 'keydown', (e) =>
       @handleKeyDown(e) if @isMovementKey(e)
     document.addEventListener 'keyup', (e) =>
       @stopMovement(e)
+
+  broadCastMove: (player) ->
+    @trigger('playerMove', player, @)
 
   handleKeyDown: (e) ->
     e.stopPropagation()
@@ -71,12 +81,17 @@ module.exports = class Avatar extends View
 
     @setMovementClasses()
 
+    @positionOnMap()
+
+  positionOnMap: ->
+    @position_x = @model.get('x_position')
+    @position_y = @model.get('y_position')
     @el.style.webkitTransform = "translate3d(#{@model.position()}, 0)"
 
   stopMovement: (e) ->
     if e and e.keyCode
       if @activeMovementKeys.indexOf(e.keyCode) > -1
-        console.log @activeMovementKeys.splice(@activeMovementKeys.indexOf(e.keyCode), 1)
+        @activeMovementKeys.splice(@activeMovementKeys.indexOf(e.keyCode), 1)
 
       if @activeMovementKeys.length is 0
         @stopMovementLoop()
@@ -128,6 +143,12 @@ module.exports = class Avatar extends View
     clearInterval(@movementLoop)
     @movementLoop = null
 
+  setDimensions: ->
+    setTimeout(=>
+      avatar_rect = @el.getClientRects()[0]
+      @width = avatar_rect.right - avatar_rect.left
+      @height = avatar_rect.bottom - avatar_rect.top
+    , 0)
 
 
 
