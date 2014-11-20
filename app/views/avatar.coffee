@@ -22,10 +22,15 @@ module.exports = class Avatar extends View
   autoRender: false
   className: 'avatar'
   movementInc: 10
-  movementLoopInc: 20
+  movementLoopInc: 30
   moving: false
   activeMovementKeys: []
   movementKeys: [left, up, right, down]
+  availableDirections:
+    left: true
+    right: true
+    up: true
+    down: true
 
   initialize: ->
     super
@@ -60,8 +65,10 @@ module.exports = class Avatar extends View
 
 
   move: (keys) ->
+
     @moving = true
 
+    @checkCollision()
     if !@isMovingDirection(up) and 
       !@isMovingDirection(down) and 
       !@isMovingDirection(left) and 
@@ -91,7 +98,7 @@ module.exports = class Avatar extends View
   stopMovement: (e) ->
     if e and e.keyCode
       if @activeMovementKeys.indexOf(e.keyCode) > -1
-        @activeMovementKeys.splice(@activeMovementKeys.indexOf(e.keyCode), 1)
+        @stopMovementDirection(e.keyCode)
 
       if @activeMovementKeys.length is 0
         @stopMovementLoop()
@@ -102,7 +109,6 @@ module.exports = class Avatar extends View
       @stopMovementLoop()
       @activeMovementKeys = []
       @moving = false
-
 
     @setMovementClasses()
 
@@ -143,6 +149,9 @@ module.exports = class Avatar extends View
     clearInterval(@movementLoop)
     @movementLoop = null
 
+  stopMovementDirection: (keyCode) ->
+    @activeMovementKeys.splice(@activeMovementKeys.indexOf(keyCode), 1)
+
   setDimensions: ->
     setTimeout(=>
       avatar_rect = @el.getClientRects()[0]
@@ -150,5 +159,18 @@ module.exports = class Avatar extends View
       @height = avatar_rect.bottom - avatar_rect.top
     , 0)
 
+  checkCollision: ->
+    blocked_up    = @isMovingDirection(up) and !@availableDirections.up
+    blocked_down  = @isMovingDirection(down) and !@availableDirections.down
+    blocked_left  = @isMovingDirection(left) and !@availableDirections.left
+    blocked_right = @isMovingDirection(right) and !@availableDirections.right
 
+    @stopMovementDirection(up) if blocked_up
+    @stopMovementDirection(down) if blocked_down
+    @stopMovementDirection(left) if blocked_left
+    @stopMovementDirection(right) if blocked_right
+
+    # @collision = true
+
+      # @stopMovement()
 

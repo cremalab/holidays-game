@@ -445,13 +445,20 @@ module.exports = Avatar = (function(_super) {
 
   Avatar.prototype.movementInc = 10;
 
-  Avatar.prototype.movementLoopInc = 20;
+  Avatar.prototype.movementLoopInc = 30;
 
   Avatar.prototype.moving = false;
 
   Avatar.prototype.activeMovementKeys = [];
 
   Avatar.prototype.movementKeys = [left, up, right, down];
+
+  Avatar.prototype.availableDirections = {
+    left: true,
+    right: true,
+    up: true,
+    down: true
+  };
 
   Avatar.prototype.initialize = function() {
     Avatar.__super__.initialize.apply(this, arguments);
@@ -497,6 +504,7 @@ module.exports = Avatar = (function(_super) {
 
   Avatar.prototype.move = function(keys) {
     this.moving = true;
+    this.checkCollision();
     if (!this.isMovingDirection(up) && !this.isMovingDirection(down) && !this.isMovingDirection(left) && !this.isMovingDirection(right)) {
       this.moving = false;
       this.stopMovementLoop();
@@ -526,7 +534,7 @@ module.exports = Avatar = (function(_super) {
   Avatar.prototype.stopMovement = function(e) {
     if (e && e.keyCode) {
       if (this.activeMovementKeys.indexOf(e.keyCode) > -1) {
-        this.activeMovementKeys.splice(this.activeMovementKeys.indexOf(e.keyCode), 1);
+        this.stopMovementDirection(e.keyCode);
       }
       if (this.activeMovementKeys.length === 0) {
         this.stopMovementLoop();
@@ -591,6 +599,10 @@ module.exports = Avatar = (function(_super) {
     return this.movementLoop = null;
   };
 
+  Avatar.prototype.stopMovementDirection = function(keyCode) {
+    return this.activeMovementKeys.splice(this.activeMovementKeys.indexOf(keyCode), 1);
+  };
+
   Avatar.prototype.setDimensions = function() {
     var _this = this;
     return setTimeout(function() {
@@ -599,6 +611,26 @@ module.exports = Avatar = (function(_super) {
       _this.width = avatar_rect.right - avatar_rect.left;
       return _this.height = avatar_rect.bottom - avatar_rect.top;
     }, 0);
+  };
+
+  Avatar.prototype.checkCollision = function() {
+    var blocked_down, blocked_left, blocked_right, blocked_up;
+    blocked_up = this.isMovingDirection(up) && !this.availableDirections.up;
+    blocked_down = this.isMovingDirection(down) && !this.availableDirections.down;
+    blocked_left = this.isMovingDirection(left) && !this.availableDirections.left;
+    blocked_right = this.isMovingDirection(right) && !this.availableDirections.right;
+    if (blocked_up) {
+      this.stopMovementDirection(up);
+    }
+    if (blocked_down) {
+      this.stopMovementDirection(down);
+    }
+    if (blocked_left) {
+      this.stopMovementDirection(left);
+    }
+    if (blocked_right) {
+      return this.stopMovementDirection(right);
+    }
   };
 
   return Avatar;
@@ -633,6 +665,10 @@ module.exports = MapView = (function(_super) {
 
   MapView.prototype.offset_y = 0;
 
+  MapView.prototype.height = 5000;
+
+  MapView.prototype.width = 5000;
+
   MapView.prototype.render = function() {
     MapView.__super__.render.apply(this, arguments);
     return this.setDimensions();
@@ -657,30 +693,50 @@ module.exports = MapView = (function(_super) {
     var pan_down, pan_left, pan_right, pan_up, px, py, within_rect, within_x, within_y;
     px = player.get('x_position');
     py = player.get('y_position');
-    within_x = px > this.viewport.left && px < this.viewport.right;
-    within_y = py > this.viewport.top && py < this.viewport.bottom;
-    within_rect = within_x && within_y;
-    pan_right = px > ((this.viewport.right - this.offset_x) - avatar.width);
-    pan_left = px < (this.viewport.left - this.offset_x);
-    pan_down = py > ((this.viewport.bottom - this.offset_y) - avatar.height);
-    pan_up = py < (this.viewport.top - this.offset_y);
-    if (pan_left) {
-      this.offset_x = this.rect.left + (this.viewport.left - px);
+    if (this.canMoveTo(px, py, avatar)) {
+      avatar.collision = false;
+      within_x = px > this.viewport.left && px < this.viewport.right;
+      within_y = py > this.viewport.top && py < this.viewport.bottom;
+      within_rect = within_x && within_y;
+      pan_right = px > ((this.viewport.right - this.offset_x) - avatar.width);
+      pan_left = px < (this.viewport.left - this.offset_x);
+      pan_down = py > ((this.viewport.bottom - this.offset_y) - avatar.height);
+      pan_up = py < (this.viewport.top - this.offset_y);
+      if (pan_left) {
+        this.offset_x = this.rect.left + (this.viewport.left - px);
+      }
+      if (pan_right) {
+        this.offset_x = this.rect.left + ((this.viewport.right - avatar.width) - px);
+      }
+      if (pan_up) {
+        this.offset_y = this.rect.top + (this.viewport.top - py);
+      }
+      if (pan_down) {
+        this.offset_y = this.rect.top + ((this.viewport.bottom - avatar.height) - py);
+      }
+      return this.repositionMap(this.offset_x, this.offset_y);
+    } else {
+      return avatar.collision = true;
     }
-    if (pan_right) {
-      this.offset_x = this.rect.left + ((this.viewport.right - avatar.width) - px);
-    }
-    if (pan_up) {
-      this.offset_y = this.rect.top + (this.viewport.top - py);
-    }
-    if (pan_down) {
-      this.offset_y = this.rect.top + ((this.viewport.bottom - avatar.height) - py);
-    }
-    return this.repositionMap(this.offset_x, this.offset_y);
   };
 
   MapView.prototype.repositionMap = function(left, top) {
     return this.el.style.webkitTransform = "translate3d(" + left + "px, " + top + "px, 0)";
+  };
+
+  MapView.prototype.canMoveTo = function(x, y, avatar) {
+    var can_down, can_left, can_right, can_up;
+    can_right = x < this.width;
+    can_left = x > 0;
+    can_up = y > 0;
+    can_down = y < this.width;
+    avatar.availableDirections = {
+      right: can_right,
+      left: can_left,
+      up: can_up,
+      down: can_down
+    };
+    return can_left && can_right && can_up && can_down;
   };
 
   return MapView;
