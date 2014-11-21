@@ -5,6 +5,7 @@ Player        = require 'models/player'
 Avatar        = require 'views/avatar'
 DrawingCanvas = require 'views/drawing_canvas'
 Trailblazer   = require 'models/trailblazer'
+Weather       = require 'lib/weather'
 utils         = require 'lib/utils'
 
 module.exports = class GameController
@@ -19,6 +20,7 @@ module.exports = class GameController
       className: 'map'
       el: document.getElementById("map")
       autoRender: true
+    Weather.snow('snowCanvas')
 
   setupCanvas: ->
     @canvas = new DrawingCanvas
