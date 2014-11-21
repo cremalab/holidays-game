@@ -1,0 +1,80 @@
+@keyframes legs0
+  0%
+    top -.03em
+  100%
+    top 0
+    
+.legs
+  width .5em
+  height .1em
+  position absolute
+  background #eee
+  position absolute
+  top 1.3em
+  left 50%
+  margin-left -.25em
+  border-radius .2em
+  &:before,
+  &:after
+    content ''
+    display block
+    position absolute
+    top 0
+    width .22em
+    height 180%
+    background pants-color
+    border-bottom 3px solid #000
+    border-radius 0 0 .1em .1em
+    box-shadow 0 1px 1px black
+    transition all transition-speed
+
+  &:before
+    left 0
+    z-index 2
+  &:after
+    right 0
+    z-index 1
+  
+  .moving &
+    &:before,
+    &:after
+      animation-name legs0
+      transition-property top
+      animation-duration .8s
+      animation-iteration-count infinite
+    &:after
+      animation-delay .4s
+  .moving.alt &
+    &:before
+      animation-delay .4s
+    &:after
+      animation-delay 0
+    
+  .avatar[data-pos="1"] &
+    &:before
+      width .27em
+    &:after
+      width .18em
+  .avatar[data-pos="3"] &,
+  .avatar[data-pos="2"] &
+    &:after
+      width .27em
+      right .05em
+    &:before
+      width .27em
+      left .05em
+  
+  .avatar[data-pos="5"] &
+  .avatar[data-pos="6"] &
+    &:after
+      width .27em
+      right .05em
+    &:before
+      width .27em
+      left .05em
+
+  .avatar[data-pos="7"] &
+    &:before
+      width .18em
+    &:after
+      width .27em
