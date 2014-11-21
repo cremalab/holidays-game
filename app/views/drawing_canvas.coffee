@@ -3,10 +3,17 @@ View = require './view'
 module.exports = class DrawingCanvas extends View
   color: "#363f59"
   lineWidth: 50
+  gameLoopInt: 2000
+  plotCleanCount: 5
+  cleanup: true
 
   initialize: ->
     super
     @plots = []
+    if @cleanup
+      setInterval =>
+        @cleanupPlots()
+      , @gameLoopInt
 
   render: ->
     super
@@ -18,30 +25,18 @@ module.exports = class DrawingCanvas extends View
     @ctx.lineCap = 'round'
     @ctx.lineJoin = 'round'
 
-    @plots = []
+  draw: (plots) ->
+    @drawOnCanvas plots
 
-  draw: (player, avatar) ->
-    # return unless @isActive
-    
-    x = player.get('x_position') + (avatar.width/2)
-    y = player.get('y_position') + (avatar.height/2)
-    @plots.push
-      x: x
-      y: y
-
-    @drawOnCanvas @plots
-
-  drawOnCanvas: ->
-    @ctx.beginPath()
-    @ctx.moveTo @plots[0].x, @plots[0].y
-    for plot, i in @plots
-      @ctx.lineTo plot.x, plot.y
-    # console.log @ctx
-    @ctx.stroke()
-    @ctx.closePath()
-
-  endDraw: (e) ->
-    @plots = []
+  drawOnCanvas: (plots) ->
+    if plots.length
+      @ctx.beginPath()
+      @ctx.moveTo plots[0].x, plots[0].y
+      for plot, i in plots
+        @ctx.lineTo plot.x, plot.y
+      # console.log @ctx
+      @ctx.stroke()
+      @ctx.closePath()
 
   # Extend an avatar's trail
   addPointToTrail: (plots, player, avatar) ->
@@ -53,4 +48,12 @@ module.exports = class DrawingCanvas extends View
     @ctx.lineTo end.x, end.y
     @ctx.stroke()
     @ctx.closePath()
+    @plots.push start
+    @plots.push end
+
+  cleanupPlots: ->
+    @plots.splice(0, @plotCleanCount)
+    @ctx.restore()
+    @ctx.clearRect(0,0, @el.width, @el.height)
+    @drawOnCanvas(@plots)
 
