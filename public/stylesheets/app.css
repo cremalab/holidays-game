@@ -5,6 +5,15 @@
   width: 5000px;
   height: 5000px;
   background: url("/images/bg.jpg");
+  z-index: 0;
+}
+#drawCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 5000px;
+  height: 5000px;
+  z-index: 10;
 }
 .avatar {
   position: absolute;
@@ -39,6 +48,15 @@ html {
   width: 5000px;
   height: 5000px;
   background: url("/images/bg.jpg");
+  z-index: 0;
+}
+#drawCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 5000px;
+  height: 5000px;
+  z-index: 10;
 }
 
 

@@ -108,7 +108,7 @@ module.exports = Application;
 });
 
 ;require.register("controllers/game_controller", function(exports, require, module) {
-var Avatar, EventBroker, GameController, MapView, Player, mediator, utils;
+var Avatar, DrawingCanvas, EventBroker, GameController, MapView, Player, mediator, utils;
 
 MapView = require('views/map_view');
 
@@ -120,6 +120,8 @@ Player = require('models/player');
 
 Avatar = require('views/avatar');
 
+DrawingCanvas = require('views/drawing_canvas');
+
 utils = require('lib/utils');
 
 module.exports = GameController = (function() {
@@ -127,15 +129,23 @@ module.exports = GameController = (function() {
 
   function GameController() {
     this.setupMap();
+    this.setupCanvas();
+    this.addPlayer();
   }
 
   GameController.prototype.setupMap = function() {
-    this.mapView = new MapView({
+    return this.mapView = new MapView({
       className: 'map',
       el: document.getElementById("map"),
       autoRender: true
     });
-    return this.addPlayer();
+  };
+
+  GameController.prototype.setupCanvas = function() {
+    return this.canvas = new DrawingCanvas({
+      el: document.getElementById('drawCanvas'),
+      autoRender: true
+    });
   };
 
   GameController.prototype.addPlayer = function() {
@@ -150,6 +160,7 @@ module.exports = GameController = (function() {
       model: player
     });
     this.mapView.listenTo(avatar, 'playerMove', this.mapView.checkPlayerPosition);
+    this.canvas.listenTo(avatar, 'playerMove', this.canvas.draw);
     return this.mapView.spawnPlayer(player, avatar);
   };
 
@@ -629,23 +640,76 @@ module.exports = Avatar = (function(_super) {
       this.stopMovementDirection(left);
     }
     if (blocked_right) {
-      this.stopMovementDirection(right);
-    }
-    if (blocked_up) {
-      console.log('blocked_up');
-    }
-    if (blocked_down) {
-      console.log('blocked_down');
-    }
-    if (blocked_left) {
-      console.log('blocked_left');
-    }
-    if (blocked_right) {
-      return console.log('blocked_right');
+      return this.stopMovementDirection(right);
     }
   };
 
   return Avatar;
+
+})(View);
+});
+
+;require.register("views/drawing_canvas", function(exports, require, module) {
+var DrawingCanvas, View, _ref,
+  __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+View = require('./view');
+
+module.exports = DrawingCanvas = (function(_super) {
+  __extends(DrawingCanvas, _super);
+
+  function DrawingCanvas() {
+    _ref = DrawingCanvas.__super__.constructor.apply(this, arguments);
+    return _ref;
+  }
+
+  DrawingCanvas.prototype.color = 'yellowgreen';
+
+  DrawingCanvas.prototype.initialize = function() {
+    DrawingCanvas.__super__.initialize.apply(this, arguments);
+    return this.plots = [];
+  };
+
+  DrawingCanvas.prototype.render = function() {
+    DrawingCanvas.__super__.render.apply(this, arguments);
+    this.ctx = this.el.getContext('2d');
+    this.ctx.strokeStyle = 'yellowgreen';
+    this.ctx.lineWidth = '3';
+    this.ctx.lineCap = 'round';
+    this.ctx.lineJoin = 'round';
+    return this.plots = [];
+  };
+
+  DrawingCanvas.prototype.draw = function(player, avatar) {
+    var x, y;
+    x = player.get('x_position');
+    y = player.get('y_position');
+    this.plots.push({
+      x: x,
+      y: y
+    });
+    return this.drawOnCanvas(this.plots);
+  };
+
+  DrawingCanvas.prototype.drawOnCanvas = function() {
+    var i, plot, _i, _len, _ref1;
+    this.ctx.beginPath();
+    this.ctx.moveTo(this.plots[0].x, this.plots[0].y);
+    i = 1;
+    _ref1 = this.plots;
+    for (i = _i = 0, _len = _ref1.length; _i < _len; i = ++_i) {
+      plot = _ref1[i];
+      this.ctx.lineTo(plot.x, plot.y);
+    }
+    return this.ctx.stroke();
+  };
+
+  DrawingCanvas.prototype.endDraw = function(e) {
+    return this.plots = [];
+  };
+
+  return DrawingCanvas;
 
 })(View);
 });
