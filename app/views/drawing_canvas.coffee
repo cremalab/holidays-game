@@ -25,16 +25,12 @@ module.exports = class DrawingCanvas extends View
     @ctx.lineCap = 'round'
     @ctx.lineJoin = 'round'
 
-  draw: (plots) ->
-    @drawOnCanvas plots
-
   drawOnCanvas: (plots) ->
     if plots.length
       @ctx.beginPath()
       @ctx.moveTo plots[0].x, plots[0].y
       for plot, i in plots
         @ctx.lineTo plot.x, plot.y
-      # console.log @ctx
       @ctx.stroke()
       @ctx.closePath()
 
@@ -51,6 +47,7 @@ module.exports = class DrawingCanvas extends View
     @plots.push start
     @plots.push end
 
+  # Drop old snow trail plots and redraw
   cleanupPlots: ->
     @plots.splice(0, @plotCleanCount)
     @ctx.restore()
