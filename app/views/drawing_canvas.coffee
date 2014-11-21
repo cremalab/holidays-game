@@ -2,7 +2,7 @@ View = require './view'
 
 module.exports = class DrawingCanvas extends View
   color: "#363f59"
-  lineWidth: 30
+  lineWidth: 50
 
   initialize: ->
     super
