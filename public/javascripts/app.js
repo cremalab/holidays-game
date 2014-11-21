@@ -108,7 +108,7 @@ module.exports = Application;
 });
 
 ;require.register("controllers/game_controller", function(exports, require, module) {
-var Avatar, DrawingCanvas, EventBroker, GameController, MapView, Player, SnowDrawer, mediator, utils;
+var Avatar, DrawingCanvas, EventBroker, GameController, MapView, Player, Trailblazer, mediator, utils;
 
 MapView = require('views/map_view');
 
@@ -122,7 +122,7 @@ Avatar = require('views/avatar');
 
 DrawingCanvas = require('views/drawing_canvas');
 
-SnowDrawer = require('models/snow_drawer');
+Trailblazer = require('models/trailblazer');
 
 utils = require('lib/utils');
 
@@ -161,7 +161,7 @@ module.exports = GameController = (function() {
     avatar = new Avatar({
       model: player
     });
-    avatar.snowDrawer = new SnowDrawer({
+    avatar.trailblazer = new Trailblazer({
       player: player,
       avatar: avatar,
       canvas: this.canvas
@@ -437,10 +437,74 @@ module.exports = SnowDrawer = (function(_super) {
     this.canvas = options.canvas;
     this.player = options.player;
     this.avatar = options.avatar;
-    return this.canvas.listenTo(this.avatar, 'playerMove', this.canvas.draw);
+    return this.canvas.listenTo(this.avatar, 'playerMove', this.canvas.addPoint);
   };
 
   return SnowDrawer;
+
+})(Model);
+});
+
+;require.register("models/trailblazer", function(exports, require, module) {
+var Model, Trailblazer, _ref,
+  __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+Model = require('models/model');
+
+module.exports = Trailblazer = (function(_super) {
+  __extends(Trailblazer, _super);
+
+  function Trailblazer() {
+    _ref = Trailblazer.__super__.constructor.apply(this, arguments);
+    return _ref;
+  }
+
+  Trailblazer.prototype.initialize = function(options) {
+    var _this = this;
+    Trailblazer.__super__.initialize.apply(this, arguments);
+    this.canvas = options.canvas;
+    this.player = options.player;
+    this.avatar = options.avatar;
+    this.plots = [];
+    this.plot_count = 0;
+    return this.listenTo(this.avatar, 'playerMove', function(player, avatar) {
+      var plot;
+      _this.plot_count++;
+      if (_this.plot_count % 5 === 0) {
+        plot = {
+          x: player.get('x_position'),
+          y: player.get('y_position')
+        };
+        _this.plots.push(plot);
+        return _this.canvas.addPointToTrail(_this.getStartEnd(_this.plots), _this.player, _this.avatar);
+      }
+    });
+  };
+
+  Trailblazer.prototype.getStartEnd = function(plots) {
+    var last, latest;
+    if (plots.length > 1) {
+      last = plots[plots.length - 2];
+      latest = plots[plots.length - 1];
+    } else {
+      last = {
+        x: this.player.get('x_position'),
+        y: this.player.get('y_position')
+      };
+      if (plots.length) {
+        latest = plots[plots.length];
+        if (!latest) {
+          latest = last;
+        }
+      }
+    }
+    latest.x = latest.x + (this.avatar.width / 2);
+    latest.y = latest.y + (this.avatar.height / 2);
+    return [last, latest];
+  };
+
+  return Trailblazer;
 
 })(Model);
 });
@@ -698,7 +762,9 @@ module.exports = DrawingCanvas = (function(_super) {
     return _ref;
   }
 
-  DrawingCanvas.prototype.color = 'yellowgreen';
+  DrawingCanvas.prototype.color = "#363f59";
+
+  DrawingCanvas.prototype.lineWidth = 30;
 
   DrawingCanvas.prototype.initialize = function() {
     DrawingCanvas.__super__.initialize.apply(this, arguments);
@@ -708,8 +774,10 @@ module.exports = DrawingCanvas = (function(_super) {
   DrawingCanvas.prototype.render = function() {
     DrawingCanvas.__super__.render.apply(this, arguments);
     this.ctx = this.el.getContext('2d');
-    this.ctx.strokeStyle = 'yellowgreen';
-    this.ctx.lineWidth = '3';
+    this.ctx.globalAlpha = 0.5;
+    this.ctx.globalCompositeOperation = "xor";
+    this.ctx.strokeStyle = this.color;
+    this.ctx.lineWidth = this.lineWidth;
     this.ctx.lineCap = 'round';
     this.ctx.lineJoin = 'round';
     return this.plots = [];
@@ -717,8 +785,8 @@ module.exports = DrawingCanvas = (function(_super) {
 
   DrawingCanvas.prototype.draw = function(player, avatar) {
     var x, y;
-    x = player.get('x_position');
-    y = player.get('y_position');
+    x = player.get('x_position') + (avatar.width / 2);
+    y = player.get('y_position') + (avatar.height / 2);
     this.plots.push({
       x: x,
       y: y
@@ -730,17 +798,28 @@ module.exports = DrawingCanvas = (function(_super) {
     var i, plot, _i, _len, _ref1;
     this.ctx.beginPath();
     this.ctx.moveTo(this.plots[0].x, this.plots[0].y);
-    i = 1;
     _ref1 = this.plots;
     for (i = _i = 0, _len = _ref1.length; _i < _len; i = ++_i) {
       plot = _ref1[i];
       this.ctx.lineTo(plot.x, plot.y);
     }
-    return this.ctx.stroke();
+    this.ctx.stroke();
+    return this.ctx.closePath();
   };
 
   DrawingCanvas.prototype.endDraw = function(e) {
     return this.plots = [];
+  };
+
+  DrawingCanvas.prototype.addPointToTrail = function(plots, player, avatar) {
+    var end, start;
+    start = plots[0];
+    end = plots[plots.length - 1];
+    this.ctx.beginPath();
+    this.ctx.moveTo(start.x, start.y);
+    this.ctx.lineTo(end.x, end.y);
+    this.ctx.stroke();
+    return this.ctx.closePath();
   };
 
   return DrawingCanvas;

@@ -4,7 +4,7 @@ EventBroker   = require 'lib/event_broker'
 Player        = require 'models/player'
 Avatar        = require 'views/avatar'
 DrawingCanvas = require 'views/drawing_canvas'
-SnowDrawer    = require 'models/snow_drawer'
+Trailblazer   = require 'models/trailblazer'
 utils         = require 'lib/utils'
 
 module.exports = class GameController
@@ -34,7 +34,7 @@ module.exports = class GameController
     avatar = new Avatar
       model: player
 
-    avatar.snowDrawer = new SnowDrawer
+    avatar.trailblazer = new Trailblazer
       player: player
       avatar: avatar
       canvas: @canvas
