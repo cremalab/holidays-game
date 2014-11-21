@@ -108,7 +108,7 @@ module.exports = Application;
 });
 
 ;require.register("controllers/game_controller", function(exports, require, module) {
-var Avatar, DrawingCanvas, EventBroker, GameController, MapView, Player, mediator, utils;
+var Avatar, DrawingCanvas, EventBroker, GameController, MapView, Player, SnowDrawer, mediator, utils;
 
 MapView = require('views/map_view');
 
@@ -121,6 +121,8 @@ Player = require('models/player');
 Avatar = require('views/avatar');
 
 DrawingCanvas = require('views/drawing_canvas');
+
+SnowDrawer = require('models/snow_drawer');
 
 utils = require('lib/utils');
 
@@ -159,8 +161,12 @@ module.exports = GameController = (function() {
     avatar = new Avatar({
       model: player
     });
+    avatar.snowDrawer = new SnowDrawer({
+      player: player,
+      avatar: avatar,
+      canvas: this.canvas
+    });
     this.mapView.listenTo(avatar, 'playerMove', this.mapView.checkPlayerPosition);
-    this.canvas.listenTo(avatar, 'playerMove', this.canvas.draw);
     return this.mapView.spawnPlayer(player, avatar);
   };
 
@@ -407,6 +413,34 @@ module.exports = Player = (function(_super) {
   };
 
   return Player;
+
+})(Model);
+});
+
+;require.register("models/snow_drawer", function(exports, require, module) {
+var Model, SnowDrawer, _ref,
+  __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+Model = require('models/model');
+
+module.exports = SnowDrawer = (function(_super) {
+  __extends(SnowDrawer, _super);
+
+  function SnowDrawer() {
+    _ref = SnowDrawer.__super__.constructor.apply(this, arguments);
+    return _ref;
+  }
+
+  SnowDrawer.prototype.initialize = function(options) {
+    SnowDrawer.__super__.initialize.apply(this, arguments);
+    this.canvas = options.canvas;
+    this.player = options.player;
+    this.avatar = options.avatar;
+    return this.canvas.listenTo(this.avatar, 'playerMove', this.canvas.draw);
+  };
+
+  return SnowDrawer;
 
 })(Model);
 });
@@ -849,7 +883,7 @@ var __templateData = function template(locals) {
 var buf = [];
 var jade_mixins = {};
 
-buf.push("<div id=\"content\"><h1>Map</h1></div>");;return buf.join("");
+buf.push("<div id=\"content\"><canvas id=\"drawCanvas\" width=\"5000\" height=\"5000\"></canvas><h1>Map</h1></div>");;return buf.join("");
 };
 if (typeof define === 'function' && define.amd) {
   define([], function() {

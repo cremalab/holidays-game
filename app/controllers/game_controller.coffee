@@ -4,6 +4,7 @@ EventBroker   = require 'lib/event_broker'
 Player        = require 'models/player'
 Avatar        = require 'views/avatar'
 DrawingCanvas = require 'views/drawing_canvas'
+SnowDrawer    = require 'models/snow_drawer'
 utils         = require 'lib/utils'
 
 module.exports = class GameController
@@ -33,8 +34,11 @@ module.exports = class GameController
     avatar = new Avatar
       model: player
 
-    @mapView.listenTo avatar, 'playerMove', @mapView.checkPlayerPosition
-    @canvas.listenTo avatar, 'playerMove', @canvas.draw
+    avatar.snowDrawer = new SnowDrawer
+      player: player
+      avatar: avatar
+      canvas: @canvas
 
+    @mapView.listenTo avatar, 'playerMove', @mapView.checkPlayerPosition
 
     @mapView.spawnPlayer(player, avatar)
