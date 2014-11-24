@@ -21,7 +21,7 @@ module.exports = class Avatar extends View
   template: require './templates/avatar'
   autoRender: false
   className: 'avatar'
-  movementInc: 10
+  movementInc: 5
   movementLoopInc: 30
   moving: false
   activeMovementKeys: []
@@ -41,6 +41,7 @@ module.exports = class Avatar extends View
     @positionOnMap()
     @bindEvents()
     @setDimensions()
+    @el.setAttribute('data-pos', 7)
 
   bindEvents: ->
     document.addEventListener 'keydown', (e) =>
@@ -87,6 +88,7 @@ module.exports = class Avatar extends View
       @model.set('x_position', @model.get('x_position') + @movementInc)
 
     @setMovementClasses()
+    @setPositionIndex()
 
     @positionOnMap()
 
@@ -111,11 +113,16 @@ module.exports = class Avatar extends View
       @moving = false
 
     @setMovementClasses()
+    @setPositionIndex()
 
   isMovementKey: (e) ->
     return @movementKeys.indexOf(e.keyCode) > -1
 
   isMovingDirection: (keyCode) ->
+    if keyCode.isArray
+      return keyCode.every (e) ->
+        @activeMovementKeys.indexOf(e) > -1
+
     @activeMovementKeys.indexOf(keyCode) > -1
 
   setMovementClasses: ->
@@ -126,24 +133,52 @@ module.exports = class Avatar extends View
       classList.remove 'moving'
 
     if @isMovingDirection(up)
-      classList.add 'up'
-      classList.remove 'down'
+      classList.add 'dir-up'
+    else
+      classList.remove 'dir-up'
+
     if @isMovingDirection(down)
-      classList.add 'down'
-      classList.remove 'up'
+      classList.add 'dir-down'
+    else
+      classList.remove 'dir-down'
     if @isMovingDirection(left)
-      classList.add 'left'
-      classList.remove 'right'
+      classList.add 'dir-left'
+    else
+      classList.remove 'dir-left'
     if @isMovingDirection(right)
-      classList.add 'right'
-      classList.remove 'left'
+      classList.add 'dir-right'
+    else
+      classList.remove 'dir-right'
+
+
+  setPositionIndex: ->
+    cl = @el.classList
+    if cl.contains('dir-up') and cl.contains('dir-left')
+      return @el.setAttribute('data-pos', 5)
+    if cl.contains('dir-up') and cl.contains('dir-right')
+      return @el.setAttribute('data-pos', 3)
+    if cl.contains('dir-down') and cl.contains('dir-left')
+      return @el.setAttribute('data-pos', 7)
+    if cl.contains('dir-down') and cl.contains('dir-right')
+      return @el.setAttribute('data-pos', 1)
+    if cl.contains('dir-up')
+      return @el.setAttribute('data-pos', 4)
+    if cl.contains('dir-down')
+      return @el.setAttribute('data-pos', null)
+    if cl.contains('dir-right')
+      return @el.setAttribute('data-pos', 2)
+    if cl.contains('dir-left')
+      return @el.setAttribute('data-pos', 6)
+
+
+
 
   clearMovementClasses: ->
     classList = @el.classList
-    classList.remove('up')
-    classList.remove('down')
-    classList.remove('left')
-    classList.remove('right')
+    classList.remove('dir-up')
+    classList.remove('dir-down')
+    classList.remove('dir-left')
+    classList.remove('dir-right')
 
   stopMovementLoop: ->
     clearInterval(@movementLoop)

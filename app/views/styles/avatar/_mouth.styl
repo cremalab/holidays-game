@@ -1,0 +1,43 @@
+
+.mouth
+  position absolute
+  top .74em
+  left 50%
+  width .5em
+  height .1em
+  border-radius 50%
+  border-bottom 1px solid #000
+  margin-left -.25em
+  transition all transition-speed
+  
+  .avatar[data-pos="1"] &
+    transform rotate(-10deg)
+    margin-left -0em
+    margin-top -.08em
+    width .4em
+    height .14em
+  .avatar[data-pos="2"] &
+    transform rotate(-8deg)
+    margin-left .15em
+    margin-top -.08em
+    width .26em
+    height .1em
+
+  .avatar[data-pos="3"] &,
+  .avatar[data-pos="4"] &,
+  .avatar[data-pos="5"] &
+    display none
+
+  .avatar[data-pos="6"] &
+    transform rotate(8deg)
+    margin-left -.4em
+    margin-top -.08em
+    width .26em
+    height .1em
+    
+  .avatar[data-pos="7"] &
+    transform rotate(10deg)
+    margin-left -.4em
+    margin-top -.08em
+    width .4em
+    height .14em

@@ -1,5 +1,30 @@
+@import "avatar/_config"
+@import "avatar/_torso"
+@import "avatar/_head"
+@import "avatar/_legs"
+@import "avatar/_mouth"
+@import "avatar/_eyes"
+@import "avatar/_arms"
+//@import "person/_hair"
+
+@keyframes walking-person
+  0%
+    top 0
+  100%
+    top -.03em
+
 .avatar
   position absolute
   left 0
   top 0
   z-index 2
+  font-size 2em
+  width 1em
+  height 2em
+  text-align center
+  display inline-block
+  transition-property top
+  animation-duration .6s
+  &.moving
+    animation-name walking-person
+    animation-iteration-count infinite

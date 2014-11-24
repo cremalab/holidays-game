@@ -25,6 +25,9 @@ module.exports = class MapView extends View
   spawnPlayer: (player, avatar) ->
     avatar.container = @el
     avatar.render()
+    setTimeout =>
+      @checkPlayerPosition(player, avatar)
+    , 0
 
   checkPlayerPosition: (player, avatar) ->
     px = player.get('x_position')
@@ -37,9 +40,12 @@ module.exports = class MapView extends View
     within_y = py > @viewport.top and py < @viewport.bottom
     within_rect = within_x and within_y
 
-    pan_right = px > ((@viewport.right - @offset_x) - avatar.width)
+    a_height = avatar.height or 0
+    a_width = avatar.width or 0
+
+    pan_right = px > ((@viewport.right - @offset_x) - a_width)
     pan_left  = px < (@viewport.left - @offset_x)
-    pan_down  = py > ((@viewport.bottom - @offset_y) - avatar.height)
+    pan_down  = py > ((@viewport.bottom - @offset_y) - a_height)
     pan_up    = py < (@viewport.top - @offset_y)
 
     new_x = @offset_x
@@ -52,7 +58,7 @@ module.exports = class MapView extends View
     if pan_up
       new_y = @rect.top + (@viewport.top - py)
     if pan_down
-      new_y = @rect.top + ((@viewport.bottom - avatar.height) - py)
+      new_y = @rect.top + ((@viewport.bottom - a_height) - py)
 
     # Don't pan if it will reveal beyond the edge of the map
     unless (new_x + @offset_x) >= 0
