@@ -23,7 +23,7 @@ module.exports = class GameController
       className: 'map'
       el: document.getElementById("map")
       autoRender: true
-    Weather.snow('snowCanvas')
+    # Weather.snow('snowCanvas')
 
   setupCanvas: ->
     @canvas = new DrawingCanvas
@@ -31,13 +31,16 @@ module.exports = class GameController
       autoRender: true
 
   createPlayer: ->
+    id = Date.now()
     player = new Player
-      id: 1
-      name: Date.now()
+      id: id
+      name: id
       x_position: 400
       y_position: 2800
     avatar = new Avatar
       model: player
+
+    mediator.current_player = player
 
     @notifier.connect(player)
     @notifier.getRoomPlayers()
@@ -56,8 +59,8 @@ module.exports = class GameController
       x_position = data.x_position
       y_position = data.y_position
     else
-      x_position = 0
-      y_position = 0
+      x_position = 400
+      y_position = 1000
 
     player = new Player
       id: 1

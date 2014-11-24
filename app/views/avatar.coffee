@@ -1,4 +1,4 @@
-View = require './view'
+View     = require './view'
 
 left  = 37
 up    = 38
@@ -44,12 +44,15 @@ module.exports = class Avatar extends View
     @el.setAttribute('data-pos', 7)
 
   bindEvents: ->
-    document.addEventListener 'keydown', (e) =>
-      @handleKeyDown(e) if @isMovementKey(e)
-    document.addEventListener 'keyup', (e) =>
-      @stopMovement(e)
+    if @model.isCurrentPlayer()
+      document.addEventListener 'keydown', (e) =>
+        @handleKeyDown(e) if @isMovementKey(e)
+      document.addEventListener 'keyup', (e) =>
+        @stopMovement(e)
 
   broadCastMove: (player) ->
+    unless player.isCurrentPlayer()
+      @positionOnMap()
     @trigger('playerMove', player, @)
 
   handleKeyDown: (e) ->
@@ -169,9 +172,6 @@ module.exports = class Avatar extends View
       return @el.setAttribute('data-pos', 2)
     if cl.contains('dir-left')
       return @el.setAttribute('data-pos', 6)
-
-
-
 
   clearMovementClasses: ->
     classList = @el.classList
