@@ -1,0 +1,62 @@
+
+.eyes
+  position absolute
+  top .5em
+  left 50%
+  &:before, &:after
+    width .14em
+    height .09em
+    content ''
+    display block
+    background black
+    position absolute
+    top 0
+    border-radius 50%
+    border 1px solid white
+    box-shadow 0 0 2px #000
+    margin 0 .06em
+    transition all transition-speed
+  &:after
+    left 100%
+  &:before
+    right 100%
+
+  .avatar[data-pos="1"] &
+    &:before
+      right -.2em
+    &:after
+      left .27em
+      margin-top -.05em
+      font-size .78em
+  
+  .avatar[data-pos="2"] &
+    &:before
+      right -.46em
+      margin-top -.05em
+      width .09em
+      height .12em
+    &:after
+      display none
+  
+  .avatar[data-pos="3"] &,
+  .avatar[data-pos="4"] &,
+  .avatar[data-pos="5"] &
+    &:after,
+    &:before
+      display none
+
+  .avatar[data-pos="6"] &
+    &:before
+      display none
+    &:after
+      margin-top -.05em
+      width .09em
+      height .12em
+      left -.46em
+  .avatar[data-pos="7"] &
+    &:before
+      right .2em
+      margin-top -.05em
+      font-size .78em
+    &:after
+      left -.17em

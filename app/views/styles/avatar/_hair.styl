@@ -1,0 +1,64 @@
+.hair
+  position absolute
+  top 0
+  left 50%
+  margin-left -.3em
+  width .6em
+  height .3em
+  background #310C0C
+  border-radius 50%
+  &:before, &:after
+    content ''
+    display block
+    width .4em
+    height .2em
+    border-radius 50%
+    position absolute
+    top .2em
+    background #310C0C
+    transition all transition-speed
+  &:before
+    left -.26em
+    transform rotate(-60deg)
+    top .18em
+    width .45em
+    height .22em
+  &:after
+    transform rotate(70deg)
+    left .46em
+
+  .avatar[data-pos="1"] &
+    &:before
+      left -.26em
+      height .4em
+      width .6em
+      border-top-right-radius .2em
+    &:after
+      height 0.1em
+      width 0.3em
+      left 0.52em
+      transform rotate(60deg)
+      top .18em
+  .avatar[data-pos="2"] &
+    &:before
+      width .7em
+      height .6em
+      border-radius .3em .3em .2em .3em
+      transform rotate(-80deg)
+      right -.3em
+      top .14em
+    &:after
+      display none
+
+  .avatar[data-pos="3"] &
+    width .7em
+    height .4em
+    &:before
+      width .7em
+      height .8em
+      border-radius .3em .5em .4em .5em
+      transform rotate(-90deg)
+      left -.15em
+      top .05em
+    &:after
+      display none

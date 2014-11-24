@@ -32,7 +32,7 @@ module.exports = class GameController
       id: 1
       name: "Ross"
       x_position: 400
-      y_position: 400
+      y_position: 2800
     avatar = new Avatar
       model: player
 
