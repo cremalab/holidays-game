@@ -11,6 +11,7 @@ module.exports = class Player extends Model
     super
     @listenTo @, "change:x_position change:y_position", @streamPosition
     @subscribeEvent "players:moved:#{@id}", @setPosition
+    @subscribeEvent "players:left", @handleLeave
 
   position: ->
     return "#{@get('x_position')}px, #{@get('y_position')}px"
@@ -19,14 +20,21 @@ module.exports = class Player extends Model
     mediator.current_player.id is @id
 
   setPosition: (data) ->
-    console.log @isCurrentPlayer()
     unless @isCurrentPlayer()
       @set
         x_position: data.x_position
         y_position: data.y_position
+        position_direction: data.direction
 
   streamPosition: ->
     @movement_inc++
-    if @movement_inc is 10
+    if @movement_inc is 2
       @movement_inc = 0
       @publishEvent 'playerMoved', @ if @isCurrentPlayer()
+
+  leaveRoom: ->
+    @publishEvent 'players:left', @id
+
+  handleLeave: (id) ->
+    if id is @id
+      @dispose()
