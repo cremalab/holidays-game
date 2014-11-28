@@ -5,13 +5,13 @@ up    = 38
 right = 39
 down  = 40
 
-directionsByName = 
+directionsByName =
   left: left
   up: up
   right: right
   down: down
 
-directionsByCode = 
+directionsByCode =
   37: "left"
   38: "up"
   39: "right"
@@ -72,9 +72,9 @@ module.exports = class Avatar extends View
     @moving = true
 
     @checkCollision()
-    if !@isMovingDirection(up) and 
-      !@isMovingDirection(down) and 
-      !@isMovingDirection(left) and 
+    if !@isMovingDirection(up) and
+      !@isMovingDirection(down) and
+      !@isMovingDirection(left) and
       !@isMovingDirection(right)
         @moving = false
         @stopMovementLoop()
@@ -113,7 +113,7 @@ module.exports = class Avatar extends View
       if @activeMovementKeys.length is 0
         @stopMovementLoop()
         @moving = false
-      
+
       @el.classList.remove directionsByCode[e.keyCode] if @moving
     else
       @stopMovementLoop()
@@ -176,7 +176,7 @@ module.exports = class Avatar extends View
     if cl.contains('dir-right')
       return @model.set('position_direction', 2)
     if cl.contains('dir-left')
-      return @model.set('position_direction', 3)
+      return @model.set('position_direction', 6)
 
   clearMovementClasses: ->
     classList = @el.classList

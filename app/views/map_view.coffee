@@ -7,8 +7,8 @@ module.exports = class MapView extends View
   viewport_padding: 100
   offset_x: 0
   offset_y: 0
-  height: 5000
-  width: 5000
+  width: 5769
+  height: 4102
 
   render: ->
     super

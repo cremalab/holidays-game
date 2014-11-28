@@ -11,7 +11,6 @@ module.exports = class Trailblazer extends Model
 
     @listenTo @avatar, 'playerMove', (player, avatar) =>
       @plot_count++
-      console.log player.id
 
       # if @plot_count % 5 is 0
       plot =
