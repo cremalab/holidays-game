@@ -13,11 +13,11 @@ module.exports = class Notifier extends Model
     @subscribe()
     @subscribeEvent 'playerMoved', @publishPlayerMovement
     @subscribeEvent "players:left", @removePlayer
-    
+
     pubnub = @PN
 
     window.addEventListener "beforeunload", (e) =>
-      @PN.unsubscribe 
+      @PN.unsubscribe
         channel: "players"
 
   subscribe: ->
@@ -30,15 +30,15 @@ module.exports = class Notifier extends Model
       state:
         x_position: @player.get('x_position')
         y_position: @player.get('y_position')
-      callback: (d) =>
-        @getRoomPlayers(d)
+      # callback: (d) =>
+      #   @getRoomPlayers(d)
 
   getRoomPlayers: (d) ->
-    # console.log d
     @PN.here_now
       channel : 'players'
       state: true
       callback: (message) =>
+        console.log message
         @handlePlayers(message)
 
   message: (m) ->
@@ -48,10 +48,11 @@ module.exports = class Notifier extends Model
     #     @publishEvent "players:moved:#{m.uuid}", m
 
   handlePlayers: (message) ->
-    # if message.uuids
-    #   for player in message.uuids
-    #     unless player is @player.get('id')
-    #       @publishEvent 'addPlayer', player
+    if message.uuids
+      for player in message.uuids
+        console.log player
+        unless player.uuid is @player.get('id')
+          @publishEvent 'addPlayer', player.uuid, player.state
 
   handlePresence: (m) ->
     unless m.uuid is mediator.current_player.id
@@ -71,7 +72,7 @@ module.exports = class Notifier extends Model
 
     @PN.state
       channel  : "players",
-      state    : 
+      state    :
         x_position: x_position
         y_position: y_position
         direction: direction
@@ -79,5 +80,5 @@ module.exports = class Notifier extends Model
   removePlayer: (id) ->
     if mediator.current_player.id is id
       console.log 'unsubscribe'
-      @PN.unsubscribe 
+      @PN.unsubscribe
         channel: 'players'
