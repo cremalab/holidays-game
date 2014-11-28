@@ -5,7 +5,7 @@ module.exports = class DrawingCanvas extends View
   lineWidth: 50
   gameLoopInt: 2000
   plotCleanCount: 5
-  cleanup: true
+  cleanup: false
 
   initialize: ->
     super
@@ -32,7 +32,7 @@ module.exports = class DrawingCanvas extends View
       for plot, i in plots
         @ctx.lineTo plot.x, plot.y
       @ctx.stroke()
-      @ctx.closePath()
+      # @ctx.closePath()
 
   # Extend an avatar's trail
   addPointToTrail: (plots, player, avatar) ->
