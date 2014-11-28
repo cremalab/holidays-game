@@ -13,7 +13,7 @@ module.exports = class Trailblazer extends Model
       @plot_count++
 
       # if @plot_count % 5 is 0
-      plot = 
+      plot =
         x: player.get('x_position')
         y: player.get('y_position')
       @plots.push(plot)
@@ -30,10 +30,10 @@ module.exports = class Trailblazer extends Model
         y: @player.get('y_position') + (@avatar.height + 15)
       if plots.length
         latest = plots[plots.length]
-        latest = last unless latest 
+        latest = last unless latest
 
-    latest.x = latest.x + (@avatar.width/1.1)
-    latest.y = latest.y + (@avatar.height + 15)
+    latest.x = latest.x + (@avatar.width/2)
+    latest.y = latest.y + (@avatar.height * .8)
     return [last, latest]
 
   cleanupPlots: ->

@@ -31,6 +31,8 @@ mediator.publish       = mediator.trigger = Backbone.Events.trigger
 # Initialize an empty callback list so we might seal the mediator later.
 mediator._callbacks = null
 
+mediator.current_player = null
+
 # Request / Response
 # --–---------------
 

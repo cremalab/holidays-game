@@ -1,3 +1,4 @@
+mediator    = require 'lib/mediator'
 utils       = require 'lib/utils'
 EventBroker = require 'lib/event_broker'
 
@@ -360,7 +361,7 @@ module.exports = class View extends Backbone.NativeView
     view.dispose()
 
     # Remove the subview from the lists.
-    index = utils.indexOf subviews, view
+    index = subviews.indexOf view
     subviews.splice index, 1 if index isnt -1
     delete byName[name]
 

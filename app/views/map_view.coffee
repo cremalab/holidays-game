@@ -7,8 +7,8 @@ module.exports = class MapView extends View
   viewport_padding: 100
   offset_x: 0
   offset_y: 0
-  height: 5000
-  width: 5000
+  width: 5769
+  height: 4102
 
   render: ->
     super
@@ -16,7 +16,7 @@ module.exports = class MapView extends View
 
   setDimensions: ->
     @rect = document.body.getClientRects()[0]
-    @viewport = 
+    @viewport =
       left:   @rect.left + @viewport_padding
       top:    @rect.top + @viewport_padding
       right:  @rect.right - @viewport_padding
@@ -39,6 +39,12 @@ module.exports = class MapView extends View
     within_x = px > @viewport.left and px < @viewport.right
     within_y = py > @viewport.top and py < @viewport.bottom
     within_rect = within_x and within_y
+
+    @panToPlayerPosition(player, avatar) if player.isCurrentPlayer()
+
+  panToPlayerPosition: (player, avatar) ->
+    px = player.get('x_position')
+    py = player.get('y_position')
 
     a_height = avatar.height or 0
     a_width = avatar.width or 0
@@ -67,7 +73,6 @@ module.exports = class MapView extends View
       @offset_y = new_y
 
     @repositionMap(@offset_x, @offset_y)
-
 
   repositionMap: (left, top) ->
     @el.style.webkitTransform = "translate3d(#{left}px, #{top}px, 0)"
