@@ -32,8 +32,8 @@ module.exports = class Trailblazer extends Model
         latest = plots[plots.length]
         latest = last unless latest
 
-    latest.x = latest.x + (@avatar.width/1.1)
-    latest.y = latest.y + (@avatar.height + 15)
+    latest.x = latest.x + (@avatar.width/2)
+    latest.y = latest.y + (@avatar.height * .8)
     return [last, latest]
 
   cleanupPlots: ->

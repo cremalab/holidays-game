@@ -1,4 +1,5 @@
-View     = require './view'
+View       = require './view'
+ChatterBox = require 'lib/chatterbox'
 
 left  = 37
 up    = 38
@@ -36,6 +37,9 @@ module.exports = class Avatar extends View
     super
     @listenTo @model, "change:x_position change:y_position", @broadCastMove
     @listenTo @model, "change:position_direction", @orient
+    @chatterbox = new ChatterBox
+      player: @model
+      avatar: @
 
   render: ->
     super
@@ -65,6 +69,11 @@ module.exports = class Avatar extends View
         @movementLoop = setInterval =>
           @move()
         , @movementLoopInc
+
+    if e.keyCode is 13 # return/enter
+      @chatterbox.handleEnter(e)
+    if e.keyCode is 27 # esc
+      @chatterbox.disposeBubble(true)
 
 
   move: (keys) ->

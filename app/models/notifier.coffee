@@ -13,6 +13,8 @@ module.exports = class Notifier extends Model
     @subscribe()
     @subscribeEvent 'playerMoved', @publishPlayerMovement
     @subscribeEvent "players:left", @removePlayer
+    @subscribeEvent "messages:saved", @publishMessage
+    @subscribeEvent "messages:dismissed", @dismissMessage
 
     pubnub = @PN
 
@@ -40,15 +42,17 @@ module.exports = class Notifier extends Model
         @handlePlayers(message)
 
   message: (m) ->
-    # if m.action and m.action is 'move'
-    #   console.log "UUID: #{m.uuid}"
-    #   unless mediator.current_player.id is m.uuid
-    #     @publishEvent "players:moved:#{m.uuid}", m
+    if m.type
+      switch m.type
+        when 'chat_message'
+          unless mediator.current_player.id is m.uuid
+            @publishEvent "messages:received:#{m.uuid}", m
+        when 'chat_message_dismissed'
+          @publishEvent "messages:dismissed:#{m.uuid}"
 
   handlePlayers: (message) ->
     if message.uuids
       for player in message.uuids
-        console.log player
         unless player.uuid is @player.get('id')
           @publishEvent 'addPlayer', player.uuid, player.state
 
@@ -56,7 +60,6 @@ module.exports = class Notifier extends Model
     unless m.uuid is mediator.current_player.id
       switch m.action
         when 'join'
-          console.log 'join!'
           @publishEvent 'addPlayer', m.uuid, m.data
         when 'state-change'
           @publishEvent "players:moved:#{m.uuid}", m.data
@@ -80,3 +83,16 @@ module.exports = class Notifier extends Model
       console.log 'unsubscribe'
       @PN.unsubscribe
         channel: 'players'
+
+  publishMessage: (attributes) ->
+    attributes.type = 'chat_message'
+    @PN.publish
+      channel: "players"
+      message: attributes
+
+  dismissMessage: (uuid) ->
+    @PN.publish
+      channel: "players"
+      message:
+        type: 'chat_message_dismissed'
+        uuid: uuid
