@@ -30,8 +30,6 @@ module.exports = class Notifier extends Model
       state:
         x_position: @player.get('x_position')
         y_position: @player.get('y_position')
-      # callback: (d) =>
-      #   @getRoomPlayers(d)
 
   getRoomPlayers: (d) ->
     @PN.here_now
