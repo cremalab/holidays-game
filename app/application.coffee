@@ -3,7 +3,7 @@ mediator       = require 'lib/mediator'
 
 # The application bootstrapper.
 Application =
-  initialize: ->
+  initialize: ->    
     @gameController = new GameController()
 
     # Freeze the object

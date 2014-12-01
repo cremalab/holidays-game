@@ -1,17 +1,18 @@
-View = require './view'
+View       = require './view'
+ChatterBox = require 'lib/chatterbox'
 
 left  = 37
 up    = 38
 right = 39
 down  = 40
 
-directionsByName = 
+directionsByName =
   left: left
   up: up
   right: right
   down: down
 
-directionsByCode = 
+directionsByCode =
   37: "left"
   38: "up"
   39: "right"
@@ -35,6 +36,10 @@ module.exports = class Avatar extends View
   initialize: ->
     super
     @listenTo @model, "change:x_position change:y_position", @broadCastMove
+    @listenTo @model, "change:position_direction", @orient
+    @chatterbox = new ChatterBox
+      player: @model
+      avatar: @
 
   render: ->
     super
@@ -44,15 +49,16 @@ module.exports = class Avatar extends View
     @el.setAttribute('data-pos', 7)
 
   bindEvents: ->
-    document.addEventListener 'keydown', (e) =>
-      @handleKeyDown(e) if @isMovementKey(e)
-    document.addEventListener 'keyup', (e) =>
-      @stopMovement(e)
+    if @model.isCurrentPlayer()
+      document.addEventListener 'keydown', @handleKeyDown
+      document.addEventListener 'keyup', @handleKeyUp
 
   broadCastMove: (player) ->
+    unless player.isCurrentPlayer()
+      @positionOnMap()
     @trigger('playerMove', player, @)
 
-  handleKeyDown: (e) ->
+  handleKeyDown: (e) =>
     e.stopPropagation()
 
     if @isMovementKey(e) and @activeMovementKeys.indexOf(e.keyCode) < 0
@@ -64,15 +70,20 @@ module.exports = class Avatar extends View
           @move()
         , @movementLoopInc
 
+    if e.keyCode is 13 # return/enter
+      @chatterbox.handleEnter(e)
+    if e.keyCode is 27 # esc
+      @chatterbox.disposeBubble(true)
+
 
   move: (keys) ->
 
     @moving = true
 
     @checkCollision()
-    if !@isMovingDirection(up) and 
-      !@isMovingDirection(down) and 
-      !@isMovingDirection(left) and 
+    if !@isMovingDirection(up) and
+      !@isMovingDirection(down) and
+      !@isMovingDirection(left) and
       !@isMovingDirection(right)
         @moving = false
         @stopMovementLoop()
@@ -97,6 +108,12 @@ module.exports = class Avatar extends View
     @position_y = @model.get('y_position')
     @el.style.webkitTransform = "translate3d(#{@model.position()}, 0)"
 
+  orient: (player, position_direction) ->
+    @el.setAttribute('data-pos', position_direction)
+
+  handleKeyUp: (e) =>
+    @stopMovement(e)
+
   stopMovement: (e) ->
     if e and e.keyCode
       if @activeMovementKeys.indexOf(e.keyCode) > -1
@@ -105,7 +122,7 @@ module.exports = class Avatar extends View
       if @activeMovementKeys.length is 0
         @stopMovementLoop()
         @moving = false
-      
+
       @el.classList.remove directionsByCode[e.keyCode] if @moving
     else
       @stopMovementLoop()
@@ -154,24 +171,21 @@ module.exports = class Avatar extends View
   setPositionIndex: ->
     cl = @el.classList
     if cl.contains('dir-up') and cl.contains('dir-left')
-      return @el.setAttribute('data-pos', 5)
+      return @model.set('position_direction', 5)
     if cl.contains('dir-up') and cl.contains('dir-right')
-      return @el.setAttribute('data-pos', 3)
+      return @model.set('position_direction', 3)
     if cl.contains('dir-down') and cl.contains('dir-left')
-      return @el.setAttribute('data-pos', 7)
+      return @model.set('position_direction', 7)
     if cl.contains('dir-down') and cl.contains('dir-right')
-      return @el.setAttribute('data-pos', 1)
+      return @model.set('position_direction', 1)
     if cl.contains('dir-up')
-      return @el.setAttribute('data-pos', 4)
+      return @model.set('position_direction', 4)
     if cl.contains('dir-down')
-      return @el.setAttribute('data-pos', null)
+      return @model.set('position_direction', null)
     if cl.contains('dir-right')
-      return @el.setAttribute('data-pos', 2)
+      return @model.set('position_direction', 2)
     if cl.contains('dir-left')
-      return @el.setAttribute('data-pos', 6)
-
-
-
+      return @model.set('position_direction', 6)
 
   clearMovementClasses: ->
     classList = @el.classList
@@ -204,3 +218,8 @@ module.exports = class Avatar extends View
     @stopMovementDirection(down) if blocked_down
     @stopMovementDirection(left) if blocked_left
     @stopMovementDirection(right) if blocked_right
+
+  dispose: ->
+    document.removeEventListener 'keydown', @handleKeyDown
+    document.removeEventListener 'keyup', @handleKeyUp
+    super
