@@ -13,6 +13,8 @@ module.exports = class MapView extends View
   render: ->
     super
     @setDimensions()
+    window.addEventListener 'resize', =>
+      @setDimensions()
 
   setDimensions: ->
     @rect = document.body.getClientRects()[0]
