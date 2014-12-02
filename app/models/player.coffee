@@ -28,12 +28,11 @@ module.exports = class Player extends Model
           y_position: data.y_position
           orientation: data.orientation
       if data.name
-        console.log data
         @set 'name', data.name
 
   streamPosition: ->
     @movement_inc++
-    triggerMove = @movement_inc is 5 or @hasChanged('orientation')
+    triggerMove = @movement_inc is 6 or @hasChanged('orientation')
     if triggerMove
       @movement_inc = 0
       @publishEvent 'playerMoved', @ if @isCurrentPlayer()
