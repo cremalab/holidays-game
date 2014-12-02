@@ -23,6 +23,7 @@ module.exports = class Notifier extends Model
         channel: "players"
 
   subscribe: ->
+    console.log 'subscribe'
     @PN.subscribe
       channel: 'players'
       presence: (m) =>
@@ -32,6 +33,8 @@ module.exports = class Notifier extends Model
       state:
         x_position: @player.get('x_position')
         y_position: @player.get('y_position')
+      connect: (a,b)=>
+        @getRoomPlayers()
 
   getRoomPlayers: (d) ->
     @PN.here_now
@@ -56,7 +59,7 @@ module.exports = class Notifier extends Model
         unless player.uuid is @player.get('id')
           @publishEvent 'addPlayer', player.uuid, player.state
 
-  handlePresence: (m) ->
+  handlePresence: (m,a) ->
     unless m.uuid is mediator.current_player.id
       switch m.action
         when 'join'
@@ -65,18 +68,20 @@ module.exports = class Notifier extends Model
           @publishEvent "players:moved:#{m.uuid}", m.data
         when 'leave'
           @publishEvent "players:left", m.uuid
+        when 'timeout'
+          @publishEvent "players:left", m.uuid
 
   publishPlayerMovement: (player) ->
-    x_position = player.get('x_position')
-    y_position = player.get('y_position')
-    direction  = player.get('position_direction')
+    x_position  = player.get('x_position')
+    y_position  = player.get('y_position')
+    orientation = player.get('orientation')
 
     @PN.state
       channel  : "players",
       state    :
-        x_position: x_position
-        y_position: y_position
-        direction: direction
+        x_position:  x_position
+        y_position:  y_position
+        orientation: orientation
 
   removePlayer: (id) ->
     if mediator.current_player.id is id

@@ -35,8 +35,8 @@ module.exports = class Avatar extends View
 
   initialize: ->
     super
-    @listenTo @model, "change:x_position change:y_position", @broadCastMove
-    @listenTo @model, "change:position_direction", @orient
+    @listenTo @model, "change:x_position change:y_position change:orientation", @broadCastMove
+    @listenTo @model, "change:orientation", @orient
     @chatterbox = new ChatterBox
       player: @model
       avatar: @
@@ -47,6 +47,8 @@ module.exports = class Avatar extends View
     @bindEvents()
     @setDimensions()
     @el.setAttribute('data-pos', 7)
+    if @model.get('active')
+      @el.classList.add 'active'
 
   bindEvents: ->
     if @model.isCurrentPlayer()
@@ -99,7 +101,7 @@ module.exports = class Avatar extends View
       @model.set('x_position', @model.get('x_position') + @movementInc)
 
     @setMovementClasses()
-    @setPositionIndex()
+    @setOrientation()
 
     @positionOnMap()
 
@@ -107,9 +109,10 @@ module.exports = class Avatar extends View
     @position_x = @model.get('x_position')
     @position_y = @model.get('y_position')
     @el.style.webkitTransform = "translate3d(#{@model.position()}, 0)"
+    @el.style.transform = "translate3d(#{@model.position()}, 0)"
 
-  orient: (player, position_direction) ->
-    @el.setAttribute('data-pos', position_direction)
+  orient: (player, orientation) ->
+    @el.setAttribute('data-pos', orientation)
 
   handleKeyUp: (e) =>
     @stopMovement(e)
@@ -130,7 +133,7 @@ module.exports = class Avatar extends View
       @moving = false
 
     @setMovementClasses()
-    @setPositionIndex()
+    @setOrientation()
 
   isMovementKey: (e) ->
     return @movementKeys.indexOf(e.keyCode) > -1
@@ -168,24 +171,24 @@ module.exports = class Avatar extends View
       classList.remove 'dir-right'
 
 
-  setPositionIndex: ->
+  setOrientation: ->
     cl = @el.classList
     if cl.contains('dir-up') and cl.contains('dir-left')
-      return @model.set('position_direction', 5)
+      return @model.set('orientation', 5)
     if cl.contains('dir-up') and cl.contains('dir-right')
-      return @model.set('position_direction', 3)
+      return @model.set('orientation', 3)
     if cl.contains('dir-down') and cl.contains('dir-left')
-      return @model.set('position_direction', 7)
+      return @model.set('orientation', 7)
     if cl.contains('dir-down') and cl.contains('dir-right')
-      return @model.set('position_direction', 1)
+      return @model.set('orientation', 1)
     if cl.contains('dir-up')
-      return @model.set('position_direction', 4)
+      return @model.set('orientation', 4)
     if cl.contains('dir-down')
-      return @model.set('position_direction', null)
+      return @model.set('orientation', null)
     if cl.contains('dir-right')
-      return @model.set('position_direction', 2)
+      return @model.set('orientation', 2)
     if cl.contains('dir-left')
-      return @model.set('position_direction', 6)
+      return @model.set('orientation', 6)
 
   clearMovementClasses: ->
     classList = @el.classList

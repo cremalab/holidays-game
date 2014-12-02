@@ -14,5 +14,5 @@ module.exports = class SpeechBubbleView extends View
     setTimeout =>
       @rect = @el.getClientRects()[0]
       @el.style.top = "#{-(@rect.height + 20)}px"
-      @el.style.left = "#{-(@rect.width / 3)}px"
+      @el.style.left = "#{-(@rect.width / 4)}px"
     , 0
