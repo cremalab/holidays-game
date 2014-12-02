@@ -21,14 +21,24 @@ module.exports = class Player extends Model
 
   setPosition: (data) ->
     unless @isCurrentPlayer()
+<<<<<<< Updated upstream
       @set
         x_position: data.x_position
         y_position: data.y_position
         orientation: data.orientation
+=======
+      if data.x_position or data.orientation
+        @set
+          x_position: data.x_position
+          y_position: data.y_position
+          orientation: data.orientation
+      if data.name
+        @set 'name', data.name
+>>>>>>> Stashed changes
 
   streamPosition: ->
     @movement_inc++
-    triggerMove = @movement_inc is 5 or @hasChanged('orientation')
+    triggerMove = @movement_inc is 6 or @hasChanged('orientation')
     if triggerMove
       @movement_inc = 0
       @publishEvent 'playerMoved', @ if @isCurrentPlayer()
