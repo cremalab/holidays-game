@@ -67,16 +67,16 @@ module.exports = class Notifier extends Model
           @publishEvent "players:left", m.uuid
 
   publishPlayerMovement: (player) ->
-    x_position = player.get('x_position')
-    y_position = player.get('y_position')
-    direction  = player.get('position_direction')
+    x_position  = player.get('x_position')
+    y_position  = player.get('y_position')
+    orientation = player.get('orientation')
 
     @PN.state
       channel  : "players",
       state    :
-        x_position: x_position
-        y_position: y_position
-        direction: direction
+        x_position:  x_position
+        y_position:  y_position
+        orientation: orientation
 
   removePlayer: (id) ->
     if mediator.current_player.id is id
