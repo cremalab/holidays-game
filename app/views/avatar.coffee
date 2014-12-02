@@ -37,6 +37,7 @@ module.exports = class Avatar extends View
     super
     @listenTo @model, "change:x_position change:y_position change:orientation", @broadCastMove
     @listenTo @model, "change:orientation", @orient
+    @listenTo @model, "change:name", @setName
     @chatterbox = new ChatterBox
       player: @model
       avatar: @
@@ -221,6 +222,10 @@ module.exports = class Avatar extends View
     @stopMovementDirection(down) if blocked_down
     @stopMovementDirection(left) if blocked_left
     @stopMovementDirection(right) if blocked_right
+
+  setName: ->
+    name = @model.get('name')
+    @el.querySelector('.player-name').innerText = name
 
   dispose: ->
     document.removeEventListener 'keydown', @handleKeyDown

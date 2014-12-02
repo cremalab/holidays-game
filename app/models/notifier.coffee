@@ -15,6 +15,7 @@ module.exports = class Notifier extends Model
     @subscribeEvent "players:left", @removePlayer
     @subscribeEvent "messages:saved", @publishMessage
     @subscribeEvent "messages:dismissed", @dismissMessage
+    @subscribeEvent "players:name_changed", @setName
 
     pubnub = @PN
 
@@ -31,6 +32,7 @@ module.exports = class Notifier extends Model
       message: (m) =>
         @message(m)
       state:
+        name: @player.get('name')
         x_position: @player.get('x_position')
         y_position: @player.get('y_position')
       connect: (a,b)=>
@@ -41,7 +43,6 @@ module.exports = class Notifier extends Model
       channel : 'players'
       state: true
       callback: (message) =>
-        console.log message
         @handlePlayers(message)
 
   message: (m) ->
@@ -101,3 +102,9 @@ module.exports = class Notifier extends Model
       message:
         type: 'chat_message_dismissed'
         uuid: uuid
+
+  setName: (player) ->
+    @PN.state
+      channel  : "players"
+      state    :
+        name:  player.get('name')
