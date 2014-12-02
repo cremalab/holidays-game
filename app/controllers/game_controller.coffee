@@ -9,6 +9,7 @@ DrawingCanvas = require 'views/drawing_canvas'
 Trailblazer   = require 'models/trailblazer'
 Weather       = require 'lib/weather'
 Notifier      = require 'models/notifier'
+JoinGameView  = require 'views/join_game_view'
 utils         = require 'lib/utils'
 
 module.exports = class GameController
@@ -23,6 +24,7 @@ module.exports = class GameController
     @setupMap()
     @setupCanvas()
     @createPlayer()
+    @promptPlayerName()
     @subscribeEvent 'addPlayer', @addPlayer
     @createPlayerList()
 
@@ -43,6 +45,15 @@ module.exports = class GameController
       el: document.getElementById('drawCanvas')
       autoRender: true
 
+
+  promptPlayerName: ->
+    view = new JoinGameView
+      container: document.body
+    mediator.current_player.listenTo view, 'setPlayerName', (name) =>
+      view.dispose()
+      player = mediator.current_player.set('name', name)
+      @createPlayerAvatar(player)
+
   createPlayer: ->
     id = Date.now()
     player = new Player
@@ -51,13 +62,14 @@ module.exports = class GameController
       x_position: 400
       y_position: 2800
       active: true
-    avatar = new Avatar
-      model: player
 
     mediator.current_player = player
 
     @notifier.connect(player) if @multiplayer
 
+  createPlayerAvatar: (player) ->
+    avatar = new Avatar
+      model: player
     avatar.trailblazer = new Trailblazer
       player: player
       avatar: avatar
@@ -78,10 +90,9 @@ module.exports = class GameController
       else
         x_position = 400
         y_position = 1000
-
       player = new Player
         id: uuid
-        name: uuid
+        name: data.name
         x_position: x_position
         y_position: y_position
       avatar = new Avatar

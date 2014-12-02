@@ -10,6 +10,7 @@ module.exports = class Player extends Model
   initialize: ->
     super
     @listenTo @, "change:x_position change:y_position change:orientation", @streamPosition
+    @listenTo @, "change:name", @publishNameChange
     @subscribeEvent "players:moved:#{@id}", @setPosition
     @subscribeEvent "players:left", @handleLeave
 
@@ -42,3 +43,6 @@ module.exports = class Player extends Model
   handleLeave: (id) ->
     if id is @id
       @dispose()
+
+  publishNameChange: ->
+    @publishEvent 'players:name_changed', @ if @isCurrentPlayer()
