@@ -28,7 +28,7 @@ module.exports = class Player extends Model
 
   streamPosition: ->
     @movement_inc++
-    triggerMove = @movement_inc is 8 or @hasChanged('orientation')
+    triggerMove = @movement_inc is 5 or @hasChanged('orientation')
     if triggerMove
       @movement_inc = 0
       @publishEvent 'playerMoved', @ if @isCurrentPlayer()

@@ -54,7 +54,7 @@ module.exports = class GameController
     mediator.current_player = player
 
     @notifier.connect(player)
-    @notifier.getRoomPlayers()
+    # @notifier.getRoomPlayers()
 
     avatar.trailblazer = new Trailblazer
       player: player
