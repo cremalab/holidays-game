@@ -14,6 +14,8 @@ utils         = require 'lib/utils'
 module.exports = class GameController
   Backbone.utils.extend @prototype, EventBroker
   players: []
+  multiplayer: true
+  snow: false
 
   constructor: ->
     @players = new Players []
@@ -33,7 +35,8 @@ module.exports = class GameController
     document.getElementById('leave_room').addEventListener 'click', (e) =>
       e.preventDefault()
       mediator.current_player.leaveRoom()
-    # Weather.snow('snowCanvas')
+
+    Weather.snow('snowCanvas') if @snow
 
   setupCanvas: ->
     @canvas = new DrawingCanvas
@@ -53,8 +56,7 @@ module.exports = class GameController
 
     mediator.current_player = player
 
-    @notifier.connect(player)
-    # @notifier.getRoomPlayers()
+    @notifier.connect(player) if @multiplayer
 
     avatar.trailblazer = new Trailblazer
       player: player
