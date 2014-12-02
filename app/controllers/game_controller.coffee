@@ -87,12 +87,14 @@ module.exports = class GameController
       if data
         x_position = data.x_position
         y_position = data.y_position
+        name = data.name
       else
         x_position = 400
         y_position = 1000
+        name = uuid
       player = new Player
         id: uuid
-        name: data.name
+        name: name
         x_position: x_position
         y_position: y_position
       avatar = new Avatar

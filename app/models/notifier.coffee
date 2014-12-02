@@ -57,6 +57,8 @@ module.exports = class Notifier extends Model
   handlePlayers: (message) ->
     if message.uuids
       for player in message.uuids
+        console.log player.uuid
+        console.log player.state
         unless player.uuid is @player.get('id')
           @publishEvent 'addPlayer', player.uuid, player.state
 
@@ -76,6 +78,7 @@ module.exports = class Notifier extends Model
     x_position  = player.get('x_position')
     y_position  = player.get('y_position')
     orientation = player.get('orientation')
+    name        = player.get('name')
 
     @PN.state
       channel  : "players",
@@ -83,6 +86,7 @@ module.exports = class Notifier extends Model
         x_position:  x_position
         y_position:  y_position
         orientation: orientation
+        name:        name
 
   removePlayer: (id) ->
     if mediator.current_player.id is id
