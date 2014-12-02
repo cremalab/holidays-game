@@ -1,80 +1,60 @@
-@keyframes legs0
-  0%
-    top -.03em
-  100%
-    top 0
-    
-.legs
-  width .5em
-  height .1em
-  position absolute
-  background #eee
-  position absolute
-  top 1.3em
-  left 50%
-  margin-left -.25em
-  border-radius .2em
-  &:before,
-  &:after
-    content ''
-    display block
-    position absolute
-    top 0
-    width .22em
-    height 180%
-    background pants-color
-    border-bottom 3px solid #000
-    border-radius 0 0 .1em .1em
-    box-shadow 0 1px 1px black
-    transition all transition-speed
 
-  &:before
-    left 0
+.leg
+  body-part(1em, 1em, pants-color)
+  position absolute
+  top 4.2em
+  z-index 1
+.right.leg
+  left 1.1em
+  [data-pos="1"] &
+    left 1.4em
+    top 4.4em
     z-index 2
-  &:after
-    right 0
+  [data-pos="2"] &
+    left 1.5em
+    top 4.5em
+    z-index 2
+  [data-pos="3"] &
+    left 1.7em
+    top 4.4em
+    z-index 2
+  [data-pos="4"] &
+    left 1.9em
+    top 4.3em
+    z-index 2
+  [data-pos="5"] &
+    left 1.7em
+    top 4.2em
+  [data-pos="6"] &
+    left 1.5em
+    top 4.2em
+  [data-pos="7"] &
+    left 1.3em
+    top 4.3em
     z-index 1
-  
-  .moving &
-    &:before,
-    &:after
-      animation-name legs0
-      transition-property top
-      animation-duration .8s
-      animation-iteration-count infinite
-    &:after
-      animation-delay .4s
-  .moving.alt &
-    &:before
-      animation-delay .4s
-    &:after
-      animation-delay 0
-    
-  .avatar[data-pos="1"] &
-    &:before
-      width .27em
-    &:after
-      width .18em
-  .avatar[data-pos="3"] &,
-  .avatar[data-pos="2"] &
-    &:after
-      width .27em
-      right .05em
-    &:before
-      width .27em
-      left .05em
-  
-  .avatar[data-pos="5"] &
-  .avatar[data-pos="6"] &
-    &:after
-      width .27em
-      right .05em
-    &:before
-      width .27em
-      left .05em
-
-  .avatar[data-pos="7"] &
-    &:before
-      width .18em
-    &:after
-      width .27em
+.left.leg
+  right 1.1em
+  [data-pos="1"] &
+    right 1.2em
+    top 4.2em
+  [data-pos="2"] &
+    right 1.4em
+    top 4.3em
+  [data-pos="3"] &
+    right 1.6em
+    top 4.3em
+  [data-pos="4"] &
+    right 1.9em
+    top 4.2em
+  [data-pos="5"] &
+    right 1.6em
+    top 4.3em
+    z-index 2
+  [data-pos="6"] &
+    right 1.4em
+    top 4.3em
+    z-index 2
+  [data-pos="7"] &
+    right 1.3em
+    top 4.3em
+    z-index 2

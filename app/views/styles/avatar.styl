@@ -5,30 +5,22 @@
 @import "avatar/_mouth"
 @import "avatar/_eyes"
 @import "avatar/_arms"
-//@import "person/_hair"
-
-@keyframes walking-person
-  0%
-    top 0
-  100%
-    top -.03em
 
 .avatar
   position absolute
   left 0
   top 0
   z-index 2
-  font-size 2em
-  text-align center
   display inline-block
+  text-align center
+  margin 0 .5em
   transition-property top
-  animation-duration .6s
-  width 60px
-  height 100px
+  animation-duration .2s
   &.moving
     animation-name walking-person
     animation-iteration-count infinite
-
+  *, *:before
+    transition all .2s
 .chat-dialog
   z-index 20
   position relative
