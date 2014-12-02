@@ -16,7 +16,7 @@ module.exports = class GameController
   Backbone.utils.extend @prototype, EventBroker
   players: []
   multiplayer: true
-  snow: false
+  snow: true
 
   constructor: ->
     @players = new Players []
