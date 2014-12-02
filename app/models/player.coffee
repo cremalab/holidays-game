@@ -28,7 +28,7 @@ module.exports = class Player extends Model
 
   streamPosition: ->
     @movement_inc++
-    if @movement_inc is 4
+    if @movement_inc is 8
       @movement_inc = 0
       @publishEvent 'playerMoved', @ if @isCurrentPlayer()
 

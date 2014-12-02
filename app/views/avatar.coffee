@@ -47,6 +47,8 @@ module.exports = class Avatar extends View
     @bindEvents()
     @setDimensions()
     @el.setAttribute('data-pos', 7)
+    if @model.get('active')
+      @el.classList.add 'active'
 
   bindEvents: ->
     if @model.isCurrentPlayer()
@@ -107,6 +109,7 @@ module.exports = class Avatar extends View
     @position_x = @model.get('x_position')
     @position_y = @model.get('y_position')
     @el.style.webkitTransform = "translate3d(#{@model.position()}, 0)"
+    @el.style.transform = "translate3d(#{@model.position()}, 0)"
 
   orient: (player, position_direction) ->
     @el.setAttribute('data-pos', position_direction)

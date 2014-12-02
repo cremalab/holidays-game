@@ -47,6 +47,7 @@ module.exports = class GameController
       name: id
       x_position: 400
       y_position: 2800
+      active: true
     avatar = new Avatar
       model: player
 
