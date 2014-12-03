@@ -1,2 +1,29 @@
 .config
   color red
+
+
+@keyframes walking-person
+  0%
+    top 0
+  100%
+    top -.2em
+
+
+hat-color = #900
+shirt-color = #000
+pants-color = #009
+skin-color = #eebb99 //#c93
+eye-color = #000
+
+body-part(w, h, color, gradient = true, type = circle, radius = 50%)
+  width w
+  height h
+  border-radius radius
+  if gradient
+    background-image radial-gradient(
+      type,
+      lighten(color, 60%),
+      color
+     )
+  else
+    background color
