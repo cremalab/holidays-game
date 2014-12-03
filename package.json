@@ -24,6 +24,7 @@
     "clean-css-brunch": ">= 1.0 < 1.8",
     "coffee-script-brunch": ">= 1.0 < 1.8",
     "css-brunch": ">= 1.0 < 1.8",
+    "progeny": "git://github.com/cremalab/progeny.git",
     "stylus-brunch": ">= 1.0 < 1.8.1",
     "jade-brunch": "1.8.0",
     "uglify-js-brunch": ">= 1.7.4 < 1.8"
