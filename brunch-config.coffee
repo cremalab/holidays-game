@@ -16,5 +16,10 @@ exports.config =
     templates:
       joinTo: 'javascripts/app.js'
 
+  plugins:
+    autoprefixer:
+      browsers: ["last 2 versions"]
+      cascade: false
+
   server:
     port: 4040
