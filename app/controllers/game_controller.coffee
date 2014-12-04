@@ -17,6 +17,7 @@ module.exports = class GameController
   players: []
   multiplayer: false
   snow: false
+  customNames: false
 
   constructor: ->
     @players = new Players []
@@ -24,7 +25,10 @@ module.exports = class GameController
     @setupMap()
     @setupCanvas()
     @createPlayer()
-    @promptPlayerName()
+    if @customNames
+      @promptPlayerName()
+    else
+      @createPlayerAvatar(mediator.current_player)
     @subscribeEvent 'addPlayer', @addPlayer
     @createPlayerList()
 
