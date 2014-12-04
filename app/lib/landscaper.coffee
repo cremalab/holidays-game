@@ -40,7 +40,12 @@ module.exports = class Landscaper
 
       obstruction.svg = img
 
-  checkObstructions: (x, y, avatar, availableDirections, cb) ->
+  checkObstructions: (x, y, avatar, map) ->
+    availableDirections = 
+      right: true
+      left: true
+      up: true
+      down: true
     for obstruction in @obstructions
       avatarRect = obstruction.svg.createSVGRect()
       avatarRect.height = avatar.height
@@ -65,6 +70,15 @@ module.exports = class Landscaper
         avatarRect.y = y
         availableDirections.down = obstruction.svg.getIntersectionList(avatarRect, null).length < 1
         avatarRect.y = player.get('y_position')
+
+    if x > map.width
+      availableDirections.right = false
+    if x < 0
+      availableDirections.left = false
+    if y > map.height
+      availableDirections.down = false
+    if y < 0
+      availableDirections.up = false
     
     avatar.availableDirections = availableDirections
     avatar.trigger 'availableDirectionsUpdated', x, y

@@ -83,18 +83,5 @@ module.exports = class MapView extends View
     @el.style.webkitTransform = "translate3d(#{left}px, #{top}px, 0)"
 
   canMoveTo: (x,y, avatar) ->
-    # Check if within map bounds
-    can_right = x < @width
-    can_left  = x > 0
-    can_up    = y > 0
-    can_down  = y < @width
-
-    availableDirections = 
-      right: can_right
-      left: can_left
-      up: can_up
-      down: can_down
-
-    # check obstructions on map
     if avatar
-      @landscaper.checkObstructions x,y,avatar,availableDirections
+      @landscaper.checkObstructions x,y,avatar,@
