@@ -43,6 +43,12 @@ module.exports = class Landscaper
       left: true
       up: true
       down: true
+
+    rights = []
+    ups    = []
+    lefts  = []
+    downs  = []
+
     for obstruction in @obstructions
       avatarRect = obstruction.svg.createSVGRect()
       avatarRect.height = avatar.height
@@ -53,20 +59,25 @@ module.exports = class Landscaper
 
       if x < avatarRect.x
         avatarRect.x = x
-        availableDirections.left = obstruction.svg.getIntersectionList(avatarRect, null).length < 1
+        lefts.push obstruction.svg.getIntersectionList(avatarRect, null).length < 1
         avatarRect.x = player.get('x_position')
       if x > avatarRect.x
         avatarRect.x = x
-        availableDirections.right = obstruction.svg.getIntersectionList(avatarRect, null).length < 1
+        rights.push obstruction.svg.getIntersectionList(avatarRect, null).length < 1
         avatarRect.x = player.get('x_position')
       if y < avatarRect.y
         avatarRect.y = y
-        availableDirections.up = obstruction.svg.getIntersectionList(avatarRect, null).length < 1
+        ups.push obstruction.svg.getIntersectionList(avatarRect, null).length < 1
         avatarRect.y = player.get('y_position')
       if y > avatarRect.y
         avatarRect.y = y
-        availableDirections.down = obstruction.svg.getIntersectionList(avatarRect, null).length < 1
+        downs.push obstruction.svg.getIntersectionList(avatarRect, null).length < 1
         avatarRect.y = player.get('y_position')
+
+    availableDirections.right = rights.indexOf(false) < 0
+    availableDirections.left  = lefts.indexOf(false) < 0
+    availableDirections.up    = ups.indexOf(false) < 0
+    availableDirections.down  = downs.indexOf(false) < 0
 
     if x > map.width
       availableDirections.right = false
