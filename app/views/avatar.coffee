@@ -101,19 +101,15 @@ module.exports = class Avatar extends View
 
     if @isMovingDirection(up)
       new_y = @model.get('y_position') + -@movementInc
-      # @model.set('y_position', @model.get('y_position') + -@movementInc)
     if @isMovingDirection(down)
       new_y = @model.get('y_position') + @movementInc
-      # @model.set('y_position', @model.get('y_position') + @movementInc)
     if @isMovingDirection(left)
       new_x = @model.get('x_position') + -@movementInc
-      # @model.set('x_position', @model.get('x_position') + -@movementInc)
     if @isMovingDirection(right)
       new_x = @model.get('x_position') + @movementInc
-      # @model.set('x_position', @model.get('x_position') + @movementInc)
 
-    @trigger 'playerMove', new_x, new_y, @
     # Let MapView know the player wants to move
+    @trigger 'playerMove', new_x, new_y, @
 
     @setMovementClasses()
     @setOrientation()
