@@ -15,8 +15,8 @@ utils         = require 'lib/utils'
 module.exports = class GameController
   Backbone.utils.extend @prototype, EventBroker
   players: []
-  multiplayer: true
-  snow: true
+  multiplayer: false
+  snow: false
 
   constructor: ->
     @players = new Players []
@@ -59,8 +59,8 @@ module.exports = class GameController
     player = new Player
       id: id
       name: id
-      x_position: 400
-      y_position: 2800
+      x_position: 600
+      y_position: 100
       active: true
 
     mediator.current_player = player

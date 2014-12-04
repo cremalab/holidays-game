@@ -4,18 +4,18 @@ module.exports = class Trailblazer extends Model
   initialize: (options) ->
     super
     @canvas = options.canvas
-    @player = options.player
     @avatar = options.avatar
+    @player = @avatar.model
     @plots  = []
     @plot_count = 0
 
-    @listenTo @avatar, 'playerMove', (player, avatar) =>
+    @listenTo @player, 'change:x_position change:y_position', (x,y) =>
       @plot_count++
 
       # if @plot_count % 5 is 0
       plot =
-        x: player.get('x_position')
-        y: player.get('y_position')
+        x: @player.get('x_position')
+        y: @player.get('y_position')
       @plots.push(plot)
       @cleanupPlots()
       @canvas.addPointToTrail @getStartEnd(@plots), @player, @avatar
