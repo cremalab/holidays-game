@@ -18,7 +18,7 @@ module.exports = class GameController
   multiplayer: false
   snow: false
   trails: false
-  customNames: false
+  customNames: true
 
   constructor: ->
     @players = new Players []
@@ -39,9 +39,6 @@ module.exports = class GameController
       el: document.getElementById("map")
       autoRender: true
     mediator = mediator
-    document.getElementById('leave_room').addEventListener 'click', (e) =>
-      e.preventDefault()
-      mediator.current_player.leaveRoom()
 
     Weather.snow('snowCanvas') if @snow
 
