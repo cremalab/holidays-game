@@ -1,12 +1,23 @@
 .modal
-  z-index 20 
-  margin 2em auto
-  padding 2em
-  background white
-  width 50%
+  content ''
+  display block
   position fixed
-  left 25%
-  top 10%
-  box-shadow 0 .5em 1em rgba(0,0,0,.4)
-  border-radius .2em
+  width 100%
+  height 100%
+  background rgba(black, 0.25)
+  z-index 10
+  display table
+  
+.modal-content
+  display table-cell
+  vertical-align middle
+  text-align center
+
+.modal-content-box
+  @extend .pad-2, .nest-3
+  @extend $rounded
+  display inline-block
+  background white
+  width 20em
+  box-shadow 0 0.15em 0.15em 0.25em rgba(black, 0.05)
   
