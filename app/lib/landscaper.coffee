@@ -18,8 +18,6 @@ module.exports = class Landscaper
 
     SVGInjector img, {}, ->
       img = document.querySelector "svg##{obstruction.id}"
-      img.setAttribute('x', '100')
-      img.setAttribute('y', '500')
       box = img.getBBox()
 
       img.x      = obstruction.x

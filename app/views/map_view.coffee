@@ -5,7 +5,7 @@ template   = require './templates/map'
 module.exports = class MapView extends View
   template: template
   className: "map"
-  viewport_padding: 100
+  viewport_padding: 300
   offset_x: 0
   offset_y: 0
   width: 5769
