@@ -17,6 +17,7 @@ module.exports = class GameController
   players: []
   multiplayer: false
   snow: false
+  trails: false
 
   constructor: ->
     @players = new Players []
@@ -70,10 +71,12 @@ module.exports = class GameController
   createPlayerAvatar: (player) ->
     avatar = new Avatar
       model: player
-    avatar.trailblazer = new Trailblazer
-      player: player
-      avatar: avatar
-      canvas: @canvas
+      
+    if @trails
+      avatar.trailblazer = new Trailblazer
+        player: player
+        avatar: avatar
+        canvas: @canvas
 
     @mapView.listenTo avatar, 'playerMove', @mapView.checkPlayerPosition
 
