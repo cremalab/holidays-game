@@ -1,9 +1,8 @@
-// nib is a powerful lib for stylus that provides cross-browser css3 mixins.
-// No more vendor prefixes. http://visionmedia.github.com/nib/
-@import 'nib'
-@import 'map'
-@import 'avatar'
-@import 'modal'
+@import 'nestle'
+
+@import '00-config/**/*'
+@import '01-utility/**/*'
+@import '02-components/**/*'
 
 // Apply a natural box layout model to all elements.
 // http://paulirish.com/2012/box-sizing-border-box-ftw/
@@ -16,6 +15,7 @@ body
   width 100%
   margin 0
   padding 0
+  
 html
   height 100%
   width 100%
