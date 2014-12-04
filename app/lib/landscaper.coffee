@@ -15,10 +15,7 @@ module.exports = class Landscaper
     img.id = obstruction.id
     img.setAttribute('src', obstruction.src)
     img = @map.el.appendChild(img)
-    # img.style.webkitTransform = "translate3d(#{position},0)"
-    # img.style.transform = "translate3d(#{position}, 0)"
-    # img.style.top = obstruction.y
-    # img.style.left = obstruction.x
+
     SVGInjector img, {}, ->
       img = document.querySelector "svg##{obstruction.id}"
       img.setAttribute('x', '100')
