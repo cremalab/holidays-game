@@ -106,3 +106,4 @@ module.exports = class Landscaper
       x: x
       y: y
     obstruction.raiseEvent "hit_#{dir}", options
+    obstruction.raiseEvent "hit_any", options

@@ -29,7 +29,9 @@ module.exports = class Activist
     item.addEventListener 'hit_right', (options) ->
       item.onHit.right(item, options) if item.onHit.right
     item.addEventListener 'hit_top', (options) ->
-      item.onHit.right(item, options) if item.onHit.top
+      item.onHit.top(item, options) if item.onHit.top
     item.addEventListener 'hit_bottom', (options) ->
-      item.onHit.right(item, options) if item.onHit.bottom
+      item.onHit.bottom(item, options) if item.onHit.bottom
+    item.addEventListener 'hit_any', (options) ->
+      item.onHit.any(item, options) if item.onHit.any
 
