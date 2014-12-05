@@ -1,13 +1,17 @@
+Activist = require 'lib/activist'
+
 module.exports = class Landscaper
   landscape: require 'lib/landscape'
   obstructions: []
   constructor: (options) ->
     @map = options.map
   init: ->
+    @activist = new Activist
     for obstruction in @landscape
       if obstruction.hasOwnProperty 'src'
         svg = @createSVG(obstruction)
-        @obstructions.push obstruction
+        @obstructions.push @activist.activate(obstruction)
+
 
   createSVG: (obstruction) ->
     position = "#{obstruction.x}px, #{obstruction.y}px"
@@ -57,19 +61,19 @@ module.exports = class Landscaper
 
       if x < avatarRect.x
         avatarRect.x = x
-        lefts.push obstruction.svg.getIntersectionList(avatarRect, null).length < 1
+        @determineDirections(avatarRect, obstruction, lefts, 'right', x, y, avatar)
         avatarRect.x = player.get('x_position')
       if x > avatarRect.x
         avatarRect.x = x
-        rights.push obstruction.svg.getIntersectionList(avatarRect, null).length < 1
+        @determineDirections(avatarRect, obstruction, rights, 'left', x, y, avatar)
         avatarRect.x = player.get('x_position')
       if y < avatarRect.y
         avatarRect.y = y
-        ups.push obstruction.svg.getIntersectionList(avatarRect, null).length < 1
+        @determineDirections(avatarRect, obstruction, ups, 'bottom', x, y, avatar)
         avatarRect.y = player.get('y_position')
       if y > avatarRect.y
         avatarRect.y = y
-        downs.push obstruction.svg.getIntersectionList(avatarRect, null).length < 1
+        @determineDirections(avatarRect, obstruction, downs, 'top', x, y, avatar)
         avatarRect.y = player.get('y_position')
 
     availableDirections.right = rights.indexOf(false) < 0
@@ -88,3 +92,18 @@ module.exports = class Landscaper
     
     avatar.availableDirections = availableDirections
     avatar.trigger 'availableDirectionsUpdated', x, y
+
+  determineDirections: (avatarRect, obstruction, array, dir, x, y, avatar) ->
+    if obstruction.svg.getIntersectionList(avatarRect, null).length < 1
+      array.push true
+    else
+      array.push false
+      @dispatchHitActions(obstruction, dir, x, y, avatar)
+
+  dispatchHitActions: (obstruction, dir, x, y, avatar) ->
+    options = 
+      avatar: avatar
+      x: x
+      y: y
+    obstruction.raiseEvent "hit_#{dir}", options
+    obstruction.raiseEvent "hit_any", options
