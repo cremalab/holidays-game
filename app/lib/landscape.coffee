@@ -5,7 +5,5 @@ module.exports = [
   y: 300
   onHit:
     left: (item, options) ->
-      item.svg.style.left = options.x + options.avatar.width
-      options.avatar.model.set('x_position', options.x)
-
+      alert 'you hit the left side of the table. +100 Gold'
 ]
