@@ -1,8 +1,8 @@
 module.exports = [
-  id: "bar"
-  src: "images/bar.svg"
-  x: 500
-  y: 300
+  id: "table"
+  src: "images/table.png"
+  x: 600
+  y: 500
   onHit:
     # left, right, top, bottom, any -> 
     left: (item, options) ->
