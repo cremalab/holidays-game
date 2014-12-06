@@ -41,13 +41,18 @@ module.exports = class Avatar extends View
     @chatterbox = new ChatterBox
       player: @model
       avatar: @
+    @listenTo @, "availableDirectionsUpdated", @updatePosition
 
   render: ->
     super
     @positionOnMap()
     @bindEvents()
-    @setDimensions()
     @el.setAttribute('data-pos', 7)
+    setTimeout(=>
+      @rect = @el.getClientRects()[0]
+      @boundingRect = @el.getBoundingClientRect()
+      @setDimensions()
+    , 0)
     if @model.get('active')
       @el.classList.add 'active'
 
@@ -59,7 +64,7 @@ module.exports = class Avatar extends View
   broadCastMove: (player) ->
     unless player.isCurrentPlayer()
       @positionOnMap()
-    @trigger('playerMove', player, @)
+      @trigger('playerMove', player, @)
 
   handleKeyDown: (e) =>
     e.stopPropagation()
@@ -91,15 +96,20 @@ module.exports = class Avatar extends View
         @moving = false
         @stopMovementLoop()
 
+    new_x = @model.get('x_position')
+    new_y = @model.get('y_position')
 
     if @isMovingDirection(up)
-      @model.set('y_position', @model.get('y_position') + -@movementInc)
+      new_y = @model.get('y_position') + -@movementInc
     if @isMovingDirection(down)
-      @model.set('y_position', @model.get('y_position') + @movementInc)
+      new_y = @model.get('y_position') + @movementInc
     if @isMovingDirection(left)
-      @model.set('x_position', @model.get('x_position') + -@movementInc)
+      new_x = @model.get('x_position') + -@movementInc
     if @isMovingDirection(right)
-      @model.set('x_position', @model.get('x_position') + @movementInc)
+      new_x = @model.get('x_position') + @movementInc
+
+    # Let MapView know the player wants to move
+    @trigger 'playerMove', new_x, new_y, @
 
     @setMovementClasses()
     @setOrientation()
@@ -206,11 +216,8 @@ module.exports = class Avatar extends View
     @activeMovementKeys.splice(@activeMovementKeys.indexOf(keyCode), 1)
 
   setDimensions: ->
-    setTimeout(=>
-      avatar_rect = @el.getClientRects()[0]
-      @width = avatar_rect.right - avatar_rect.left
-      @height = avatar_rect.bottom - avatar_rect.top
-    , 0)
+    @width = @rect.right - @rect.left
+    @height = @rect.bottom - @rect.top
 
   checkCollision: ->
     blocked_up    = @isMovingDirection(up) and !@availableDirections.up
@@ -222,6 +229,15 @@ module.exports = class Avatar extends View
     @stopMovementDirection(down) if blocked_down
     @stopMovementDirection(left) if blocked_left
     @stopMovementDirection(right) if blocked_right
+
+  updatePosition: (new_x,new_y) ->
+    if  (new_x > @model.get('x_position') and @availableDirections.right) or
+        (new_x < @model.get('x_position') and @availableDirections.left)
+          @model.set('x_position', new_x)
+
+    if  (new_y > @model.get('y_position') and @availableDirections.down) or
+        (new_y < @model.get('y_position') and @availableDirections.up)
+          @model.set('y_position', new_y)
 
   setName: ->
     name = @model.get('name')

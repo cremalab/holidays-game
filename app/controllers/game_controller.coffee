@@ -15,8 +15,10 @@ utils         = require 'lib/utils'
 module.exports = class GameController
   Backbone.utils.extend @prototype, EventBroker
   players: []
-  multiplayer: true
-  snow: true
+  multiplayer: false
+  snow: false
+  trails: false
+  customNames: false
 
   constructor: ->
     @players = new Players []
@@ -24,7 +26,10 @@ module.exports = class GameController
     @setupMap()
     @setupCanvas()
     @createPlayer()
-    @promptPlayerName()
+    if @customNames
+      @promptPlayerName()
+    else
+      @createPlayerAvatar(mediator.current_player)
     @subscribeEvent 'addPlayer', @addPlayer
     @createPlayerList()
 
@@ -59,8 +64,8 @@ module.exports = class GameController
     player = new Player
       id: id
       name: id
-      x_position: 400
-      y_position: 2800
+      x_position: 600
+      y_position: 100
       active: true
 
     mediator.current_player = player
@@ -70,10 +75,12 @@ module.exports = class GameController
   createPlayerAvatar: (player) ->
     avatar = new Avatar
       model: player
-    avatar.trailblazer = new Trailblazer
-      player: player
-      avatar: avatar
-      canvas: @canvas
+      
+    if @trails
+      avatar.trailblazer = new Trailblazer
+        player: player
+        avatar: avatar
+        canvas: @canvas
 
     @mapView.listenTo avatar, 'playerMove', @mapView.checkPlayerPosition
 

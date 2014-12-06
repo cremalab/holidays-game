@@ -1,18 +1,25 @@
-View = require './view'
-template = require './templates/map'
+Landscaper = require 'lib/landscaper'
+View       = require './view'
+template   = require './templates/map'
 
 module.exports = class MapView extends View
   template: template
   className: "map"
-  viewport_padding: 100
+  viewport_padding: 300
   offset_x: 0
   offset_y: 0
   width: 5769
   height: 4102
 
+  initialize: ->
+    super
+    @landscaper = new Landscaper
+      map: @
+
   render: ->
     super
     @setDimensions()
+    @landscaper.init()
     window.addEventListener 'resize', =>
       @setDimensions()
 
@@ -31,18 +38,14 @@ module.exports = class MapView extends View
       @checkPlayerPosition(player, avatar)
     , 0
 
-  checkPlayerPosition: (player, avatar) ->
-    px = player.get('x_position')
-    py = player.get('y_position')
-
-    if @canMoveTo(px, py, avatar)
-      avatar.collision = false
+  checkPlayerPosition: (px,py,avatar) ->
+    @canMoveTo(px, py, avatar)
 
     within_x = px > @viewport.left and px < @viewport.right
     within_y = py > @viewport.top and py < @viewport.bottom
     within_rect = within_x and within_y
-
-    @panToPlayerPosition(player, avatar) if player.isCurrentPlayer()
+    if avatar
+      @panToPlayerPosition(avatar.model, avatar) if avatar.model.isCurrentPlayer()
 
   panToPlayerPosition: (player, avatar) ->
     px = player.get('x_position')
@@ -80,15 +83,5 @@ module.exports = class MapView extends View
     @el.style.webkitTransform = "translate3d(#{left}px, #{top}px, 0)"
 
   canMoveTo: (x,y, avatar) ->
-    can_right = x < @width
-    can_left  = x > 0
-    can_up    = y > 0
-    can_down  = y < @width
-
-    avatar.availableDirections =
-      right: can_right
-      left: can_left
-      up: can_up
-      down: can_down
-
-    return can_left and can_right and can_up and can_down
+    if avatar
+      @landscaper.checkObstructions x,y,avatar,@
