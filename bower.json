@@ -6,7 +6,8 @@
     "exoskeleton": ">= 0.7.0",
     "backbone.nativeview": ">= 0.3.2",
     "backbone.nativeajax": ">= 0.2.0",
-    "svg-injector": ">= 1.1.2"
+    "svg-injector": ">= 1.1.2",
+    "imagesloaded": ">= 3.1.8"
   },
   "overrides": {
     "backbone.nativeview": {
