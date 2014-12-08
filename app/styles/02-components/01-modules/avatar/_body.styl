@@ -10,18 +10,19 @@
     width 3em
   100%
     width 2em
-    margin-left -1.7em
     height .2em
     top 5em
 
 
-.avatar .body
-    position relative    
-    transition transform .2s linear
-    animation-duration .2s
-    top 0
-    //*, *:before
-    //  transition all .2s
+.avatar-wrap
+  position relative    
+  transition transform .2s linear
+  animation-duration .2s
+  top 0
+.avatar[data-pos="5"] .body,
+.avatar[data-pos="6"] .body,
+.avatar[data-pos="7"] .body
+  transform scaleX(-1)
 
 .avatar
   &:after
@@ -34,14 +35,14 @@
     position absolute
     top 4.9em
     left 50%
-    margin-left -2.3em
+    margin-left -.3em
     transition transform .2s linear
     animation-duration .2s
   
 .avatar.moving 
-  &:after, .body
+  &:after, .avatar-wrap
     animation-iteration-count infinite
     animation-name walking-person-shadow
   
-  .body
+  .avatar-wrap
     animation-name walking-person

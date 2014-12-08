@@ -53,6 +53,7 @@
   //     box-shadow -.3em .1em 0 currentColor
       
   [data-gender="female"] &
+    color hair-color
     &:before, &:after
       content: '';
       display: block;
@@ -66,13 +67,14 @@
     &:before
       left: -.8em;
       transform: rotate(20deg);
-      box-shadow: .5em .1em 0 hair-color;
+      box-shadow: .5em .1em 0 currentColor;
     &:after
       right -.8em
       transform: rotate(-20deg);
-      box-shadow: -.5em .1em 0 hair-color;
+      box-shadow: -.5em .1em 0 currentColor;
   
-  [data-pos="1"][data-gender="female"] &
+  [data-pos="1"][data-gender="female"] &,
+  [data-pos="7"][data-gender="female"] &
     &:before
       left -.4em
       top 2.3em
@@ -81,30 +83,56 @@
       right -.6em
       top 2.1em
 
-  [data-pos="2"][data-gender="female"] &
+  [data-pos="2"][data-gender="female"] &,
+  [data-pos="6"][data-gender="female"] &
+    width: 1.4em;
+    height: 1em;
+    border-radius: 40% 0 40% 40%;
+    position: absolute;
+    top: 2.2em;
+    left: .2em;
+    background: currentColor;
+    z-index: 7;
     &:before
       left: 0.2em;
       z-index: 10;
-      top: 1.4em;
-      transform: rotate(70deg);
-      height: 1.6em;
-      box-shadow: 0.5em 0.1em 0 #300;
-
-  [data-pos="2"][data-gender="female"] &
-  [data-pos="3"][data-gender="female"] &
+      top: -.2em;
+      height: 1.3em;
+  [data-pos="2"][data-gender="female"] &,
+  [data-pos="6"][data-gender="female"] &
     &:after
       display none
 
-
-  [data-pos="4"][data-gender="female"] &
-    &:before, &:after
-      z-index 7
-
-  [data-pos="7"][data-gender="female"] &
-    &:after
-      z-index 7
-      right -.4em
-      top 2.3em
+  [data-pos="3"][data-gender="female"] &,
+  [data-pos="5"][data-gender="female"] &
+    width: 2.3em;
+    height: 1em;
+    border-radius: 50%;
+    background-color: currentcolor;
+    position: absolute;
+    top: 2.7em;
+    left: 0.5em;
+    z-index: 7;
     &:before
-      left -.6em
-      top 2.1em
+      top: -0.4em;
+      left: 1.2em;
+      height: 1.45em;
+    &:after
+      display none
+  [data-pos="4"][data-gender="female"] &
+    width 3.4em
+    height 1.6em
+    background-color currentColor
+    position absolute
+    top 2.4em
+    left 50%
+    margin-left -1.7em
+    z-index 7
+    border-radius 50%
+    &:before, &:after
+      top 0
+      z-index 7
+    &:before
+      margin-left -.2em
+    &:after
+      margin-right -.3em
