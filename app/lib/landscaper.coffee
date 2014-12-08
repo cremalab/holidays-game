@@ -139,7 +139,6 @@ module.exports = class Landscaper
 
   determineImgDirections: (avatarRect, obstruction, array, dir, x, y, avatar) ->
     top_left_hit = x < obstruction.right and x > obstruction.left and y > obstruction.top and y < obstruction.bottom
-    console.log top_left_hit
     a_bottom_pos = y + avatar.height
     a_right_pos  = x + avatar.width
     bottom_right_hit = a_right_pos < obstruction.right and a_right_pos > obstruction.left and a_bottom_pos > obstruction.top and a_bottom_pos < obstruction.bottom
