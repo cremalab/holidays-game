@@ -141,11 +141,12 @@ module.exports = class Landscaper
     # use avatar.width to ignore player name making it wider
     aLeftOfB  = (x + avatar.width) < obstruction.left
     aRightOfB = x > obstruction.right
-    aAboveB   = y > obstruction.bottom
-    aBelowB   = (y + avatarRect.height) < obstruction.top
+    aBelowB   = y > obstruction.bottom
+    aAboveB   = (y + avatarRect.height) < obstruction.top
 
     if !( aLeftOfB || aRightOfB || aAboveB || aBelowB )
       array.push false
+      @dispatchHitActions(obstruction, dir, x, y, avatar)
     else
       array.push true
 
@@ -161,5 +162,6 @@ module.exports = class Landscaper
       avatar: avatar
       x: x
       y: y
+    console.log 'HIT ACTION'
     obstruction.raiseEvent "hit_#{dir}", options
     obstruction.raiseEvent "hit_any", options
