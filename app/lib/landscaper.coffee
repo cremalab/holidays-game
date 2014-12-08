@@ -84,13 +84,13 @@ module.exports = class Landscaper
     availableDirections.up    = @ups.indexOf(false) < 0
     availableDirections.down  = @downs.indexOf(false) < 0
 
-    if x > map.width
+    if (x + avatar.width) > map.width
       availableDirections.right = false
     if x < 0
       availableDirections.left = false
-    if y > map.height
+    if (y + avatar.height + map.padding_bottom) >= map.height
       availableDirections.down = false
-    if y < 0
+    if (y + avatar.height - map.padding_top) < 0
       availableDirections.up = false
     
     avatar.availableDirections = availableDirections
@@ -162,6 +162,5 @@ module.exports = class Landscaper
       avatar: avatar
       x: x
       y: y
-    console.log 'HIT ACTION'
     obstruction.raiseEvent "hit_#{dir}", options
     obstruction.raiseEvent "hit_any", options

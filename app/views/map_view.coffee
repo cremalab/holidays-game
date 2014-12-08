@@ -8,8 +8,10 @@ module.exports = class MapView extends View
   viewport_padding: 300
   offset_x: 0
   offset_y: 0
-  width: 5769
-  height: 4102
+  width: 2002
+  height: 1500
+  padding_top: 80
+  padding_bottom: 15
 
   initialize: ->
     super
@@ -72,9 +74,11 @@ module.exports = class MapView extends View
       new_y = @rect.top + ((@viewport.bottom - a_height) - py)
 
     # Don't pan if it will reveal beyond the edge of the map
-    unless (new_x + @offset_x) >= 0
+    left_max_pan   = @offset_x - (@viewport_padding - a_width)
+
+    unless (new_x + @offset_x) >= 0 or Math.abs(new_x + (left_max_pan)) > (@width - @viewport_padding)
       @offset_x = new_x
-    unless (new_y + @offset_y) >= 0
+    unless (new_y + @offset_y) >= 0 or Math.abs(new_y + (@offset_y + a_height + 40)) > @height
       @offset_y = new_y
 
     @repositionMap(@offset_x, @offset_y)
