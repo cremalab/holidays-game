@@ -66,15 +66,25 @@ module.exports = [
 ,
   id: "orange chair"
   src: "images/orange_chair.png"
-  x: 840
+  x: 850
   y: 730
+,
+  id: "red chair"
+  src: "images/red_chair.png"
+  x: 1050
+  y: 730
+,
+  id: "red chair2"
+  src: "images/red_chair.png"
+  x: 300
+  y: 960
+,
+  id: "red chair3"
+  src: "images/red_chair.png"
+  x: 130
+  y: 960
 ,
   id: "orange chair2"
-  src: "images/orange_chair.png"
-  x: 1070
-  y: 730
-,
-  id: "orange chair3"
   src: "images/orange_chair.png"
   x: 1000
   y: 450
@@ -82,22 +92,27 @@ module.exports = [
   id: "bookshelf"
   src: "images/bookshelf.png"
   x: 25
-  y: 75
+  y: 55
 ,
   id: "bookshelf2"
   src: "images/bookshelf.png"
   x: 110
-  y: 75
+  y: 55
 ,
   id: "bookshelf3"
   src: "images/bookshelf.png"
   x: 195
-  y: 75
+  y: 55
 ,
   id: "bookshelf3"
   src: "images/bookshelf.png"
   x: 280
-  y: 75
+  y: 55
+,
+  id: "bookshelf4"
+  src: "images/bookshelf.png"
+  x: 690
+  y: 55
 ,
   id: "couch"
   src: "images/couch.png"
@@ -112,15 +127,85 @@ module.exports = [
   id: "sharpie_table"
   src: "images/sharpie_table.png"
   x: 190
-  y: 600
+  y: 550
 ,
   id: "sharpie_table2"
   src: "images/sharpie_table.png"
-  x: 230
-  y: 700
+  x: 215
+  y: 740
+,
+  id: "sharpie_table3"
+  src: "images/sharpie_table.png"
+  x: 70
+  y: 300
 ,
   id: "office_table"
   src: "images/office_table.png"
   x: 1640
-  y: 1050
+  y: 1075
+,
+  id: "long_cabinet"
+  src: "images/long_cabinet.png"
+  x: 500
+  y: 80
+,
+  id: "long_cabinet2"
+  src: "images/long_cabinet.png"
+  x: 775
+  y: 80
+,
+  id: "container"
+  src: "images/container.png"
+  x: 965
+  y: 80
+,
+  id: "container2"
+  src: "images/container.png"
+  x: 1015
+  y: 80
+,
+  id: "container3"
+  src: "images/container.png"
+  x: 1065
+  y: 80
+,
+  id: "office_chair"
+  src: "images/office_chair.png"
+  x: 1810
+  y: 1130
+,
+  id: "office_chair2"
+  src: "images/office_chair.png"
+  x: 1810
+  y: 1230
+,
+  id: "office_chair3"
+  src: "images/office_chair.png"
+  x: 1810
+  y: 1330
+,
+  id: "office_chair3"
+  src: "images/office_chair.png"
+  x: 1810
+  y: 1430
+,
+  id: "office_chair_flip"
+  src: "images/office_chair_flip.png"
+  x: 1605
+  y: 1130
+,
+  id: "office_chair_flip2"
+  src: "images/office_chair_flip.png"
+  x: 1605
+  y: 1230
+,
+  id: "office_chair_flip3"
+  src: "images/office_chair_flip.png"
+  x: 1605
+  y: 1330
+,
+  id: "office_chair_flip3"
+  src: "images/office_chair_flip.png"
+  x: 1605
+  y: 1430
 ]

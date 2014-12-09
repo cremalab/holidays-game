@@ -65,7 +65,7 @@ module.exports = class GameController
       id: id
       name: id
       x_position: 600
-      y_position: 100
+      y_position: 200
       active: true
 
     mediator.current_player = player
