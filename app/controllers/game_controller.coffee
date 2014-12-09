@@ -10,6 +10,7 @@ Trailblazer   = require 'models/trailblazer'
 Weather       = require 'lib/weather'
 Notifier      = require 'models/notifier'
 JoinGameView  = require 'views/join_game_view'
+AutoPilot     = require 'lib/autopilot'
 utils         = require 'lib/utils'
 
 module.exports = class GameController
@@ -75,6 +76,7 @@ module.exports = class GameController
   createPlayerAvatar: (player) ->
     avatar = new Avatar
       model: player
+    avatar.autopilot = new AutoPilot(avatar, @mapView)
       
     if @trails
       avatar.trailblazer = new Trailblazer
@@ -86,11 +88,15 @@ module.exports = class GameController
 
     @mapView.spawnPlayer(player, avatar)
     @players.add player
+    @mapView.el.addEventListener 'touchstart', (e) =>
+      avatar.stopMovement()
+      x = e.touches[0].clientX - (avatar.width /2)
+      y = e.touches[0].clientY - (avatar.height/2)
+
+      avatar.travelToPoint(x,y)
 
   addPlayer: (uuid, data) ->
-    # console.log uuid is mediator.current_player.id
     unless parseFloat(uuid) is parseFloat(mediator.current_player.id)
-      console.log 'add new Player'
       if data
         x_position = data.x_position
         y_position = data.y_position
