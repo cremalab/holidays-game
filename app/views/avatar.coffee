@@ -195,7 +195,7 @@ module.exports = class Avatar extends View
     if cl.contains('dir-up')
       return @model.set('orientation', 4)
     if cl.contains('dir-down')
-      return @model.set('orientation', null)
+      return @model.set('orientation', 0)
     if cl.contains('dir-right')
       return @model.set('orientation', 2)
     if cl.contains('dir-left')
