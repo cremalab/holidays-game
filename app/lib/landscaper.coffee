@@ -102,7 +102,7 @@ module.exports = class Landscaper
     if obstruction.svg
       avatarRect = obstruction.svg.createSVGRect()
     else
-      avatarRect = obstruction.img.getClientRects()[0]
+      avatarRect = avatar.rect
 
     avatarRect.height = avatar.height
     avatarRect.width = avatar.width
