@@ -51,12 +51,12 @@ module.exports = [
 ,
   id: "table_vertical2"
   src: "images/table_vertical.png"
-  x: 980
+  x: 970
   y: 500
 ,
   id: "table_vertical3"
   src: "images/table_vertical.png"
-  x: 980
+  x: 970
   y: 735
 ,
   id: "table_vertical4"
@@ -68,6 +68,16 @@ module.exports = [
   src: "images/orange_chair.png"
   x: 840
   y: 730
+,
+  id: "orange chair2"
+  src: "images/orange_chair.png"
+  x: 1070
+  y: 730
+,
+  id: "orange chair3"
+  src: "images/orange_chair.png"
+  x: 1000
+  y: 450
 ,
   id: "bookshelf"
   src: "images/bookshelf.png"
@@ -98,4 +108,19 @@ module.exports = [
   src: "images/couch.png"
   x: 495
   y: 875
+,
+  id: "sharpie_table"
+  src: "images/sharpie_table.png"
+  x: 190
+  y: 600
+,
+  id: "sharpie_table2"
+  src: "images/sharpie_table.png"
+  x: 230
+  y: 700
+,
+  id: "office_table"
+  src: "images/office_table.png"
+  x: 1640
+  y: 1050
 ]
