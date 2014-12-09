@@ -20,6 +20,7 @@ module.exports = class GameController
   snow: false
   trails: false
   customNames: false
+  clickToNavigate: false
 
   constructor: ->
     @players = new Players []
@@ -92,8 +93,13 @@ module.exports = class GameController
       avatar.stopMovement()
       x = e.touches[0].clientX - (avatar.width /2)
       y = e.touches[0].clientY - (avatar.height/2)
-
       avatar.travelToPoint(x,y)
+    if @clickToNavigate
+      @mapView.el.addEventListener 'click', (e) =>
+        avatar.stopMovement()
+        x = e.clientX - (avatar.width /2)
+        y = e.clientY - (avatar.height/2)
+        avatar.travelToPoint(x,y)
 
   addPlayer: (uuid, data) ->
     unless parseFloat(uuid) is parseFloat(mediator.current_player.id)
