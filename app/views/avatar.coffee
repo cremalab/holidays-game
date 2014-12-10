@@ -34,7 +34,11 @@ module.exports = class Avatar extends View
 
   initialize: ->
     super
-    @listenTo @model, "change:x_position change:y_position change:orientation", @broadCastMove
+    @listenTo @model, "change:x_position change:y_position change:orientation", @broadCastMove  
+    unless @model.isCurrentPlayer()
+      @listenTo @model, "change:moving", =>
+        @setMovementClasses()
+
     @listenTo @model, "change:orientation", @orient
     @listenTo @model, "change:name", @setName
     @chatterbox = new ChatterBox
@@ -86,6 +90,7 @@ module.exports = class Avatar extends View
   move: (keys) ->
 
     @moving = true
+    @model.set('moving', true)
 
     @checkCollision()
     if !@isMovingDirection(up) and
@@ -93,6 +98,7 @@ module.exports = class Avatar extends View
       !@isMovingDirection(left) and
       !@isMovingDirection(right)
         @moving = false
+        @model.set('moving', false)
         @stopMovementLoop()
 
     new_x = @model.get('x_position')
@@ -131,7 +137,6 @@ module.exports = class Avatar extends View
       y: y
     @autopilot.travelToPoint(target, @)
 
-
   orient: (player, orientation) ->
     @el.setAttribute('data-pos', orientation)
 
@@ -155,6 +160,7 @@ module.exports = class Avatar extends View
 
     @setMovementClasses()
     @setOrientation()
+    # @trigger 'playerMove', @model.get('x_position'), @model.get('y_position'), @
 
   isMovementKey: (e) ->
     return @movementKeys.indexOf(e.keyCode) > -1
@@ -167,7 +173,7 @@ module.exports = class Avatar extends View
 
   setMovementClasses: ->
     classList = @el.classList
-    if @moving
+    if @model.get('moving')
       classList.add 'moving'
     else
       classList.remove 'moving'
@@ -219,6 +225,7 @@ module.exports = class Avatar extends View
 
   stopMovementLoop: ->
     clearInterval(@movementLoop)
+    @model.set('moving', false)
     @movementLoop = null
 
   stopMovementDirection: (keyCode) ->
