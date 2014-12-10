@@ -1,32 +1,41 @@
 mediator = require 'lib/mediator'
 Model    = require 'models/model'
+Escort   = require 'lib/escort'
 
 module.exports = class Notifier extends Model
   connect: (player) ->
     @player = player
+
+    pubnub.here_now
+      channel : 'players'
+      callback : (m) ->
+        console.log(m)
+
     @PN = PUBNUB.init
       publish_key: 'pub-c-7f96182e-eed7-46dd-9b72-80d838427d8e',
       subscribe_key: 'sub-c-b9f703c2-7109-11e4-aacc-02ee2ddab7fe'
       uuid: player.get('id')
       heartbeat: 10
     console.log 'connect'
-    @subscribe()
-    @subscribeEvent 'playerMoved', @publishPlayerMovement
-    @subscribeEvent "players:left", @removePlayer
-    @subscribeEvent "messages:saved", @publishMessage
-    @subscribeEvent "messages:dismissed", @dismissMessage
-    @subscribeEvent "players:name_changed", @setName
 
-    pubnub = @PN
+    Escort.findEmptyRoom @PN, =>
+      @subscribe('players')
+      @subscribeEvent 'playerMoved', @publishPlayerMovement
+      @subscribeEvent "players:left", @removePlayer
+      @subscribeEvent "messages:saved", @publishMessage
+      @subscribeEvent "messages:dismissed", @dismissMessage
+      @subscribeEvent "players:name_changed", @setName
 
-    window.addEventListener "beforeunload", (e) =>
-      @PN.unsubscribe
-        channel: "players"
+      pubnub = @PN
 
-  subscribe: ->
+      window.addEventListener "beforeunload", (e) =>
+        @PN.unsubscribe
+          channel: "players"
+
+  subscribe: (channel) ->
     console.log 'subscribe'
     @PN.subscribe
-      channel: 'players'
+      channel: channel
       presence: (m) =>
         @handlePresence(m)
       message: (m) =>
