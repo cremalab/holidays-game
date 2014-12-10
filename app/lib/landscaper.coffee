@@ -61,8 +61,6 @@ module.exports = class Landscaper
 
       obstruction.img = img
 
-      console.log obstruction
-
 
   checkObstructions: (x, y, avatar, map) ->
     availableDirections =

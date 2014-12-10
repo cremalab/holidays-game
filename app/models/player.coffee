@@ -9,7 +9,7 @@ module.exports = class Player extends Model
 
   initialize: ->
     super
-    @listenTo @, "change:x_position change:y_position change:orientation", @streamPosition
+    @listenTo @, "change:x_position change:y_position change:orientation change:moving", @streamPosition
     @listenTo @, "change:name", @publishNameChange
     @subscribeEvent "players:moved:#{@id}", @setPosition
     @subscribeEvent "players:left", @handleLeave
@@ -22,17 +22,20 @@ module.exports = class Player extends Model
 
   setPosition: (data) ->
     unless @isCurrentPlayer()
-      if data.x_position or data.orientation
+      if data.x_position or data.orientation or data.moving
         @set
           x_position: data.x_position
           y_position: data.y_position
           orientation: data.orientation
+          moving: data.moving
       if data.name
         @set 'name', data.name
 
   streamPosition: ->
     @movement_inc++
-    triggerMove = @movement_inc is 6 or @hasChanged('orientation')
+    triggerMove = @movement_inc is 6 or 
+      @hasChanged('orientation') or 
+      @hasChanged('moving')
     if triggerMove
       @movement_inc = 0
       @publishEvent 'playerMoved', @ if @isCurrentPlayer()
