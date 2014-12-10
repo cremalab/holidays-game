@@ -6,6 +6,11 @@ Application =
   initialize: ->    
     @gameController = new GameController()
 
+    # Prevents scrolling on touch devices
+    document.ontouchmove = (event) ->
+      event.preventDefault()
+      return
+
     # Freeze the object
     Object.freeze? this
 
