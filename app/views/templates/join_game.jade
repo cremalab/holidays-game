@@ -67,20 +67,7 @@
                         - var pickerId = "avatar-pants"
                         input(type='radio' name=pickerId value=pickerId + "-" + color id=pickerId + "-" + color)
                         label(for=pickerId + "-" + color, class=color)
-        .col
-          .avatar(data-pos="7" style='font-size: 1rem; position: relative; font-size: 1.15em').v-space-none
-            .player-name= name
-            .avatar-wrap
-              .body.v-space-none
-                .hat
-                .head
-                .hair
-                .left.eye
-                .right.eye
-                .mouth
-                .torso
-                .left.leg
-                .right.leg
-                .right.arm
-                .left.arm
+        .col.nest-reset
+          .avatar(data-pos="7" style='position: relative')
+            include avatar
       button.sub-width-full Join the party!
