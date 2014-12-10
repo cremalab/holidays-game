@@ -1,5 +1,32 @@
+- var hat_colors = [
+-  'red',
+-  'orange',
+-  'yellow',
+-  'green',
+-  'blue',
+-  'indigo',
+-  'violet'
+- ]
+
 .modal-content
   .modal-content-box
-    h2 Customize
-    input#player_name(name="name" type="text" placeholder="What's your name?")
-    button.sub-width-full Join the party!
+    form
+      h2 Customize
+      input#player_name(name="name" type="text" placeholder="What's your name?")
+      .field
+        .field-label Hat color
+        .field-input
+          .colorPicker
+            each color in hat_colors
+              - var pickerId = "hat-color"
+              input(type='radio' name=pickerId value=color class=color id=pickerId + "-" + color)
+              label(for=pickerId + "-" + color, class=color)
+      .field
+        .field-label Hat color
+        .field-input
+          .colorPicker
+            each color in hat_colors
+              - var pickerId = "body-color"
+              input(type='radio' name=pickerId value=color class=color id=pickerId + "-" + color)
+              label(for=pickerId + "-" + color, class=color)
+      button.sub-width-full Join the party!
