@@ -3,23 +3,19 @@ Model    = require 'models/model'
 Escort   = require 'lib/escort'
 
 module.exports = class Notifier extends Model
-  connect: (player) ->
+  connect: (player, onConnect) ->
     @player = player
-
-    pubnub.here_now
-      channel : 'players'
-      callback : (m) ->
-        console.log(m)
 
     @PN = PUBNUB.init
       publish_key: 'pub-c-7f96182e-eed7-46dd-9b72-80d838427d8e',
       subscribe_key: 'sub-c-b9f703c2-7109-11e4-aacc-02ee2ddab7fe'
       uuid: player.get('id')
       heartbeat: 10
-    console.log 'connect'
+      restore: true
 
-    Escort.findEmptyRoom @PN, =>
-      @subscribe('players')
+    Escort.findEmptyRoom @PN, (channel_name) =>
+      console.log channel_name
+      @subscribe(channel_name, onConnect)
       @subscribeEvent 'playerMoved', @publishPlayerMovement
       @subscribeEvent "players:left", @removePlayer
       @subscribeEvent "messages:saved", @publishMessage
@@ -32,8 +28,8 @@ module.exports = class Notifier extends Model
         @PN.unsubscribe
           channel: "players"
 
-  subscribe: (channel) ->
-    console.log 'subscribe'
+  subscribe: (channel, onConnect) ->
+    console.log "subscribing to channel #{channel}"
     @PN.subscribe
       channel: channel
       presence: (m) =>
@@ -44,7 +40,8 @@ module.exports = class Notifier extends Model
         name: @player.get('name')
         x_position: @player.get('x_position')
         y_position: @player.get('y_position')
-      connect: (a,b)=>
+      connect: =>
+        onConnect(channel) if onConnect
         @getRoomPlayers()
 
   getRoomPlayers: (d) ->
