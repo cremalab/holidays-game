@@ -4,7 +4,7 @@ module.exports = [
   x: 260
   y: 400
   onHit:
-    # left, right, top, bottom, any -> 
+    # left, right, top, bottom, any ->
     left: (item, options) ->
       alert 'you hit the left side of the table. +100 XP'
 
