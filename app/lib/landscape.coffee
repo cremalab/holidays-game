@@ -13,12 +13,12 @@ module.exports = [
   src: "images/table.png"
   x: 25
   y: 400
-,  
+,
   id: "table3"
   src: "images/table.png"
   x: 25
   y: 475
-,  
+,
   id: "table4"
   src: "images/table.png"
   x: 260
@@ -28,41 +28,45 @@ module.exports = [
   src: "images/table.png"
   x: 25
   y: 800
-,  
+,
   id: "table8"
   src: "images/table.png"
   x: 260
   y: 800
-,  
+,
   id: "table6"
   src: "images/table.png"
   x: 25
   y: 875
-,  
+,
   id: "table7"
   src: "images/table.png"
   x: 260
   y: 875
-,  
+,
   id: "mac"
   src: "images/mac.png"
   x: 345
   y: 480
-,  
+  ghosty: true
+,
   id: "mac2"
   src: "images/mac.png"
   x: 115
   y: 480
-,  
+  ghosty: true
+,
   id: "mac3"
   src: "images/mac.png"
   x: 345
   y: 880
-,  
+  ghosty: true
+,
   id: "mac4"
   src: "images/mac.png"
   x: 115
   y: 880
+  ghosty: true
 ,
   id: "table_vertical"
   src: "images/table_vertical.png"
@@ -84,27 +88,27 @@ module.exports = [
   x: 900
   y: 635
 ,
-  id: "orange chair"
+  id: "orange_chair"
   src: "images/orange_chair.png"
   x: 850
   y: 725
 ,
-  id: "red chair"
+  id: "red_chair"
   src: "images/red_chair.png"
   x: 1050
   y: 680
 ,
-  id: "red chair2"
+  id: "red_chair2"
   src: "images/red_chair.png"
   x: 300
   y: 960
 ,
-  id: "red chair3"
+  id: "red_chair3"
   src: "images/red_chair.png"
   x: 130
   y: 960
 ,
-  id: "orange chair2"
+  id: "orange_chair2"
   src: "images/orange_chair.png"
   x: 1050
   y: 390
