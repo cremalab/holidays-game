@@ -6,19 +6,18 @@ up    = 38
 right = 39
 down  = 40
 
-directionsByName =
-  left: left
-  up: up
-  right: right
-  down: down
-
-directionsByCode =
-  37: "left"
-  38: "up"
-  39: "right"
-  40: "down"
 
 module.exports = class Avatar extends View
+  directionsByName:
+    left: left
+    up: up
+    right: right
+    down: down
+  directionsByCode:
+    37: "left"
+    38: "up"
+    39: "right"
+    40: "down"
   template: require './templates/avatar'
   autoRender: false
   className: 'avatar'
@@ -70,7 +69,7 @@ module.exports = class Avatar extends View
     e.stopPropagation()
 
     if @isMovementKey(e) and @activeMovementKeys.indexOf(e.keyCode) < 0
-      @activeMovementKeys.push e.keyCode
+      @addActiveMovementKey e.keyCode
 
       unless @moving or @movementLoop
         @clearMovementClasses()
@@ -122,6 +121,17 @@ module.exports = class Avatar extends View
     @el.style.webkitTransform = "translate3d(#{@model.position()}, 0)"
     @el.style.transform = "translate3d(#{@model.position()}, 0)"
 
+  addActiveMovementKey: (key) ->
+    if @activeMovementKeys.indexOf(key) < 0
+      @activeMovementKeys.push key
+
+  travelToPoint: (x, y) ->
+    target =
+      x: x
+      y: y
+    @autopilot.travelToPoint(target, @)
+
+
   orient: (player, orientation) ->
     @el.setAttribute('data-pos', orientation)
 
@@ -137,7 +147,7 @@ module.exports = class Avatar extends View
         @stopMovementLoop()
         @moving = false
 
-      @el.classList.remove directionsByCode[e.keyCode] if @moving
+      @el.classList.remove @directionsByCode[e.keyCode] if @moving
     else
       @stopMovementLoop()
       @activeMovementKeys = []
@@ -153,7 +163,6 @@ module.exports = class Avatar extends View
     if keyCode.isArray
       return keyCode.every (e) ->
         @activeMovementKeys.indexOf(e) > -1
-
     @activeMovementKeys.indexOf(keyCode) > -1
 
   setMovementClasses: ->
@@ -213,7 +222,8 @@ module.exports = class Avatar extends View
     @movementLoop = null
 
   stopMovementDirection: (keyCode) ->
-    @activeMovementKeys.splice(@activeMovementKeys.indexOf(keyCode), 1)
+    if @activeMovementKeys.indexOf(keyCode) > -1
+      @activeMovementKeys.splice(@activeMovementKeys.indexOf(keyCode), 1)
 
   setDimensions: ->
     @width = @rect.right - @rect.left
@@ -238,6 +248,11 @@ module.exports = class Avatar extends View
     if  (new_y > @model.get('y_position') and @availableDirections.down) or
         (new_y < @model.get('y_position') and @availableDirections.up)
           @model.set('y_position', new_y)
+
+  isCloseEnoughTo: (x, y) ->
+    px = Math.abs(x - @model.get('x_position')) < 20
+    py = Math.abs(y - @model.get('y_position')) < 20
+    return px and py
 
   setName: ->
     name = @model.get('name')
