@@ -1,12 +1,48 @@
-.avatar .body
-    position relative    
+
+@keyframes walking-person
+  0%
+    top 0
+  100%
+    top -.2em
+
+@keyframes walking-person-shadow
+  0%
+    width 3em
+  100%
+    width 2em
+    height .2em
+    top 5em
+
+
+.avatar-wrap
+  position relative    
+  transition transform .2s linear
+  animation-duration .2s
+  top 0
+.avatar[data-pos="5"] .body,
+.avatar[data-pos="6"] .body,
+.avatar[data-pos="7"] .body
+  transform scaleX(-1)
+
+.avatar
+  &:after
+    content ''
+    display block
+    width 3em
+    height .4em
+    border-radius 50%
+    background rgba(0,0,0,.1)
+    position absolute
+    top 4.9em
+    left 50%
+    margin-left -.3em
     transition transform .2s linear
     animation-duration .2s
-    top 0
-    //*, *:before
-    //  transition all .2s
-
   
-.avatar.moving .body
-    animation-name walking-person
+.avatar.moving 
+  &:after, .avatar-wrap
     animation-iteration-count infinite
+    animation-name walking-person-shadow
+  
+  .avatar-wrap
+    animation-name walking-person

@@ -10,15 +10,17 @@ Trailblazer   = require 'models/trailblazer'
 Weather       = require 'lib/weather'
 Notifier      = require 'models/notifier'
 JoinGameView  = require 'views/join_game_view'
+AutoPilot     = require 'lib/autopilot'
 utils         = require 'lib/utils'
 
 module.exports = class GameController
   Backbone.utils.extend @prototype, EventBroker
   players: []
-  multiplayer: false
+  multiplayer: true
   snow: false
   trails: false
-  customNames: true
+  customNames: false
+  clickToNavigate: false
 
   constructor: ->
     @players = new Players []
@@ -62,17 +64,21 @@ module.exports = class GameController
       id: id
       name: id
       x_position: 600
-      y_position: 100
+      y_position: 150
       active: true
 
     mediator.current_player = player
 
-    @notifier.connect(player) if @multiplayer
+    if @multiplayer
+      @notifier.connect player, (channel) =>
+        channel = channel.split("players_")[1]
+        document.getElementById("room_name").innerHTML = channel
 
   createPlayerAvatar: (player) ->
     avatar = new Avatar
       model: player
-      
+    avatar.autopilot = new AutoPilot(avatar, @mapView)
+
     if @trails
       avatar.trailblazer = new Trailblazer
         player: player
@@ -83,11 +89,20 @@ module.exports = class GameController
 
     @mapView.spawnPlayer(player, avatar)
     @players.add player
+    @mapView.el.addEventListener 'touchstart', (e) =>
+      avatar.stopMovement()
+      x = e.touches[0].clientX - (avatar.width /2)
+      y = e.touches[0].clientY - (avatar.height/2)
+      avatar.travelToPoint(x,y)
+    if @clickToNavigate
+      @mapView.el.addEventListener 'click', (e) =>
+        avatar.stopMovement()
+        x = e.clientX - (avatar.width /2)
+        y = e.clientY - (avatar.height/2)
+        avatar.travelToPoint(x,y)
 
   addPlayer: (uuid, data) ->
-    # console.log uuid is mediator.current_player.id
     unless parseFloat(uuid) is parseFloat(mediator.current_player.id)
-      console.log 'add new Player'
       if data
         x_position = data.x_position
         y_position = data.y_position
@@ -104,17 +119,18 @@ module.exports = class GameController
       avatar = new Avatar
         model: player
 
-      avatar.trailblazer = new Trailblazer
-        player: player
-        avatar: avatar
-        canvas: @canvas
+      if @trails
+        avatar.trailblazer = new Trailblazer
+          player: player
+          avatar: avatar
+          canvas: @canvas
 
       @mapView.listenTo avatar, 'playerMove', @mapView.checkPlayerPosition
       @mapView.spawnPlayer(player, avatar)
       @players.add player
 
   createPlayerList: ->
-    list = new PlayerList
+    @playerList = new PlayerList
       collection: @players
       autoRender: true
       container: document.getElementById('player_list')
