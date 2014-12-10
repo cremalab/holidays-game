@@ -72,13 +72,16 @@ module.exports = class GameController
 
     mediator.current_player = player
 
-    @notifier.connect(player) if @multiplayer
+    if @multiplayer
+      @notifier.connect player, (channel) =>
+        channel = channel.split("players_")[1]
+        document.getElementById("room_name").innerHTML = channel
 
   createPlayerAvatar: (player) ->
     avatar = new Avatar
       model: player
     avatar.autopilot = new AutoPilot(avatar, @mapView)
-      
+
     if @trails
       avatar.trailblazer = new Trailblazer
         player: player
@@ -129,7 +132,7 @@ module.exports = class GameController
       @players.add player
 
   createPlayerList: ->
-    list = new PlayerList
+    @playerList = new PlayerList
       collection: @players
       autoRender: true
       container: document.getElementById('player_list')

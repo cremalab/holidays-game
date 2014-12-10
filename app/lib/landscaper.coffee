@@ -10,7 +10,8 @@ module.exports = class Landscaper
     for obstruction in @landscape
       if obstruction.hasOwnProperty 'src'
         svg = @createObstructionGraphic(obstruction)
-        @obstructions.push @activist.activate(obstruction)
+        unless obstruction.ghosty
+          @obstructions.push @activist.activate(obstruction)
 
 
   createObstructionGraphic: (obstruction) ->
@@ -54,7 +55,7 @@ module.exports = class Landscaper
       rect = img.getClientRects()[0]
       obstruction.left = obstruction.x
       obstruction.top  = obstruction.y
-      obstruction.right = obstruction.x + rect.width 
+      obstruction.right = obstruction.x + rect.width
       obstruction.bottom = obstruction.y + rect.height
       img.classList.add 'img'
 
@@ -64,7 +65,7 @@ module.exports = class Landscaper
 
 
   checkObstructions: (x, y, avatar, map) ->
-    availableDirections = 
+    availableDirections =
       right: true
       left: true
       up: true
@@ -77,22 +78,22 @@ module.exports = class Landscaper
 
     for obstruction in @obstructions
 
-      @getObstructionShape(obstruction, x, y, avatar)     
+      @getObstructionShape(obstruction, x, y, avatar)
 
     availableDirections.right = @rights.indexOf(false) < 0
     availableDirections.left  = @lefts.indexOf(false) < 0
     availableDirections.up    = @ups.indexOf(false) < 0
     availableDirections.down  = @downs.indexOf(false) < 0
 
-    if x > map.width
+    if (x + avatar.width) > map.width
       availableDirections.right = false
     if x < 0
       availableDirections.left = false
-    if y > map.height
+    if (y + avatar.height + map.padding_bottom) >= map.height
       availableDirections.down = false
-    if y < 0
+    if (y + avatar.height - map.padding_top) < 0
       availableDirections.up = false
-    
+
     avatar.availableDirections = availableDirections
     avatar.trigger 'availableDirectionsUpdated', x, y
 
@@ -102,7 +103,7 @@ module.exports = class Landscaper
     if obstruction.svg
       avatarRect = obstruction.svg.createSVGRect()
     else
-      avatarRect = obstruction.img.getClientRects()[0]
+      avatarRect = avatar.rect
 
     avatarRect.height = avatar.height
     avatarRect.width = avatar.width
@@ -158,10 +159,9 @@ module.exports = class Landscaper
       @dispatchHitActions(obstruction, dir, x, y, avatar)
 
   dispatchHitActions: (obstruction, dir, x, y, avatar) ->
-    options = 
+    options =
       avatar: avatar
       x: x
       y: y
-    console.log 'HIT ACTION'
     obstruction.raiseEvent "hit_#{dir}", options
     obstruction.raiseEvent "hit_any", options
