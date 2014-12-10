@@ -9,11 +9,16 @@ DrawingCanvas = require 'views/drawing_canvas'
 Trailblazer   = require 'models/trailblazer'
 Weather       = require 'lib/weather'
 Notifier      = require 'models/notifier'
+JoinGameView  = require 'views/join_game_view'
 utils         = require 'lib/utils'
 
 module.exports = class GameController
   Backbone.utils.extend @prototype, EventBroker
   players: []
+  multiplayer: true
+  snow: false
+  trails: false
+  customNames: false
 
   constructor: ->
     @players = new Players []
@@ -21,6 +26,10 @@ module.exports = class GameController
     @setupMap()
     @setupCanvas()
     @createPlayer()
+    if @customNames
+      @promptPlayerName()
+    else
+      @createPlayerAvatar(mediator.current_player)
     @subscribeEvent 'addPlayer', @addPlayer
     @createPlayerList()
 
@@ -33,32 +42,48 @@ module.exports = class GameController
     document.getElementById('leave_room').addEventListener 'click', (e) =>
       e.preventDefault()
       mediator.current_player.leaveRoom()
-    # Weather.snow('snowCanvas')
+
+    Weather.snow('snowCanvas') if @snow
 
   setupCanvas: ->
     @canvas = new DrawingCanvas
       el: document.getElementById('drawCanvas')
       autoRender: true
 
+
+  promptPlayerName: ->
+    view = new JoinGameView
+      container: document.body
+    mediator.current_player.listenTo view, 'setPlayerName', (name) =>
+      view.dispose()
+      player = mediator.current_player.set('name', name)
+      @createPlayerAvatar(player)
+
   createPlayer: ->
     id = Date.now()
     player = new Player
       id: id
       name: id
-      x_position: 400
-      y_position: 2800
-    avatar = new Avatar
-      model: player
+      x_position: 600
+      y_position: 100
+      active: true
 
     mediator.current_player = player
 
-    @notifier.connect(player)
-    @notifier.getRoomPlayers()
+    if @multiplayer
+      @notifier.connect player, (channel) =>
+        channel = channel.split("players_")[1]
+        document.getElementById("room_name").innerHTML = channel
 
-    avatar.trailblazer = new Trailblazer
-      player: player
-      avatar: avatar
-      canvas: @canvas
+  createPlayerAvatar: (player) ->
+    avatar = new Avatar
+      model: player
+
+    if @trails
+      avatar.trailblazer = new Trailblazer
+        player: player
+        avatar: avatar
+        canvas: @canvas
 
     @mapView.listenTo avatar, 'playerMove', @mapView.checkPlayerPosition
 
@@ -72,13 +97,14 @@ module.exports = class GameController
       if data
         x_position = data.x_position
         y_position = data.y_position
+        name = data.name
       else
         x_position = 400
         y_position = 1000
-
+        name = uuid
       player = new Player
         id: uuid
-        name: uuid
+        name: name
         x_position: x_position
         y_position: y_position
       avatar = new Avatar
@@ -94,7 +120,7 @@ module.exports = class GameController
       @players.add player
 
   createPlayerList: ->
-    list = new PlayerList
+    @playerList = new PlayerList
       collection: @players
       autoRender: true
       container: document.getElementById('player_list')

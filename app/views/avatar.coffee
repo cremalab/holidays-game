@@ -35,18 +35,26 @@ module.exports = class Avatar extends View
 
   initialize: ->
     super
-    @listenTo @model, "change:x_position change:y_position", @broadCastMove
-    @listenTo @model, "change:position_direction", @orient
+    @listenTo @model, "change:x_position change:y_position change:orientation", @broadCastMove
+    @listenTo @model, "change:orientation", @orient
+    @listenTo @model, "change:name", @setName
     @chatterbox = new ChatterBox
       player: @model
       avatar: @
+    @listenTo @, "availableDirectionsUpdated", @updatePosition
 
   render: ->
     super
     @positionOnMap()
     @bindEvents()
-    @setDimensions()
     @el.setAttribute('data-pos', 7)
+    setTimeout(=>
+      @rect = @el.getClientRects()[0]
+      @boundingRect = @el.getBoundingClientRect()
+      @setDimensions()
+    , 0)
+    if @model.get('active')
+      @el.classList.add 'active'
 
   bindEvents: ->
     if @model.isCurrentPlayer()
@@ -56,7 +64,7 @@ module.exports = class Avatar extends View
   broadCastMove: (player) ->
     unless player.isCurrentPlayer()
       @positionOnMap()
-    @trigger('playerMove', player, @)
+      @trigger('playerMove', player, @)
 
   handleKeyDown: (e) =>
     e.stopPropagation()
@@ -88,18 +96,23 @@ module.exports = class Avatar extends View
         @moving = false
         @stopMovementLoop()
 
+    new_x = @model.get('x_position')
+    new_y = @model.get('y_position')
 
     if @isMovingDirection(up)
-      @model.set('y_position', @model.get('y_position') + -@movementInc)
+      new_y = @model.get('y_position') + -@movementInc
     if @isMovingDirection(down)
-      @model.set('y_position', @model.get('y_position') + @movementInc)
+      new_y = @model.get('y_position') + @movementInc
     if @isMovingDirection(left)
-      @model.set('x_position', @model.get('x_position') + -@movementInc)
+      new_x = @model.get('x_position') + -@movementInc
     if @isMovingDirection(right)
-      @model.set('x_position', @model.get('x_position') + @movementInc)
+      new_x = @model.get('x_position') + @movementInc
+
+    # Let MapView know the player wants to move
+    @trigger 'playerMove', new_x, new_y, @
 
     @setMovementClasses()
-    @setPositionIndex()
+    @setOrientation()
 
     @positionOnMap()
 
@@ -107,9 +120,10 @@ module.exports = class Avatar extends View
     @position_x = @model.get('x_position')
     @position_y = @model.get('y_position')
     @el.style.webkitTransform = "translate3d(#{@model.position()}, 0)"
+    @el.style.transform = "translate3d(#{@model.position()}, 0)"
 
-  orient: (player, position_direction) ->
-    @el.setAttribute('data-pos', position_direction)
+  orient: (player, orientation) ->
+    @el.setAttribute('data-pos', orientation)
 
   handleKeyUp: (e) =>
     @stopMovement(e)
@@ -130,7 +144,7 @@ module.exports = class Avatar extends View
       @moving = false
 
     @setMovementClasses()
-    @setPositionIndex()
+    @setOrientation()
 
   isMovementKey: (e) ->
     return @movementKeys.indexOf(e.keyCode) > -1
@@ -168,24 +182,24 @@ module.exports = class Avatar extends View
       classList.remove 'dir-right'
 
 
-  setPositionIndex: ->
+  setOrientation: ->
     cl = @el.classList
     if cl.contains('dir-up') and cl.contains('dir-left')
-      return @model.set('position_direction', 5)
+      return @model.set('orientation', 5)
     if cl.contains('dir-up') and cl.contains('dir-right')
-      return @model.set('position_direction', 3)
+      return @model.set('orientation', 3)
     if cl.contains('dir-down') and cl.contains('dir-left')
-      return @model.set('position_direction', 7)
+      return @model.set('orientation', 7)
     if cl.contains('dir-down') and cl.contains('dir-right')
-      return @model.set('position_direction', 1)
+      return @model.set('orientation', 1)
     if cl.contains('dir-up')
-      return @model.set('position_direction', 4)
+      return @model.set('orientation', 4)
     if cl.contains('dir-down')
-      return @model.set('position_direction', null)
+      return @model.set('orientation', null)
     if cl.contains('dir-right')
-      return @model.set('position_direction', 2)
+      return @model.set('orientation', 2)
     if cl.contains('dir-left')
-      return @model.set('position_direction', 6)
+      return @model.set('orientation', 6)
 
   clearMovementClasses: ->
     classList = @el.classList
@@ -202,11 +216,8 @@ module.exports = class Avatar extends View
     @activeMovementKeys.splice(@activeMovementKeys.indexOf(keyCode), 1)
 
   setDimensions: ->
-    setTimeout(=>
-      avatar_rect = @el.getClientRects()[0]
-      @width = avatar_rect.right - avatar_rect.left
-      @height = avatar_rect.bottom - avatar_rect.top
-    , 0)
+    @width = @rect.right - @rect.left
+    @height = @rect.bottom - @rect.top
 
   checkCollision: ->
     blocked_up    = @isMovingDirection(up) and !@availableDirections.up
@@ -218,6 +229,19 @@ module.exports = class Avatar extends View
     @stopMovementDirection(down) if blocked_down
     @stopMovementDirection(left) if blocked_left
     @stopMovementDirection(right) if blocked_right
+
+  updatePosition: (new_x,new_y) ->
+    if  (new_x > @model.get('x_position') and @availableDirections.right) or
+        (new_x < @model.get('x_position') and @availableDirections.left)
+          @model.set('x_position', new_x)
+
+    if  (new_y > @model.get('y_position') and @availableDirections.down) or
+        (new_y < @model.get('y_position') and @availableDirections.up)
+          @model.set('y_position', new_y)
+
+  setName: ->
+    name = @model.get('name')
+    @el.querySelector('.player-name').innerText = name
 
   dispose: ->
     document.removeEventListener 'keydown', @handleKeyDown

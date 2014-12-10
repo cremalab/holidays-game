@@ -1,0 +1,75 @@
+
+.head
+  body-part(4em, 4em, skin-color, true, circle at 50% 70%, 50% 50% 40% 40%)
+  position relative
+  z-index 4
+  overflow hidden
+  &:before
+    content ''
+    display block
+    position absolute
+    top 0
+    left 0
+    width 100%
+    height 100%
+    animation-duration .1s
+    background-image radial-gradient(
+      circle at 50% 100%,
+      transparent 0%,
+      transparent 50%,
+      hat-color 51%,
+      #000 100%
+    )
+    [data-pos="1"] &
+      background-image radial-gradient(
+        circle at 70% 100%,
+        transparent 0%,
+        transparent 50%,
+        hat-color 51%,
+        #000 100%
+      )      
+    [data-pos="2"] &
+      top -40%
+      left -51%
+      width 277%
+      height 217%
+    [data-pos="3"] &,
+    [data-pos="4"] &,
+    [data-pos="5"] &
+      top 0%
+      left 0%
+      width 200%
+      height 100%
+      background-image radial-gradient(
+        circle at 50% 20%,
+        mix(#000, hat-color, 60%) 0%,
+        hat-color 50%,
+        transparent 51%,
+        transparent 100%
+      )
+    [data-pos="3"] &
+      margin-left -65%
+    [data-pos="4"] &
+      margin-left -50%
+    [data-pos="5"] &
+      margin-left -35%
+    [data-pos="6"] &
+      top -40%
+      left -122%
+      width 277%
+      height 217%
+    [data-pos="7"] &
+      background-image radial-gradient(
+        circle at 30% 100%,
+        transparent 0%,
+        transparent 50%,
+        hat-color 51%,
+        #000 100%
+      )      
+  [data-pos="2"] &
+    border-radius 50% 50% 40% 50%
+  [data-pos="4"] &
+    border-radius 50%
+  [data-pos="5"] &,
+  [data-pos="6"] &
+    border-radius 50% 50% 50% 40%

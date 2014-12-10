@@ -1,0 +1,49 @@
+
+.eye
+  body-part(.5em, .5em, eye-color)
+  position absolute
+  z-index 6
+  top 2.6em
+  box-shadow 0 -.2em .2em rgba(#000,.1)
+.left.eye
+  right 1.2em
+  [data-pos="1"] &
+    right .5em
+    top 2.3em
+    box-shadow -.2em -.1em .2em rgba(#000, .1)
+  [data-pos="2"] &
+    right .8em
+    top 2.3em
+    z-index 2
+  [data-pos="3"] &
+    right 1.2em
+    top 2.3em
+  [data-pos="3"] &,
+  [data-pos="4"] &,
+  [data-pos="5"] &
+    z-index 2
+  [data-pos="6"] &
+    right 2.8em
+  [data-pos="7"] &
+    right 2em
+.right.eye
+  left 1.2em
+  [data-pos="1"] &
+    left 2em
+    box-shadow -.2em -.1em .2em rgba(#000, .1)
+  [data-pos="2"] &
+    left 2.8em
+    box-shadow -.2em 0em 0.2em rgba(#000, .1)
+  [data-pos="3"] &
+    left 2.8em
+    box-shadow -.2em 0em 0.2em rgba(#000, .1)
+  [data-pos="3"] &,
+  [data-pos="4"] &
+  [data-pos="5"] &
+  [data-pos="6"] &
+    z-index 2
+  [data-pos="7"] &
+    left .5em
+    top 2.3em
+    box-shadow -.2em 0em 0.2em rgba(#000, .1)
+    

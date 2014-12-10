@@ -15,9 +15,27 @@
   <script>require('initialize');</script>
 </head>
 <body>
-  <div id='player_list'></div>
-  <a href='#' id='leave_room'>Leave Room</a>
+
+  <!-- MENU -->
+  <div class="menu">
+    <div class="menu-leave">
+      <a href='#' id='leave_room'>Leave Room</a>
+    </div>
+    <div class="menu-playerList">
+      <h4>You're in Room <span id="room_name">...</span></h4>
+      <h3>Other people</h3>
+      <div id='player_list'></div>
+    </div>
+  </div>
+  <!-- END MENU -->
+
+  <!-- MAP -->
   <div id='map'></div>
+  <!-- END MAP -->
+
+  <!-- SNOW -->
   <canvas id="snowCanvas" width="500" height="500"></canvas>
+  <!-- END SNOW -->
+
 </body>
 </html>

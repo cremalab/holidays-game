@@ -1,0 +1,23 @@
+.modal
+  content ''
+  display block
+  position fixed
+  width 100%
+  height 100%
+  background rgba(black, 0.25)
+  z-index 10
+  display table
+  
+.modal-content
+  display table-cell
+  vertical-align middle
+  text-align center
+
+.modal-content-box
+  @extend .pad-2, .nest-3
+  @extend $rounded
+  display inline-block
+  background white
+  width 20em
+  box-shadow 0 0.15em 0.15em 0.25em rgba(black, 0.05)
+  

@@ -6,7 +6,6 @@ SpeechBubbleView = require 'views/speech_bubble_view'
 module.exports = class ChatterBox extends Model
   initialize: ->
     super
-    console.log "#{@get('player').id}"
     @subscribeEvent "messages:received:#{@get('player').id}", @renderSpeechBubble
     @subscribeEvent "messages:dismissed:#{@get('player').id}", @disposeBubble
 

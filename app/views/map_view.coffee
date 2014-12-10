@@ -1,18 +1,29 @@
-View = require './view'
-template = require './templates/map'
+Landscaper = require 'lib/landscaper'
+View       = require './view'
+template   = require './templates/map'
 
 module.exports = class MapView extends View
   template: template
   className: "map"
-  viewport_padding: 100
+  viewport_padding: 300
   offset_x: 0
   offset_y: 0
-  width: 5769
-  height: 4102
+  width: 2002
+  height: 1500
+  padding_top: 80
+  padding_bottom: 15
+
+  initialize: ->
+    super
+    @landscaper = new Landscaper
+      map: @
 
   render: ->
     super
     @setDimensions()
+    @landscaper.init()
+    window.addEventListener 'resize', =>
+      @setDimensions()
 
   setDimensions: ->
     @rect = document.body.getClientRects()[0]
@@ -29,18 +40,14 @@ module.exports = class MapView extends View
       @checkPlayerPosition(player, avatar)
     , 0
 
-  checkPlayerPosition: (player, avatar) ->
-    px = player.get('x_position')
-    py = player.get('y_position')
-
-    if @canMoveTo(px, py, avatar)
-      avatar.collision = false
+  checkPlayerPosition: (px,py,avatar) ->
+    @canMoveTo(px, py, avatar)
 
     within_x = px > @viewport.left and px < @viewport.right
     within_y = py > @viewport.top and py < @viewport.bottom
     within_rect = within_x and within_y
-
-    @panToPlayerPosition(player, avatar) if player.isCurrentPlayer()
+    if avatar
+      @panToPlayerPosition(avatar.model, avatar) if avatar.model.isCurrentPlayer()
 
   panToPlayerPosition: (player, avatar) ->
     px = player.get('x_position')
@@ -67,9 +74,11 @@ module.exports = class MapView extends View
       new_y = @rect.top + ((@viewport.bottom - a_height) - py)
 
     # Don't pan if it will reveal beyond the edge of the map
-    unless (new_x + @offset_x) >= 0
+    left_max_pan   = @offset_x - (@viewport_padding - a_width)
+
+    unless (new_x + @offset_x) >= 0 or Math.abs(new_x + (left_max_pan)) > (@width - @viewport_padding)
       @offset_x = new_x
-    unless (new_y + @offset_y) >= 0
+    unless (new_y + @offset_y) >= 0 or Math.abs(new_y + (@offset_y + a_height + 40)) > @height
       @offset_y = new_y
 
     @repositionMap(@offset_x, @offset_y)
@@ -78,15 +87,5 @@ module.exports = class MapView extends View
     @el.style.webkitTransform = "translate3d(#{left}px, #{top}px, 0)"
 
   canMoveTo: (x,y, avatar) ->
-    can_right = x < @width
-    can_left  = x > 0
-    can_up    = y > 0
-    can_down  = y < @width
-
-    avatar.availableDirections =
-      right: can_right
-      left: can_left
-      up: can_up
-      down: can_down
-
-    return can_left and can_right and can_up and can_down
+    if avatar
+      @landscaper.checkObstructions x,y,avatar,@

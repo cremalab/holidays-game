@@ -1,0 +1,15 @@
+$input-text
+  @extend .pad-5
+  @extend $rounded
+  border 2px solid gray
+  width 100%
+  background-clip content-box
+  &:focus
+    outline none
+    border-color green
+
+input
+  font inherit
+  &[type='text']
+    @extend $input-text
+    
