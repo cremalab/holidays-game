@@ -1,5 +1,7 @@
 channel_prefix = "players_"
 
+# Escorts players to a room with capacity
+
 module.exports =
   capacity: 10
   findEmptyRoom: (PN, cb) ->
