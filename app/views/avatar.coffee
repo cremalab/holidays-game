@@ -21,7 +21,7 @@ module.exports = class Avatar extends View
   template: require './templates/avatar'
   autoRender: false
   className: 'avatar'
-  movementInc: 10
+  movementInc: 8
   movementLoopInc: 30
   moving: false
   activeMovementKeys: []
