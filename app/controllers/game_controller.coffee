@@ -16,7 +16,7 @@ utils         = require 'lib/utils'
 module.exports = class GameController
   Backbone.utils.extend @prototype, EventBroker
   players: []
-  multiplayer: false
+  multiplayer: true
   snow: false
   trails: false
   customNames: false
@@ -122,10 +122,11 @@ module.exports = class GameController
       avatar = new Avatar
         model: player
 
-      avatar.trailblazer = new Trailblazer
-        player: player
-        avatar: avatar
-        canvas: @canvas
+      if @trails
+        avatar.trailblazer = new Trailblazer
+          player: player
+          avatar: avatar
+          canvas: @canvas
 
       @mapView.listenTo avatar, 'playerMove', @mapView.checkPlayerPosition
       @mapView.spawnPlayer(player, avatar)
