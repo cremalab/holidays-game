@@ -1,60 +1,44 @@
 
 .leg
-  body-part(1em, 1em, pants-color)
+  width 1em
+  height 1em
+  border-radius 50%
+  background pants-color-male
+  box-shadow inset .4em 0 rgba(0,0,0,.2)
   position absolute
-  top 4.2em
+  top 4.3em
   z-index 1
+  
+  [data-gender="female"] &
+    background-color pants-color-female
+  
 .right.leg
   left 1.1em
-  [data-pos="1"] &
+  [data-pos="1"] &,
+  [data-pos="7"] &
     left 1.4em
-    top 4.4em
     z-index 2
-  [data-pos="2"] &
+  [data-pos="2"] &,
+  [data-pos="6"] &
     left 1.5em
-    top 4.5em
     z-index 2
-  [data-pos="3"] &
+  [data-pos="3"] &,
+  [data-pos="5"] &
     left 1.7em
-    top 4.4em
     z-index 2
   [data-pos="4"] &
     left 1.9em
-    top 4.3em
     z-index 2
-  [data-pos="5"] &
-    left 1.7em
-    top 4.2em
-  [data-pos="6"] &
-    left 1.5em
-    top 4.2em
-  [data-pos="7"] &
-    left 1.3em
-    top 4.3em
-    z-index 1
 .left.leg
   right 1.1em
-  [data-pos="1"] &
+  [data-pos="1"] &,
+  [data-pos="7"] &
     right 1.2em
-    top 4.2em
-  [data-pos="2"] &
-    right 1.4em
-    top 4.3em
-  [data-pos="3"] &
-    right 1.6em
-    top 4.3em
-  [data-pos="4"] &
-    right 1.9em
-    top 4.2em
-  [data-pos="5"] &
-    right 1.6em
-    top 4.3em
-    z-index 2
+  [data-pos="2"] &,
   [data-pos="6"] &
     right 1.4em
-    top 4.3em
-    z-index 2
-  [data-pos="7"] &
-    right 1.3em
-    top 4.3em
-    z-index 2
+  [data-pos="3"] &,
+  [data-pos="5"] &
+    right 1.6em
+  [data-pos="4"] &
+    right 1.9em

@@ -1,23 +1,31 @@
     
 .arm
-  body-part(1em, .8em, shirt-color)
+  width 1em
+  height .8em
+  background shirt-color
+  border-radius 50%
+  box-shadow inset .4em 0 rgba(0,0,0,.2)
+  border 1px solid darken(shirt-color, 30%)
   top 3.6em
   position absolute
   z-index 1
 .arm.right
   left .5em
   transform rotate(-30deg)
-  [data-pos="1"] &
+  [data-pos="1"] &,
+  [data-pos="7"] &
     left 1em
     z-index 3
     top 3.8em
     transform rotate(-90deg)
-  [data-pos="2"] &
+  [data-pos="2"] &,
+  [data-pos="6"] &
     left 1.5em
     z-index 3
     top 3.9em
     transform rotate(-90deg)
-  [data-pos="3"] &
+  [data-pos="3"] &,
+  [data-pos="5"] &
     left 1.9em
     z-index 3
     top 3.9em
@@ -27,51 +35,24 @@
     z-index 3
     top 3.7em
     transform rotate(-110deg)
-  [data-pos="5"] &
-    left 1.9em
-    z-index 2
-    top 3.7em
-    transform rotate(-110deg)
-  [data-pos="6"] &
-    left 1.9em
-    z-index 2
-    top 3.7em
-    transform rotate(-110deg)
-  [data-pos="7"] &
-    left 1.9em
-    z-index 2
-    top 3.7em
-    transform rotate(-110deg)
 .arm.left
   right .5em
   transform rotate(30deg)
-  [data-pos="1"] &
+  [data-pos="1"] &,
+  [data-pos="7"] &
     transform rotate(70deg)
     right 1em
-  [data-pos="2"] &
+  [data-pos="2"] &,
+  [data-pos="6"] &
     transform rotate(70deg)
     right 1.5em
     z-index 2
-  [data-pos="3"] &
+  [data-pos="3"] &,
+  [data-pos="5"] &
     transform rotate(70deg)
     right 1.9em
     z-index 2
   [data-pos="4"] &
     transform rotate(110deg)
     right 2.6em
-    z-index 3
-  [data-pos="5"] &
-    transform rotate(110deg)
-    top 3.9em
-    right 1.9em
-    z-index 3
-  [data-pos="6"] &
-    transform rotate(90deg)
-    top 3.9em
-    right 1.5em
-    z-index 3
-  [data-pos="7"] &
-    transform rotate(90deg)
-    top 3.9em
-    right 1.1em
     z-index 3
