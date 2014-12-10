@@ -282,4 +282,9 @@ module.exports = [
   src: "images/counter_2.png"
   x: 1222
   y: 82
+,
+  id: "coffee_table"
+  src: "images/coffee_table.png"
+  x: 200
+  y: 1160
 ]
