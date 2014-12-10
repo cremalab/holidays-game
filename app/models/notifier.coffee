@@ -14,7 +14,6 @@ module.exports = class Notifier extends Model
       restore: true
 
     Escort.findEmptyRoom @PN, (channel_name) =>
-      console.log channel_name
       @subscribe(channel_name, onConnect)
       @subscribeEvent 'playerMoved', @publishPlayerMovement
       @subscribeEvent "players:left", @removePlayer
@@ -64,8 +63,6 @@ module.exports = class Notifier extends Model
   handlePlayers: (message) ->
     if message.uuids
       for player in message.uuids
-        console.log player.uuid
-        console.log player.state
         unless player.uuid is @player.get('id')
           @publishEvent 'addPlayer', player.uuid, player.state
 
@@ -86,6 +83,7 @@ module.exports = class Notifier extends Model
     y_position  = player.get('y_position')
     orientation = player.get('orientation')
     name        = player.get('name')
+    moving      = player.get('moving')
 
     @PN.state
       channel  : @channel,
@@ -94,6 +92,7 @@ module.exports = class Notifier extends Model
         y_position:  y_position
         orientation: orientation
         name:        name
+        moving:      moving
 
   removePlayer: (id) ->
     if mediator.current_player.id is id
