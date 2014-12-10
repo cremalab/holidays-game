@@ -257,4 +257,29 @@ module.exports = [
   src: "images/desk_chair_flip.png"
   x: 870
   y: 750
+,
+  id: "fridge"
+  src: "images/fridge.png"
+  x: 1125
+  y: 50
+,
+  id: "wall"
+  src: "images/wall.png"
+  x: 1630
+  y: 285
+,
+  id: "wall_2"
+  src: "images/wall_2.png"
+  x: 1630
+  y: 0
+,
+  id: "counter"
+  src: "images/counter.png"
+  x: 1590
+  y: 80
+,
+  id: "counter_2"
+  src: "images/counter_2.png"
+  x: 1222
+  y: 82
 ]
