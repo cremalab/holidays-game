@@ -19,7 +19,7 @@ module.exports = class GameController
   multiplayer: true
   snow: false
   trails: false
-  customNames: false
+  customNames: true
   clickToNavigate: false
 
   constructor: ->
