@@ -32,9 +32,11 @@ module.exports = class Avatar extends View
     up: true
     down: true
 
-  initialize: ->
+  initialize: (options) ->
+    @soulless = options.soulless
     super
-    @listenTo @model, "change:x_position change:y_position change:orientation", @broadCastMove  
+    @listenTo @model, "change:x_position change:y_position change:orientation", @broadCastMove
+    @listenTo @model, "change:avatar-hat change:avatar-hair change:avatar-skin change:avatar-coat change:avatar-pants", @updateLook
     unless @model.isCurrentPlayer()
       @listenTo @model, "change:moving", =>
         @setMovementClasses()
@@ -48,16 +50,26 @@ module.exports = class Avatar extends View
 
   render: ->
     super
-    @positionOnMap()
-    @bindEvents()
-    @el.setAttribute('data-pos', 7)
-    setTimeout(=>
-      @rect = @el.getClientRects()[0]
-      @boundingRect = @el.getBoundingClientRect()
-      @setDimensions()
-    , 0)
-    if @model.get('active')
-      @el.classList.add 'active'
+    if @soulless
+      @el.removeChild(@el.querySelector('.player-name'))
+    else
+      @positionOnMap()
+      @bindEvents()
+      @el.setAttribute('data-pos', 7)
+      setTimeout(=>
+        @rect = @el.getClientRects()[0]
+        @boundingRect = @el.getBoundingClientRect()
+        @setDimensions()
+      , 0)
+      if @model.get('active')
+        @el.classList.add 'active'
+      if @model.isCurrentPlayer()
+        @el.addEventListener 'touchstart', (e) =>
+          e.preventDefault()
+          e.stopPropagation()
+          @chatterbox.handleEnter();
+    @orient(@model, @model.get('orientation'))
+    @updateLook()
 
   bindEvents: ->
     if @model.isCurrentPlayer()
@@ -264,6 +276,15 @@ module.exports = class Avatar extends View
   setName: ->
     name = @model.get('name')
     @el.querySelector('.player-name').innerText = name
+
+  updateLook: (a,b,c) ->
+    @el.className = 'avatar'
+    @el.classList.add 'active' if @model.get('active')
+    @el.classList.add @model.get('avatar-hat')
+    @el.classList.add @model.get('avatar-hair')
+    @el.classList.add @model.get('avatar-skin')
+    @el.classList.add @model.get('avatar-coat')
+    @el.classList.add @model.get('avatar-pants')
 
   dispose: ->
     document.removeEventListener 'keydown', @handleKeyDown
