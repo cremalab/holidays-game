@@ -24,6 +24,17 @@ module.exports = class MapView extends View
     @landscaper.init()
     window.addEventListener 'resize', =>
       @setDimensions()
+    window.addEventListener ''
+
+
+    doubleTouchStartTimestamp = 0
+    document.addEventListener "touchstart", (event) ->
+      now = +(new Date())
+      event.preventDefault()  if doubleTouchStartTimestamp + 500 > now
+      doubleTouchStartTimestamp = now
+      return
+
+
 
   setDimensions: ->
     @rect = document.body.getClientRects()[0]
@@ -89,3 +100,10 @@ module.exports = class MapView extends View
   canMoveTo: (x,y, avatar) ->
     if avatar
       @landscaper.checkObstructions x,y,avatar,@
+
+  addTouchEvents: (avatar, event_name) ->
+    @el.addEventListener event_name, (e) =>
+      avatar.stopMovement()
+      x = e.touches[0].clientX - (avatar.width /2)
+      y = e.touches[0].clientY - (avatar.height/2)
+      avatar.travelToPoint(x,y)

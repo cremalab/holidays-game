@@ -64,6 +64,10 @@ module.exports = class Avatar extends View
       if @model.get('active')
         @el.classList.add 'active'
     @orient(@model, @model.get('orientation'))
+    @el.addEventListener 'touchstart', (e) =>
+      e.preventDefault()
+      e.stopPropagation()
+      @chatterbox.handleEnter();
     @updateLook()
 
   bindEvents: ->
