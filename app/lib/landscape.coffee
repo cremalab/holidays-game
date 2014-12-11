@@ -3,11 +3,6 @@ module.exports = [
   src: "images/table.png"
   x: 260
   y: 400
-  onHit:
-    # left, right, top, bottom, any ->
-    left: (item, options) ->
-      alert 'you hit the left side of the table. +100 XP'
-
 ,
   id: "table2"
   src: "images/table.png"
@@ -95,7 +90,6 @@ module.exports = [
   src: "images/table_vertical.png"
   x: 900
   y: 400
-  ghosty: true
 ,
   id: "table_vertical2"
   src: "images/table_vertical.png"
