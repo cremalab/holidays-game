@@ -24,7 +24,7 @@
                   .field-input
                     .colorPicker
                       each color in hat_colors
-                        - var pickerId = "avater-hat"
+                        - var pickerId = "avatar-hat"
                         input(type='radio' name=pickerId value=pickerId + "-" + color id=pickerId + "-" + color)
                         label(for=pickerId + "-" + color, class=color)
               .row
@@ -34,7 +34,7 @@
                   .field-input
                     .colorPicker
                       each color in hat_colors
-                        - var pickerId = "avater-hair"
+                        - var pickerId = "avatar-hair"
                         input(type='radio' name=pickerId value=pickerId + "-" + color id=pickerId + "-" + color)
                         label(for=pickerId + "-" + color, class=color)
               .row
@@ -44,7 +44,7 @@
                   .field-input
                     .colorPicker
                       each color in hat_colors
-                        - var pickerId = "avater-skin"
+                        - var pickerId = "avatar-skin"
                         input(type='radio' name=pickerId value=pickerId + "-" + color id=pickerId + "-" + color)
                         label(for=pickerId + "-" + color, class=color)
               .row
@@ -54,7 +54,7 @@
                   .field-input
                     .colorPicker
                       each color in hat_colors
-                        - var pickerId = "avater-coat"
+                        - var pickerId = "avatar-coat"
                         input(type='radio' name=pickerId value=pickerId + "-" + color id=pickerId + "-" + color)
                         label(for=pickerId + "-" + color, class=color)
               .row
@@ -67,7 +67,6 @@
                         - var pickerId = "avatar-pants"
                         input(type='radio' name=pickerId value=pickerId + "-" + color id=pickerId + "-" + color)
                         label(for=pickerId + "-" + color, class=color)
-        .col.nest-reset
-          .avatar(data-pos="7" style='position: relative')
-            include avatar
+        .col.nest-reset.avatar-holder
+
       button.sub-width-full Join the party!

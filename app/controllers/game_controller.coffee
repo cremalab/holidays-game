@@ -16,7 +16,7 @@ utils         = require 'lib/utils'
 module.exports = class GameController
   Backbone.utils.extend @prototype, EventBroker
   players: []
-  multiplayer: true
+  multiplayer: false
   snow: false
   trails: false
   customNames: true
@@ -51,11 +51,14 @@ module.exports = class GameController
 
 
   promptPlayerName: ->
+    player = mediator.current_player
     view = new JoinGameView
       container: document.body
+      model: player
+
     mediator.current_player.listenTo view, 'setPlayerName', (name) =>
       view.dispose()
-      player = mediator.current_player.set('name', name)
+      player.set('name', name)
       @createPlayerAvatar(player)
 
   createPlayer: ->
@@ -66,6 +69,7 @@ module.exports = class GameController
       x_position: 600
       y_position: 200
       active: true
+      orientation: 1
 
     mediator.current_player = player
 
