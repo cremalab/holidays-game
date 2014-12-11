@@ -312,10 +312,15 @@ module.exports = [
   x: 200
   y: 1160
 ,
+  id: "front_table"
+  src: "images/front_table.png"
+  x: 900
+  y: 1060
+,
   id: "tree"
   src: "images/tree.png"
-  x: 1285
-  y: 1330
+  x: 1485
+  y: 530
 ,
   id: "plant"
   src: "images/plant.png"
@@ -335,22 +340,46 @@ module.exports = [
   y: 680
   ghosty: true
 ,
+  id: "Lamp3"
+  src: "images/Lamp_1_flip.png"
+  x: 190
+  y: 400
+  ghosty: true
+,
+  id: "Lamp4"
+  src: "images/Lamp_1.png"
+  x: 270
+  y: 800
+  ghosty: true
+,
+  id: "present21"
+  src: "images/present_32.png"
+  x: 1470
+  y: 655
+  ghosty: true
+,
+  id: "present22"
+  src: "images/present_2.png"
+  x: 1560
+  y: 645
+  ghosty: true
+,
   id: "present1"
   src: "images/present_1.png"
-  x: 1295
-  y: 1450
+  x: 1495
+  y: 650
   ghosty: true
 ,
   id: "present6"
   src: "images/present_3.png"
-  x: 1335
-  y: 1455
+  x: 1535
+  y: 655
   ghosty: true
 ,
   id: "present2"
   src: "images/present_22.png"
-  x: 1315
-  y: 1455
+  x: 1515
+  y: 655
   ghosty: true
 ,
   id: "present3"
