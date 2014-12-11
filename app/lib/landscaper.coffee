@@ -10,8 +10,9 @@ module.exports = class Landscaper
     for obstruction in @landscape
       if obstruction.hasOwnProperty 'src'
         svg = @createObstructionGraphic(obstruction)
+        obstruction = @activist.activate(obstruction)
         unless obstruction.ghosty
-          @obstructions.push @activist.activate(obstruction)
+          @obstructions.push obstruction
 
 
   createObstructionGraphic: (obstruction) ->
@@ -109,6 +110,7 @@ module.exports = class Landscaper
     avatarRect.x = player.get('x_position')
     avatarRect.y = player.get('y_position')
     @checkIntersections(obstruction, avatarRect, player, x, y, avatar)
+    @checkProximities(avatarRect, obstruction, x, y, avatar) if obstruction.proximity
 
 
   checkIntersections: (obstruction, avatarRect, player, x, y, avatar) ->
@@ -130,6 +132,27 @@ module.exports = class Landscaper
       avatarRect.y = player.get('y_position')
 
 
+  checkProximities: (avatarRect, obstruction, x, y, avatar) ->
+    radius = obstruction.proximity.radius
+    if !radius
+      throw new Error "Proximity declaration of #{obstruction.id} needs a radius"
+
+    proximity =
+      top: obstruction.top - radius
+      bottom: obstruction.botom + radius
+      left: obstruction.left - radius
+      right: obstruction.right + radius
+
+    if @avatarOverlaps(avatar, proximity, x, y)
+      unless obstruction.current_player_within
+        obstruction.raiseEvent 'enterProximity'
+        obstruction.current_player_within = true
+    else
+      if obstruction.current_player_within
+        obstruction.raiseEvent 'leaveProximity'
+        obstruction.current_player_within = false
+
+
   determineDirections: (avatarRect, obstruction, array, dir, x, y, avatar) ->
     if obstruction.svg
       @determineSVGDirections(avatarRect, obstruction, array, dir, x, y, avatar)
@@ -138,12 +161,8 @@ module.exports = class Landscaper
 
   determineImgDirections: (avatarRect, obstruction, array, dir, x, y, avatar) ->
     # use avatar.width to ignore player name making it wider
-    aLeftOfB  = (x + avatar.width) < obstruction.left
-    aRightOfB = x > obstruction.right
-    aBelowB   = y > obstruction.bottom
-    aAboveB   = (y + avatarRect.height) < obstruction.top
 
-    if !( aLeftOfB || aRightOfB || aAboveB || aBelowB )
+    if @avatarOverlaps(avatar, obstruction, x, y)
       array.push false
       @dispatchHitActions(obstruction, dir, x, y, avatar)
     else
@@ -163,3 +182,11 @@ module.exports = class Landscaper
       y: y
     obstruction.raiseEvent "hit_#{dir}", options
     obstruction.raiseEvent "hit_any", options
+
+  avatarOverlaps: (a, b, x, y) ->
+    aLeftOfB  = (x + a.width) < b.left
+    aRightOfB = x > b.right
+    aBelowB   = y > b.bottom
+    aAboveB   = (y + a.height) < b.top
+
+    return !( aLeftOfB || aRightOfB || aAboveB || aBelowB )

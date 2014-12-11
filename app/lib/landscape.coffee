@@ -3,6 +3,12 @@ module.exports = [
   src: "images/table.png"
   x: 260
   y: 400
+  # proximity:
+  #   radius: 200
+  #   onEnter: (item, options) ->
+  #     console.log "ENTERING RADIUS"
+  #   onLeave: ->
+  #     console.log "LEAVING RADIUS"
 ,
   id: "table2"
   src: "images/table.png"
