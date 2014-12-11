@@ -16,7 +16,7 @@ utils         = require 'lib/utils'
 module.exports = class GameController
   Backbone.utils.extend @prototype, EventBroker
   players: []
-  multiplayer: true
+  multiplayer: false
   snow: false
   trails: false
   customNames: true
@@ -27,11 +27,8 @@ module.exports = class GameController
     @notifier = new Notifier
     @setupMap()
     @setupCanvas()
-    @createPlayer()
-    if @customNames
-      @promptPlayerName()
-    else
-      @createPlayerAvatar(mediator.current_player)
+    @setupPlayer()
+
     @subscribeEvent 'addPlayer', @addPlayer
     @createPlayerList()
 
@@ -49,6 +46,19 @@ module.exports = class GameController
       el: document.getElementById('drawCanvas')
       autoRender: true
 
+  setupPlayer: ->
+    mediator.current_player = new Player
+      orientation: 1
+    mediator.current_player.fetch()
+
+    if mediator.current_player.id
+      @createPlayerAvatar(mediator.current_player)
+    else
+      @createPlayer()
+      if @customNames
+        @promptPlayerName()
+      else
+        @createPlayerAvatar(mediator.current_player)
 
   promptPlayerName: ->
     player = mediator.current_player
@@ -63,7 +73,7 @@ module.exports = class GameController
 
   createPlayer: ->
     id = Date.now()
-    player = new Player
+    player = mediator.current_player = new Player
       id: id
       name: id
       x_position: 600
@@ -71,7 +81,7 @@ module.exports = class GameController
       active: true
       orientation: 1
 
-    mediator.current_player = player
+    player.save()
 
     if @multiplayer
       @notifier.connect player, (channel) =>

@@ -285,6 +285,7 @@ module.exports = class Avatar extends View
     @el.classList.add @model.get('avatar-skin')
     @el.classList.add @model.get('avatar-coat')
     @el.classList.add @model.get('avatar-pants')
+    @model.save()
 
   dispose: ->
     document.removeEventListener 'keydown', @handleKeyDown
