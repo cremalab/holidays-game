@@ -7,3 +7,56 @@ pants-color-female = salmon
 pants-color-male = #999
 skin-color = #eebb99 //#c93
 eye-color = #000
+
+picker-colors = #ff3e05 #ff8d05 #ecca05 #40af04 #057fff #7500ca #cc6fcc #555 whitesmoke
+
+// Skin Tones
+gender-colors = { male: #86cdff, female: pink }
+hat-colors    = picker-colors
+hair-colors   = #F1D2C1 #E8B295 #E4AA78 #B87049 #333
+skin-colors   = #F1D2C1 #E8B295 #E4AA78 #B87049 lighten(#462C20, 5)
+coat-colors   = picker-colors
+pants-colors  = picker-colors
+
+// Genders
+for gender, color in gender-colors
+  label.avatar-gender-{gender}
+    background color
+
+// Hat Colors
+for color, i in hat-colors
+  label.avatar-hat-{i}
+    background color
+  .avatar.avatar-hat-{i} .hat
+    color color
+
+// Hair Colors
+for color, i in hair-colors
+  label.avatar-hair-{i}
+    background color
+  .avatar.avatar-hair-{i} .hair
+    color color
+    
+// Skin Colors
+for color, i in skin-colors
+  label.avatar-skin-{i}
+    background color
+  .avatar.avatar-skin-{i} .head
+    background color
+    
+// Coat Colors
+for color, i in coat-colors
+  label.avatar-coat-{i}
+    background color
+  .avatar.avatar-coat-{i} 
+    .arm
+    .torso
+      background color
+      
+// Pants Colors
+for color, i in pants-colors
+  label.avatar-pants-{i}
+    background color
+  .avatar.avatar-pants-{i} .leg
+      background color
+

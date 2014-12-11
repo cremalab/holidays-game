@@ -12,10 +12,12 @@
     border-radius 50%
 
 .head
+  @extend .headSizing  
   background skin-color
   position relative
+  height 3.9em
+  top 0.1em
   z-index 4
-  @extend .headSizing  
 
 .hat
   @extend .headSizing
@@ -23,6 +25,8 @@
   top 0
   left 0
   z-index 8
+  color hat-color
+
   &:after
     content ''
     display block
@@ -41,8 +45,9 @@
     position absolute
     top 0
     left 50%
-    color hat-color
+    color inherit
     box-shadow .1em .2em 0 rgba(0,0,0,.2)
+    
 
     [data-pos="0"] &,
     [data-pos="1"] &,
@@ -77,26 +82,4 @@
     
     [data-pos="4"] &
       left -.8em
-
-.avatar-hat-red
-  .hat:before
-    color red
-.avatar-hat-orange
-  .hat:before
-    color orange
-.avatar-hat-yellow
-  .hat:before
-    color yellow
-.avatar-hat-green
-  .hat:before
-    color green
-.avatar-hat-blue
-  .hat:before
-    color blue
-.avatar-hat-indigo
-  .hat:before
-    color indigo  
-.avatar-hat-violet
-  .hat:before
-    color violet
   

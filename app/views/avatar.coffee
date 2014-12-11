@@ -36,7 +36,7 @@ module.exports = class Avatar extends View
     @soulless = options.soulless
     super
     @listenTo @model, "change:x_position change:y_position change:orientation", @broadCastMove
-    @listenTo @model, "change:avatar-hat change:avatar-hair change:avatar-skin change:avatar-coat change:avatar-pants", @updateLook
+    @listenTo @model, "change:avatar-gender change:avatar-hat change:avatar-hair change:avatar-skin change:avatar-coat change:avatar-pants", @updateLook
     unless @model.isCurrentPlayer()
       @listenTo @model, "change:moving", =>
         @setMovementClasses()
@@ -275,6 +275,7 @@ module.exports = class Avatar extends View
   updateLook: (a,b,c) ->
     @el.className = 'avatar'
     @el.classList.add 'active' if @model.get('active')
+    @el.setAttribute('data-gender', @model.get('avatar-gender'))
     @el.classList.add @model.get('avatar-hat')
     @el.classList.add @model.get('avatar-hair')
     @el.classList.add @model.get('avatar-skin')
