@@ -49,3 +49,12 @@ module.exports = class Player extends Model
 
   publishNameChange: ->
     @publishEvent 'players:name_changed', @ if @isCurrentPlayer()
+    @save()
+
+  save: ->
+    localStorage.setItem "CremalabPartyAvatar", JSON.stringify(@toJSON())
+    return @
+
+  fetch: ->
+    @set JSON.parse(localStorage.getItem("CremalabPartyAvatar"))
+    return @

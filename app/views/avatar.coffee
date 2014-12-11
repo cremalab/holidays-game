@@ -1,5 +1,6 @@
 View       = require './view'
 ChatterBox = require 'lib/chatterbox'
+mediator   = require 'lib/mediator'
 
 left  = 37
 up    = 38
@@ -52,6 +53,7 @@ module.exports = class Avatar extends View
     super
     if @soulless
       @el.removeChild(@el.querySelector('.player-name'))
+      @orient(@model, 7)
     else
       @positionOnMap()
       @bindEvents()
@@ -68,7 +70,7 @@ module.exports = class Avatar extends View
           e.preventDefault()
           e.stopPropagation()
           @chatterbox.handleEnter();
-    @orient(@model, @model.get('orientation'))
+      @orient(@model, @model.get('orientation'))
     @updateLook()
 
   bindEvents: ->
@@ -83,20 +85,20 @@ module.exports = class Avatar extends View
 
   handleKeyDown: (e) =>
     e.stopPropagation()
+    unless mediator.game_state is 'modal'
+      if @isMovementKey(e) and @activeMovementKeys.indexOf(e.keyCode) < 0
+        @addActiveMovementKey e.keyCode
 
-    if @isMovementKey(e) and @activeMovementKeys.indexOf(e.keyCode) < 0
-      @addActiveMovementKey e.keyCode
+        unless @moving or @movementLoop
+          @clearMovementClasses()
+          @movementLoop = setInterval =>
+            @move()
+          , @movementLoopInc
 
-      unless @moving or @movementLoop
-        @clearMovementClasses()
-        @movementLoop = setInterval =>
-          @move()
-        , @movementLoopInc
-
-    if e.keyCode is 13 # return/enter
-      @chatterbox.handleEnter(e)
-    if e.keyCode is 27 # esc
-      @chatterbox.disposeBubble(true)
+      if e.keyCode is 13 # return/enter
+        @chatterbox.handleEnter(e)
+      if e.keyCode is 27 # esc
+        @chatterbox.disposeBubble(true)
 
 
   move: (keys) ->
@@ -285,6 +287,7 @@ module.exports = class Avatar extends View
     @el.classList.add @model.get('avatar-skin')
     @el.classList.add @model.get('avatar-coat')
     @el.classList.add @model.get('avatar-pants')
+    @model.save()
 
   dispose: ->
     document.removeEventListener 'keydown', @handleKeyDown

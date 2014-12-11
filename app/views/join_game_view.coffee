@@ -1,16 +1,19 @@
-View = require './view'
-Avatar = require 'views/avatar'
+Modal     = require './modal_view'
+Avatar   = require 'views/avatar'
+mediator = require 'lib/mediator'
 template = require './templates/join_game'
 
-module.exports = class JoinGameView extends View
+module.exports = class JoinGameView extends Modal
   template: template
   autoRender: true
   className: 'modal'
   tagName: 'form'
+  noClose: true
 
   render: ->
     super
     radios = @el.querySelectorAll("input[type='radio']")
+    mediator.game_state = 'modal'
 
     @avatarView = new Avatar
       model: @model
@@ -30,5 +33,6 @@ module.exports = class JoinGameView extends View
       @trigger('setPlayerName', document.getElementById('player_name').value)
 
   dispose: ->
+    mediator.game_state = 'playing'
     @avatarView.dispose()
     super

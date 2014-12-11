@@ -32,6 +32,7 @@ mediator.publish       = mediator.trigger = Backbone.Events.trigger
 mediator._callbacks = null
 
 mediator.current_player = null
+mediator.game_state = null
 
 # Request / Response
 # --–---------------
