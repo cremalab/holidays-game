@@ -303,21 +303,6 @@ module.exports = class View extends Backbone.NativeView
 
     return
 
-  # Region management
-  # -----------------
-
-  # Functionally register a single region.
-  registerRegion: (name, selector) ->
-    mediator.execute 'region:register', this, name, selector
-
-  # Functionally unregister a single region by name.
-  unregisterRegion: (name) ->
-    mediator.execute 'region:unregister', this, name
-
-  # Unregister all regions; called upon view disposal.
-  unregisterAllRegions: ->
-    mediator.execute (name: 'region:unregister', silent: true), this
-
   # Subviews
   # --------
 
@@ -453,9 +438,6 @@ module.exports = class View extends Backbone.NativeView
 
   dispose: ->
     return if @disposed
-
-    # Unregister all regions.
-    @unregisterAllRegions()
 
     # Dispose subviews.
     subview.dispose() for subview in @subviews

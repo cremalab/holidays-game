@@ -1,6 +1,6 @@
-Model = require 'models/model'
-ChatInputView = require 'views/chat_input_view'
-ChatMessage = require 'models/chat_message'
+Model            = require 'models/model'
+ChatInputView    = require 'views/chat_input_view'
+ChatMessage      = require 'models/chat_message'
 SpeechBubbleView = require 'views/speech_bubble_view'
 
 module.exports = class ChatterBox extends Model
@@ -26,12 +26,14 @@ module.exports = class ChatterBox extends Model
       model: @message
 
   submit: ->
+    message = @dialog.el.querySelector("[name='chat_text']").value
     @open = false
-    @message.set
-      content: @dialog.el.querySelector("[name='chat_text']").value
-    @message.save()
+    if message
+      @message.set
+        content: message
+      @message.save()
+      @renderSpeechBubble(@message)
     @dialog.dispose()
-    @renderSpeechBubble(@message)
 
   renderSpeechBubble: (message) ->
     unless message instanceof ChatMessage
@@ -42,6 +44,7 @@ module.exports = class ChatterBox extends Model
       autoRender: true
       avatar: @get('avatar')
       model: message
+      chatterBox: @
     @message = message
 
   disposeBubble: (local) ->
