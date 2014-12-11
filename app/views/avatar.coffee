@@ -64,6 +64,7 @@ module.exports = class Avatar extends View
       if @model.get('active')
         @el.classList.add 'active'
     @orient(@model, @model.get('orientation'))
+    @updateLook()
 
   bindEvents: ->
     if @model.isCurrentPlayer()
@@ -272,7 +273,8 @@ module.exports = class Avatar extends View
     @el.querySelector('.player-name').innerText = name
 
   updateLook: (a,b,c) ->
-    @el.classList = 'avatar'
+    @el.className = 'avatar'
+    @el.classList.add 'active' if @model.get('active')
     @el.classList.add @model.get('avatar-hat')
     @el.classList.add @model.get('avatar-hair')
     @el.classList.add @model.get('avatar-skin')
