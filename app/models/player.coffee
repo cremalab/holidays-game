@@ -56,5 +56,8 @@ module.exports = class Player extends Model
     return @
 
   fetch: ->
-    @set JSON.parse(localStorage.getItem("CremalabPartyAvatar"))
+    attrs = JSON.parse(localStorage.getItem("CremalabPartyAvatar"))
+    delete attrs.x_position
+    delete attrs.y_position
+    @set attrs
     return @

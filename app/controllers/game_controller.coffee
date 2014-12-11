@@ -17,7 +17,7 @@ utils          = require 'lib/utils'
 module.exports = class GameController
   Backbone.utils.extend @prototype, EventBroker
   players: []
-  multiplayer: false
+  multiplayer: true
   snow: false
   trails: false
   customNames: true
@@ -51,6 +51,8 @@ module.exports = class GameController
   setupPlayer: ->
     mediator.current_player = new Player
       orientation: 1
+      x_position: 600
+      y_position: 200
     mediator.current_player.fetch()
 
     if mediator.current_player.id
