@@ -287,4 +287,24 @@ module.exports = [
   src: "images/coffee_table.png"
   x: 200
   y: 1160
+,
+  id: "tree"
+  src: "images/tree.png"
+  x: 1285
+  y: 1330
+,
+  id: "present1"
+  src: "images/present_1.png"
+  x: 1295
+  y: 1450
+,
+  id: "present2"
+  src: "images/present_22.png"
+  x: 1315
+  y: 1455
+,
+  id: "present3"
+  src: "images/present_21.png"
+  x: 925
+  y: 805
 ]
