@@ -34,4 +34,9 @@ module.exports = class Activist
       item.onHit.bottom(item, options) if item.onHit.bottom
     item.addEventListener 'hit_any', (options) ->
       item.onHit.any(item, options) if item.onHit.any
+    item.addEventListener 'enterProximity', (options) ->
+      item.proximity.onEnter(item, options) if item.proximity
+    item.addEventListener 'leaveProximity', (options) ->
+      item.proximity.onLeave(item, options) if item.proximity
+
 
