@@ -14,6 +14,7 @@ module.exports = class EditAvatarView extends JoinGameView
       if input
         if input.type is 'radio'
           input = @el.querySelector("input[name='#{attribute}'][value='#{val}']")
-          input.checked = true
+          if input
+            input.checked = true
         else
           input.value = val

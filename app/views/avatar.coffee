@@ -53,7 +53,7 @@ module.exports = class Avatar extends View
     super
     if @soulless
       @el.removeChild(@el.querySelector('.player-name'))
-      @orient(@model, 7)
+      @orient(@model, 0)
     else
       @positionOnMap()
       @bindEvents()
