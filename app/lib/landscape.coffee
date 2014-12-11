@@ -68,10 +68,34 @@ module.exports = [
   y: 880
   ghosty: true
 ,
+  id: "macflip"
+  src: "images/Mac_flip.png"
+  x: 345
+  y: 410
+  ghosty: true
+,
+  id: "macflip2"
+  src: "images/Mac_flip.png"
+  x: 115
+  y: 410
+  ghosty: true
+,
+  id: "macflip3"
+  src: "images/Mac_flip.png"
+  x: 345
+  y: 810
+  ghosty: true
+,
+  id: "macflip4"
+  src: "images/Mac_flip.png"
+  x: 115
+  y: 810
+,
   id: "table_vertical"
   src: "images/table_vertical.png"
   x: 900
   y: 400
+  ghosty: true
 ,
   id: "table_vertical2"
   src: "images/table_vertical.png"
@@ -293,18 +317,94 @@ module.exports = [
   x: 1285
   y: 1330
 ,
+  id: "plant"
+  src: "images/plant.png"
+  x: 955
+  y: 580
+  ghosty: true
+,
+  id: "Lamp"
+  src: "images/Lamp_1.png"
+  x: 990
+  y: 380
+  ghosty: true
+,
+  id: "Lamp2"
+  src: "images/Lamp_1_flip.png"
+  x: 920
+  y: 680
+  ghosty: true
+,
   id: "present1"
   src: "images/present_1.png"
   x: 1295
   y: 1450
+  ghosty: true
+,
+  id: "present6"
+  src: "images/present_3.png"
+  x: 1335
+  y: 1455
+  ghosty: true
 ,
   id: "present2"
   src: "images/present_22.png"
   x: 1315
   y: 1455
+  ghosty: true
 ,
   id: "present3"
   src: "images/present_21.png"
   x: 925
   y: 805
+  ghosty: true
+,
+  id: "present4"
+  src: "images/present_3.png"
+  x: 525
+  y: 75
+  ghosty: true
+,
+  id: "present51"
+  src: "images/present_21.png"
+  x: 225
+  y: 1160
+  ghosty: true
+,
+  id: "present5"
+  src: "images/present_31.png"
+  x: 240
+  y: 1175
+  ghosty: true
+,
+  id: "present7"
+  src: "images/present_35.png"
+  x: 220
+  y: 895
+  ghosty: true
+,
+  id: "present8"
+  src: "images/present_35.png"
+  x: 1015
+  y: 745
+  ghosty: true
+,
+  id: "present9"
+  src: "images/present_33.png"
+  x: 430
+  y: 410
+  ghosty: true
+,
+  id: "present11"
+  src: "images/present_2.png"
+  x: 1510
+  y: 65
+  ghosty: true
+,
+  id: "present10"
+  src: "images/present_32.png"
+  x: 1530
+  y: 80
+  ghosty: true
+
 ]
