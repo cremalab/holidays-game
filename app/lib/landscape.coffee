@@ -352,6 +352,12 @@ module.exports = [
   y: 800
   ghosty: true
 ,
+  id: "ipad"
+  src: "images/ipad.png"
+  x: 920
+  y: 480
+  ghosty: true
+,
   id: "present21"
   src: "images/present_32.png"
   x: 1470
