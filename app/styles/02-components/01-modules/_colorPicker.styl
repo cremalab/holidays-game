@@ -1,11 +1,3 @@
-red    = #ff3e05
-orange = #ff8d05
-yellow = #ecca05
-green  = #40af04
-blue   = #057fff
-indigo = #7500ca
-violet = #cc6fcc
-
 .colorPicker
   font-size 0.875em
   text-align center
@@ -17,9 +9,12 @@ violet = #cc6fcc
   white-space nowrap
   border-spacing 0
   border-collapse collapse
+  background white
+  position relative
 
   label
-    @extend .pad-4
+    @extend .pad-r-4, .pad-l-4
+    height 2em
     user-select none
     -webkit-tap-highlight-color rgba(white, 0.5)
     transition all 0.2s ease-in-out
@@ -29,30 +24,8 @@ violet = #cc6fcc
     text-transform capitalize
     letter-spacing -0.6em
     color transparent
-    opacity 0.15
+    opacity 0.25
     width 1%
-    
-    &.red
-      background-color red
-      -webkit-tap-highlight-color red
-    &.orange
-      background-color orange
-      -webkit-tap-highlight-color orange
-    &.yellow
-      background-color yellow
-      -webkit-tap-highlight-color yellow
-    &.green
-      background-color green
-      -webkit-tap-highlight-color green
-    &.blue
-      background-color blue
-      -webkit-tap-highlight-color blue
-    &.indigo
-      background-color indigo
-      -webkit-tap-highlight-color indigo
-    &.violet
-      background-color violet
-      -webkit-tap-highlight-color violet
     
     &:first-of-type
       border-radius 0.25em 0 0 0.25em
@@ -61,7 +34,7 @@ violet = #cc6fcc
     
     &:hover
       opacity 1
-      color white
+      color initial
       letter-spacing normal
       
   input
@@ -70,6 +43,6 @@ violet = #cc6fcc
       & + label
         width 90%
         opacity 1
-        color white
+        color initial
         letter-spacing normal
   
