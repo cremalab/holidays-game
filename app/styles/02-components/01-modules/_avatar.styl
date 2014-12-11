@@ -5,6 +5,10 @@
 @import "avatar/_eyes"
 @import "avatar/_arms"
 
+// Transitions for customization form avatar
+.avatar-holder *
+  transition all 0.2s ease-in-out
+
 .avatar
   backface-visibility hidden
   position absolute
@@ -15,11 +19,6 @@
   text-align center
   margin 0 .5em
   transition transform 0.15s linear
-  
-  *
-  *:before
-  *:after
-    transition box-shadow 0.15s 
   
   &.active
     transition none

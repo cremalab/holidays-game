@@ -14,43 +14,33 @@
       background transparent
       color currentColor
   
-  [data-pos="0"][data-gender="male"] &,
-  [data-pos="1"][data-gender="male"] &,
+  [data-pos="0"][data-gender="male"] &
+  [data-pos="1"][data-gender="male"] &
+  [data-pos="7"][data-gender="male"] &
   [data-pos="2"][data-gender="male"] &
+  [data-pos="6"][data-gender="male"] &
     &:before
       box-shadow .5em .1em 0 currentColor
 
   [data-pos="1"][data-gender="male"] &
+  [data-pos="7"][data-gender="male"] &
     &:before
       left 1.4em
       top 1.1em
 
   [data-pos="2"][data-gender="male"] &
+  [data-pos="6"][data-gender="male"] &
     &:before
-      left 3.1em
-      top 1.2em
+      left 2.8em
+      top 1.3em
       width .8em
       box-shadow .3em .1em 0 currentColor
 
-  [data-pos="3"][data-gender="male"] &,
-  [data-pos="4"][data-gender="male"] &,
+  [data-pos="3"][data-gender="male"] &
+  [data-pos="4"][data-gender="male"] &
   [data-pos="5"][data-gender="male"] &
       display none
 
-  [data-pos="6"][data-gender="male"] &,
-  [data-pos="7"][data-gender="male"] &
-    &:before
-      box-shadow: -.5em .1em 0 currentColor
-
-  [data-pos="7"][data-gender="male"] &
-    &:before
-        top 1.1em
-
-  [data-pos="6"][data-gender="male"] &
-    &:before
-      left 0
-      width .8
-      box-shadow -.3em .1em 0 currentColor
       
   [data-gender="female"] &
     color hair-color
