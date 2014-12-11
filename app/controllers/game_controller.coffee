@@ -1,17 +1,18 @@
-MapView       = require 'views/map_view'
-mediator      = require 'lib/mediator'
-EventBroker   = require 'lib/event_broker'
-Player        = require 'models/player'
-Players       = require 'models/players'
-PlayerList    = require 'views/player_list'
-Avatar        = require 'views/avatar'
-DrawingCanvas = require 'views/drawing_canvas'
-Trailblazer   = require 'models/trailblazer'
-Weather       = require 'lib/weather'
-Notifier      = require 'models/notifier'
-JoinGameView  = require 'views/join_game_view'
-AutoPilot     = require 'lib/autopilot'
-utils         = require 'lib/utils'
+MapView        = require 'views/map_view'
+mediator       = require 'lib/mediator'
+EventBroker    = require 'lib/event_broker'
+Player         = require 'models/player'
+Players        = require 'models/players'
+PlayerList     = require 'views/player_list'
+Avatar         = require 'views/avatar'
+DrawingCanvas  = require 'views/drawing_canvas'
+Trailblazer    = require 'models/trailblazer'
+Weather        = require 'lib/weather'
+Notifier       = require 'models/notifier'
+JoinGameView   = require 'views/join_game_view'
+EditAvatarView = require 'views/edit_avatar_view'
+AutoPilot      = require 'lib/autopilot'
+utils          = require 'lib/utils'
 
 module.exports = class GameController
   Backbone.utils.extend @prototype, EventBroker
@@ -31,6 +32,7 @@ module.exports = class GameController
 
     @subscribeEvent 'addPlayer', @addPlayer
     @createPlayerList()
+    mediator.game_state = 'playing'
 
   setupMap: ->
     @mapView = new MapView
@@ -60,16 +62,22 @@ module.exports = class GameController
       else
         @createPlayerAvatar(mediator.current_player)
 
-  promptPlayerName: ->
+  promptPlayerName: (editing) ->
     player = mediator.current_player
-    view = new JoinGameView
-      container: document.body
-      model: player
+    if editing
+      view = new EditAvatarView
+        container: document.body
+        model: player
+    else
+      view = new JoinGameView
+        container: document.body
+        model: player
 
     mediator.current_player.listenTo view, 'setPlayerName', (name) =>
       view.dispose()
       player.set('name', name)
-      @createPlayerAvatar(player)
+      player.save()
+      @createPlayerAvatar(player) unless editing
 
   createPlayer: ->
     id = Date.now()
@@ -87,6 +95,7 @@ module.exports = class GameController
       @notifier.connect player, (channel) =>
         channel = channel.split("players_")[1]
         document.getElementById("room_name").innerHTML = channel
+
 
   createPlayerAvatar: (player) ->
     avatar = new Avatar
@@ -107,6 +116,7 @@ module.exports = class GameController
 
     if @clickToNavigate
       @mapView.addTouchEvents(avatar, 'click')
+    @setupGameMenu()
 
   addPlayer: (uuid, data) ->
     unless parseFloat(uuid) is parseFloat(mediator.current_player.id)
@@ -141,3 +151,11 @@ module.exports = class GameController
       collection: @players
       autoRender: true
       container: document.getElementById('player_list')
+
+  setupGameMenu: ->
+    editAvatarButton = document.createElement("button")
+    document.getElementById('game-settings').appendChild(editAvatarButton)
+    editAvatarButton.innerHTML = "Edit my Avatar"
+    editAvatarButton.addEventListener 'click', (e) =>
+      e.preventDefault()
+      @promptPlayerName(true)
