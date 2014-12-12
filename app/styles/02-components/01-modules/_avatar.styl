@@ -6,8 +6,10 @@
 @import "avatar/_arms"
 
 // Transitions for customization form avatar
-.avatar-holder *
-  transition all 0.2s ease-in-out
+.avatar-holder 
+  padding 2em
+  *
+    transition all 0.2s ease-in-out
 
 .avatar
   backface-visibility hidden
@@ -51,8 +53,9 @@
   -moz-border-radius: 5px
   border-radius: 5px
   z-index 20
-  top -90%
-  left -50%
+  bottom 4.5em
+  left 50%
+  transform translateX(-50%)
 
   input
     border none
@@ -64,10 +67,11 @@
 .speech-bubble:after
   content: ""
   position: absolute
-  bottom: -15px
-  left: 40%
+  top: 100%
+  left: 50%
+  transform translateX(-50%)
   border-style: solid
-  border-width: 15px 15px 0
+  border-width: 8px 8px 0
   border-color: #fff transparent
   display: block
   width: 0
