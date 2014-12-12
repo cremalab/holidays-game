@@ -18,18 +18,11 @@ module.exports = class Player extends Model
     return "#{@get('x_position')}px, #{@get('y_position')}px"
 
   isCurrentPlayer: ->
-    mediator.current_player.id is @id
+    parseInt(mediator.current_player.id) is parseInt(@id)
 
   setPosition: (data) ->
     unless @isCurrentPlayer()
-      if data.x_position or data.orientation or data.moving
-        @set
-          x_position: data.x_position
-          y_position: data.y_position
-          orientation: data.orientation
-          moving: data.moving
-      if data.name
-        @set 'name', data.name
+      @set data
 
   streamPosition: ->
     @movement_inc++
@@ -52,12 +45,14 @@ module.exports = class Player extends Model
     @save()
 
   save: ->
-    localStorage.setItem "CremalabPartyAvatar", JSON.stringify(@toJSON())
-    return @
+    if @isCurrentPlayer()
+      attrs = @toJSON()
+      delete attrs.id
+      delete attrs.active
+      localStorage.setItem "CremalabPartyAvatar", JSON.stringify(@toJSON())
+      @publishEvent "players:avatar_changed", @
+      return @
 
-  fetch: ->
-    attrs = JSON.parse(localStorage.getItem("CremalabPartyAvatar"))
-    delete attrs.x_position
-    delete attrs.y_position
-    @set attrs
-    return @
+  dispose: ->
+    @trigger 'dispose'
+    super

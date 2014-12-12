@@ -38,6 +38,8 @@ module.exports = class Avatar extends View
     super
     @listenTo @model, "change:x_position change:y_position change:orientation", @broadCastMove
     @listenTo @model, "change:avatar-gender change:avatar-hat change:avatar-hair change:avatar-skin change:avatar-coat change:avatar-pants", @updateLook
+    @listenTo @model, "dispose", @dispose
+    @subscribeEvent "players:left", @handleLeave
     unless @model.isCurrentPlayer()
       @listenTo @model, "change:moving", =>
         @setMovementClasses()
@@ -279,7 +281,7 @@ module.exports = class Avatar extends View
     name = @model.get('name')
     @el.querySelector('.player-name').innerText = name
 
-  updateLook: (a,b,c) ->
+  updateLook: ->
     @el.className = 'avatar'
     @el.classList.add 'active' if @model.get('active')
     @el.setAttribute('data-gender', @model.get('avatar-gender'))
@@ -288,7 +290,13 @@ module.exports = class Avatar extends View
     @el.classList.add @model.get('avatar-skin')
     @el.classList.add @model.get('avatar-coat')
     @el.classList.add @model.get('avatar-pants')
-    @model.save()
+    if @model.isCurrentPlayer()
+      @model.save()
+
+  handleLeave: (id) ->
+    if @model
+      if parseInt(id) is parseInt(@model.id)
+        @dispose()
 
   dispose: ->
     document.removeEventListener 'keydown', @handleKeyDown

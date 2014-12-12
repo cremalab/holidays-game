@@ -49,20 +49,27 @@ module.exports = class GameController
       autoRender: true
 
   setupPlayer: ->
-    mediator.current_player = new Player
+    attrs = JSON.parse(localStorage.getItem("CremalabPartyAvatar"))
+    mediator.current_player = new Player(attrs)
+    mediator.current_player.set
       orientation: 1
       x_position: 600
       y_position: 200
-    mediator.current_player.fetch()
+      active: true
+      id: Date.now()
 
-    if mediator.current_player.id
-      @createPlayerAvatar(mediator.current_player)
-    else
-      @createPlayer()
-      if @customNames
-        @promptPlayerName()
-      else
-        @createPlayerAvatar(mediator.current_player)
+    if @multiplayer
+      @notifier.connect mediator.current_player, (channel) =>
+        channel = channel.split("players_")[1]
+        document.getElementById("room_name").innerHTML = channel
+
+        if mediator.current_player.get('name')
+          return @createPlayerAvatar(mediator.current_player)
+        else
+          if @customNames
+            @promptPlayerName()
+          else
+            @createPlayerAvatar(mediator.current_player)
 
   promptPlayerName: (editing) ->
     player = mediator.current_player
@@ -80,23 +87,6 @@ module.exports = class GameController
       player.set('name', name)
       player.save()
       @createPlayerAvatar(player) unless editing
-
-  createPlayer: ->
-    id = Date.now()
-    player = mediator.current_player = new Player
-      id: id
-      name: id
-      x_position: 600
-      y_position: 200
-      active: true
-      orientation: 1
-
-    player.save()
-
-    if @multiplayer
-      @notifier.connect player, (channel) =>
-        channel = channel.split("players_")[1]
-        document.getElementById("room_name").innerHTML = channel
 
 
   createPlayerAvatar: (player) ->
@@ -121,32 +111,23 @@ module.exports = class GameController
     @setupGameMenu()
 
   addPlayer: (uuid, data) ->
-    unless parseFloat(uuid) is parseFloat(mediator.current_player.id)
-      if data
-        x_position = data.x_position
-        y_position = data.y_position
-        name = data.name
-      else
-        x_position = 400
-        y_position = 1000
-        name = uuid
-      player = new Player
-        id: uuid
-        name: name
-        x_position: x_position
-        y_position: y_position
-      avatar = new Avatar
-        model: player
+    if data
+      unless parseFloat(uuid) is parseFloat(mediator.current_player.id)
+        unless @players.get(uuid)
+          player = new Player({id: uuid})
+          player.set(data)
+          avatar = new Avatar
+            model: player
 
-      if @trails
-        avatar.trailblazer = new Trailblazer
-          player: player
-          avatar: avatar
-          canvas: @canvas
+          if @trails
+            avatar.trailblazer = new Trailblazer
+              player: player
+              avatar: avatar
+              canvas: @canvas
 
-      @mapView.listenTo avatar, 'playerMove', @mapView.checkPlayerPosition
-      @mapView.spawnPlayer(player, avatar)
-      @players.add player
+          @mapView.listenTo avatar, 'playerMove', @mapView.checkPlayerPosition
+          @mapView.spawnPlayer(player, avatar)
+          @players.add player
 
   createPlayerList: ->
     @playerList = new PlayerList
