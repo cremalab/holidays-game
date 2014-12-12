@@ -99,11 +99,12 @@ module.exports = class Avatar extends View
             @move()
           , @movementLoopInc
 
+      if e.keyCode is 16 # shift
+        @addActiveMovementKey e.keyCode
       if e.keyCode is 13 # return/enter
         @chatterbox.handleEnter(e)
       if e.keyCode is 27 # esc
         @chatterbox.disposeBubble(true)
-
 
   move: (keys) ->
 
@@ -160,6 +161,9 @@ module.exports = class Avatar extends View
 
   handleKeyUp: (e) =>
     @stopMovement(e)
+    if e.keyCode is 16 # shift
+      @stopMovementDirection e.keyCode
+
 
   stopMovement: (e) ->
     if e and e.keyCode
@@ -189,49 +193,66 @@ module.exports = class Avatar extends View
         @activeMovementKeys.indexOf(e) > -1
     @activeMovementKeys.indexOf(keyCode) > -1
 
+  isShiftKeyDown: () ->
+    return @activeMovementKeys.indexOf(16) > -1
+
   setMovementClasses: ->
     classList = @el.classList
+    classToAdd = ''
+
     if @model.get('moving')
       classList.add 'moving'
     else
       classList.remove 'moving'
 
+    @clearMovementClasses()
+
     if @isMovingDirection(up)
       classList.add 'dir-up'
-    else
-      classList.remove 'dir-up'
 
     if @isMovingDirection(down)
       classList.add 'dir-down'
-    else
-      classList.remove 'dir-down'
+
     if @isMovingDirection(left)
       classList.add 'dir-left'
-    else
-      classList.remove 'dir-left'
+
     if @isMovingDirection(right)
       classList.add 'dir-right'
-    else
-      classList.remove 'dir-right'
-
 
   setOrientation: ->
     cl = @el.classList
     if cl.contains('dir-up') and cl.contains('dir-left')
+      if @isShiftKeyDown()
+        return @model.set('orientation', 1)
       return @model.set('orientation', 5)
     if cl.contains('dir-up') and cl.contains('dir-right')
+      if @isShiftKeyDown()
+        return @model.set('orientation', 7)
       return @model.set('orientation', 3)
     if cl.contains('dir-down') and cl.contains('dir-left')
+      if @isShiftKeyDown()
+        return @model.set('orientation', 3)
       return @model.set('orientation', 7)
     if cl.contains('dir-down') and cl.contains('dir-right')
+      if @isShiftKeyDown()
+        return @model.set('orientation', 5)
       return @model.set('orientation', 1)
     if cl.contains('dir-up')
+      if @isShiftKeyDown()
+        return @model.set('orientation', 0)
       return @model.set('orientation', 4)
     if cl.contains('dir-down')
+      if @isShiftKeyDown()
+        console.log('opposite')
+        return @model.set('orientation', 4)
       return @model.set('orientation', 0)
     if cl.contains('dir-right')
+      if @isShiftKeyDown()
+        return @model.set('orientation', 6)
       return @model.set('orientation', 2)
     if cl.contains('dir-left')
+      if @isShiftKeyDown()
+        return @model.set('orientation', 2)
       return @model.set('orientation', 6)
 
   clearMovementClasses: ->
