@@ -39,6 +39,7 @@ module.exports = class Avatar extends View
     @listenTo @model, "change:x_position change:y_position change:orientation", @broadCastMove
     @listenTo @model, "change:avatar-gender change:avatar-hat change:avatar-hair change:avatar-skin change:avatar-coat change:avatar-pants", @updateLook
     @listenTo @model, "dispose", @dispose
+    @listenTo @model, "change:z-plane", @updateZIndex
     @subscribeEvent "players:left", @handleLeave
     unless @model.isCurrentPlayer()
       @listenTo @model, "change:moving", =>
@@ -292,6 +293,9 @@ module.exports = class Avatar extends View
     @el.classList.add @model.get('avatar-pants')
     if @model.isCurrentPlayer()
       @model.save()
+
+  updateZIndex: ->
+    @el.style.zIndex = @model.get('y_position')
 
   handleLeave: (id) ->
     if @model

@@ -32,6 +32,7 @@ module.exports = class Player extends Model
     if triggerMove
       @movement_inc = 0
       @publishEvent 'playerMoved', @ if @isCurrentPlayer()
+      @set('z-plane', @get('y_position'))
 
   leaveRoom: ->
     @publishEvent 'players:left', @id
