@@ -28,7 +28,6 @@ module.exports = class Notifier extends Model
           channel: @channel
 
   subscribe: (channel, onConnect) ->
-    console.log "subscribing to channel #{channel}"
     attrs = @player.toJSON()
     delete attrs.active
     @PN.subscribe
@@ -117,4 +116,4 @@ module.exports = class Notifier extends Model
     attrs = player.toJSON()
     @PN.state
       channel  : @channel
-      state    : player.changed
+      state    : attrs
