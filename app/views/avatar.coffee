@@ -38,7 +38,8 @@ module.exports = class Avatar extends View
       @template = options.template
     @soulless = options.soulless
     super
-    @listenTo @model, "change:x_position change:y_position change:orientation", @broadCastMove
+    unless @soulless
+      @listenTo @model, "change:x_position change:y_position change:orientation", @broadCastMove
     @listenTo @model, "change:avatar-gender change:avatar-hat change:avatar-hair change:avatar-skin change:avatar-coat change:avatar-pants", @updateLook
     @listenTo @model, "dispose", @dispose
     @listenTo @model, "change:z-plane", @updateZIndex
