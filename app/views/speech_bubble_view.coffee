@@ -11,10 +11,6 @@ module.exports = class SpeechBubbleView extends View
 
   render: ->
     super
-    setTimeout =>
-      @el.style.top = "-6.2em"
-      @el.style.left = "-2.5em"
-    , 0
     if @avatar.model.isCurrentPlayer()
       @el.querySelector('.close').addEventListener 'click', (e) =>
         e.stopPropagation()
