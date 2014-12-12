@@ -8,14 +8,12 @@ module.exports = class SpeechBubbleView extends View
   initialize: (options) ->
     super
     @avatar     = options.avatar
-    @chatterBox = options.chatterBox
 
   render: ->
     super
     setTimeout =>
-      @rect = @el.getClientRects()[0]
-      @el.style.top = "#{-(@rect.height + 20)}px"
-      @el.style.left = "#{-(@rect.width / 4)}px"
+      @el.style.top = "-6.2em"
+      @el.style.left = "-2.5em"
     , 0
     if @avatar.model.isCurrentPlayer()
       @el.querySelector('.close').addEventListener 'click', (e) =>

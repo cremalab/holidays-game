@@ -24,6 +24,7 @@ module.exports = class ChatterBox extends Model
       container: @get('avatar').el
       autoRender: true
       model: @message
+      avatar: @get('avatar')
 
   submit: ->
     message = @dialog.el.querySelector("[name='chat_text']").value
