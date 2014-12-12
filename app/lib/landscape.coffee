@@ -152,7 +152,7 @@ module.exports = [
   x: 195
   y: 55
 ,
-  id: "bookshelf3"
+  id: "bookshelf5"
   src: "images/bookshelf.png"
   x: 280
   y: 55
