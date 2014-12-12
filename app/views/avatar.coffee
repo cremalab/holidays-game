@@ -75,6 +75,7 @@ module.exports = class Avatar extends View
           @chatterbox.handleEnter();
       @orient(@model, @model.get('orientation'))
     @updateLook()
+    @updateZIndex()
 
   bindEvents: ->
     if @model.isCurrentPlayer()
