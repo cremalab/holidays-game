@@ -4,9 +4,11 @@ template = require './templates/hint'
 module.exports = class HintView extends View
   className: 'hint'
   template: template
+  initialize: ->
+    super
+    @listenTo @model, 'dispose', @dispose
   render: ->
     super
-    console.log @model.get('obstruction').x
     @el.style.position = 'absolute'
     @el.style.width = '300px'
     @el.style.zIndex = '100000'

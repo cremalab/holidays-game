@@ -25,5 +25,15 @@ module.exports = class Navi
     @subviews.push view
 
   removeHint: (id) ->
+    match = @hints.filter (item) ->
+      item.id is id
+    console.log match
+    match = match[0]
+    if match
+      console.log match
+      match.dispose()
+      @hints.splice(@hints.indexOf(match), 1)
+      @subviews.splice(@hints.indexOf(match), 1)
+
 
 

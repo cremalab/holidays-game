@@ -289,7 +289,7 @@ module.exports = [
   x: 1125
   y: 50
   proximity:
-    radius: 100
+    radius: 120
     onEnter: (item, options) ->
       hint = 
         obstruction: item
