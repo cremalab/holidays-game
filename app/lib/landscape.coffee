@@ -301,7 +301,6 @@ module.exports = [
     keys:
       action: ->
         EventBroker.publishEvent 'reactor:act', 'team_photo'
-
 ,
   id: "wall"
   src: "images/wall.png"
