@@ -47,13 +47,13 @@ module.exports = class Avatar extends View
         @setMovementClasses()
     unless @soulless
       @listenTo @model, "change:x_position change:y_position change:orientation", @broadCastMove
+      @listenTo @, "availableDirectionsUpdated", @updatePosition
       @chatterbox = new ChatterBox
         player: @model
         avatar: @
 
     @listenTo @model, "change:orientation", @orient
     @listenTo @model, "change:name", @setName
-    @listenTo @, "availableDirectionsUpdated", @updatePosition
 
   render: ->
     super
