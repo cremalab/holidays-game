@@ -58,7 +58,6 @@ module.exports = class Avatar extends View
   render: ->
     super
     if @soulless
-      # @el.removeChild(@el.querySelector('.player-name')) if @el.querySelector('.player-name')
       @orient(@model, 0)
     else
       @positionOnMap()

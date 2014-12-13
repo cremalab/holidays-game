@@ -134,6 +134,7 @@ module.exports = class GameController
       collection: @players
       autoRender: true
       container: document.getElementById('player_list')
+      map: @mapView
 
   setupGameMenu: ->
     editAvatarButton = document.createElement("button")

@@ -10,7 +10,11 @@ module.exports = class PlayerList extends CollectionView
     else
       template = require './templates/avatar_head'
 
-    new Avatar
+    avatar = new Avatar
       model: model
       soulless: true
       template: template
+    avatar.el.addEventListener 'click', =>
+      console.log 'click head'
+      @publishEvent "map:pan_to_player", model, avatar, true
+    return avatar
