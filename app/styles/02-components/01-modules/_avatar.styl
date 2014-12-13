@@ -12,6 +12,7 @@
     transition all 0.2s ease-in-out
 
 .avatar
+  @extend .nest-reset
   backface-visibility hidden
   position absolute
   left 0
@@ -63,6 +64,7 @@
     width 100%
     height 100%
     padding 0
+    text-align center
 
 .speech-bubble:after
   content: ""
@@ -90,16 +92,4 @@
   vertical-align top
   text-shadow #fff 0 1px 0
   border .08em solid #fff
-
-
-.menu
-  .avatar, .avatar-wrap
-    position static
-    width 4em
-    height 4em
-    display block
-    margin 1em auto
-    .body
-      top auto
-      left auto
     
