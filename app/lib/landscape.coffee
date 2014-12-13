@@ -72,25 +72,25 @@ module.exports = [
   ghosty: true
 ,
   id: "macflip"
-  src: "images/Mac_flip.png"
+  src: "images/mac_flip.png"
   x: 345
   y: 410
   ghosty: true
 ,
   id: "macflip2"
-  src: "images/Mac_flip.png"
+  src: "images/mac_flip.png"
   x: 115
   y: 410
   ghosty: true
 ,
   id: "macflip3"
-  src: "images/Mac_flip.png"
+  src: "images/mac_flip.png"
   x: 345
   y: 810
   ghosty: true
 ,
   id: "macflip4"
-  src: "images/Mac_flip.png"
+  src: "images/mac_flip.png"
   x: 115
   y: 810
 ,
@@ -291,7 +291,7 @@ module.exports = [
   proximity:
     radius: 60
     onEnter: (item, options) ->
-      hint = 
+      hint =
         obstruction: item
         text: "Press spacebar to view the curious photo on the fridge"
         id: "fridge_hint"
