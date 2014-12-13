@@ -289,18 +289,18 @@ module.exports = [
   x: 1125
   y: 50
   proximity:
-    radius: 120
+    radius: 60
     onEnter: (item, options) ->
       hint = 
         obstruction: item
-        text: "Look at this fridge"
+        text: "Press spacebar to view the curious photo on the fridge"
         id: "fridge_hint"
       EventBroker.publishEvent 'navi:hint', hint
     onLeave: ->
       EventBroker.publishEvent 'navi:dismiss_hint', "fridge_hint"
     keys:
       action: ->
-        alert 'correctkeydown'
+        EventBroker.publishEvent 'reactor:act', 'team_photo'
 
 ,
   id: "wall"

@@ -13,6 +13,7 @@ JoinGameView   = require 'views/join_game_view'
 EditAvatarView = require 'views/edit_avatar_view'
 AutoPilot      = require 'lib/autopilot'
 Navi           = require 'lib/navi'
+Reactor        = require 'lib/reactor'
 utils          = require 'lib/utils'
 
 module.exports = class GameController
@@ -42,7 +43,8 @@ module.exports = class GameController
       autoRender: true
     mediator = mediator
 
-    @nav = new Navi(@mapView)
+    @reactor = new Reactor(@mapView, @players)
+    @nav     = new Navi(@mapView)
 
     Weather.snow('snowCanvas') if @snow
 
