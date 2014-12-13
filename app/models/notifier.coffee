@@ -114,6 +114,7 @@ module.exports = class Notifier extends Model
 
   setAttrs: (player) ->
     attrs = player.toJSON()
+    delete attrs.active
     @PN.state
       channel  : @channel
       state    : attrs

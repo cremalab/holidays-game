@@ -34,9 +34,12 @@ module.exports = class Avatar extends View
     down: true
 
   initialize: (options) ->
+    if options.template
+      @template = options.template
     @soulless = options.soulless
     super
-    @listenTo @model, "change:x_position change:y_position change:orientation", @broadCastMove
+    unless @soulless
+      @listenTo @model, "change:x_position change:y_position change:orientation", @broadCastMove
     @listenTo @model, "change:avatar-gender change:avatar-hat change:avatar-hair change:avatar-skin change:avatar-coat change:avatar-pants", @updateLook
     @listenTo @model, "dispose", @dispose
     @listenTo @model, "change:z-plane", @updateZIndex
@@ -55,7 +58,7 @@ module.exports = class Avatar extends View
   render: ->
     super
     if @soulless
-      @el.removeChild(@el.querySelector('.player-name'))
+      # @el.removeChild(@el.querySelector('.player-name')) if @el.querySelector('.player-name')
       @orient(@model, 0)
     else
       @positionOnMap()

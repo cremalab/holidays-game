@@ -59,6 +59,7 @@ module.exports = class Landscaper
       obstruction.right = obstruction.x + rect.width
       obstruction.bottom = obstruction.y + rect.height
       img.classList.add 'img'
+      img.style.zIndex = obstruction.zIndex or obstruction.y
 
       obstruction.img = img
 
