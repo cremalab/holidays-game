@@ -7,6 +7,7 @@ module.exports = class SpeechBubbleView extends View
 
   initialize: (options) ->
     super
+    @chatterBox = options.chatterBox
     @avatar     = options.avatar
 
   render: ->
