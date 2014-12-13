@@ -7,11 +7,9 @@
 
 @keyframes walking-person-shadow
   0%
-    width 3em
+    transform scale(1)
   100%
-    width 2em
-    height .2em
-    top 1.5em
+    transform scale(0.9)
 
 .avatar-wrap
   position relative    
@@ -37,13 +35,15 @@
     width 3em
     height .4em
     border-radius 50%
-    background rgba(0,0,0,.1)
+    background rgba(black, 0.05)
     position absolute
-    top 1.35em
+    top 1.325em
     left -1em
     margin-left -.3em
     transition transform .2s linear
     animation-duration .2s
+    transform-origin center
+    z-index -1
   
 .avatar.moving 
   &:after, .avatar-wrap

@@ -1,3 +1,5 @@
+EventBroker = require 'lib/event_broker'
+
 module.exports = [
   id: "table"
   src: "images/table.png"
@@ -286,21 +288,37 @@ module.exports = [
   src: "images/fridge.png"
   x: 1125
   y: 50
+  proximity:
+    radius: 60
+    onEnter: (item, options) ->
+      hint = 
+        obstruction: item
+        text: "Press spacebar to view the curious photo on the fridge"
+        id: "fridge_hint"
+      EventBroker.publishEvent 'navi:hint', hint
+    onLeave: ->
+      EventBroker.publishEvent 'navi:dismiss_hint', "fridge_hint"
+    keys:
+      action: ->
+        EventBroker.publishEvent 'reactor:act', 'team_photo'
 ,
   id: "wall"
   src: "images/wall.png"
   x: 1630
+  zIndex: 10
   y: 285
 ,
   id: "wall_2"
   src: "images/wall_2.png"
   x: 1630
+  zIndex: 20
   y: 0
 ,
   id: "counter"
   src: "images/counter.png"
   x: 1590
   y: 80
+  zIndex: 25
 ,
   id: "counter_2"
   src: "images/counter_2.png"
@@ -327,6 +345,7 @@ module.exports = [
   src: "images/Lamp_1.png"
   x: 990
   y: 380
+  zIndex: 400
   ghosty: true
 ,
   id: "Lamp2"
@@ -361,6 +380,7 @@ module.exports = [
 ,
   id: "present4"
   src: "images/present_3.png"
+  zIndex: 100
   x: 525
   y: 75
   ghosty: true
@@ -399,12 +419,14 @@ module.exports = [
   src: "images/present_2.png"
   x: 1510
   y: 65
+  zIndex: 100
   ghosty: true
 ,
   id: "present10"
   src: "images/present_32.png"
   x: 1530
   y: 80
+  zIndex: 100
   ghosty: true
 
 ]

@@ -12,6 +12,8 @@ Notifier       = require 'models/notifier'
 JoinGameView   = require 'views/join_game_view'
 EditAvatarView = require 'views/edit_avatar_view'
 AutoPilot      = require 'lib/autopilot'
+Navi           = require 'lib/navi'
+Reactor        = require 'lib/reactor'
 utils          = require 'lib/utils'
 
 module.exports = class GameController
@@ -31,6 +33,8 @@ module.exports = class GameController
     @setupPlayer()
 
     @subscribeEvent 'addPlayer', @addPlayer
+    @subscribeEvent 'editPlayer', => 
+      @promptPlayerName(true)
     @createPlayerList()
     mediator.game_state = 'playing'
 
@@ -40,6 +44,9 @@ module.exports = class GameController
       el: document.getElementById("map")
       autoRender: true
     mediator = mediator
+
+    @reactor = new Reactor(@mapView, @players)
+    @nav     = new Navi(@mapView)
 
     Weather.snow('snowCanvas') if @snow
 
@@ -61,7 +68,7 @@ module.exports = class GameController
     if @multiplayer
       @notifier.connect mediator.current_player, (channel) =>
         channel = channel.split("players_")[1]
-        document.getElementById("room_name").innerHTML = channel
+        # document.getElementById("room_name").innerHTML = channel
 
         if mediator.current_player.get('name')
           return @createPlayerAvatar(mediator.current_player)
@@ -70,6 +77,8 @@ module.exports = class GameController
             @promptPlayerName()
           else
             @createPlayerAvatar(mediator.current_player)
+    else
+      @createPlayerAvatar(mediator.current_player)
 
   promptPlayerName: (editing) ->
     player = mediator.current_player
@@ -103,7 +112,7 @@ module.exports = class GameController
     @mapView.listenTo avatar, 'playerMove', @mapView.checkPlayerPosition
 
     @mapView.spawnPlayer(player, avatar)
-    @players.add player
+    @players.add player, {at: 0}
     @mapView.addTouchEvents(avatar, 'touchstart')
 
     if @clickToNavigate
@@ -134,11 +143,12 @@ module.exports = class GameController
       collection: @players
       autoRender: true
       container: document.getElementById('player_list')
+      map: @mapView
 
   setupGameMenu: ->
     editAvatarButton = document.createElement("button")
     document.getElementById('game-settings').appendChild(editAvatarButton)
-    editAvatarButton.innerHTML = "Edit my Avatar"
+    editAvatarButton.innerHTML = "Edit"
     editAvatarButton.addEventListener 'click', (e) =>
       e.preventDefault()
       @promptPlayerName(true)

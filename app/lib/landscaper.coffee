@@ -3,6 +3,7 @@ Activist = require 'lib/activist'
 module.exports = class Landscaper
   landscape: require 'lib/landscape'
   obstructions: []
+  current_player_overlaps: []
   constructor: (options) ->
     @map = options.map
   init: ->
@@ -58,7 +59,9 @@ module.exports = class Landscaper
       obstruction.top  = obstruction.y
       obstruction.right = obstruction.x + rect.width
       obstruction.bottom = obstruction.y + rect.height
+
       img.classList.add 'img'
+      img.style.zIndex = obstruction.zIndex or obstruction.y
 
       obstruction.img = img
 
@@ -139,18 +142,20 @@ module.exports = class Landscaper
 
     proximity =
       top: obstruction.top - radius
-      bottom: obstruction.botom + radius
+      bottom: obstruction.bottom + radius
       left: obstruction.left - radius
       right: obstruction.right + radius
 
     if @avatarOverlaps(avatar, proximity, x, y)
-      unless obstruction.current_player_within
+      unless obstruction.current_player_overlap
+        @current_player_overlaps.push obstruction.id
+        obstruction.current_player_overlap = true
         obstruction.raiseEvent 'enterProximity'
-        obstruction.current_player_within = true
     else
-      if obstruction.current_player_within
+      if @current_player_overlaps.indexOf(obstruction.id) > -1
         obstruction.raiseEvent 'leaveProximity'
-        obstruction.current_player_within = false
+        @current_player_overlaps.splice @current_player_overlaps.indexOf(obstruction.id), 1
+        obstruction.current_player_overlap = false
 
 
   determineDirections: (avatarRect, obstruction, array, dir, x, y, avatar) ->
@@ -188,5 +193,6 @@ module.exports = class Landscaper
     aRightOfB = x > b.right
     aBelowB   = y > b.bottom
     aAboveB   = (y + a.height) < b.top
+
 
     return !( aLeftOfB || aRightOfB || aAboveB || aBelowB )
