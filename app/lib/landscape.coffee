@@ -190,7 +190,7 @@ module.exports = [
   id: "sharpie_table3"
   src: "images/sharpie_table.png"
   x: 70
-  y: 300
+  y: 340
 ,
   id: "office_table"
   src: "images/office_table.png"
@@ -358,6 +358,13 @@ module.exports = [
   y: 480
   ghosty: true
 ,
+  id: "ipad2"
+  src: "images/ipad.png"
+  x: 920
+  y: 510
+  ghosty: true
+  mirror: true
+,
   id: "present21"
   src: "images/present_32.png"
   x: 1470
@@ -398,6 +405,12 @@ module.exports = [
   src: "images/present_3.png"
   x: 525
   y: 75
+  ghosty: true
+,
+  id: "present41"
+  src: "images/present_1.png"
+  x: 895
+  y: 65
   ghosty: true
 ,
   id: "present51"
