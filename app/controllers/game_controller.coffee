@@ -12,6 +12,8 @@ Notifier       = require 'models/notifier'
 JoinGameView   = require 'views/join_game_view'
 EditAvatarView = require 'views/edit_avatar_view'
 AutoPilot      = require 'lib/autopilot'
+Navi           = require 'lib/navi'
+Reactor        = require 'lib/reactor'
 utils          = require 'lib/utils'
 
 module.exports = class GameController
@@ -43,6 +45,9 @@ module.exports = class GameController
       autoRender: true
     mediator = mediator
 
+    @reactor = new Reactor(@mapView, @players)
+    @nav     = new Navi(@mapView)
+
     Weather.snow('snowCanvas') if @snow
 
   setupCanvas: ->
@@ -72,6 +77,8 @@ module.exports = class GameController
             @promptPlayerName()
           else
             @createPlayerAvatar(mediator.current_player)
+    else
+      @createPlayerAvatar(mediator.current_player)
 
   promptPlayerName: (editing) ->
     player = mediator.current_player
