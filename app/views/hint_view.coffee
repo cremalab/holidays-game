@@ -10,7 +10,6 @@ module.exports = class HintView extends View
   render: ->
     super
     @el.style.position = 'absolute'
-    @el.style.width = '300px'
     @el.style.zIndex = '100000'
     @el.style.left = @model.get('obstruction').x + "px"
     @el.style.top = @model.get('obstruction').y + "px"

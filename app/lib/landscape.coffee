@@ -298,6 +298,10 @@ module.exports = [
       EventBroker.publishEvent 'navi:hint', hint
     onLeave: ->
       EventBroker.publishEvent 'navi:dismiss_hint', "fridge_hint"
+    keys:
+      action: ->
+        alert 'correctkeydown'
+
 ,
   id: "wall"
   src: "images/wall.png"
