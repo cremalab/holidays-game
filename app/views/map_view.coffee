@@ -53,9 +53,6 @@ module.exports = class MapView extends View
     , 0
 
   checkPlayerPosition: (px,py,avatar) ->
-    if @focusedPlayer and @focusedPlayer.id isnt avatar.model.id
-      console.log 'no match'
-      @panToPlayerPosition(avatar.model, avatar)
     @canMoveTo(px, py, avatar)
 
     within_x = px > @viewport.left and px < @viewport.right
