@@ -33,6 +33,8 @@ module.exports = class GameController
     @setupPlayer()
 
     @subscribeEvent 'addPlayer', @addPlayer
+    @subscribeEvent 'editPlayer', => 
+      @promptPlayerName(true)
     @createPlayerList()
     mediator.game_state = 'playing'
 
@@ -66,7 +68,7 @@ module.exports = class GameController
     if @multiplayer
       @notifier.connect mediator.current_player, (channel) =>
         channel = channel.split("players_")[1]
-        document.getElementById("room_name").innerHTML = channel
+        # document.getElementById("room_name").innerHTML = channel
 
         if mediator.current_player.get('name')
           return @createPlayerAvatar(mediator.current_player)
@@ -110,7 +112,7 @@ module.exports = class GameController
     @mapView.listenTo avatar, 'playerMove', @mapView.checkPlayerPosition
 
     @mapView.spawnPlayer(player, avatar)
-    @players.add player
+    @players.add player, {at: 0}
     @mapView.addTouchEvents(avatar, 'touchstart')
 
     if @clickToNavigate
@@ -146,7 +148,7 @@ module.exports = class GameController
   setupGameMenu: ->
     editAvatarButton = document.createElement("button")
     document.getElementById('game-settings').appendChild(editAvatarButton)
-    editAvatarButton.innerHTML = "Edit my Avatar"
+    editAvatarButton.innerHTML = "Edit"
     editAvatarButton.addEventListener 'click', (e) =>
       e.preventDefault()
       @promptPlayerName(true)

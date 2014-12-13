@@ -4,6 +4,7 @@ Avatar = require './avatar'
 
 
 module.exports = class PlayerList extends CollectionView
+  className: 'playerList'
   initItemView: (model) ->
     if model.isCurrentPlayer()
       template = require './templates/avatar'
