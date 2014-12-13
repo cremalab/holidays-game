@@ -138,6 +138,19 @@ module.exports = [
   src: "images/orange_chair.png"
   x: 1050
   y: 390
+  proximity:
+    radius: 60
+    onEnter: (item, options) ->
+      hint = 
+        obstruction: item
+        text: "Press spacebar to start the party"
+        id: "disco_hint"
+      EventBroker.publishEvent 'navi:hint', hint
+    onLeave: ->
+      EventBroker.publishEvent 'navi:dismiss_hint', "disco_hint"
+    keys:
+      action: ->
+        EventBroker.publishEvent 'reactor:act', 'disco'
 ,
   id: "bookshelf"
   src: "images/bookshelf.png"

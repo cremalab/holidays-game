@@ -10,3 +10,8 @@ module.exports =
         template: require 'views/templates/team_photo'
         autoRender: true
       mediator.game_state = 'modal'
+  disco: (map) ->
+    map.el.classList.add 'disco-time'
+    setTimeout ( ->
+      map.el.classList.remove 'disco-time'
+    ), 8000
