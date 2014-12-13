@@ -12,12 +12,13 @@ Notifier       = require 'models/notifier'
 JoinGameView   = require 'views/join_game_view'
 EditAvatarView = require 'views/edit_avatar_view'
 AutoPilot      = require 'lib/autopilot'
+Navi           = require 'lib/navi'
 utils          = require 'lib/utils'
 
 module.exports = class GameController
   Backbone.utils.extend @prototype, EventBroker
   players: []
-  multiplayer: true
+  multiplayer: false
   snow: false
   trails: false
   customNames: true
@@ -40,6 +41,8 @@ module.exports = class GameController
       el: document.getElementById("map")
       autoRender: true
     mediator = mediator
+
+    @nav = new Navi(@mapView)
 
     Weather.snow('snowCanvas') if @snow
 
@@ -70,6 +73,8 @@ module.exports = class GameController
             @promptPlayerName()
           else
             @createPlayerAvatar(mediator.current_player)
+    else
+      @createPlayerAvatar(mediator.current_player)
 
   promptPlayerName: (editing) ->
     player = mediator.current_player

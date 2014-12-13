@@ -1,3 +1,5 @@
+EventBroker = require 'lib/event_broker'
+
 module.exports = [
   id: "table"
   src: "images/table.png"
@@ -286,6 +288,16 @@ module.exports = [
   src: "images/fridge.png"
   x: 1125
   y: 50
+  proximity:
+    radius: 100
+    onEnter: (item, options) ->
+      hint = 
+        obstruction: item
+        text: "Look at this fridge"
+        id: "fridge_hint"
+      EventBroker.publishEvent 'navi:hint', hint
+    onLeave: ->
+      EventBroker.publishEvent 'navi:dismiss_hint', "fridge_hint"
 ,
   id: "wall"
   src: "images/wall.png"
