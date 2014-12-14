@@ -297,6 +297,16 @@ module.exports = [
   x: 1630
   y: 0
 ,
+  id: "wall_3"
+  src: "images/wall3.png"
+  x: 1430
+  y: 835
+,
+  id: "wall_4"
+  src: "images/wall4.png"
+  x: 1408
+  y: 835
+,
   id: "counter"
   src: "images/counter.png"
   x: 1590
@@ -364,6 +374,16 @@ module.exports = [
   y: 510
   ghosty: true
   mirror: true
+,
+  id: "dan"
+  src: "images/dan.png"
+  x: 390
+  y: 70
+,
+  id: "george"
+  src: "images/george.png"
+  x: 1070
+  y: 1170
 ,
   id: "present21"
   src: "images/present_32.png"
