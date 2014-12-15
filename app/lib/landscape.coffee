@@ -293,7 +293,7 @@ module.exports = [
     onEnter: (item, options) ->
       hint =
         obstruction: item
-        text: "Press spacebar to view the curious photo on the fridge"
+        text: "[Interact] View the curious photo on the fridge"
         id: "fridge_hint"
       EventBroker.publishEvent 'navi:hint', hint
     onLeave: ->
