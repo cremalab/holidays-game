@@ -49,8 +49,7 @@ module.exports = class Landscaper
       obstruction.bottom = obstruction.y + box.height
       img.classList.add 'svg'
       if obstruction.mirror
-        img.style.webkitTransform = "rotateZ(180deg)"
-        img.style.transform = "rotateZ(180deg)"
+        img.style.webkitTransform = "scaleX(-1)"
 
       obstruction.svg = img
 
@@ -66,8 +65,7 @@ module.exports = class Landscaper
       img.classList.add 'img'
       img.style.zIndex = obstruction.zIndex or obstruction.y
       if obstruction.mirror
-        img.style.webkitTransform = "rotateZ(180deg)"
-        img.style.transform = "rotateZ(180deg)"
+        img.style.webkitTransform = "scaleX(-1)"
 
       obstruction.img = img
 
