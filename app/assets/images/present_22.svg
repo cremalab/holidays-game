@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="25px" height="31px" viewBox="0 0 25 31" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.2.1 (9971) - http://www.bohemiancoding.com/sketch -->
+    <title>present_22</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="present_22" sketch:type="MSArtboardGroup">
+            <rect id="Rectangle-480" fill="#E7E7E7" sketch:type="MSShapeGroup" x="0" y="14" width="25" height="17"></rect>
+            <rect id="Rectangle-481" fill="#F0F0F0" sketch:type="MSShapeGroup" transform="translate(12.500000, 10.000000) scale(1, -1) translate(-12.500000, -10.000000) " x="0" y="6" width="25" height="8"></rect>
+            <rect id="Rectangle-482" fill="#248AC1" sketch:type="MSShapeGroup" x="9" y="14" width="6" height="17"></rect>
+            <rect id="Rectangle-483" fill="#2B93CB" sketch:type="MSShapeGroup" x="9" y="6" width="6" height="8"></rect>
+            <rect id="Rectangle-484" fill="#2B93CB" sketch:type="MSShapeGroup" x="0" y="9" width="25" height="2"></rect>
+            <path d="M12.9000015,8.29999997 C12.9000015,-0.200000044 29.9000015,-1.20000044 15.4000015,9.79999956" id="Path-39" stroke="#2B93CB" stroke-width="3" sketch:type="MSShapeGroup"></path>
+            <path d="M2.5,8.29999997 C2.5,-0.200000044 19.5,-1.20000044 5,9.79999956" id="Path-40" stroke="#2B93CB" stroke-width="3" sketch:type="MSShapeGroup" transform="translate(6.677277, 5.768148) scale(-1, 1) translate(-6.677277, -5.768148) "></path>
+        </g>
+    </g>
+</svg>

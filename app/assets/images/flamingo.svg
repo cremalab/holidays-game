@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="52px" height="52px" viewBox="0 0 52 52" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.2.1 (9971) - http://www.bohemiancoding.com/sketch -->
+    <title>flamingo</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="flamingo" sketch:type="MSArtboardGroup">
+            <path d="M39.5,6.87145558 C33,6.87145558 43,28.8714556 36.5,26.8714556 C30,24.8714556 32,24.3714556 32,24.3714556" id="Path-89" stroke="#F27281" sketch:type="MSShapeGroup"></path>
+            <path d="M43,7.29999951 C43,7.29999951 43,6.2999995 45,7.29999951 C47,8.29999952 47,10.7999997 47,11.7999997 C47,12.7999997 45.5,8.79999951 43.5,7.79999954 C42.7809506,6.97822874 41.5,8.29999948 41.5,8.29999948 L43,7.29999951 Z" id="Rectangle-539" fill="#F6D06C" sketch:type="MSShapeGroup"></path>
+            <path d="M37.5,10 C38,9 40.0502893,9 41,9 C42.6568542,9 44,8.1045695 44,7 C43,6 42.6568542,5 41,5 C39.3431458,5 37.5,6.8954305 37.5,8 C37.5,8.31550634 37.3537677,10.2924646 37.5,10 Z" id="Oval-480" fill="#F27281" sketch:type="MSShapeGroup"></path>
+            <path d="M27,42.5 L32,24.5" id="Path-90" stroke="#676767" stroke-linecap="round" stroke-linejoin="round" sketch:type="MSShapeGroup" transform="translate(29.500000, 33.500000) scale(-1, 1) translate(-29.500000, -33.500000) "></path>
+            <path d="M7.5,23.9999999 C7.5,23.9999999 8.5,20.3805913 12,20.5 C15.5,20.6194087 17,23.5 15,23.5 C13,23.5 10,26.0000002 10,26.0000002 L7.5,23.9999999 Z" id="Rectangle-541" fill="#FC7586" sketch:type="MSShapeGroup"></path>
+            <path d="M13.5,22.9999999 C13,22.4999999 11.5,20.4999999 11.5,20.4999999 C11.5,20.4999999 22.5,11.4999999 28,13.5 C33.5,15.5000001 31.5,21 36,26.2000008 C35.8231896,26.0991863 33.1787477,26.0803445 32.5,25.9999999 C30,25 26,23.9999999 23.5,24.9999999 C21.5,25.5 17.0351921,24.9506969 14.5,23.9999999 C13.8729476,23.7648553 14,23.4999999 13.5,22.9999999 Z" id="Rectangle-540" fill="#F27281" sketch:type="MSShapeGroup"></path>
+            <path d="M18,42.5 L23,24.5" id="Path-88" stroke="#676767" stroke-linecap="round" stroke-linejoin="round" sketch:type="MSShapeGroup"></path>
+            <circle id="Oval-481" fill="#676767" sketch:type="MSShapeGroup" cx="41.5" cy="6.5" r="0.5"></circle>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="40px" height="30px" viewBox="0 0 40 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.2.1 (9971) - http://www.bohemiancoding.com/sketch -->
+    <title>ipad</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="ipad" sketch:type="MSArtboardGroup">
+            <rect id="Rectangle-519" fill="#B8B8B8" sketch:type="MSShapeGroup" x="1" y="4" width="38" height="20" rx="3"></rect>
+            <rect id="Rectangle-518" fill="#797979" sketch:type="MSShapeGroup" x="4" y="6" width="33" height="16"></rect>
+            <circle id="Oval-381" stroke="#979797" fill="#D8D8D8" sketch:type="MSShapeGroup" cx="2.5" cy="13.9000015" r="0.5"></circle>
+        </g>
+    </g>
+</svg>

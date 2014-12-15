@@ -134,6 +134,31 @@ module.exports = [
   x: 130
   y: 960
 ,
+  id: "orange_chair5"
+  src: "images/orange_chair.png"
+  x: 310
+  y: 1120
+,
+  id: "red_chair5"
+  src: "images/red_chair.png"
+  x: 300
+  y: 1260
+,
+  id: "red_chair4"
+  src: "images/red_chair.png"
+  x: 350
+  y: 560
+,
+  id: "orange_chair3"
+  src: "images/orange_chair.png"
+  x: 358
+  y: 345
+,
+  id: "orange_chair4"
+  src: "images/orange_chair.png"
+  x: 375
+  y: 745
+,
   id: "orange_chair2"
   src: "images/orange_chair.png"
   x: 1050
@@ -353,7 +378,7 @@ module.exports = [
   id: "plant"
   src: "images/plant.png"
   x: 955
-  y: 580
+  y: 590
   ghosty: true
 ,
   id: "Lamp"
@@ -383,14 +408,34 @@ module.exports = [
 ,
   id: "ipad"
   src: "images/ipad.png"
-  x: 920
+  x: 990
   y: 480
+  ghosty: true
+  mirror: true
+,
+  id: "ipad4"
+  src: "images/ipad.png"
+  x: 915
+  y: 755
+  ghosty: true
+,
+  id: "ipad3"
+  src: "images/ipad.png"
+  x: 435
+  y: 515
   ghosty: true
 ,
   id: "ipad2"
   src: "images/ipad.png"
-  x: 920
-  y: 510
+  x: 630
+  y: 75
+  ghosty: true
+  mirror: true
+,
+  id: "flamingo"
+  src: "images/flamingo.png"
+  x: 930
+  y: 525
   ghosty: true
   mirror: true
 ,
@@ -414,6 +459,18 @@ module.exports = [
   src: "images/present_2.png"
   x: 1560
   y: 645
+  ghosty: true
+,
+  id: "present23"
+  src: "images/present_2.png"
+  x: 940
+  y: 425
+  ghosty: true
+,
+  id: "present24"
+  src: "images/present_31.png"
+  x: 990
+  y: 515
   ghosty: true
 ,
   id: "present1"
@@ -468,6 +525,12 @@ module.exports = [
   id: "present7"
   src: "images/present_35.png"
   x: 220
+  y: 895
+  ghosty: true
+,
+  id: "present71"
+  src: "images/present_22.png"
+  x: 205
   y: 895
   ghosty: true
 ,
