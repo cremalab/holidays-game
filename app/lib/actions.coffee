@@ -11,7 +11,18 @@ module.exports =
         autoRender: true
       mediator.game_state = 'modal'
   disco: (map) ->
-    map.el.classList.add 'disco-time'
-    setTimeout ( ->
+    if !@audio
+      @audio = new Audio('http://www.flashkit.com/imagesvr_ce/flashkit/loops/Techno-Dance/Club/----_COO-Ravedema-4935/----_COO-Ravedema-4935_hifi.mp3')
+    
+    if @audio.paused
+      map.el.classList.add 'disco-time'
+      @audio.play()
+      @audio.addEventListener('ended', ->
+        this.currentTime = 0
+        this.play()
+      , false)
+    else
       map.el.classList.remove 'disco-time'
-    ), 8000
+      @audio.currentTime = 0
+      @audio.pause()
+      

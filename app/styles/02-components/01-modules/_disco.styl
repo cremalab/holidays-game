@@ -2,13 +2,10 @@
 @keyframes move
   0%
     transform rotate(-33deg)
-    width 3em
   50%
     transform rotate(33deg)
-    width 5em
   100%
     transform rotate(-33deg)
-    width 3em
 
 .disco-time .disco
   position absolute
@@ -17,7 +14,8 @@
   width 100%
   height 100%
   background rgba(#000, .8)
-  z-index 1
+  z-index 9000
+  pointer-events none
   
   .lights
     transform perspective( 600px ) rotateX( 84deg )
