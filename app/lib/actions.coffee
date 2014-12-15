@@ -12,7 +12,7 @@ module.exports =
       mediator.game_state = 'modal'
   disco: (map) ->
     if !@audio
-      @audio = new Audio('http://www.flashkit.com/imagesvr_ce/flashkit/loops/Techno-Dance/Club/----_COO-Ravedema-4935/----_COO-Ravedema-4935_hifi.mp3')
+      @audio = new Audio('https://s3.amazonaws.com/cremalab/disco.mp3')
     
     if @audio.paused
       map.el.classList.add 'disco-time'
