@@ -313,19 +313,6 @@ module.exports = [
   src: "images/fridge.png"
   x: 1125
   y: 50
-  proximity:
-    radius: 60
-    onEnter: (item, options) ->
-      hint =
-        obstruction: item
-        text: "Press spacebar to view the curious photo on the fridge"
-        id: "fridge_hint"
-      EventBroker.publishEvent 'navi:hint', hint
-    onLeave: ->
-      EventBroker.publishEvent 'navi:dismiss_hint', "fridge_hint"
-    keys:
-      action: ->
-        EventBroker.publishEvent 'reactor:act', 'team_photo'
 ,
   id: "wall"
   src: "images/wall.png"
@@ -386,7 +373,14 @@ module.exports = [
   x: 990
   y: 380
   zIndex: 400
-  ghosty: true
+  proximity:
+    radius: 60
+    onEnter: (item, options) ->
+      console.log item
+      console.log options
+      EventBroker.publishEvent 'reactor:act', 'lamp_light', item
+    onLeave: (item, options) ->
+      EventBroker.publishEvent 'reactor:act', "lamp_light", item
 ,
   id: "Lamp2"
   src: "images/Lamp_1_flip.png"
@@ -437,7 +431,6 @@ module.exports = [
   x: 930
   y: 525
   ghosty: true
-  mirror: true
 ,
   id: "dan"
   src: "images/dan.png"
@@ -505,9 +498,31 @@ module.exports = [
   ghosty: true
 ,
   id: "present41"
-  src: "images/present_1.png"
-  x: 895
-  y: 65
+  src: "images/present_31.png"
+  zIndex: 100
+  x: 825
+  y: 75
+  ghosty: true
+,
+  id: "present25"
+  src: "images/present_2.png"
+  zIndex: 100
+  x: 803
+  y: 68
+  ghosty: true
+,
+  id: "present26"
+  src: "images/present_22.png"
+  zIndex: 1000
+  x: 195
+  y: 498
+  ghosty: true
+,
+  id: "present27"
+  src: "images/present_2.png"
+  zIndex: 1000
+  x: 195
+  y: 798
   ghosty: true
 ,
   id: "present51"
@@ -559,5 +574,4 @@ module.exports = [
   y: 80
   zIndex: 100
   ghosty: true
-
 ]
