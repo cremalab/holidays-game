@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="54px" height="45px" viewBox="0 0 54 45" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.2.1 (9971) - http://www.bohemiancoding.com/sketch -->
+    <title>Lamp_1</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Lamp_1" sketch:type="MSArtboardGroup">
+            <path d="M18,37 C18,34.2385763 14.6421356,32 10.5,32 C6.35786438,32 3,34.2385763 3,37 C3,39.7614237 18,39.7614237 18,37 Z" id="Oval-329" fill="#656565" sketch:type="MSShapeGroup"></path>
+            <path d="M31,4.5 C30,1.5 26,0.4999999 27,5.9999999 C28,11.4999999 22.5000007,14.9999996 15.5,14 C8.49999927,13.0000004 -2.00000003,9.50000095 3.99999997,15.5000004" id="Path-72" stroke="#494848" stroke-width="0.399999917" sketch:type="MSShapeGroup"></path>
+            <path d="M10,33 L4,14.5" id="Path-69" stroke="#656565" sketch:type="MSShapeGroup"></path>
+            <path d="M5,17.5 L32.5,7.5" id="Path-71" stroke="#656565" sketch:type="MSShapeGroup"></path>
+            <rect id="Rectangle-501" fill="#656565" sketch:type="MSShapeGroup" transform="translate(33.000000, 5.500000) rotate(-19.000000) translate(-33.000000, -5.500000) " x="31" y="2" width="4" height="7"></rect>
+            <path d="M33.6899698,13.5437188 L46.3480522,15.0666624 L48.7737047,40.7554975 L21.7205589,33.5182825 L33.6899698,13.5437188 Z" id="Rectangle-502" fill-opacity="0.355072464" fill="#FF0606" sketch:type="MSShapeGroup" transform="translate(35.247132, 27.149608) rotate(-16.000000) translate(-35.247132, -27.149608) "></path>
+            <path d="M42,15 C42,15 42,8 35,8 C28,8 28,15 28,15 L42,15 Z" id="Oval-330" fill="#656565" sketch:type="MSShapeGroup" transform="translate(35.000000, 11.500000) rotate(-17.000000) translate(-35.000000, -11.500000) "></path>
+            <path d="M4,15.5 L31.5,5.5" id="Path-70" stroke="#656565" sketch:type="MSShapeGroup"></path>
+        </g>
+    </g>
+</svg>

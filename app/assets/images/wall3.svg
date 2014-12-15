@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="571px" height="95px" viewBox="0 0 571 95" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.2.1 (9971) - http://www.bohemiancoding.com/sketch -->
+    <title>wall3</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="wall3" sketch:type="MSArtboardGroup">
+            <path d="M0,1 L570,1 L548,95 L0,95 L0,1 Z" id="Rectangle-348" fill="#AAA4A0" sketch:type="MSShapeGroup"></path>
+            <path d="M199,22 L397,22 L385,72 L190,72 L199,22 Z" id="Rectangle-523" fill="#FFFFFF" sketch:type="MSShapeGroup"></path>
+        </g>
+    </g>
+</svg>

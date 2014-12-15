@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="33px" height="49px" viewBox="0 0 33 49" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.2.1 (9971) - http://www.bohemiancoding.com/sketch -->
+    <title>desk_chair</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="filter-1">
+            <feOffset dx="1" dy="0" in="SourceAlpha" result="shadowOffsetInner1"></feOffset>
+            <feGaussianBlur stdDeviation="0.5" in="shadowOffsetInner1" result="shadowBlurInner1"></feGaussianBlur>
+            <feComposite in="shadowBlurInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0.0681600765   0 0 0 0 0.0681600765   0 0 0 0 0.0681600765  0 0 0 0.200025476 0" in="shadowInnerInner1" type="matrix" result="shadowMatrixInner1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+                <feMergeNode in="shadowMatrixInner1"></feMergeNode>
+            </feMerge>
+        </filter>
+        <filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="2" dy="1" in="SourceAlpha" result="shadowOffsetInner1"></feOffset>
+            <feGaussianBlur stdDeviation="0.5" in="shadowOffsetInner1" result="shadowBlurInner1"></feGaussianBlur>
+            <feComposite in="shadowBlurInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.207753057 0" in="shadowInnerInner1" type="matrix" result="shadowMatrixInner1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+                <feMergeNode in="shadowMatrixInner1"></feMergeNode>
+            </feMerge>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="desk_chair" sketch:type="MSArtboardGroup">
+            <g id="Group" sketch:type="MSLayerGroup" transform="translate(1.000000, 2.000000)">
+                <rect id="Rectangle-356" fill="#C4C4C4" filter="url(#filter-1)" sketch:type="MSShapeGroup" x="23" y="0" width="7" height="23"></rect>
+                <rect id="Rectangle-354" fill="#AEAEAE" sketch:type="MSShapeGroup" x="23" y="14" width="7" height="23"></rect>
+                <rect id="Rectangle-357" fill="#C4C4C4" filter="url(#filter-2)" sketch:type="MSShapeGroup" transform="translate(11.500000, 24.500000) rotate(-90.000000) translate(-11.500000, -24.500000) " x="-1" y="13" width="25" height="23"></rect>
+                <rect id="Rectangle-355" fill="#AEAEAE" sketch:type="MSShapeGroup" transform="translate(11.500000, 33.500000) rotate(-90.000000) translate(-11.500000, -33.500000) " x="8" y="22" width="7" height="23"></rect>
+                <rect id="Rectangle-358" fill="#656565" sketch:type="MSShapeGroup" x="1" y="37" width="3" height="7"></rect>
+                <rect id="Rectangle-359" fill="#656565" sketch:type="MSShapeGroup" x="24" y="37" width="3" height="7"></rect>
+            </g>
+        </g>
+    </g>
+</svg>
