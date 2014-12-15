@@ -2,7 +2,10 @@ EventBroker = require 'lib/event_broker'
 
 module.exports = class Activist
   Backbone.utils.extend @prototype, EventBroker
-
+  actionKey: 32
+  actionableItems: []
+  constructor: ->
+    document.addEventListener 'keydown', @handleKeyDown
   activate: (ob) ->
     ob.onHit = ob.onHit or {}
     ob.events = {}
@@ -34,4 +37,24 @@ module.exports = class Activist
       item.onHit.bottom(item, options) if item.onHit.bottom
     item.addEventListener 'hit_any', (options) ->
       item.onHit.any(item, options) if item.onHit.any
+    item.addEventListener 'enterProximity', (options) ->
+      item.current_player_within_proximity = true
+      item.proximity.onEnter(item, options) if item.proximity
+    item.addEventListener 'leaveProximity', (options) ->
+      item.current_player_within_proximity = false
+      item.proximity.onLeave(item, options) if item.proximity
+    if item.proximity and item.proximity.keys
+      if item.proximity.keys.action
+        @actionableItems.push item
+
+  handleKeyDown: (e) =>
+    switch e.keyCode
+      when 32
+        @fireActionHandlers()
+
+  fireActionHandlers: ->
+    for item in @actionableItems
+      if item.current_player_within_proximity
+        item.proximity.keys.action(item)
+
 

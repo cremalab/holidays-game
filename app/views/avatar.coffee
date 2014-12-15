@@ -34,25 +34,30 @@ module.exports = class Avatar extends View
     down: true
 
   initialize: (options) ->
+    if options.template
+      @template = options.template
     @soulless = options.soulless
     super
-    @listenTo @model, "change:x_position change:y_position change:orientation", @broadCastMove
     @listenTo @model, "change:avatar-gender change:avatar-hat change:avatar-hair change:avatar-skin change:avatar-coat change:avatar-pants", @updateLook
+    @listenTo @model, "dispose", @dispose
+    @listenTo @model, "change:z-plane", @updateZIndex
+    @subscribeEvent "players:left", @handleLeave
     unless @model.isCurrentPlayer()
       @listenTo @model, "change:moving", =>
         @setMovementClasses()
+    unless @soulless
+      @listenTo @model, "change:x_position change:y_position change:orientation", @broadCastMove
+      @listenTo @, "availableDirectionsUpdated", @updatePosition
+      @chatterbox = new ChatterBox
+        player: @model
+        avatar: @
 
     @listenTo @model, "change:orientation", @orient
     @listenTo @model, "change:name", @setName
-    @chatterbox = new ChatterBox
-      player: @model
-      avatar: @
-    @listenTo @, "availableDirectionsUpdated", @updatePosition
 
   render: ->
     super
     if @soulless
-      @el.removeChild(@el.querySelector('.player-name'))
       @orient(@model, 0)
     else
       @positionOnMap()
@@ -72,6 +77,7 @@ module.exports = class Avatar extends View
           @chatterbox.handleEnter();
       @orient(@model, @model.get('orientation'))
     @updateLook()
+    @updateZIndex()
 
   bindEvents: ->
     if @model.isCurrentPlayer()
@@ -95,11 +101,12 @@ module.exports = class Avatar extends View
             @move()
           , @movementLoopInc
 
+      if e.keyCode is 16 # shift
+        @addActiveMovementKey e.keyCode
       if e.keyCode is 13 # return/enter
         @chatterbox.handleEnter(e)
       if e.keyCode is 27 # esc
         @chatterbox.disposeBubble(true)
-
 
   move: (keys) ->
 
@@ -156,6 +163,9 @@ module.exports = class Avatar extends View
 
   handleKeyUp: (e) =>
     @stopMovement(e)
+    if e.keyCode is 16 # shift
+      @stopMovementDirection e.keyCode
+
 
   stopMovement: (e) ->
     if e and e.keyCode
@@ -185,49 +195,66 @@ module.exports = class Avatar extends View
         @activeMovementKeys.indexOf(e) > -1
     @activeMovementKeys.indexOf(keyCode) > -1
 
+  isShiftKeyDown: () ->
+    return @activeMovementKeys.indexOf(16) > -1
+
   setMovementClasses: ->
     classList = @el.classList
+    classToAdd = ''
+
     if @model.get('moving')
       classList.add 'moving'
     else
       classList.remove 'moving'
 
+    @clearMovementClasses()
+
     if @isMovingDirection(up)
       classList.add 'dir-up'
-    else
-      classList.remove 'dir-up'
 
     if @isMovingDirection(down)
       classList.add 'dir-down'
-    else
-      classList.remove 'dir-down'
+
     if @isMovingDirection(left)
       classList.add 'dir-left'
-    else
-      classList.remove 'dir-left'
+
     if @isMovingDirection(right)
       classList.add 'dir-right'
-    else
-      classList.remove 'dir-right'
-
 
   setOrientation: ->
     cl = @el.classList
     if cl.contains('dir-up') and cl.contains('dir-left')
+      if @isShiftKeyDown()
+        return @model.set('orientation', 1)
       return @model.set('orientation', 5)
     if cl.contains('dir-up') and cl.contains('dir-right')
+      if @isShiftKeyDown()
+        return @model.set('orientation', 7)
       return @model.set('orientation', 3)
     if cl.contains('dir-down') and cl.contains('dir-left')
+      if @isShiftKeyDown()
+        return @model.set('orientation', 3)
       return @model.set('orientation', 7)
     if cl.contains('dir-down') and cl.contains('dir-right')
+      if @isShiftKeyDown()
+        return @model.set('orientation', 5)
       return @model.set('orientation', 1)
     if cl.contains('dir-up')
+      if @isShiftKeyDown()
+        return @model.set('orientation', 0)
       return @model.set('orientation', 4)
     if cl.contains('dir-down')
+      if @isShiftKeyDown()
+        console.log('opposite')
+        return @model.set('orientation', 4)
       return @model.set('orientation', 0)
     if cl.contains('dir-right')
+      if @isShiftKeyDown()
+        return @model.set('orientation', 6)
       return @model.set('orientation', 2)
     if cl.contains('dir-left')
+      if @isShiftKeyDown()
+        return @model.set('orientation', 2)
       return @model.set('orientation', 6)
 
   clearMovementClasses: ->
@@ -279,7 +306,7 @@ module.exports = class Avatar extends View
     name = @model.get('name')
     @el.querySelector('.player-name').innerText = name
 
-  updateLook: (a,b,c) ->
+  updateLook: ->
     @el.className = 'avatar'
     @el.classList.add 'active' if @model.get('active')
     @el.setAttribute('data-gender', @model.get('avatar-gender'))
@@ -288,7 +315,16 @@ module.exports = class Avatar extends View
     @el.classList.add @model.get('avatar-skin')
     @el.classList.add @model.get('avatar-coat')
     @el.classList.add @model.get('avatar-pants')
-    @model.save()
+    if @model.isCurrentPlayer()
+      @model.save()
+
+  updateZIndex: ->
+    @el.style.zIndex = @model.get('y_position')
+
+  handleLeave: (id) ->
+    if @model
+      if parseInt(id) is parseInt(@model.id)
+        @dispose()
 
   dispose: ->
     document.removeEventListener 'keydown', @handleKeyDown

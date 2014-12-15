@@ -1,6 +1,7 @@
 Landscaper = require 'lib/landscaper'
 View       = require './view'
 template   = require './templates/map'
+transition_events = 'transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd'
 
 module.exports = class MapView extends View
   template: template
@@ -17,6 +18,7 @@ module.exports = class MapView extends View
     super
     @landscaper = new Landscaper
       map: @
+    @subscribeEvent 'map:pan_to_player', @panToPlayerPosition
 
   render: ->
     super
@@ -24,9 +26,8 @@ module.exports = class MapView extends View
     @landscaper.init()
     window.addEventListener 'resize', =>
       @setDimensions()
-    window.addEventListener ''
 
-
+    # prevent double-tap zoon
     doubleTouchStartTimestamp = 0
     document.addEventListener "touchstart", (event) ->
       now = +(new Date())
@@ -60,7 +61,9 @@ module.exports = class MapView extends View
     if avatar
       @panToPlayerPosition(avatar.model, avatar) if avatar.model.isCurrentPlayer()
 
-  panToPlayerPosition: (player, avatar) ->
+  panToPlayerPosition: (player, avatar, animate) ->
+    @focusedPlayer = player
+
     px = player.get('x_position')
     py = player.get('y_position')
 
@@ -92,10 +95,18 @@ module.exports = class MapView extends View
     unless (new_y + @offset_y) >= 0 or Math.abs(py + @viewport_padding) >= @height
       @offset_y = new_y
 
-    @repositionMap(@offset_x, @offset_y)
+    @repositionMap(@offset_x, @offset_y, animate)
 
-  repositionMap: (left, top) ->
+  repositionMap: (left, top, animate) ->
+    if animate
+      @el.addEventListener "transitionend", @removeTransition, @
+      @el.style.transition = 'all .5s'
+
     @el.style.webkitTransform = "translate3d(#{left}px, #{top}px, 0)"
+
+  removeTransition: ->
+    @style.transition = null
+    @removeEventListener('transitionend', @addAnimation)
 
   canMoveTo: (x,y, avatar) ->
     if avatar

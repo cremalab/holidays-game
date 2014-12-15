@@ -12,12 +12,14 @@ Notifier       = require 'models/notifier'
 JoinGameView   = require 'views/join_game_view'
 EditAvatarView = require 'views/edit_avatar_view'
 AutoPilot      = require 'lib/autopilot'
+Navi           = require 'lib/navi'
+Reactor        = require 'lib/reactor'
 utils          = require 'lib/utils'
 
 module.exports = class GameController
   Backbone.utils.extend @prototype, EventBroker
   players: []
-  multiplayer: false
+  multiplayer: true
   snow: false
   trails: false
   customNames: true
@@ -31,6 +33,8 @@ module.exports = class GameController
     @setupPlayer()
 
     @subscribeEvent 'addPlayer', @addPlayer
+    @subscribeEvent 'editPlayer', => 
+      @promptPlayerName(true)
     @createPlayerList()
     mediator.game_state = 'playing'
 
@@ -41,6 +45,9 @@ module.exports = class GameController
       autoRender: true
     mediator = mediator
 
+    @reactor = new Reactor(@mapView, @players)
+    @nav     = new Navi(@mapView)
+
     Weather.snow('snowCanvas') if @snow
 
   setupCanvas: ->
@@ -49,18 +56,29 @@ module.exports = class GameController
       autoRender: true
 
   setupPlayer: ->
-    mediator.current_player = new Player
+    attrs = JSON.parse(localStorage.getItem("CremalabPartyAvatar"))
+    mediator.current_player = new Player(attrs)
+    mediator.current_player.set
       orientation: 1
-    mediator.current_player.fetch()
+      x_position: 600
+      y_position: 200
+      active: true
+      id: Date.now()
 
-    if mediator.current_player.id
-      @createPlayerAvatar(mediator.current_player)
+    if @multiplayer
+      @notifier.connect mediator.current_player, (channel) =>
+        channel = channel.split("players_")[1]
+        # document.getElementById("room_name").innerHTML = channel
+
+        if mediator.current_player.get('name')
+          return @createPlayerAvatar(mediator.current_player)
+        else
+          if @customNames
+            @promptPlayerName()
+          else
+            @createPlayerAvatar(mediator.current_player)
     else
-      @createPlayer()
-      if @customNames
-        @promptPlayerName()
-      else
-        @createPlayerAvatar(mediator.current_player)
+      @createPlayerAvatar(mediator.current_player)
 
   promptPlayerName: (editing) ->
     player = mediator.current_player
@@ -79,23 +97,6 @@ module.exports = class GameController
       player.save()
       @createPlayerAvatar(player) unless editing
 
-  createPlayer: ->
-    id = Date.now()
-    player = mediator.current_player = new Player
-      id: id
-      name: id
-      x_position: 600
-      y_position: 200
-      active: true
-      orientation: 1
-
-    player.save()
-
-    if @multiplayer
-      @notifier.connect player, (channel) =>
-        channel = channel.split("players_")[1]
-        document.getElementById("room_name").innerHTML = channel
-
 
   createPlayerAvatar: (player) ->
     avatar = new Avatar
@@ -111,7 +112,7 @@ module.exports = class GameController
     @mapView.listenTo avatar, 'playerMove', @mapView.checkPlayerPosition
 
     @mapView.spawnPlayer(player, avatar)
-    @players.add player
+    @players.add player, {at: 0}
     @mapView.addTouchEvents(avatar, 'touchstart')
 
     if @clickToNavigate
@@ -119,43 +120,35 @@ module.exports = class GameController
     @setupGameMenu()
 
   addPlayer: (uuid, data) ->
-    unless parseFloat(uuid) is parseFloat(mediator.current_player.id)
-      if data
-        x_position = data.x_position
-        y_position = data.y_position
-        name = data.name
-      else
-        x_position = 400
-        y_position = 1000
-        name = uuid
-      player = new Player
-        id: uuid
-        name: name
-        x_position: x_position
-        y_position: y_position
-      avatar = new Avatar
-        model: player
+    if data
+      unless parseFloat(uuid) is parseFloat(mediator.current_player.id)
+        unless @players.get(uuid)
+          player = new Player({id: uuid})
+          player.set(data)
+          avatar = new Avatar
+            model: player
 
-      if @trails
-        avatar.trailblazer = new Trailblazer
-          player: player
-          avatar: avatar
-          canvas: @canvas
+          if @trails
+            avatar.trailblazer = new Trailblazer
+              player: player
+              avatar: avatar
+              canvas: @canvas
 
-      @mapView.listenTo avatar, 'playerMove', @mapView.checkPlayerPosition
-      @mapView.spawnPlayer(player, avatar)
-      @players.add player
+          @mapView.listenTo avatar, 'playerMove', @mapView.checkPlayerPosition
+          @mapView.spawnPlayer(player, avatar)
+          @players.add player
 
   createPlayerList: ->
     @playerList = new PlayerList
       collection: @players
       autoRender: true
       container: document.getElementById('player_list')
+      map: @mapView
 
   setupGameMenu: ->
     editAvatarButton = document.createElement("button")
     document.getElementById('game-settings').appendChild(editAvatarButton)
-    editAvatarButton.innerHTML = "Edit my Avatar"
+    editAvatarButton.innerHTML = "Edit"
     editAvatarButton.addEventListener 'click', (e) =>
       e.preventDefault()
       @promptPlayerName(true)

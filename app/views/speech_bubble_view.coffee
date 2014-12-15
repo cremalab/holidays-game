@@ -7,16 +7,11 @@ module.exports = class SpeechBubbleView extends View
 
   initialize: (options) ->
     super
-    @avatar     = options.avatar
     @chatterBox = options.chatterBox
+    @avatar     = options.avatar
 
   render: ->
     super
-    setTimeout =>
-      @rect = @el.getClientRects()[0]
-      @el.style.top = "#{-(@rect.height + 20)}px"
-      @el.style.left = "#{-(@rect.width / 4)}px"
-    , 0
     if @avatar.model.isCurrentPlayer()
       @el.querySelector('.close').addEventListener 'click', (e) =>
         e.stopPropagation()

@@ -5,13 +5,12 @@ Escort   = require 'lib/escort'
 module.exports = class Notifier extends Model
   connect: (player, onConnect) ->
     @player = player
-
     @PN = PUBNUB.init
       publish_key: 'pub-c-7f96182e-eed7-46dd-9b72-80d838427d8e',
       subscribe_key: 'sub-c-b9f703c2-7109-11e4-aacc-02ee2ddab7fe'
       uuid: player.get('id')
       heartbeat: 10
-      restore: true
+      # restore: true
 
     Escort.findEmptyRoom @PN, (channel_name) =>
       @subscribe(channel_name, onConnect)
@@ -19,7 +18,8 @@ module.exports = class Notifier extends Model
       @subscribeEvent "players:left", @removePlayer
       @subscribeEvent "messages:saved", @publishMessage
       @subscribeEvent "messages:dismissed", @dismissMessage
-      @subscribeEvent "players:name_changed", @setName
+      @subscribeEvent "players:name_changed", @setAttrs
+      @subscribeEvent "players:avatar_changed", @setAttrs
 
       pubnub = @PN
 
@@ -28,28 +28,25 @@ module.exports = class Notifier extends Model
           channel: @channel
 
   subscribe: (channel, onConnect) ->
-    console.log "subscribing to channel #{channel}"
+    attrs = @player.toJSON()
+    delete attrs.active
     @PN.subscribe
       channel: channel
       presence: (m) =>
         @handlePresence(m)
       message: (m) =>
         @message(m)
-      state:
-        name: @player.get('name')
-        x_position: @player.get('x_position')
-        y_position: @player.get('y_position')
+      state: attrs
       connect: =>
         @channel = channel
-        onConnect(channel) if onConnect
-        @getRoomPlayers()
+        @getRoomPlayers(onConnect)
 
-  getRoomPlayers: ->
+  getRoomPlayers: (onConnect) ->
     @PN.here_now
       channel : @channel
       state: true
       callback: (message) =>
-        @handlePlayers(message)
+        @handlePlayers(message, onConnect)
 
   message: (m) ->
     if m.type
@@ -60,11 +57,13 @@ module.exports = class Notifier extends Model
         when 'chat_message_dismissed'
           @publishEvent "messages:dismissed:#{m.uuid}"
 
-  handlePlayers: (message) ->
+  handlePlayers: (message, onConnect) ->
     if message.uuids
       for player in message.uuids
-        unless player.uuid is @player.get('id')
+        unless parseInt(player.uuid) is parseInt(@player.get('id'))
           @publishEvent 'addPlayer', player.uuid, player.state
+    
+    onConnect(@channel) if onConnect
 
   handlePresence: (m,a) ->
     unless m.uuid is mediator.current_player.id
@@ -113,8 +112,9 @@ module.exports = class Notifier extends Model
         type: 'chat_message_dismissed'
         uuid: uuid
 
-  setName: (player) ->
+  setAttrs: (player) ->
+    attrs = player.toJSON()
+    delete attrs.active
     @PN.state
       channel  : @channel
-      state    :
-        name:  player.get('name')
+      state    : attrs
