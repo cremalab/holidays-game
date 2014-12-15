@@ -85,14 +85,6 @@ module.exports = class Notifier extends Model
     name        = player.get('name')
     moving      = player.get('moving')
     @setAttrs(player)
-    # @PN.state
-    #   channel  : @channel,
-    #   state    :
-    #     x_position:  x_position
-    #     y_position:  y_position
-    #     orientation: orientation
-    #     name:        name
-    #     moving:      moving
 
   removePlayer: (id) ->
     if mediator.current_player.id is id
