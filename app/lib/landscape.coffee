@@ -371,7 +371,7 @@ module.exports = [
   y: 1060
 ,
   id: "tree"
-  src: "images/tree.png"
+  src: "images/tree1.png"
   x: 1485
   y: 530
 ,

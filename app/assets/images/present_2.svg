@@ -6,13 +6,15 @@
     <defs></defs>
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
         <g id="present_2" sketch:type="MSArtboardGroup">
-            <rect id="Rectangle-480" fill="#E7E7E7" sketch:type="MSShapeGroup" x="0" y="14" width="25" height="17"></rect>
-            <rect id="Rectangle-481" fill="#F0F0F0" sketch:type="MSShapeGroup" transform="translate(12.500000, 10.000000) scale(1, -1) translate(-12.500000, -10.000000) " x="0" y="6" width="25" height="8"></rect>
-            <rect id="Rectangle-482" fill="#CA0005" sketch:type="MSShapeGroup" x="9" y="14" width="6" height="17"></rect>
-            <rect id="Rectangle-483" fill="#E4060D" sketch:type="MSShapeGroup" x="9" y="6" width="6" height="8"></rect>
-            <rect id="Rectangle-484" fill="#E4060D" sketch:type="MSShapeGroup" x="0" y="9" width="25" height="2"></rect>
-            <path d="M12.9000015,8.29999997 C12.9000015,-0.200000044 29.9000015,-1.20000044 15.4000015,9.79999956" id="Path-39" stroke="#E3070D" stroke-width="3" sketch:type="MSShapeGroup"></path>
-            <path d="M2.5,8.29999997 C2.5,-0.200000044 19.5,-1.20000044 5,9.79999956" id="Path-40" stroke="#E3070D" stroke-width="3" sketch:type="MSShapeGroup" transform="translate(6.677277, 5.768148) scale(-1, 1) translate(-6.677277, -5.768148) "></path>
+            <g id="Group" sketch:type="MSLayerGroup" transform="translate(0.000000, 1.000000)">
+                <rect id="Rectangle-480" fill="#E7E7E7" sketch:type="MSShapeGroup" x="0" y="13" width="25" height="17"></rect>
+                <rect id="Rectangle-481" fill="#F0F0F0" sketch:type="MSShapeGroup" transform="translate(12.500000, 9.000000) scale(1, -1) translate(-12.500000, -9.000000) " x="0" y="5" width="25" height="8"></rect>
+                <rect id="Rectangle-482" fill="#CA0005" sketch:type="MSShapeGroup" x="9" y="13" width="6" height="17"></rect>
+                <rect id="Rectangle-483" fill="#E4060D" sketch:type="MSShapeGroup" x="9" y="5" width="6" height="8"></rect>
+                <rect id="Rectangle-484" fill="#E4060D" sketch:type="MSShapeGroup" x="0" y="8" width="25" height="2"></rect>
+                <path d="M12.9000015,7.29999997 C12.9000015,-1.20000004 29.9000015,-2.20000044 15.4000015,8.79999956" id="Path-39" stroke="#E3070D" stroke-width="3" sketch:type="MSShapeGroup"></path>
+                <path d="M2.5,7.29999997 C2.5,-1.20000004 19.5,-2.20000044 5,8.79999956" id="Path-40" stroke="#E3070D" stroke-width="3" sketch:type="MSShapeGroup" transform="translate(6.677277, 4.768148) scale(-1, 1) translate(-6.677277, -4.768148) "></path>
+            </g>
         </g>
     </g>
 </svg>

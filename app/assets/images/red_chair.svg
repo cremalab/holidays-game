@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="52px" height="51px" viewBox="0 0 52 51" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.2.1 (9971) - http://www.bohemiancoding.com/sketch -->
+    <title>red_chair</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="red_chair" sketch:type="MSArtboardGroup">
+            <rect id="Rectangle-368" fill="#787878" sketch:type="MSShapeGroup" x="5" y="38" width="4" height="6"></rect>
+            <rect id="Rectangle-369" fill="#787878" sketch:type="MSShapeGroup" x="23" y="43" width="4" height="6"></rect>
+            <rect id="Rectangle-370" fill="#787878" sketch:type="MSShapeGroup" x="41" y="37" width="4" height="6"></rect>
+            <path d="M2.78020118,33.8703429 C3.62277752,39.3344456 13.025149,43.640625 24.5,43.640625 C35.8748746,43.640625 45.2132261,39.4091552 46.1958306,34.0128975 C46.2523755,33.702365 46.28125,16.3879751 46.28125,16.0703125 C46.28125,10.2324901 36.5294522,5.5 24.5,5.5 C12.4705478,5.5 2.71875,10.2324901 2.71875,16.0703125 C2.71875,16.3394572 2.73947787,33.6062525 2.78020118,33.8703429 Z" id="Oval-342" fill="#BA5656" sketch:type="MSShapeGroup"></path>
+            <ellipse id="Oval-341" fill="#CB5F5F" sketch:type="MSShapeGroup" cx="24.5" cy="16.0703125" rx="21.78125" ry="10.5703125"></ellipse>
+        </g>
+    </g>
+</svg>
