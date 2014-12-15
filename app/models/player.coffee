@@ -26,7 +26,7 @@ module.exports = class Player extends Model
 
   streamPosition: ->
     @movement_inc++
-    triggerMove = @movement_inc is 6 or 
+    triggerMove = @movement_inc is 5 or 
       @hasChanged('orientation') or 
       @hasChanged('moving')
     if triggerMove
