@@ -46,6 +46,7 @@ module.exports = class Notifier extends Model
       channel : @channel
       state: true
       callback: (message) =>
+        console.log message
         @handlePlayers(message, onConnect)
 
   message: (m) ->
@@ -83,6 +84,7 @@ module.exports = class Notifier extends Model
     orientation = player.get('orientation')
     name        = player.get('name')
     moving      = player.get('moving')
+    # @setAttrs(player)
 
     @PN.state
       channel  : @channel,
@@ -90,7 +92,6 @@ module.exports = class Notifier extends Model
         x_position:  x_position
         y_position:  y_position
         orientation: orientation
-        name:        name
         moving:      moving
 
   removePlayer: (id) ->
