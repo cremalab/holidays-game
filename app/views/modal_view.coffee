@@ -5,7 +5,9 @@ template = require './templates/modal'
 module.exports = class ModalView extends View
   template: template
   className: 'modal'
-  initialize: ->
+  initialize: (options) ->
+    if options and options.template
+      @template = options.template
     super
   render: ->
     super
