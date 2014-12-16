@@ -10,7 +10,6 @@ module.exports = class Notifier extends Model
       subscribe_key: 'sub-c-b9f703c2-7109-11e4-aacc-02ee2ddab7fe'
       uuid: player.get('id')
       heartbeat: 10
-      # restore: true
 
     Escort.findEmptyRoom @PN, (channel_name) =>
       @subscribe(channel_name, onConnect)
@@ -46,7 +45,6 @@ module.exports = class Notifier extends Model
       channel : @channel
       state: true
       callback: (message) =>
-        console.log message
         @handlePlayers(message, onConnect)
 
   message: (m) ->
@@ -85,14 +83,6 @@ module.exports = class Notifier extends Model
     name        = player.get('name')
     moving      = player.get('moving')
     @setAttrs(player)
-
-    # @PN.state
-    #   channel  : @channel,
-    #   state    :
-    #     x_position:  x_position
-    #     y_position:  y_position
-    #     orientation: orientation
-    #     moving:      moving
 
   removePlayer: (id) ->
     if mediator.current_player.id is id
