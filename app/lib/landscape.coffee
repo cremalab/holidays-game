@@ -804,7 +804,7 @@ module.exports = [
     onEnter: (item, options) ->
       hint =
         obstruction: item
-        text: "Kelly wants more shoes!"
+        text: "Kelly wants more cheese!"
         id: "kelly_present"
       EventBroker.publishEvent 'navi:hint', hint
     onLeave: ->
