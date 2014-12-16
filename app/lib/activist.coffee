@@ -4,8 +4,10 @@ module.exports = class Activist
   Backbone.utils.extend @prototype, EventBroker
   actionKey: 32
   actionableItems: []
-  constructor: ->
+  constructor: (landscaper) ->
+    @landscaper = landscaper
     document.addEventListener 'keydown', @handleKeyDown
+    @subscribeEvent 'map:interact', @handleTap
   activate: (ob) ->
     ob.onHit = ob.onHit or {}
     ob.events = {}
@@ -51,6 +53,22 @@ module.exports = class Activist
     switch e.keyCode
       when 32
         @fireActionHandlers()
+
+  handleTap: (e, x, y) ->
+    for item in @actionableItems
+      if item.current_player_within_proximity
+        av_proxy = 
+          width: 30
+          height: 30
+        if @landscaper.avatarOverlaps(av_proxy, item, x - @landscaper.map.offset_x, y - @landscaper.map.offset_y)
+          e.preventDefault()
+          e.stopPropagation()
+          item.proximity.keys.action(item)
+          return false
+        else 
+          return e
+      else
+        return e
 
   fireActionHandlers: ->
     for item in @actionableItems
