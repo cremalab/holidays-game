@@ -1,0 +1,18 @@
+nestle()
+
+.nest-reset
+  *
+    margin-top 0
+    
+.grid
+  &.break-max-medium
+    & > .grid-items
+      & > .row > .col
+      & > .col
+        @media max-medium
+          display block
+  &.break-max-small
+    & > .grid-items
+      & > .col
+        @media max-small
+          display block
