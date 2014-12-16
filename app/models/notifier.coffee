@@ -10,6 +10,7 @@ module.exports = class Notifier extends Model
       subscribe_key: 'sub-c-b9f703c2-7109-11e4-aacc-02ee2ddab7fe'
       uuid: player.get('id')
       heartbeat: 10
+      restore: true
 
     Escort.findEmptyRoom @PN, (channel_name) =>
       @subscribe(channel_name, onConnect)
