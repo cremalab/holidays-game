@@ -43,6 +43,7 @@ module.exports =
     
     if @audio.paused
       map.el.classList.add 'disco-time'
+      map.discoMode = true
       @audio.play()
       @audio.addEventListener('ended', ->
         this.currentTime = 0
@@ -50,5 +51,6 @@ module.exports =
       , false)
     else
       map.el.classList.remove 'disco-time'
+      map.discoMode = false
       @audio.currentTime = 0
       @audio.pause()
