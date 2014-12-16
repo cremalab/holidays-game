@@ -48,12 +48,14 @@ module.exports = class Landscaper
       obstruction.right  = obstruction.x + box.width
       obstruction.bottom = obstruction.y + box.height
       img.classList.add 'svg'
+      if obstruction.mirror
+        img.style.webkitTransform = "scaleX(-1)"
 
       obstruction.svg = img
 
   createImage: (obstruction, img) ->
     img  = document.getElementById obstruction.id
-    imagesLoaded img, ->
+    return imagesLoaded img, ->
       rect = img.getClientRects()[0]
       obstruction.left = obstruction.x
       obstruction.top  = obstruction.y
@@ -62,8 +64,11 @@ module.exports = class Landscaper
 
       img.classList.add 'img'
       img.style.zIndex = obstruction.zIndex or obstruction.y
+      if obstruction.mirror
+        img.style.webkitTransform = "scaleX(-1)"
 
       obstruction.img = img
+
 
 
   checkObstructions: (x, y, avatar, map) ->

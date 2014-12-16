@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="78px" height="101px" viewBox="0 0 78 101" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.2.1 (9971) - http://www.bohemiancoding.com/sketch -->
+    <title>Bookshelf</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="23" y="23" width="5" height="14"></rect>
+        <rect id="path-2" x="23" y="43" width="5" height="14"></rect>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Bookshelf" sketch:type="MSArtboardGroup">
+            <g id="Group" sketch:type="MSLayerGroup">
+                <rect id="Rectangle-330" stroke="#615F5F" stroke-width="2" fill="#797979" sketch:type="MSShapeGroup" x="0" y="19" width="78" height="82"></rect>
+                <rect id="Rectangle-332" fill="#929292" sketch:type="MSShapeGroup" x="2" y="21" width="74" height="17"></rect>
+                <rect id="Rectangle-333" fill="#B86F6F" sketch:type="MSShapeGroup" x="3" y="23" width="5" height="14"></rect>
+                <rect id="Rectangle-334" fill="#AEAEAE" sketch:type="MSShapeGroup" x="9" y="23" width="5" height="14"></rect>
+                <rect id="Rectangle-335" fill="#5580A8" sketch:type="MSShapeGroup" x="15" y="23" width="5" height="14"></rect>
+                <g id="Rectangle-336">
+                    <use fill="#3E6486" fill-rule="evenodd" sketch:type="MSShapeGroup" transform="translate(25.500000, 30.000000) rotate(-26.000000) translate(-25.500000, -30.000000) " xlink:href="#path-1"></use>
+                    <use fill="none" xlink:href="#path-1"></use>
+                </g>
+                <rect id="Rectangle-337" fill-opacity="0.188377491" fill="#6A6969" sketch:type="MSShapeGroup" x="2" y="21" width="74" height="4"></rect>
+                <rect id="Rectangle-343" fill="#929292" sketch:type="MSShapeGroup" x="2" y="41" width="74" height="17"></rect>
+                <rect id="Rectangle-338" fill="#509592" sketch:type="MSShapeGroup" x="3" y="43" width="5" height="14"></rect>
+                <rect id="Rectangle-339" fill="#A0AA82" sketch:type="MSShapeGroup" x="9" y="43" width="5" height="14"></rect>
+                <rect id="Rectangle-340" fill="#5580A8" sketch:type="MSShapeGroup" x="15" y="43" width="5" height="14"></rect>
+                <g id="Rectangle-341">
+                    <use fill="#3E6486" fill-rule="evenodd" sketch:type="MSShapeGroup" transform="translate(25.500000, 50.000000) rotate(-26.000000) translate(-25.500000, -50.000000) " xlink:href="#path-2"></use>
+                    <use fill="none" xlink:href="#path-2"></use>
+                </g>
+                <rect id="Rectangle-342" fill-opacity="0.188377491" fill="#6A6969" sketch:type="MSShapeGroup" x="2" y="41" width="74" height="4"></rect>
+                <rect id="Rectangle-349" fill="#929292" sketch:type="MSShapeGroup" x="2" y="61" width="74" height="17"></rect>
+                <rect id="Rectangle-344" fill="#B86F6F" sketch:type="MSShapeGroup" x="58" y="63" width="5" height="14"></rect>
+                <rect id="Rectangle-345" fill="#AEAEAE" sketch:type="MSShapeGroup" x="64" y="63" width="5" height="14"></rect>
+                <rect id="Rectangle-346" fill="#5580A8" sketch:type="MSShapeGroup" x="70" y="63" width="5" height="14"></rect>
+                <rect id="Rectangle-348" fill-opacity="0.188377491" fill="#6A6969" sketch:type="MSShapeGroup" x="2" y="61" width="74" height="4"></rect>
+                <rect id="Rectangle-355" fill="#929292" sketch:type="MSShapeGroup" x="2" y="82" width="74" height="17"></rect>
+                <rect id="Rectangle-350" fill="#B86F6F" sketch:type="MSShapeGroup" x="3" y="84" width="5" height="14"></rect>
+                <rect id="Rectangle-351" fill="#666666" sketch:type="MSShapeGroup" x="9" y="84" width="5" height="14"></rect>
+                <rect id="Rectangle-352" fill="#9172A1" sketch:type="MSShapeGroup" x="15" y="84" width="5" height="14"></rect>
+                <rect id="Rectangle-357" fill="#B86F6F" sketch:type="MSShapeGroup" x="15" y="84" width="5" height="14"></rect>
+                <rect id="Rectangle-353" fill="#AEAEAE" sketch:type="MSShapeGroup" x="21" y="84" width="5" height="14"></rect>
+                <rect id="Rectangle-356" fill="#9172A1" sketch:type="MSShapeGroup" x="27" y="84" width="5" height="14"></rect>
+                <rect id="Rectangle-354" fill-opacity="0.188377491" fill="#6A6969" sketch:type="MSShapeGroup" x="2" y="82" width="74" height="4"></rect>
+                <rect id="Rectangle-331" fill="#909090" sketch:type="MSShapeGroup" x="0" y="0" width="78" height="19"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

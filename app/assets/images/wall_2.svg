@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="23px" height="380px" viewBox="0 0 23 380" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.2.1 (9971) - http://www.bohemiancoding.com/sketch -->
+    <title>wall_2</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="filter-1">
+            <feOffset dx="1" dy="3" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="0" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.278911565   0 0 0 0 0.278911565   0 0 0 0 0.278911565  0 0 0 0.390658967 0" in="shadowBlurOuter1" type="matrix" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="wall_2" sketch:type="MSArtboardGroup" filter="url(#filter-1)" fill="#EEEBCB">
+            <g id="Group-7" sketch:type="MSLayerGroup" transform="translate(11.500000, 188.500000) scale(-1, 1) translate(-11.500000, -188.500000) translate(0.000000, -2.000000)">
+                <path d="M0,0 L0,290 L22,381 L22,91 L0,0 Z" id="Rectangle-310" sketch:type="MSShapeGroup"></path>
+            </g>
+        </g>
+    </g>
+</svg>

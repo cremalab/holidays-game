@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="166px" height="423px" viewBox="0 0 166 423" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.2.1 (9971) - http://www.bohemiancoding.com/sketch -->
+    <title>office_table</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="office_table" sketch:type="MSArtboardGroup">
+            <path d="M0,68 C0,68 0,2.00000001 83,2 C166,1.99999999 166,68 166,68 L166,423 L0,423 L0,68 Z" id="Rectangle-349" fill="#E7CC8F" sketch:type="MSShapeGroup"></path>
+            <rect id="Rectangle-350" fill="#F9F9F9" sketch:type="MSShapeGroup" x="0" y="256" width="166" height="7"></rect>
+            <rect id="Rectangle-351" fill="#F9F9F9" sketch:type="MSShapeGroup" x="0" y="86" width="166" height="7"></rect>
+            <rect id="Rectangle-352" fill="#F9F9F9" sketch:type="MSShapeGroup" transform="translate(83.000000, 173.500000) rotate(-90.000000) translate(-83.000000, -173.500000) " x="0" y="170" width="166" height="7"></rect>
+            <rect id="Rectangle-353" fill="#F9F9F9" sketch:type="MSShapeGroup" transform="translate(83.000000, 345.500000) rotate(-90.000000) translate(-83.000000, -345.500000) " x="0" y="342" width="166" height="7"></rect>
+            <rect id="Rectangle-438" fill="#00F54A" sketch:type="MSShapeGroup" transform="translate(42.000000, 160.000000) rotate(37.000000) translate(-42.000000, -160.000000) " x="39" y="157" width="6" height="6"></rect>
+            <rect id="Rectangle-439" fill="#00F54A" sketch:type="MSShapeGroup" transform="translate(62.000000, 220.000000) rotate(83.000000) translate(-62.000000, -220.000000) " x="59" y="217" width="6" height="6"></rect>
+            <rect id="Rectangle-440" fill="#FF0815" sketch:type="MSShapeGroup" transform="translate(102.000000, 200.000000) rotate(83.000000) translate(-102.000000, -200.000000) " x="99" y="197" width="6" height="6"></rect>
+            <rect id="Rectangle-441" fill="#FF0815" sketch:type="MSShapeGroup" transform="translate(112.000000, 70.000000) rotate(129.000000) translate(-112.000000, -70.000000) " x="109" y="67" width="6" height="6"></rect>
+            <rect id="Rectangle-441" fill="#FF0815" sketch:type="MSShapeGroup" transform="translate(53.956107, 164.201352) rotate(101.000000) translate(-53.956107, -164.201352) " x="50.9561067" y="161.201352" width="6" height="6"></rect>
+            <rect id="Rectangle-441" fill="#F2FE50" sketch:type="MSShapeGroup" transform="translate(49.718660, 152.281340) rotate(129.000000) translate(-49.718660, -152.281340) " x="46.7186601" y="149.28134" width="6" height="6"></rect>
+            <rect id="Rectangle-441" fill="#F2FE50" sketch:type="MSShapeGroup" transform="translate(69.562646, 219.123847) rotate(129.000000) translate(-69.562646, -219.123847) " x="66.5626455" y="216.123847" width="6" height="6"></rect>
+            <rect id="Rectangle-441" fill="#F2FE50" sketch:type="MSShapeGroup" transform="translate(65.343246, 293.123847) rotate(176.000000) translate(-65.343246, -293.123847) " x="62.3432465" y="290.123847" width="6" height="6"></rect>
+            <rect id="Rectangle-446" fill="#00F54A" sketch:type="MSShapeGroup" transform="translate(56.000000, 304.500000) rotate(-73.000000) translate(-56.000000, -304.500000) " x="49" y="300" width="14" height="9"></rect>
+            <rect id="Rectangle-446" fill="#F2FE50" sketch:type="MSShapeGroup" transform="translate(108.000000, 175.500000) rotate(-106.000000) translate(-108.000000, -175.500000) " x="101" y="171" width="14" height="9"></rect>
+            <g id="Rectangle-449-+-Rectangle-450-+-Rectangle-448" sketch:type="MSLayerGroup" transform="translate(103.000000, 124.500000) rotate(17.000000) translate(-103.000000, -124.500000) translate(102.000000, 116.000000)">
+                <rect id="Rectangle-449" fill="#FF0815" sketch:type="MSShapeGroup" x="0" y="0" width="2" height="12"></rect>
+                <rect id="Rectangle-450" fill="#FF0815" sketch:type="MSShapeGroup" x="0" y="5" width="2" height="12"></rect>
+                <rect id="Rectangle-448" fill="#FFFFFF" sketch:type="MSShapeGroup" x="0" y="3" width="2" height="12"></rect>
+            </g>
+            <g id="Rectangle-449-+-Rectangle-450-+-Rectangle-449" sketch:type="MSLayerGroup" transform="translate(62.000000, 56.000000)">
+                <rect id="Rectangle-449" fill="#00F54A" sketch:type="MSShapeGroup" x="0" y="0" width="2" height="12"></rect>
+                <rect id="Rectangle-450" fill="#00F54A" sketch:type="MSShapeGroup" x="0" y="5" width="2" height="12"></rect>
+                <rect id="Rectangle-448" fill="#FFFFFF" sketch:type="MSShapeGroup" x="0" y="3" width="2" height="12"></rect>
+            </g>
+            <g id="Rectangle-449-+-Rectangle-450-+-Rectangle-450" sketch:type="MSLayerGroup" transform="translate(103.000000, 304.500000) rotate(-45.000000) translate(-103.000000, -304.500000) translate(102.000000, 296.000000)">
+                <rect id="Rectangle-449" fill="#0873FF" sketch:type="MSShapeGroup" x="0" y="0" width="2" height="12"></rect>
+                <rect id="Rectangle-450" fill="#0873FF" sketch:type="MSShapeGroup" x="0" y="5" width="2" height="12"></rect>
+                <rect id="Rectangle-448" fill="#FFFFFF" sketch:type="MSShapeGroup" x="0" y="3" width="2" height="12"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

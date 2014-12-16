@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="47px" height="70px" viewBox="0 0 47 70" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.2.1 (9971) - http://www.bohemiancoding.com/sketch -->
+    <title>container</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="container" sketch:type="MSArtboardGroup">
+            <rect id="Rectangle-368" fill="#E5C994" sketch:type="MSShapeGroup" x="0" y="0" width="47" height="70"></rect>
+            <rect id="Rectangle-369" fill="#CBB17F" sketch:type="MSShapeGroup" x="0" y="20" width="47" height="50"></rect>
+            <rect id="Rectangle-370" fill="#DDD5C6" sketch:type="MSShapeGroup" x="2" y="24" width="43" height="17"></rect>
+            <rect id="Rectangle-371" fill="#DDD5C6" sketch:type="MSShapeGroup" x="2" y="46" width="43" height="17"></rect>
+            <rect id="Rectangle-372" fill="#957F55" sketch:type="MSShapeGroup" x="2" y="67" width="43" height="3"></rect>
+            <rect id="Rectangle-373" fill="#A5A5A5" sketch:type="MSShapeGroup" x="17" y="30" width="12" height="2"></rect>
+            <rect id="Rectangle-374" fill="#A5A5A5" sketch:type="MSShapeGroup" x="17" y="52" width="12" height="2"></rect>
+        </g>
+    </g>
+</svg>

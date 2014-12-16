@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="47px" height="297px" viewBox="0 0 47 297" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.2.1 (9971) - http://www.bohemiancoding.com/sketch -->
+    <title>counter</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="counter" sketch:type="MSArtboardGroup">
+            <path d="M4,24 L9,2 L10,277.5 L4,297 L4,24 Z" id="Rectangle-346" stroke="#979797" fill="#CEECB3" sketch:type="MSShapeGroup"></path>
+            <path d="M9,1.5 L47,1.5 L47,277.5 L9,277.5 L9,1.5 Z" id="Rectangle-344" stroke="#979797" fill="#F5F1C9" sketch:type="MSShapeGroup"></path>
+            <path d="M9,276.5 L47,276.5 L42,296.5 L4,296.5 L9,276.5 Z" id="Rectangle-345" stroke="#979797" fill="#CEECB3" sketch:type="MSShapeGroup"></path>
+            <rect id="Rectangle-409" fill="#FCFCFC" sketch:type="MSShapeGroup" x="13" y="190" width="30" height="60" rx="5"></rect>
+            <rect id="Rectangle-411" fill="#DDDDDD" sketch:type="MSShapeGroup" x="16" y="223" width="24" height="24" rx="5"></rect>
+            <rect id="Rectangle-412" fill="#DDDDDD" sketch:type="MSShapeGroup" x="16" y="192" width="24" height="24" rx="5"></rect>
+            <path d="M39.5,219.5 C39.5,219.5 39.5,215.5 38,213.5 C36.5,211.5 30,205 30,205 L30,209.031129" id="Path-37" stroke="#ACAAAA" stroke-width="2" stroke-linejoin="round" sketch:type="MSShapeGroup"></path>
+            <rect id="Rectangle-412" fill="#959595" sketch:type="MSShapeGroup" x="28" y="90" width="11" height="23"></rect>
+            <rect id="Rectangle-414" fill="#959595" sketch:type="MSShapeGroup" transform="translate(34.500000, 86.000000) rotate(-47.000000) translate(-34.500000, -86.000000) " x="34" y="82" width="1" height="8"></rect>
+            <path d="M23,90 C23,90 28.75,88 31,88 L39,88 L39,95 L28,95 C26.75,95 23,94 23,94 L23,90 Z" id="Rectangle-413" fill="#616161" sketch:type="MSShapeGroup"></path>
+        </g>
+    </g>
+</svg>
