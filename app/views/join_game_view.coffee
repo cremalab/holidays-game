@@ -6,7 +6,6 @@ template = require './templates/join_game'
 module.exports = class JoinGameView extends Modal
   template: template
   autoRender: true
-  className: 'modal'
   tagName: 'form'
   noClose: true
 

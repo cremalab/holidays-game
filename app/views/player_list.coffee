@@ -1,5 +1,4 @@
 CollectionView = require './collection_view'
-PlayerListView = require './player_list_view'
 Avatar = require './avatar'
 
 
