@@ -313,8 +313,6 @@ module.exports = [
   src: "images/fridge.png"
   x: 1125
   y: 50
-<<<<<<< HEAD
-=======
   proximity:
     radius: 60
     onEnter: (item, options) ->
@@ -328,13 +326,31 @@ module.exports = [
     keys:
       action: ->
         EventBroker.publishEvent 'reactor:act', 'team_photo'
->>>>>>> FETCH_HEAD
 ,
   id: "wall"
   src: "images/wall.png"
   x: 1630
   zIndex: 10
   y: 285
+,
+  id: "door"
+  src: "images/door.png"
+  x: 1780
+  zIndex: 50
+  y: 315
+  proximity:
+    radius: 10
+    onEnter: (item, options) ->
+      hint =
+        obstruction: item
+        text: "[Interact] Knock on the door?"
+        id: "bathroom_hint"
+      EventBroker.publishEvent 'navi:hint', hint
+    onLeave: ->
+      EventBroker.publishEvent 'navi:dismiss_hint', "bathroom_hint"
+    keys:
+      action: ->
+        EventBroker.publishEvent 'reactor:act', 'bathroom_photo'
 ,
   id: "wall_2"
   src: "images/wall_2.png"
@@ -402,19 +418,40 @@ module.exports = [
   src: "images/Lamp_1_flip.png"
   x: 920
   y: 680
-  ghosty: true
+  proximity:
+    radius: 60
+    onEnter: (item, options) ->
+      console.log item
+      console.log options
+      EventBroker.publishEvent 'reactor:act', 'lamp_light_flip', item
+    onLeave: (item, options) ->
+      EventBroker.publishEvent 'reactor:act', "lamp_light_flip", item
 ,
   id: "Lamp3"
   src: "images/Lamp_1_flip.png"
   x: 190
   y: 400
-  ghosty: true
+  proximity:
+    radius: 60
+    onEnter: (item, options) ->
+      console.log item
+      console.log options
+      EventBroker.publishEvent 'reactor:act', 'lamp_light_flip', item
+    onLeave: (item, options) ->
+      EventBroker.publishEvent 'reactor:act', "lamp_light_flip", item
 ,
   id: "Lamp4"
   src: "images/Lamp_1.png"
   x: 270
   y: 800
-  ghosty: true
+  proximity:
+    radius: 60
+    onEnter: (item, options) ->
+      console.log item
+      console.log options
+      EventBroker.publishEvent 'reactor:act', 'lamp_light', item
+    onLeave: (item, options) ->
+      EventBroker.publishEvent 'reactor:act', "lamp_light", item
 ,
   id: "ipad"
   src: "images/ipad.png"
@@ -452,11 +489,106 @@ module.exports = [
   src: "images/dan.png"
   x: 390
   y: 70
+  proximity:
+    radius: 60
+    onEnter: (item, options) ->
+      hint =
+        obstruction: item
+        text: "Go Jayhawks!"
+        id: "dan_talk"
+      EventBroker.publishEvent 'navi:hint', hint
+    onLeave: ->
+      EventBroker.publishEvent 'navi:dismiss_hint', "dan_talk"
 ,
   id: "george"
   src: "images/george.png"
   x: 1070
   y: 1170
+  proximity:
+    radius: 60
+    onEnter: (item, options) ->
+      hint =
+        obstruction: item
+        text: "Don't recreate the moon!"
+        id: "george_talk"
+      EventBroker.publishEvent 'navi:hint', hint
+    onLeave: ->
+      EventBroker.publishEvent 'navi:dismiss_hint', "george_talk"
+,
+  id: "nate"
+  src: "images/nate.png"
+  x: 120
+  y: 520
+  proximity:
+    radius: 60
+    onEnter: (item, options) ->
+      hint =
+        obstruction: item
+        text: "Invite your friends to the party!"
+        id: "nate_talk"
+      EventBroker.publishEvent 'navi:hint', hint
+    onLeave: ->
+      EventBroker.publishEvent 'navi:dismiss_hint', "nate_talk"
+,
+  id: "rob"
+  src: "images/rob.png"
+  x: 1520
+  y: 120
+  proximity:
+    radius: 60
+    onEnter: (item, options) ->
+      hint =
+        obstruction: item
+        text: "Did you bring any food?"
+        id: "rob_talk"
+      EventBroker.publishEvent 'navi:hint', hint
+    onLeave: ->
+      EventBroker.publishEvent 'navi:dismiss_hint', "rob_talk"
+,
+  id: "ross"
+  src: "images/ross.png"
+  x: 1450
+  y: 900
+  proximity:
+    radius: 60
+    onEnter: (item, options) ->
+      hint =
+        obstruction: item
+        text: "Leave me alone! I'm working!"
+        id: "ross_talk"
+      EventBroker.publishEvent 'navi:hint', hint
+    onLeave: ->
+      EventBroker.publishEvent 'navi:dismiss_hint', "ross_talk"
+,
+  id: "deric"
+  src: "images/deric.png"
+  x: 380
+  y: 1170
+  proximity:
+    radius: 60
+    onEnter: (item, options) ->
+      hint =
+        obstruction: item
+        text: "We hope you and your family have a great holiday season!"
+        id: "deric_talk"
+      EventBroker.publishEvent 'navi:hint', hint
+    onLeave: ->
+      EventBroker.publishEvent 'navi:dismiss_hint', "deric_talk"
+,
+  id: "kelly"
+  src: "images/kelly.png"
+  x: 1410
+  y: 580
+  proximity:
+    radius: 60
+    onEnter: (item, options) ->
+      hint =
+        obstruction: item
+        text: "Welcome to our space. Come back anytime!"
+        id: "kelly_talk"
+      EventBroker.publishEvent 'navi:hint', hint
+    onLeave: ->
+      EventBroker.publishEvent 'navi:dismiss_hint', "kelly_talk"
 ,
   id: "present21"
   src: "images/present_32.png"
