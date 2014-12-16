@@ -58,8 +58,8 @@ module.exports = class Activist
     for item in @actionableItems
       if item.current_player_within_proximity
         av_proxy = 
-          width: 30
-          height: 30
+          width: 10
+          height: 10
         if @landscaper.avatarOverlaps(av_proxy, item, x - @landscaper.map.offset_x, y - @landscaper.map.offset_y)
           e.preventDefault()
           e.stopPropagation()
