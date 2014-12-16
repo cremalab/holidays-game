@@ -600,19 +600,36 @@ module.exports = [
   src: "images/present_2.png"
   x: 1560
   y: 645
-  ghosty: true
 ,
   id: "present23"
   src: "images/present_2.png"
   x: 940
   y: 425
-  ghosty: true
+  proximity:
+    radius: 60
+    onEnter: (item, options) ->
+      hint =
+        obstruction: item
+        text: "Ross wants a new guitar!"
+        id: "ross_present"
+      EventBroker.publishEvent 'navi:hint', hint
+    onLeave: ->
+      EventBroker.publishEvent 'navi:dismiss_hint', "ross_present"
 ,
   id: "present24"
   src: "images/present_31.png"
-  x: 990
+  x: 995
   y: 515
-  ghosty: true
+  proximity:
+    radius: 60
+    onEnter: (item, options) ->
+      hint =
+        obstruction: item
+        text: "Rob wants the new Call of Duty!"
+        id: "rob_present"
+      EventBroker.publishEvent 'navi:hint', hint
+    onLeave: ->
+      EventBroker.publishEvent 'navi:dismiss_hint', "rob_present"
 ,
   id: "present1"
   src: "images/present_1.png"
@@ -636,7 +653,16 @@ module.exports = [
   src: "images/present_21.png"
   x: 925
   y: 805
-  ghosty: true
+  proximity:
+    radius: 60
+    onEnter: (item, options) ->
+      hint =
+        obstruction: item
+        text: "Deric wants more Sriracha sauce!"
+        id: "deric_present"
+      EventBroker.publishEvent 'navi:hint', hint
+    onLeave: ->
+      EventBroker.publishEvent 'navi:dismiss_hint', "deric_present"
 ,
   id: "present4"
   src: "images/present_3.png"
@@ -657,7 +683,16 @@ module.exports = [
   zIndex: 100
   x: 803
   y: 68
-  ghosty: true
+  proximity:
+    radius: 60
+    onEnter: (item, options) ->
+      hint =
+        obstruction: item
+        text: "George wants shoes as cool as Bishop's!"
+        id: "george_present"
+      EventBroker.publishEvent 'navi:hint', hint
+    onLeave: ->
+      EventBroker.publishEvent 'navi:dismiss_hint', "george_present"
 ,
   id: "present26"
   src: "images/present_22.png"
@@ -671,7 +706,16 @@ module.exports = [
   zIndex: 1000
   x: 195
   y: 798
-  ghosty: true
+  proximity:
+    radius: 60
+    onEnter: (item, options) ->
+      hint =
+        obstruction: item
+        text: "Matt wants a new messenger bag!"
+        id: "matt_present"
+      EventBroker.publishEvent 'navi:hint', hint
+    onLeave: ->
+      EventBroker.publishEvent 'navi:dismiss_hint', "matt_present"
 ,
   id: "present51"
   src: "images/present_21.png"
@@ -691,23 +735,80 @@ module.exports = [
   y: 895
   ghosty: true
 ,
+  id: "present72"
+  src: "images/present_31.png"
+  x: 415
+  y: 910
+  proximity:
+    radius: 60
+    onEnter: (item, options) ->
+      hint =
+        obstruction: item
+        text: "Michael wants an iPad air 2!"
+        id: "michael_present"
+      EventBroker.publishEvent 'navi:hint', hint
+    onLeave: ->
+      EventBroker.publishEvent 'navi:dismiss_hint', "michael_present"
+,
   id: "present71"
   src: "images/present_22.png"
   x: 205
   y: 895
-  ghosty: true
+  proximity:
+    radius: 60
+    onEnter: (item, options) ->
+      hint =
+        obstruction: item
+        text: "Bishop wants an iPhone 6+!"
+        id: "bishop_present"
+      EventBroker.publishEvent 'navi:hint', hint
+    onLeave: ->
+      EventBroker.publishEvent 'navi:dismiss_hint', "bishop_present"
 ,
   id: "present8"
   src: "images/present_35.png"
   x: 1015
-  y: 745
-  ghosty: true
+  y: 785
+  proximity:
+    radius: 60
+    onEnter: (item, options) ->
+      hint =
+        obstruction: item
+        text: "John wants something purple!"
+        id: "john_present"
+      EventBroker.publishEvent 'navi:hint', hint
+    onLeave: ->
+      EventBroker.publishEvent 'navi:dismiss_hint', "john_present"
+,
+  id: "present81"
+  src: "images/present_32.png"
+  x: 1015
+  y: 635
+  proximity:
+    radius: 60
+    onEnter: (item, options) ->
+      hint =
+        obstruction: item
+        text: "Kelly wants more shoes!"
+        id: "kelly_present"
+      EventBroker.publishEvent 'navi:hint', hint
+    onLeave: ->
+      EventBroker.publishEvent 'navi:dismiss_hint', "kelly_present"
 ,
   id: "present9"
   src: "images/present_33.png"
   x: 430
   y: 410
-  ghosty: true
+  proximity:
+    radius: 60
+    onEnter: (item, options) ->
+      hint =
+        obstruction: item
+        text: "Dan wants KU basketball tickets!"
+        id: "dan_present"
+      EventBroker.publishEvent 'navi:hint', hint
+    onLeave: ->
+      EventBroker.publishEvent 'navi:dismiss_hint', "dan_present"
 ,
   id: "present11"
   src: "images/present_2.png"
