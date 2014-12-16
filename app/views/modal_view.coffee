@@ -12,7 +12,6 @@ module.exports = class ModalView extends View
     mediator.game_state = 'modal'
     unless @noClose
       @closeButton = document.createElement 'a'
-      @closeButton.innerHTML = "&times;"
       @el.querySelector('.modal-content-box').appendChild(@closeButton)
       @closeButton.setAttribute('href', '#')
       @closeButton.className = 'close'
