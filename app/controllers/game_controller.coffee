@@ -33,8 +33,6 @@ module.exports = class GameController
     @setupPlayer()
 
     @subscribeEvent 'addPlayer', @addPlayer
-    @subscribeEvent 'editPlayer', => 
-      @promptPlayerName(true)
     @createPlayerList()
     mediator.game_state = 'playing'
 
