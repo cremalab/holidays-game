@@ -470,7 +470,19 @@ module.exports = [
   src: "images/ipad.png"
   x: 435
   y: 515
-  ghosty: true
+  proximity:
+    radius: 60
+    onEnter: (item, options) ->
+      hint = 
+        obstruction: item
+        text: "[Interact] Start the dance party"
+        id: "disco_hint"
+      EventBroker.publishEvent 'navi:hint', hint
+    onLeave: ->
+      EventBroker.publishEvent 'navi:dismiss_hint', "disco_hint"
+    keys:
+      action: ->
+        EventBroker.publishEvent 'reactor:act', 'disco'
 ,
   id: "ipad2"
   src: "images/ipad.png"

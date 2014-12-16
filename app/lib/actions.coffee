@@ -17,6 +17,7 @@ module.exports =
         className: 'modal'
         template: require 'views/templates/bathroom_photo'
         autoRender: true
+    if @audio.paused
       mediator.game_state = 'modal'
   lamp_light: (map, options) ->
     item= options[0]
@@ -36,3 +37,20 @@ module.exports =
       else
         item.img.setAttribute('src', '/images/Lamp_2_flip.png')
         item.lamp_on = true
+  disco: (map) ->
+    if !@audio
+      @audio = new Audio('https://s3.amazonaws.com/cremalab/disco.mp3')
+    
+    if @audio.paused
+      map.el.classList.add 'disco-time'
+      map.discoMode = true
+      @audio.play()
+      @audio.addEventListener('ended', ->
+        this.currentTime = 0
+        this.play()
+      , false)
+    else
+      map.el.classList.remove 'disco-time'
+      map.discoMode = false
+      @audio.currentTime = 0
+      @audio.pause()
