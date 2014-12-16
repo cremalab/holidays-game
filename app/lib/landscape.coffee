@@ -590,6 +590,21 @@ module.exports = [
     onLeave: ->
       EventBroker.publishEvent 'navi:dismiss_hint', "kelly_talk"
 ,
+  id: "John"
+  src: "images/john.png"
+  x: 820
+  y: 1180
+  proximity:
+    radius: 60
+    onEnter: (item, options) ->
+      hint =
+        obstruction: item
+        text: "Life's a garden... Dig it!"
+        id: "john_talk"
+      EventBroker.publishEvent 'navi:hint', hint
+    onLeave: ->
+      EventBroker.publishEvent 'navi:dismiss_hint', "john_talk"
+,
   id: "present21"
   src: "images/present_32.png"
   x: 1470
