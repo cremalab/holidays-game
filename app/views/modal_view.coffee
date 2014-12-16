@@ -1,13 +1,15 @@
 View     = require 'views/view'
 mediator = require 'lib/mediator'
+template = require './templates/modal'
 
 module.exports = class ModalView extends View
-  initialize: (options) ->
-    if options and options.template
-      @template = options.template
+  template: template
+  className: 'modal'
+  initialize: ->
     super
   render: ->
     super
+    mediator.game_state = 'modal'
     unless @noClose
       @closeButton = document.createElement 'a'
       @closeButton.innerHTML = "&times;"
