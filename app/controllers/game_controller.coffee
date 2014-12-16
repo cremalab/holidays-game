@@ -14,12 +14,14 @@ EditAvatarView = require 'views/edit_avatar_view'
 AutoPilot      = require 'lib/autopilot'
 Navi           = require 'lib/navi'
 Reactor        = require 'lib/reactor'
+Eggs           = require 'lib/easter_eggs'
+Konami         = require 'lib/konami'
 utils          = require 'lib/utils'
 
 module.exports = class GameController
   Backbone.utils.extend @prototype, EventBroker
   players: []
-  multiplayer: true
+  multiplayer: false
   snow: false
   trails: false
   customNames: true
@@ -99,6 +101,8 @@ module.exports = class GameController
 
 
   createPlayerAvatar: (player) ->
+    joke = new Konami Eggs.comic_sans
+    joke.load()
     avatar = new Avatar
       model: player
     avatar.autopilot = new AutoPilot(avatar, @mapView)
@@ -118,6 +122,7 @@ module.exports = class GameController
     if @clickToNavigate
       @mapView.addTouchEvents(avatar, 'click')
     @setupGameMenu()
+
 
   addPlayer: (uuid, data) ->
     if data

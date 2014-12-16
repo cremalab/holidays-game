@@ -90,9 +90,10 @@ module.exports = class Avatar extends View
       @trigger('playerMove', player, @)
 
   handleKeyDown: (e) =>
-    e.stopPropagation()
+    console.log e.keyCode
     unless mediator.game_state is 'modal'
       if @isMovementKey(e) and @activeMovementKeys.indexOf(e.keyCode) < 0
+        e.stopPropagation()
         @addActiveMovementKey e.keyCode
 
         unless @moving or @movementLoop
