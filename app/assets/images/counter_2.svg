@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="377px" height="73px" viewBox="0 0 377 73" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.2.1 (9971) - http://www.bohemiancoding.com/sketch -->
+    <title>counter_2</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="counter_2" sketch:type="MSArtboardGroup">
+            <path d="M0,0 L377,0 L377,25.5 L372.5,73 L0,73 L0,0 Z" id="Rectangle-425" stroke="#979797" fill="#CEECB3" sketch:type="MSShapeGroup"></path>
+            <rect id="Rectangle-426" stroke="#979797" fill="#F5F1CA" sketch:type="MSShapeGroup" x="0" y="0" width="377" height="26"></rect>
+            <rect id="Rectangle-427" fill="#AAC492" sketch:type="MSShapeGroup" x="4" y="29" width="64" height="17"></rect>
+            <rect id="Rectangle-428" fill="#AAC492" sketch:type="MSShapeGroup" x="4" y="51" width="64" height="17"></rect>
+            <rect id="Rectangle-429" stroke="#979797" fill="#D8D8D8" sketch:type="MSShapeGroup" x="27" y="35" width="15" height="2"></rect>
+            <rect id="Rectangle-430" stroke="#979797" fill="#D8D8D8" sketch:type="MSShapeGroup" x="27" y="57" width="15" height="2"></rect>
+            <rect id="Rectangle-434" fill="#AAC492" sketch:type="MSShapeGroup" x="78" y="29" width="64" height="17"></rect>
+            <rect id="Rectangle-431" fill="#AAC492" sketch:type="MSShapeGroup" x="78" y="51" width="64" height="17"></rect>
+            <rect id="Rectangle-432" stroke="#979797" fill="#D8D8D8" sketch:type="MSShapeGroup" x="101" y="35" width="15" height="2"></rect>
+            <rect id="Rectangle-433" stroke="#979797" fill="#D8D8D8" sketch:type="MSShapeGroup" x="101" y="57" width="15" height="2"></rect>
+            <rect id="Rectangle-435" stroke="#979797" fill="#D8D8D8" sketch:type="MSShapeGroup" x="151" y="25" width="65" height="48"></rect>
+            <rect id="Rectangle-436" stroke="#979797" fill="#D8D8D8" sketch:type="MSShapeGroup" x="151" y="25" width="65" height="7"></rect>
+            <rect id="Rectangle-437" stroke="#979797" fill="#FFB16A" sketch:type="MSShapeGroup" x="176" y="25" width="15" height="7"></rect>
+            <path d="M162,33.5 C162,33.5 179,38.5 204,33.5" id="Path-38" stroke="#979797" sketch:type="MSShapeGroup"></path>
+        </g>
+    </g>
+</svg>
