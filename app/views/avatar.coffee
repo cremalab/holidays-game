@@ -245,7 +245,6 @@ module.exports = class Avatar extends View
       return @model.set('orientation', 4)
     if cl.contains('dir-down')
       if @isShiftKeyDown()
-        console.log('opposite')
         return @model.set('orientation', 4)
       return @model.set('orientation', 0)
     if cl.contains('dir-right')

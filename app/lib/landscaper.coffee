@@ -7,7 +7,7 @@ module.exports = class Landscaper
   constructor: (options) ->
     @map = options.map
   init: ->
-    @activist = new Activist
+    @activist = new Activist(@)
     for obstruction in @landscape
       if obstruction.hasOwnProperty 'src'
         svg = @createObstructionGraphic(obstruction)
@@ -193,6 +193,5 @@ module.exports = class Landscaper
     aRightOfB = x > b.right
     aBelowB   = y > b.bottom
     aAboveB   = (y + a.height) < b.top
-
 
     return !( aLeftOfB || aRightOfB || aAboveB || aBelowB )
