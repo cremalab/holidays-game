@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="185px" height="70px" viewBox="0 0 185 70" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.2.1 (9971) - http://www.bohemiancoding.com/sketch -->
+    <title>long cabinet</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="42" height="41"></rect>
+        <rect id="path-3" x="0" y="0" width="42" height="41"></rect>
+        <rect id="path-5" x="0" y="0" width="42" height="41"></rect>
+        <rect id="path-7" x="0" y="0" width="42" height="41"></rect>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="long-cabinet" sketch:type="MSArtboardGroup">
+            <rect id="Rectangle-375" fill="#797979" sketch:type="MSShapeGroup" x="0" y="0" width="185" height="70"></rect>
+            <rect id="Rectangle-376" fill="#8D8D8D" sketch:type="MSShapeGroup" x="0" y="0" width="185" height="21"></rect>
+            <g id="Rectangle-377-+-Rectangle-379" sketch:type="MSLayerGroup" transform="translate(6.000000, 24.000000)">
+                <mask id="mask-2" sketch:name="Rectangle 377" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <use id="Rectangle-377" stroke="#5D5B98" stroke-width="3" fill="#ADB2E0" sketch:type="MSShapeGroup" xlink:href="#path-1"></use>
+                <rect id="Rectangle-378" fill="#797979" sketch:type="MSShapeGroup" mask="url(#mask-2)" x="5" y="16" width="2" height="7"></rect>
+                <rect id="Rectangle-379" opacity="0.410389459" fill="#FFFFFF" sketch:type="MSShapeGroup" mask="url(#mask-2)" x="7" y="-8" width="3" height="35">
+                    <g transform="translate(8.500000, 9.500000) rotate(-315.000000) translate(-8.500000, -9.500000) "></g>
+                </rect>
+            </g>
+            <g id="Rectangle-377-+-Rectangle-380" sketch:type="MSLayerGroup" transform="translate(67.000000, 44.500000) scale(-1, 1) translate(-67.000000, -44.500000) translate(46.000000, 24.000000)">
+                <mask id="mask-4" sketch:name="Rectangle 377" fill="white">
+                    <use xlink:href="#path-3"></use>
+                </mask>
+                <use id="Rectangle-377" stroke="#5D5B98" stroke-width="3" fill="#ADB2E0" sketch:type="MSShapeGroup" xlink:href="#path-3"></use>
+                <rect id="Rectangle-380" opacity="0.410389459" fill="#FFFFFF" sketch:type="MSShapeGroup" mask="url(#mask-4)" x="0" y="15" width="3" height="35">
+                    <g transform="translate(1.500000, 32.500000) rotate(-45.000000) translate(-1.500000, -32.500000) "></g>
+                </rect>
+                <rect id="Rectangle-381" opacity="0.410389459" fill="#FFFFFF" sketch:type="MSShapeGroup" mask="url(#mask-4)" x="10" y="-4" width="3" height="75">
+                    <g transform="translate(11.500000, 33.500000) rotate(-45.000000) translate(-11.500000, -33.500000) "></g>
+                </rect>
+                <rect id="Rectangle-378" fill="#797979" sketch:type="MSShapeGroup" mask="url(#mask-4)" x="5" y="16" width="2" height="7"></rect>
+            </g>
+            <g id="Rectangle-377-+-Rectangle-382" sketch:type="MSLayerGroup" transform="translate(97.000000, 24.000000)">
+                <mask id="mask-6" sketch:name="Rectangle 377" fill="white">
+                    <use xlink:href="#path-5"></use>
+                </mask>
+                <use id="Rectangle-377" stroke="#5D5B98" stroke-width="3" fill="#ADB2E0" sketch:type="MSShapeGroup" xlink:href="#path-5"></use>
+                <rect id="Rectangle-378" fill="#797979" sketch:type="MSShapeGroup" mask="url(#mask-6)" x="5" y="16" width="2" height="7"></rect>
+                <rect id="Rectangle-379" opacity="0.410389459" fill="#FFFFFF" sketch:type="MSShapeGroup" mask="url(#mask-6)" x="7" y="-8" width="3" height="35">
+                    <g transform="translate(8.500000, 9.500000) rotate(-315.000000) translate(-8.500000, -9.500000) "></g>
+                </rect>
+            </g>
+            <g id="Rectangle-377-+-Rectangle-381" sketch:type="MSLayerGroup" transform="translate(158.000000, 44.500000) scale(-1, 1) translate(-158.000000, -44.500000) translate(137.000000, 24.000000)">
+                <mask id="mask-8" sketch:name="Rectangle 377" fill="white">
+                    <use xlink:href="#path-7"></use>
+                </mask>
+                <use id="Rectangle-377" stroke="#5D5B98" stroke-width="3" fill="#ADB2E0" sketch:type="MSShapeGroup" xlink:href="#path-7"></use>
+                <rect id="Rectangle-380" opacity="0.410389459" fill="#FFFFFF" sketch:type="MSShapeGroup" mask="url(#mask-8)" x="0" y="15" width="3" height="35">
+                    <g transform="translate(1.500000, 32.500000) rotate(-45.000000) translate(-1.500000, -32.500000) "></g>
+                </rect>
+                <rect id="Rectangle-381" opacity="0.410389459" fill="#FFFFFF" sketch:type="MSShapeGroup" mask="url(#mask-8)" x="10" y="-4" width="3" height="75">
+                    <g transform="translate(11.500000, 33.500000) rotate(-45.000000) translate(-11.500000, -33.500000) "></g>
+                </rect>
+                <rect id="Rectangle-378" fill="#797979" sketch:type="MSShapeGroup" mask="url(#mask-8)" x="5" y="16" width="2" height="7"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

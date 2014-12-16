@@ -1,34 +1,48 @@
 .modal
-  content ''
-  display block
   position fixed
+  top 0
+  right 0
+  bottom 0
+  left 0
+  overflow auto
+  overflow-x hidden
+  -webkit-overflow-scrolling touch
+  z-index 10000
+  background rgba(black, 0.25)
+  transform translate3d(0,0,0)
+
+.modal-wrap
   width 100%
   height 100%
-  background rgba(black, 0.25)
-  z-index 1000
   display table
-  img
-    max-width 100%
+  text-align center
   
 .modal-content
+  @extend .pad-5
   display table-cell
   vertical-align middle
   text-align center
+  
+  .field-label 
+    @media max-medium
+      text-align left
 
 .modal-content-box
-  @extend .pad-2, .nest-3
+  @extend .pad-1, .nest-2
   @extend $rounded
   display inline-block
   background white
   position relative
   width 100%
-  max-width 28em
+  max-width 30em
   box-shadow 0 0.15em 0.15em 0.25em rgba(black, 0.05)
   
   .close
-    @extend .speech-bubble .close
-    top 0
-    right 1.5em
+    top 0.5em
+    right 0.5em
+    
+  .modal.sub-intro &
+    max-width 40em
   
 .avatar-holder
   .avatar

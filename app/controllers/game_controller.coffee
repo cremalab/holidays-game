@@ -6,6 +6,7 @@ Players        = require 'models/players'
 PlayerList     = require 'views/player_list'
 Avatar         = require 'views/avatar'
 DrawingCanvas  = require 'views/drawing_canvas'
+IntroView      = require 'views/intro_view'
 Trailblazer    = require 'models/trailblazer'
 Weather        = require 'lib/weather'
 Notifier       = require 'models/notifier'
@@ -31,10 +32,10 @@ module.exports = class GameController
     @setupMap()
     @setupCanvas()
     @setupPlayer()
+    @setupSidebar()
 
     @subscribeEvent 'addPlayer', @addPlayer
-    @subscribeEvent 'editPlayer', => 
-      @promptPlayerName(true)
+    @subscribeEvent 'triggerIntro', @intro
     @createPlayerList()
     mediator.game_state = 'playing'
 
@@ -65,20 +66,23 @@ module.exports = class GameController
       active: true
       id: Date.now()
 
+    view = @intro()
+    @mapView.listenTo view, 'dispose', => 
+      @drawOrPromptAvatar()
     if @multiplayer
       @notifier.connect mediator.current_player, (channel) =>
         channel = channel.split("players_")[1]
-        # document.getElementById("room_name").innerHTML = channel
-
-        if mediator.current_player.get('name')
-          return @createPlayerAvatar(mediator.current_player)
-        else
-          if @customNames
-            @promptPlayerName()
-          else
-            @createPlayerAvatar(mediator.current_player)
     else
       @createPlayerAvatar(mediator.current_player)
+
+  drawOrPromptAvatar: ->
+    if mediator.current_player.get('name')
+      return @createPlayerAvatar(mediator.current_player)
+    else
+      if @customNames
+        @promptPlayerName()
+      else
+        @createPlayerAvatar(mediator.current_player)
 
   promptPlayerName: (editing) ->
     player = mediator.current_player
@@ -152,3 +156,14 @@ module.exports = class GameController
     editAvatarButton.addEventListener 'click', (e) =>
       e.preventDefault()
       @promptPlayerName(true)
+
+  intro: ->
+    view = new IntroView
+      container: document.body
+    return view
+
+  setupSidebar: ->
+    logo = document.querySelector('.sidebar-brand')
+    logo.addEventListener 'click', =>
+      @publishEvent('triggerIntro')
+

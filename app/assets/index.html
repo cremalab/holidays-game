@@ -6,7 +6,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Example brunch application</title>
+  <title>Cremalab</title>
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
   <link rel="stylesheet" href="stylesheets/app.css">
   <script src="https://cdn.pubnub.com/pubnub.min.js"></script>
@@ -19,7 +19,7 @@
   <!-- MENU -->
   <div class="sidebar">
     <div class="sidebar-brand">
-      <img src="images/cremalab_icon.svg" alt="">
+      <img src="images/crema-christmas-logo.svg" alt="Cremalab Christmas Logo">
     </div>
     <div id='game-settings'></div>
     <div class="sidebar-playerList" id='player_list'>
@@ -31,6 +31,18 @@
   <div id='map'></div>
   <!-- END MAP -->
 
+  <div class="keysHints">
+    <div class="hint">
+      <strong>Move</strong> 
+      <span class="val">&uarr;</span>
+      <span class="val">&rarr;</span>
+      <span class="val">&darr;</span>
+      <span class="val">&larr;</span>
+    </div>
+    <div class="hint"><strong>Reverse</strong> <span class="val">SHIFT</span></div>
+    <div class="hint"><strong>Message</strong> <span class="val">ENTER</span></div>
+    <div class="hint"><strong>Interact</strong> <span class="val">SPACEBAR</span></div>
+  </div>
   <!-- SNOW -->
   <canvas id="snowCanvas" width="500" height="500"></canvas>
   <!-- END SNOW -->

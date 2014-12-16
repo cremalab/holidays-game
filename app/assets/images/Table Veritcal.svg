@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="87px" height="260px" viewBox="0 0 87 260" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.2.1 (9971) - http://www.bohemiancoding.com/sketch -->
+    <title>Table Veritcal</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M13,0 L10,0 L0,25 L4,25 L13.2,2 L33,2 L33,0 L13,0 Z" id="path-1"></path>
+        <path d="M13,0 L10,0 L0,25 L4,25 L13.2,2 L33,2 L33,0 L13,0 Z" id="path-3"></path>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Table-Veritcal" sketch:type="MSArtboardGroup">
+            <rect id="Rectangle-314" fill="#E7CC8F" sketch:type="MSShapeGroup" transform="translate(42.999999, 115.000000) rotate(-270.000000) translate(-42.999999, -115.000000) " x="-72.0000014" y="80" width="230" height="70"></rect>
+            <rect id="Rectangle-360" fill="#D4BB81" sketch:type="MSShapeGroup" x="8" y="230" width="70" height="5"></rect>
+            <path id="Path-41" stroke="#979797" sketch:type="MSShapeGroup" d="M9.5,260 C9.5,260 12.5,232.5 30,232.5"></path>
+            <g id="Rectangle-361-+-Rectangle-365" sketch:type="MSLayerGroup" transform="translate(10.000000, 235.000000)">
+                <mask id="mask-2" sketch:name="Rectangle 361" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <use id="Rectangle-361" fill="#DBDBDB" sketch:type="MSShapeGroup" xlink:href="#path-1"></use>
+                <rect id="Rectangle-365" fill-opacity="0.41332654" fill="#504E4E" sketch:type="MSShapeGroup" mask="url(#mask-2)" x="4" y="0" width="31" height="10"></rect>
+            </g>
+            <g id="Rectangle-361-+-Rectangle-366" sketch:type="MSLayerGroup" transform="translate(59.500000, 247.500000) scale(-1, 1) translate(-59.500000, -247.500000) translate(43.000000, 235.000000)">
+                <mask id="mask-4" sketch:name="Rectangle 361" fill="white">
+                    <use xlink:href="#path-3"></use>
+                </mask>
+                <use id="Rectangle-361" fill="#DBDBDB" sketch:type="MSShapeGroup" xlink:href="#path-3"></use>
+                <rect id="Rectangle-365" fill-opacity="0.41332654" fill="#504E4E" sketch:type="MSShapeGroup" mask="url(#mask-4)" x="4" y="0" width="31" height="10"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

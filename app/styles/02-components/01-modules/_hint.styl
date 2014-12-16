@@ -1,3 +1,13 @@
+.keysHints
+  position absolute
+  bottom 1em
+  right 1em
+  z-index 10
+  width 100%
+  text-align right
+  .hint
+    display inline-block
+    
 .hint
   max-width 15em
   padding .5em
@@ -8,3 +18,11 @@
   text-align center
   border-radius 5px
   color #222
+  pointer-events none
+  .val
+    color white
+    background #bbb
+    display inline-block
+    border-radius .2em
+    padding 0 .5em
+    box-shadow .1em -.1em 0 #aaa, .2em -.2em 0 #aaa

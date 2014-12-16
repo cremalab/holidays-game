@@ -38,8 +38,6 @@ module.exports = class Avatar extends View
       @template = options.template
     @soulless = options.soulless
     super
-    unless @soulless
-      @listenTo @model, "change:x_position change:y_position change:orientation", @broadCastMove
     @listenTo @model, "change:avatar-gender change:avatar-hat change:avatar-hair change:avatar-skin change:avatar-coat change:avatar-pants", @updateLook
     @listenTo @model, "dispose", @dispose
     @listenTo @model, "change:z-plane", @updateZIndex
@@ -47,13 +45,15 @@ module.exports = class Avatar extends View
     unless @model.isCurrentPlayer()
       @listenTo @model, "change:moving", =>
         @setMovementClasses()
+    unless @soulless
+      @listenTo @model, "change:x_position change:y_position change:orientation", @broadCastMove
+      @listenTo @, "availableDirectionsUpdated", @updatePosition
+      @chatterbox = new ChatterBox
+        player: @model
+        avatar: @
 
     @listenTo @model, "change:orientation", @orient
     @listenTo @model, "change:name", @setName
-    @chatterbox = new ChatterBox
-      player: @model
-      avatar: @
-    @listenTo @, "availableDirectionsUpdated", @updatePosition
 
   render: ->
     super
@@ -245,7 +245,6 @@ module.exports = class Avatar extends View
       return @model.set('orientation', 4)
     if cl.contains('dir-down')
       if @isShiftKeyDown()
-        console.log('opposite')
         return @model.set('orientation', 4)
       return @model.set('orientation', 0)
     if cl.contains('dir-right')

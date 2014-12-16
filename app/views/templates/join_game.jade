@@ -5,75 +5,76 @@
 - var hat_colors   = [ '0', '1', '2', '3', '4', '5', '6', '7', '8']
 - var pants_colors = [ '0', '1', '2', '3', '4' ]
 
-.modal-content
-  .modal-content-box
-    form
-      h2 Customize Avatar
-      input#player_name(name="name" type="text" placeholder="What's your name?")
-      .grid.spaced.align-middle: .grid-items
-        .col
-          .field.sub-colorPicker
-            .grid.align-middle.spaced: .grid-items
-              .row
-                .col
-                  .field-label Gender:
-                .col
-                  .field-input
-                    .colorPicker
-                      each gender in genders
-                        - var pickerId = "avatar-gender"
-                        input(type='radio' name=pickerId value=gender id=pickerId + "-" + gender)
-                        label(for=pickerId + "-" + gender, class=pickerId + "-" + gender)= gender
-              .row
-                .col
-                  .field-label Hat:
-                .col
-                  .field-input
-                    .colorPicker
-                      each color in hat_colors
-                        - var pickerId = "avatar-hat"
-                        input(type='radio' name=pickerId value=pickerId + "-" + color id=pickerId + "-" + color)
-                        label(for=pickerId + "-" + color, class=pickerId + "-" + color)
-              .row
-                .col
-                  .field-label Hair:
-                .col
-                  .field-input
-                    .colorPicker
-                      each color in hair_colors
-                        - var pickerId = "avatar-hair"
-                        input(type='radio' name=pickerId value=pickerId + "-" + color id=pickerId + "-" + color)
-                        label(for=pickerId + "-" + color, class=pickerId + "-" + color)
-              .row
-                .col
-                  .field-label Skin:
-                .col
-                  .field-input
-                    .colorPicker
-                      each color in skin_colors
-                        - var pickerId = "avatar-skin"
-                        input(type='radio' name=pickerId value=pickerId + "-" + color id=pickerId + "-" + color)
-                        label(for=pickerId + "-" + color, class=pickerId + "-" + color)
-              .row
-                .col
-                  .field-label Coat:
-                .col
-                  .field-input
-                    .colorPicker
-                      each color in hat_colors
-                        - var pickerId = "avatar-coat"
-                        input(type='radio' name=pickerId value=pickerId + "-" + color id=pickerId + "-" + color)
-                        label(for=pickerId + "-" + color, class=pickerId + "-" + color)
-              .row
-                .col
-                  .field-label Pants:
-                .col
-                  .field-input
-                    .colorPicker
-                      each color in hat_colors
-                        - var pickerId = "avatar-pants"
-                        input(type='radio' name=pickerId value=pickerId + "-" + color id=pickerId + "-" + color)
-                        label(for=pickerId + "-" + color, class=pickerId + "-" + color)
-        .col.nest-reset.avatar-holder
+.modal-wrap
+  .modal-content
+    .modal-content-box
+      form
+        h2 Customize Avatar
+        input#player_name(name="name" type="text" placeholder="What's your name?")
+        .grid.spaced.align-middle.break-max-medium: .grid-items
+          .col
+            .field.sub-colorPicker
+              .grid.align-middle.spaced.break-max-medium: .grid-items
+                .row
+                  .col
+                    .field-label Gender:
+                  .col
+                    .field-input
+                      .colorPicker
+                        each gender in genders
+                          - var pickerId = "avatar-gender"
+                          input(type='radio' name=pickerId value=gender id=pickerId + "-" + gender)
+                          label(for=pickerId + "-" + gender, class=pickerId + "-" + gender)= gender
+                .row
+                  .col
+                    .field-label Hat:
+                  .col
+                    .field-input
+                      .colorPicker
+                        each color in hat_colors
+                          - var pickerId = "avatar-hat"
+                          input(type='radio' name=pickerId value=pickerId + "-" + color id=pickerId + "-" + color)
+                          label(for=pickerId + "-" + color, class=pickerId + "-" + color)
+                .row
+                  .col
+                    .field-label Hair:
+                  .col
+                    .field-input
+                      .colorPicker
+                        each color in hair_colors
+                          - var pickerId = "avatar-hair"
+                          input(type='radio' name=pickerId value=pickerId + "-" + color id=pickerId + "-" + color)
+                          label(for=pickerId + "-" + color, class=pickerId + "-" + color)
+                .row
+                  .col
+                    .field-label Skin:
+                  .col
+                    .field-input
+                      .colorPicker
+                        each color in skin_colors
+                          - var pickerId = "avatar-skin"
+                          input(type='radio' name=pickerId value=pickerId + "-" + color id=pickerId + "-" + color)
+                          label(for=pickerId + "-" + color, class=pickerId + "-" + color)
+                .row
+                  .col
+                    .field-label Coat:
+                  .col
+                    .field-input
+                      .colorPicker
+                        each color in hat_colors
+                          - var pickerId = "avatar-coat"
+                          input(type='radio' name=pickerId value=pickerId + "-" + color id=pickerId + "-" + color)
+                          label(for=pickerId + "-" + color, class=pickerId + "-" + color)
+                .row
+                  .col
+                    .field-label Pants:
+                  .col
+                    .field-input
+                      .colorPicker
+                        each color in hat_colors
+                          - var pickerId = "avatar-pants"
+                          input(type='radio' name=pickerId value=pickerId + "-" + color id=pickerId + "-" + color)
+                          label(for=pickerId + "-" + color, class=pickerId + "-" + color)
+          .col.nest-reset.avatar-holder
 
-      button.sub-width-full Join the party!
+        button.sub-width-full Join the party!

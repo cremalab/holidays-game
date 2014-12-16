@@ -117,4 +117,5 @@ module.exports = class MapView extends View
       avatar.stopMovement()
       x = e.touches[0].clientX - (avatar.width /2)
       y = e.touches[0].clientY - (avatar.height/2)
+      @publishEvent 'map:interact', e, x, y
       avatar.travelToPoint(x,y)

@@ -8,8 +8,8 @@ module.exports = class Reactor
     @map     = mapView
     @players = players
     @actions = actions
-    @subscribeEvent 'reactor:act', (actionName) =>
-      @actions[actionName](@map)
+    @subscribeEvent 'reactor:act', (actionName, options...) =>
+      @actions[actionName](@map, options)
 
 
 
