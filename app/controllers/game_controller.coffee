@@ -20,7 +20,7 @@ utils          = require 'lib/utils'
 module.exports = class GameController
   Backbone.utils.extend @prototype, EventBroker
   players: []
-  multiplayer: false
+  multiplayer: true
   snow: false
   trails: false
   customNames: true
@@ -62,8 +62,8 @@ module.exports = class GameController
     mediator.current_player = new Player(attrs)
     mediator.current_player.set
       orientation: 1
-      x_position: 600
-      y_position: 200
+      x_position: 968
+      y_position: 1384
       active: true
       id: Date.now()
 
@@ -121,6 +121,7 @@ module.exports = class GameController
     if @clickToNavigate
       @mapView.addTouchEvents(avatar, 'click')
     @setupGameMenu()
+    @mapView.centerMapOn(player.get('x_position'), player.get('y_position'), 0, 20)
 
   addPlayer: (uuid, data) ->
     if data

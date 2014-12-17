@@ -100,11 +100,25 @@ module.exports = class MapView extends View
 
     @repositionMap(@offset_x, @offset_y, animate)
 
+  centerMapOn: (x, y, offset_x, offset_y) ->
+    viewportCenterX = @viewport.right/2
+    viewportCenterY = @viewport.bottom/2
+
+    @offset_x = @offset_x - (x - viewportCenterX - 150) # minus sidebar width
+    @offset_y = @offset_y - (y - viewportCenterY)
+    if Math.abs(@offset_y - (y - viewportCenterY)) >= @height
+      @offset_y = -(y - @viewport.bottom - (@viewport_padding/1.6))
+
+    if Math.abs(@offset_x - (x - viewportCenterX)) >= @width
+      @offset_x = -(x - @viewport.right - (@viewport_padding/1.6))
+
+    @repositionMap(@offset_x, @offset_y)
+
+
   repositionMap: (left, top, animate) ->
     if animate
       @el.addEventListener "transitionend", @removeTransition, @
       @el.style.transition = 'all .5s'
-
     @el.style.webkitTransform = "translate3d(#{left}px, #{top}px, 0)"
     @el.style.MozTransform = "translate3d(#{left}px, #{top}px, 0)"
 
