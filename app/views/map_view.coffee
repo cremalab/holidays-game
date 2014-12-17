@@ -6,7 +6,7 @@ transition_events = 'transitionend webkitTransitionEnd oTransitionEnd otransitio
 module.exports = class MapView extends View
   template: template
   className: "map"
-  viewport_padding: 150
+  viewport_padding: 300
   offset_x: 0
   offset_y: 0
   width: 2002
@@ -16,6 +16,9 @@ module.exports = class MapView extends View
 
   initialize: ->
     super
+    if (navigator.userAgent.match(/iPhone/i)) or (navigator.userAgent.match(/iPod/i))
+      @mobile = true
+      @viewport_padding = 150
     @landscaper = new Landscaper
       map: @
     @subscribeEvent 'map:pan_to_player', @panToPlayerPosition
