@@ -148,7 +148,6 @@ module.exports = class Avatar extends View
     @el.style.webkitTransform = "translate3d(#{@model.position()}, 0)"
     @el.style.MozTransform = "translate3d(#{@model.position()}, 0)"
     @el.style.transform = "translate3d(#{@model.position()}, 0)"
-    console.log(@el.style)
 
   addActiveMovementKey: (key) ->
     if @activeMovementKeys.indexOf(key) < 0

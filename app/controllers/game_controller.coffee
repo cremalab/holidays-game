@@ -1,4 +1,5 @@
 MapView        = require 'views/map_view'
+DJView         = require 'views/dj_view'
 mediator       = require 'lib/mediator'
 EventBroker    = require 'lib/event_broker'
 Player         = require 'models/player'
@@ -29,6 +30,7 @@ module.exports = class GameController
   constructor: ->
     @players = new Players []
     @notifier = new Notifier
+    @setupDJ()
     @setupMap()
     @setupCanvas()
     @setupPlayer()
@@ -36,21 +38,26 @@ module.exports = class GameController
 
     @subscribeEvent 'addPlayer', @addPlayer
     @subscribeEvent 'triggerIntro', @intro
+    @subscribeEvent 'togglePlayback', ->
+      @DJ.togglePlayback()
     @createPlayerList()
     mediator.game_state = 'playing'
-    EventBroker.publishEvent 'reactor:act', 'playSoundtrack'
 
   setupMap: ->
     @mapView = new MapView
       className: 'map'
       el: document.getElementById("map")
       autoRender: true
+    @mapView.DJ = @DJ
     mediator = mediator
 
     @reactor = new Reactor(@mapView, @players)
     @nav     = new Navi(@mapView)
 
     Weather.snow('snowCanvas') if @snow
+
+  setupDJ: ->
+    @DJ = new DJView
 
   setupCanvas: ->
     @canvas = new DrawingCanvas
@@ -167,4 +174,10 @@ module.exports = class GameController
     logo = document.querySelector('.sidebar-brand')
     logo.addEventListener 'click', =>
       @publishEvent('triggerIntro')
+
+    muteToggle = document.querySelector('.sidebar-muteToggle')
+    muteToggle.addEventListener 'click', (e) =>
+      e.preventDefault()
+      @publishEvent('togglePlayback')
+      muteToggle.classList.toggle('sub-mutted')
 
