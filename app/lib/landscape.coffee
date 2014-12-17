@@ -521,7 +521,7 @@ module.exports = [
     onEnter: (item, options) ->
       hint =
         obstruction: item
-        text: "Don't recreate the moon!"
+        text: "Welcome to Cremalab! Try and find the hidden disco mode!"
         id: "george_talk"
       EventBroker.publishEvent 'navi:hint', hint
     onLeave: ->
