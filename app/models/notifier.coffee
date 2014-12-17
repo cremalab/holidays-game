@@ -6,6 +6,7 @@ module.exports = class Notifier extends Model
   connect: (player, onConnect) ->
     @player = player
     @PN = PUBNUB.init
+      # Be cool with these keys, developer dudes
       publish_key: 'pub-c-7f96182e-eed7-46dd-9b72-80d838427d8e',
       subscribe_key: 'sub-c-b9f703c2-7109-11e4-aacc-02ee2ddab7fe'
       uuid: player.get('id')
