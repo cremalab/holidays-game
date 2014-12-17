@@ -44,6 +44,7 @@ module.exports =
   playSoundtrack: ->
     @soundtrack  = new Audio('https://s3.amazonaws.com/cremalab/bit-shifter-let-it-snow.mp3')
     @soundtrack.play()
+    @soundtrack.loop = true
 
   disco: (map) ->
     if !@audio
