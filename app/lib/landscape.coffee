@@ -536,11 +536,14 @@ module.exports = [
     onEnter: (item, options) ->
       hint =
         obstruction: item
-        text: "Invite your friends to the party!"
+        text: "[interact] Invite your friends to the party!"
         id: "nate_talk"
       EventBroker.publishEvent 'navi:hint', hint
     onLeave: ->
       EventBroker.publishEvent 'navi:dismiss_hint', "nate_talk"
+    keys:
+      action: ->
+        EventBroker.publishEvent 'reactor:act', 'tweet_friends'
 ,
   id: "rob"
   src: "images/rob.png"

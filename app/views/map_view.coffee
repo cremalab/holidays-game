@@ -75,6 +75,7 @@ module.exports = class MapView extends View
     pan_down  = py > ((@viewport.bottom - @offset_y) - a_height)
     pan_up    = py < (@viewport.top - @offset_y)
 
+    console.log py, @viewport.bottom, @offset_y, a_height
     new_x = @offset_x
     new_y = @offset_y
 

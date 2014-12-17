@@ -37,6 +37,9 @@ module.exports =
       else
         item.img.setAttribute('src', '/images/Lamp_2_flip.png')
         item.lamp_on = true
+  tweet_friends: (map) ->
+    window.open "https://twitter.com/home?status=@cremalab%20developed%20an%20awesome%20holiday%20app%20with%20@brunch,%20@pubnub%20%26%20@github.%20Happy%20Holidays!", "twitter"
+ 
   disco: (map) ->
     if !@audio
       @audio = new Audio('https://s3.amazonaws.com/cremalab/disco.mp3')

@@ -21,6 +21,20 @@
   display inline-block
   text-align center
   transition transform 0.15s linear
+  font-size 1em
+  
+  .body
+    transition font-size 1s
+    font-size 1em
+  .power-up &
+    .body
+      font-size 2em
+    .player-name
+      top 3.8em
+    .speech-bubble
+      bottom 8em
+    &:after
+      top 3em
   
   &.active
     transition none
