@@ -20,7 +20,7 @@ utils          = require 'lib/utils'
 module.exports = class GameController
   Backbone.utils.extend @prototype, EventBroker
   players: []
-  multiplayer: true
+  multiplayer: false
   snow: false
   trails: false
   customNames: true
@@ -73,8 +73,6 @@ module.exports = class GameController
     if @multiplayer
       @notifier.connect mediator.current_player, (channel) =>
         channel = channel.split("players_")[1]
-    else
-      @createPlayerAvatar(mediator.current_player)
 
   drawOrPromptAvatar: ->
     if mediator.current_player.get('name')
