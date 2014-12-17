@@ -362,6 +362,16 @@ module.exports = [
   src: "images/wall3.png"
   x: 1430
   y: 835
+  proximity:
+    radius: 60
+    onEnter: (item) ->
+      hint =
+        obstruction: item
+        text: "[Interact] Scribble on the white board"
+        id: "whiteboard_hint"
+      EventBroker.publishEvent 'navi:hint', hint
+    onLeave: ->
+      EventBroker.publishEvent 'navi:dismiss_hint', "whiteboard_hint"
 ,
   id: "wall_4"
   src: "images/wall4.png"
