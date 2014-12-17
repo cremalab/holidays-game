@@ -401,7 +401,7 @@ module.exports = [
   ghosty: true
 ,
   id: "Lamp"
-  src: "images/Lamp_1.png"
+  src: "images/lamp_1.png"
   x: 990
   y: 380
   zIndex: 400
@@ -415,7 +415,7 @@ module.exports = [
       EventBroker.publishEvent 'reactor:act', "lamp_light", item
 ,
   id: "Lamp2"
-  src: "images/Lamp_1_flip.png"
+  src: "images/lamp_1_flip.png"
   x: 920
   y: 680
   proximity:
@@ -428,7 +428,7 @@ module.exports = [
       EventBroker.publishEvent 'reactor:act', "lamp_light_flip", item
 ,
   id: "Lamp3"
-  src: "images/Lamp_1_flip.png"
+  src: "images/lamp_1_flip.png"
   x: 190
   y: 400
   proximity:
@@ -441,7 +441,7 @@ module.exports = [
       EventBroker.publishEvent 'reactor:act', "lamp_light_flip", item
 ,
   id: "Lamp4"
-  src: "images/Lamp_1.png"
+  src: "images/lamp_1.png"
   x: 270
   y: 800
   proximity:
