@@ -103,6 +103,7 @@ module.exports = class MapView extends View
       @el.style.transition = 'all .5s'
 
     @el.style.webkitTransform = "translate3d(#{left}px, #{top}px, 0)"
+    @el.style.MozTransform = "translate3d(#{left}px, #{top}px, 0)"
 
   removeTransition: ->
     @style.transition = null
