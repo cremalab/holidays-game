@@ -6,7 +6,7 @@ transition_events = 'transitionend webkitTransitionEnd oTransitionEnd otransitio
 module.exports = class MapView extends View
   template: template
   className: "map"
-  viewport_padding: 300
+  viewport_padding: 150
   offset_x: 0
   offset_y: 0
   width: 2002

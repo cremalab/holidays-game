@@ -39,6 +39,10 @@ module.exports =
         item.lamp_on = true
   tweet_friends: (map, options) ->
     window.open options[0], "twitter"
+
+  soundtrack: ->
+    audio = new Audio('https://s3.amazonaws.com/cremalab/bit-shifter-let-it-snow.mp3')
+    audio.play()
  
   disco: (map) ->
     if !@audio
