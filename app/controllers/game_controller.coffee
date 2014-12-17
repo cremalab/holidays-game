@@ -173,9 +173,8 @@ module.exports = class GameController
     logo.addEventListener 'click', =>
       @publishEvent('triggerIntro')
 
-    muteToggle = document.querySelector('.sidebar-muteToggle')
-    muteToggle.addEventListener 'click', (e) =>
-      e.preventDefault()
+    audioToggle = document.querySelector('.audioToggle')
+    audioToggle.addEventListener 'click', =>
       @publishEvent('togglePlayback')
-      muteToggle.classList.toggle('sub-mutted')
+      audioToggle.classList.toggle('sub-muted')
 

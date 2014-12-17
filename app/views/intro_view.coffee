@@ -11,9 +11,9 @@ module.exports = class IntroView extends Modal
     thing = @el.querySelector('.sub-bigRed')
     thing.addEventListener 'click', =>
       @dispose()
-      @publishEvent('togglePlayback')
 
   dispose: ->
     @trigger 'dispose'
+    @publishEvent('togglePlayback')
     super
 
