@@ -543,7 +543,7 @@ module.exports = [
       EventBroker.publishEvent 'navi:dismiss_hint', "nate_talk"
     keys:
       action: ->
-        EventBroker.publishEvent 'reactor:act', 'tweet_friends'
+        EventBroker.publishEvent 'reactor:act', 'tweet_friends', 'https://twitter.com/home?status=@cremalab%20developed%20an%20awesome%20holiday%20app%20with%20@brunch,%20@pubnub%20%26%20@github.%20Happy%20Holidays!'
 ,
   id: "rob"
   src: "images/rob.png"
