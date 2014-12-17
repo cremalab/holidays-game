@@ -1,7 +1,8 @@
-Modal    = require 'views/modal_view'
-mediator = require 'lib/mediator'
+Modal       = require 'views/modal_view'
+mediator    = require 'lib/mediator'
+EventBroker = require 'lib/event_broker'
 
-module.exports = 
+module.exports =
   team_photo: (map) ->
     unless mediator.game_state is 'modal'
       view = new Modal
@@ -40,10 +41,10 @@ module.exports =
   tweet_friends: (map, options) ->
     window.open options[0], "twitter"
 
-  soundtrack: ->
-    audio = new Audio('https://s3.amazonaws.com/cremalab/bit-shifter-let-it-snow.mp3')
-    audio.play()
- 
+  playSoundtrack: ->
+    @soundtrack  = new Audio('https://s3.amazonaws.com/cremalab/bit-shifter-let-it-snow.mp3')
+    @soundtrack.play()
+
   disco: (map) ->
     if !@audio
       @audio = new Audio('https://s3.amazonaws.com/cremalab/disco.mp3')
@@ -52,6 +53,7 @@ module.exports =
       map.el.classList.add 'disco-time'
       map.discoMode = true
       @audio.play()
+      @soundtrack.pause()
       @audio.addEventListener('ended', ->
         this.currentTime = 0
         this.play()
@@ -61,3 +63,4 @@ module.exports =
       map.discoMode = false
       @audio.currentTime = 0
       @audio.pause()
+      @soundtrack.play()

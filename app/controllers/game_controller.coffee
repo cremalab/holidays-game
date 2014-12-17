@@ -38,7 +38,7 @@ module.exports = class GameController
     @subscribeEvent 'triggerIntro', @intro
     @createPlayerList()
     mediator.game_state = 'playing'
-    EventBroker.publishEvent 'reactor:act', 'soundtrack'
+    EventBroker.publishEvent 'reactor:act', 'playSoundtrack'
 
   setupMap: ->
     @mapView = new MapView
