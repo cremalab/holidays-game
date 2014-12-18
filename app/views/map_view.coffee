@@ -18,6 +18,7 @@ module.exports = class MapView extends View
     super
     if !!("ontouchstart" of window) or !!("onmsgesturechange" of window)
       @mobile = true
+      document.body.classList.add('touchDevice')
     @landscaper = new Landscaper
       map: @
     @subscribeEvent 'map:pan_to_player', @panToPlayerPosition

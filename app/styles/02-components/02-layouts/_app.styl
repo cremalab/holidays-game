@@ -26,6 +26,14 @@
   position relative
   width 5em
   z-index 1
+  transform translate3d(0,0,0)
+
+  .touchDevice &
+    *
+      pointer-events none
+    &:active    
+      *
+        pointer-events auto
   
   .scroll
     padding-right 10em
