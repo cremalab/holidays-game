@@ -5,7 +5,7 @@ channel_prefix = "players_"
 module.exports =
   capacity: 50
   findEmptyRoom: (PN, cb) ->
-    @testRoom(PN, 0, cb)
+    @testRoom(PN, 1, cb)
 
   testRoom: (PN, i, cb) ->
     PN.here_now
