@@ -38,8 +38,8 @@ module.exports = class MapView extends View
       doubleTouchStartTimestamp = now
       return
 
-    # if @mobile
-    document.body.removeChild document.getElementById("keysHints")
+    if @mobile
+      document.body.removeChild document.getElementById("keysHints")
 
 
 
