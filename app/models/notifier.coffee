@@ -1,6 +1,7 @@
 mediator = require 'lib/mediator'
 Model    = require 'models/model'
 Escort   = require 'lib/escort'
+Modal    = require 'views/modal_view'
 
 module.exports = class Notifier extends Model
   connect: (player, onConnect) ->
@@ -11,7 +12,7 @@ module.exports = class Notifier extends Model
       subscribe_key: 'sub-c-b9f703c2-7109-11e4-aacc-02ee2ddab7fe'
       uuid: player.get('id')
       heartbeat: 10
-      restore: true
+      restore: false
 
     Escort.findEmptyRoom @PN, (channel_name) =>
       @subscribe(channel_name, onConnect)
@@ -21,6 +22,7 @@ module.exports = class Notifier extends Model
       @subscribeEvent "messages:dismissed", @dismissMessage
       @subscribeEvent "players:name_changed", @setAttrs
       @subscribeEvent "players:avatar_changed", @setAttrs
+      @subscribeEvent "admin:kick", @publishKick
 
       pubnub = @PN
 
@@ -29,6 +31,7 @@ module.exports = class Notifier extends Model
           channel: @channel
 
   subscribe: (channel, onConnect) ->
+    channel = "developers"
     attrs = @player.toJSON()
     delete attrs.active
     @PN.subscribe
@@ -57,6 +60,8 @@ module.exports = class Notifier extends Model
             @publishEvent "messages:received:#{m.uuid}", m
         when 'chat_message_dismissed'
           @publishEvent "messages:dismissed:#{m.uuid}"
+        when 'kick'
+          @removePlayer(m.uuid, true)
 
   handlePlayers: (message, onConnect) ->
     if message.uuids
@@ -86,17 +91,37 @@ module.exports = class Notifier extends Model
     moving      = player.get('moving')
     @setAttrs(player)
 
-  removePlayer: (id) ->
+  removePlayer: (id, kicked) ->
     if mediator.current_player.id is id
       console.log 'unsubscribe'
       @PN.unsubscribe
-        channel: 'players'
+        channel: @channel
+      if kicked
+        @notifyKick(id)
 
   publishMessage: (attributes) ->
     attributes.type = 'chat_message'
     @PN.publish
       channel: @channel
       message: attributes
+
+  publishKick: (uuid) ->
+    attributes =
+      type: 'kick'
+      uuid: uuid
+
+    @PN.publish
+      channel: @channel
+      message: attributes
+
+  notifyKick: (uuid) ->
+    if mediator.current_player.id is uuid
+      console.log 'notify!'
+      new Modal
+        template: require 'views/templates/kick'
+        className: 'modal'
+        container: document.body
+        autoRender: true
 
   dismissMessage: (uuid) ->
     @PN.publish

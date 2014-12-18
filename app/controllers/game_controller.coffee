@@ -16,6 +16,7 @@ EditAvatarView = require 'views/edit_avatar_view'
 AutoPilot      = require 'lib/autopilot'
 Navi           = require 'lib/navi'
 Reactor        = require 'lib/reactor'
+Admin          = require 'lib/admin'
 utils          = require 'lib/utils'
 
 module.exports = class GameController
@@ -35,6 +36,7 @@ module.exports = class GameController
     @setupCanvas()
     @setupPlayer()
     @setupSidebar()
+    @admin = new Admin
 
     @subscribeEvent 'addPlayer', @addPlayer
     @subscribeEvent 'triggerIntro', @intro
