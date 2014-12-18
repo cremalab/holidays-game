@@ -80,6 +80,7 @@ module.exports = class GameController
     if @multiplayer
       @notifier.connect mediator.current_player, (channel) =>
         channel = channel.split("players_")[1]
+        @mapView.setDimensions()
 
   drawOrPromptAvatar: ->
     if mediator.current_player.get('name')

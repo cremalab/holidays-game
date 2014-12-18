@@ -320,6 +320,7 @@ module.exports = [
         obstruction: item
         text: "[Interact] View the curious photo on the fridge"
         id: "fridge_hint"
+        position: 'right'
       EventBroker.publishEvent 'navi:hint', hint
     onLeave: ->
       EventBroker.publishEvent 'navi:dismiss_hint', "fridge_hint"
@@ -463,7 +464,7 @@ module.exports = [
   x: 435
   y: 515
   proximity:
-    radius: 60
+    radius: 100
     onEnter: (item, options) ->
       hint = 
         obstruction: item
