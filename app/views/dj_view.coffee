@@ -27,4 +27,3 @@ module.exports = class DJ extends View
     else
       @audio[@currentTrack].play()
       @isPlaying = true
-    console.log @isPlaying

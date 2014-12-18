@@ -20,10 +20,15 @@ module.exports = class ModalView extends View
       @closeButton.addEventListener 'click', =>
         @dispose()
 
-      window.addEventListener 'keyup', (e) =>
-        if e.keyCode is 27
-          return @dispose()
+      window.addEventListener 'keyup', @checkEsc
+        
+
+  checkEsc: (e) =>
+    if e.keyCode is 27
+      e.stopPropagation()
+      return @dispose()
 
   dispose: ->
     mediator.game_state = 'playing'
+    window.removeEventListener 'keyup', @checkEsc
     super
