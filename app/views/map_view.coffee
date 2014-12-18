@@ -44,11 +44,17 @@ module.exports = class MapView extends View
 
   setDimensions: ->
     @rect = document.body.getClientRects()[0]
-    @viewport_padding = 
-      x: @rect.width * 0.3
-      y: @rect.height * 0.3
+    if @mobile
+      @viewport_padding = 
+        x: @rect.width * 0.5
+        y: @rect.height * 0.45
+    else
+      @viewport_padding = 
+        x: @rect.width * 0.3
+        y: @rect.height * 0.3
+    @sidebarWidth = document.body.querySelector('.sidebar').getClientRects()[0].width
     @viewport =
-      left:   @rect.left + @viewport_padding.x
+      left:   @rect.left + @viewport_padding.x - @sidebarWidth
       top:    @rect.top + @viewport_padding.y
       right:  @rect.right - @viewport_padding.x
       bottom: @rect.bottom - @viewport_padding.y
@@ -139,7 +145,7 @@ module.exports = class MapView extends View
   addTouchEvents: (avatar, event_name) ->
     @el.addEventListener event_name, (e) =>
       avatar.stopMovement()
-      x = e.touches[0].clientX - (avatar.width /2)
+      x = e.touches[0].clientX - @sidebarWidth - (avatar.width /2)
       y = e.touches[0].clientY - (avatar.height/2)
       @publishEvent 'map:interact', e, x, y
       avatar.travelToPoint(x,y)
