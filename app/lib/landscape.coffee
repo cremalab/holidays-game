@@ -408,8 +408,6 @@ module.exports = [
   proximity:
     radius: 60
     onEnter: (item, options) ->
-      console.log item
-      console.log options
       EventBroker.publishEvent 'reactor:act', 'lamp_light', item
     onLeave: (item, options) ->
       EventBroker.publishEvent 'reactor:act', "lamp_light", item
@@ -421,8 +419,6 @@ module.exports = [
   proximity:
     radius: 60
     onEnter: (item, options) ->
-      console.log item
-      console.log options
       EventBroker.publishEvent 'reactor:act', 'lamp_light_flip', item
     onLeave: (item, options) ->
       EventBroker.publishEvent 'reactor:act', "lamp_light_flip", item
@@ -434,8 +430,6 @@ module.exports = [
   proximity:
     radius: 60
     onEnter: (item, options) ->
-      console.log item
-      console.log options
       EventBroker.publishEvent 'reactor:act', 'lamp_light_flip', item
     onLeave: (item, options) ->
       EventBroker.publishEvent 'reactor:act', "lamp_light_flip", item
@@ -447,8 +441,6 @@ module.exports = [
   proximity:
     radius: 60
     onEnter: (item, options) ->
-      console.log item
-      console.log options
       EventBroker.publishEvent 'reactor:act', 'lamp_light', item
     onLeave: (item, options) ->
       EventBroker.publishEvent 'reactor:act', "lamp_light", item
