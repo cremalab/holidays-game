@@ -5,6 +5,12 @@ module.exports = class IntroView extends Modal
   template: template
   autoRender: true
   className: 'modal sub-intro'
+  triggerVolume: true
+
+  initialize: (options) ->
+    if options.triggerVolume is false
+      @triggerVolume = false
+    super
 
   render: ->
     super
@@ -14,6 +20,7 @@ module.exports = class IntroView extends Modal
 
   dispose: ->
     @trigger 'dispose'
-    @publishEvent('togglePlayback')
+    if @triggerVolume
+      @publishEvent('togglePlayback')
     super
 
