@@ -14,5 +14,6 @@ module.exports = class IntroView extends Modal
 
   dispose: ->
     @trigger 'dispose'
+    @publishEvent('togglePlayback')
     super
 

@@ -41,27 +41,12 @@ module.exports =
   tweet_friends: (map, options) ->
     window.open options[0], "twitter"
 
-  playSoundtrack: ->
-    @soundtrack  = new Audio('https://s3.amazonaws.com/cremalab/bit-shifter-let-it-snow.mp3')
-    @soundtrack.play()
-    @soundtrack.loop = true
-
   disco: (map) ->
-    if !@audio
-      @audio = new Audio('https://s3.amazonaws.com/cremalab/disco.mp3')
-    
-    if @audio.paused
-      map.el.classList.add 'disco-time'
-      map.discoMode = true
-      @audio.play()
-      @soundtrack.pause()
-      @audio.addEventListener('ended', ->
-        this.currentTime = 0
-        this.play()
-      , false)
+    console.log @
+    classList = map.el.classList
+    if classList.contains('disco-time')
+      classList.remove 'disco-time'
+      map.DJ.playTrack('soundtrack')
     else
-      map.el.classList.remove 'disco-time'
-      map.discoMode = false
-      @audio.currentTime = 0
-      @audio.pause()
-      @soundtrack.play()
+      classList.add 'disco-time'
+      map.DJ.playTrack('disco')
