@@ -98,7 +98,7 @@ module.exports = class MapView extends View
     unless (new_y + @offset_y) >= 0 or Math.abs(py + @viewport_padding) >= @height
       @offset_y = new_y
 
-    @repositionMap(@offset_x, @offset_y, animate)
+    @repositionMap(parseInt(@offset_x), parseInt(@offset_y), animate)
 
   centerMapOn: (x, y, offset_x, offset_y) ->
     viewportCenterX = @viewport.right/2
@@ -111,8 +111,8 @@ module.exports = class MapView extends View
 
     if Math.abs(@offset_x - (x - viewportCenterX)) >= @width
       @offset_x = -(x - @viewport.right - (@viewport_padding/1.6))
-
-    @repositionMap(@offset_x, @offset_y)
+    
+    @repositionMap(parseInt(@offset_x), parseInt(@offset_y))
 
 
   repositionMap: (left, top, animate) ->
