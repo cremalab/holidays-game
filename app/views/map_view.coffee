@@ -16,7 +16,7 @@ module.exports = class MapView extends View
 
   initialize: ->
     super
-    if (navigator.userAgent.match(/iPhone/i)) or (navigator.userAgent.match(/iPod/i))
+    if !!("ontouchstart" of window) or !!("onmsgesturechange" of window)
       @mobile = true
       @viewport_padding = 150
     @landscaper = new Landscaper
@@ -37,6 +37,9 @@ module.exports = class MapView extends View
       event.preventDefault()  if doubleTouchStartTimestamp + 500 > now
       doubleTouchStartTimestamp = now
       return
+
+    # if @mobile
+    document.body.removeChild document.getElementById("keysHints")
 
 
 
