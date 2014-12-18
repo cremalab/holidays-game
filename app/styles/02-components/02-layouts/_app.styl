@@ -1,5 +1,6 @@
 .app
   null
+  
 .app-controls
   @extend .nest-5
   position fixed
@@ -20,8 +21,22 @@
   text-decoration none
   &.sub-twitter
     color #56AEEC
+    
 .app-sidebar
-  overflow auto
+  position relative
+  width 5em
+  z-index 1
+  
+  .scroll
+    padding-right 10em
+    margin-right -10em
+    width auto
+    overflow hidden
+
+  .scroll-pane
+    right -15em
+    padding-right 25em
+  
 .app-map
   position relative
   overflow hidden
