@@ -28,6 +28,10 @@ module.exports = class ChatterBox extends Model
 
   submit: ->
     message = @dialog.el.querySelector("[name='chat_text']").value
+    if message = "/admin"
+      @publishEvent "admin:init"
+      @open = false
+      return @dialog.dispose()
     @open = false
     if message
       @message.set

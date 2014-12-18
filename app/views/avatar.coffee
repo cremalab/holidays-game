@@ -80,6 +80,7 @@ module.exports = class Avatar extends View
     @updateZIndex()
 
   bindEvents: ->
+    @el.addEventListener 'click', @publishClick
     if @model.isCurrentPlayer()
       document.addEventListener 'keydown', @handleKeyDown
       document.addEventListener 'keyup', @handleKeyUp
@@ -325,6 +326,10 @@ module.exports = class Avatar extends View
     if @model
       if parseInt(id) is parseInt(@model.id)
         @dispose()
+
+  publishClick: (e) =>
+    console.log 'click avatar'
+    @publishEvent "clickAvatar", @, @model, e
 
   dispose: ->
     document.removeEventListener 'keydown', @handleKeyDown
