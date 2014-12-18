@@ -165,15 +165,16 @@ module.exports = class GameController
       e.preventDefault()
       @promptPlayerName(true)
 
-  intro: ->
+  intro: (triggerVolume) ->
     view = new IntroView
       container: document.body
+      triggerVolume: triggerVolume
     return view
 
   setupSidebar: ->
     logo = document.querySelector('.sidebar-brand')
     logo.addEventListener 'click', =>
-      @publishEvent('triggerIntro')
+      @publishEvent('triggerIntro', false)
 
     audioToggle = document.querySelector('.audioToggle')
     audioToggle.addEventListener 'click', =>
