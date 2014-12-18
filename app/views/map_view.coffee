@@ -18,7 +18,6 @@ module.exports = class MapView extends View
     super
     if !!("ontouchstart" of window) or !!("onmsgesturechange" of window)
       @mobile = true
-      @viewport_padding = 150
     @landscaper = new Landscaper
       map: @
     @subscribeEvent 'map:pan_to_player', @panToPlayerPosition
@@ -45,11 +44,13 @@ module.exports = class MapView extends View
 
   setDimensions: ->
     @rect = document.body.getClientRects()[0]
+    @viewport_padding = @rect.width * 0.3
     @viewport =
       left:   @rect.left + @viewport_padding
       top:    @rect.top + @viewport_padding
       right:  @rect.right - @viewport_padding
       bottom: @rect.bottom - @viewport_padding
+
 
   spawnPlayer: (player, avatar) ->
     avatar.container = @el
