@@ -24,19 +24,19 @@ module.exports =
     item= options[0]
     if item.img
       if item.lamp_on
-        item.img.setAttribute('src', '/images/lamp_1.png')
+        item.img.setAttribute('src', 'party/images/lamp_1.png')
         item.lamp_on = false
       else
-        item.img.setAttribute('src', '/images/lamp_2.png')
+        item.img.setAttribute('src', 'party/images/lamp_2.png')
         item.lamp_on = true
   lamp_light_flip: (map, options) ->
     item= options[0]
     if item.img
       if item.lamp_on
-        item.img.setAttribute('src', '/images/lamp_1_flip.png')
+        item.img.setAttribute('src', 'party/images/lamp_1_flip.png')
         item.lamp_on = false
       else
-        item.img.setAttribute('src', '/images/lamp_2_flip.png')
+        item.img.setAttribute('src', 'party/images/lamp_2_flip.png')
         item.lamp_on = true
   tweet_friends: (map, options) ->
     window.open options[0], "twitter"
