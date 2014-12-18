@@ -106,7 +106,7 @@ module.exports = class MapView extends View
     # Don't pan if it will reveal beyond the edge of the map
     left_max_pan   = @offset_x - (@viewport_padding.x - a_width)
 
-    unless (new_x + @offset_x) >= 0 or Math.abs(px + @viewport_padding.x) >= @width
+    unless (new_x + @offset_x) >= 0 or Math.abs(px + @viewport_padding.x - @sidebarWidth) >= @width
       @offset_x = new_x
     unless (new_y + @offset_y) >= 0 or Math.abs(py + @viewport_padding.y) >= @height
       @offset_y = new_y
