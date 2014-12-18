@@ -11,7 +11,6 @@ module.exports = class HintView extends View
     @listenTo @model, 'dispose', @dispose
   render: ->
     super
-    console.log @model.get('position')
     setTimeout =>
       @el.style.position = 'absolute'
       rect = @el.getBoundingClientRect()

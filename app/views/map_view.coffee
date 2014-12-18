@@ -47,7 +47,7 @@ module.exports = class MapView extends View
     if @mobile
       @viewport_padding = 
         x: @rect.width * 0.5
-        y: @rect.height * 0.4
+        y: @rect.height * 0.45
     else
       @viewport_padding = 
         x: @rect.width * 0.3
