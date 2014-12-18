@@ -44,12 +44,14 @@ module.exports = class MapView extends View
 
   setDimensions: ->
     @rect = document.body.getClientRects()[0]
-    @viewport_padding = @rect.width * 0.3
+    @viewport_padding = 
+      x: @rect.width * 0.3
+      y: @rect.height * 0.3
     @viewport =
-      left:   @rect.left + @viewport_padding
-      top:    @rect.top + @viewport_padding
-      right:  @rect.right - @viewport_padding
-      bottom: @rect.bottom - @viewport_padding
+      left:   @rect.left + @viewport_padding.x
+      top:    @rect.top + @viewport_padding.y
+      right:  @rect.right - @viewport_padding.x
+      bottom: @rect.bottom - @viewport_padding.y
 
 
   spawnPlayer: (player, avatar) ->
@@ -95,11 +97,11 @@ module.exports = class MapView extends View
       new_y = @rect.top + ((@viewport.bottom - a_height) - py)
 
     # Don't pan if it will reveal beyond the edge of the map
-    left_max_pan   = @offset_x - (@viewport_padding - a_width)
+    left_max_pan   = @offset_x - (@viewport_padding.x - a_width)
 
-    unless (new_x + @offset_x) >= 0 or Math.abs(px + @viewport_padding) >= @width
+    unless (new_x + @offset_x) >= 0 or Math.abs(px + @viewport_padding.x) >= @width
       @offset_x = new_x
-    unless (new_y + @offset_y) >= 0 or Math.abs(py + @viewport_padding) >= @height
+    unless (new_y + @offset_y) >= 0 or Math.abs(py + @viewport_padding.y) >= @height
       @offset_y = new_y
 
     @repositionMap(parseInt(@offset_x), parseInt(@offset_y), animate)
@@ -111,10 +113,10 @@ module.exports = class MapView extends View
     @offset_x = @offset_x - (x - viewportCenterX - 150) # minus sidebar width
     @offset_y = @offset_y - (y - viewportCenterY)
     if Math.abs(@offset_y - (y - viewportCenterY)) >= @height
-      @offset_y = -(y - @viewport.bottom - (@viewport_padding/1.6))
+      @offset_y = -(y - @viewport.bottom - (@viewport_padding.y/1.6))
 
     if Math.abs(@offset_x - (x - viewportCenterX)) >= @width
-      @offset_x = -(x - @viewport.right - (@viewport_padding/1.6))
+      @offset_x = -(x - @viewport.right - (@viewport_padding.x/1.6))
     
     @repositionMap(parseInt(@offset_x), parseInt(@offset_y))
 
