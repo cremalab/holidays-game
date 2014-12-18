@@ -8,7 +8,7 @@ module.exports = class IntroView extends Modal
 
   render: ->
     super
-    thing = @el.querySelector('.sub-bigRed')
+    thing = @el.querySelector('button')
     thing.addEventListener 'click', =>
       @dispose()
 
