@@ -7,11 +7,15 @@ module.exports = class DJ extends View
   tracks:
     'soundtrack': 'https://s3.amazonaws.com/cremalab/bit-shifter-let-it-snow.mp3'
     'disco'     : 'https://s3.amazonaws.com/cremalab/disco.mp3'
+  trackVolumes:
+    'soundtrack': 0.1
+    'disco': 1.0
 
   initialize: ->
     for track in Object.keys @tracks
       @audio[track] = new Audio(@tracks[track])
       @audio[track].loop = true
+      @audio[track].volume = @trackVolumes[track]
     @playTrack(@currentTrack)
 
   playTrack: (track) ->
