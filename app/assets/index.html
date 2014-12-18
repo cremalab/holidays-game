@@ -16,21 +16,28 @@
 </head>
 <body>
 
-  <!-- MENU -->
-  <div class="sidebar">
-    <div class="sidebar-brand">
-      <img src="images/crema-christmas-logo.svg" alt="Cremalab Christmas Logo">
-    </div>
-    <div class="sidebar-audioToggle"><div class="audioToggle"></div></div>
-    <div id='game-settings'></div>
-    <div class="sidebar-playerList" id='player_list'>
+  <div class="grid height-full app">
+    <div class="grid-items app-sidebar">
+      <div class="col min">
+        <!-- MENU -->
+        <div class="sidebar">
+          <div class="sidebar-brand">
+            <img src="images/crema-christmas-logo.svg" alt="Cremalab Christmas Logo">
+          </div>
+          <div class="sidebar-audioToggle"><div class="audioToggle"></div></div>
+          <div id='game-settings'></div>
+          <div class="sidebar-playerList" id='player_list'>
+          </div>
+        </div>
+        <!-- END MENU -->
+      </div>
+      <div class="col app-map">
+        <!-- MAP -->
+        <div id='map'></div>
+        <!-- END MAP -->
+      </div>
     </div>
   </div>
-  <!-- END MENU -->
-
-  <!-- MAP -->
-  <div id='map'></div>
-  <!-- END MAP -->
 
   <div class="keysHints" id="keysHints">
     <div class="hint">
