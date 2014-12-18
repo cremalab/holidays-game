@@ -25,7 +25,7 @@ module.exports = class GameController
   snow: false
   trails: false
   customNames: true
-  clickToNavigate: true
+  clickToNavigate: false
 
   constructor: ->
     @players = new Players []
