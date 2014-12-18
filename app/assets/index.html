@@ -14,9 +14,19 @@
   <script src="javascripts/app.js"></script>
   <script>require('initialize');</script>
 </head>
-<body>
+<body class="app">
 
-  <div class="grid height-full app">
+  <div class="app-controls">
+    <div class="grid spaced align-middle">
+      <div class="grid-items">
+        <div class="col">
+          <div class="app-control"><div class="audioToggle"></div></div>
+        </div>
+        <a class="app-control sub-twitter col" href="https://twitter.com/home?status=Have%20you%20visited%20the%20%23CremaChristmas%20party%20yet?%20@Cremalab%20used%20@PubNub%20@Brunch%20to%20bring%20it%20to%20life.%20Come%20join%20me!%20cremalab.com/party" target="_blank"><span class="icon-twitter"></span></a>
+      </div>
+    </div>
+  </div>
+  <div class="grid height-full">
     <div class="grid-items app-sidebar">
       <div class="col min">
         <!-- MENU -->
@@ -24,7 +34,6 @@
           <div class="sidebar-brand">
             <img src="images/crema-christmas-logo.svg" alt="Cremalab Christmas Logo">
           </div>
-          <div class="sidebar-audioToggle"><div class="audioToggle"></div></div>
           <div id='game-settings'></div>
           <div class="sidebar-playerList" id='player_list'>
           </div>
