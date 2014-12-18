@@ -31,7 +31,6 @@ module.exports = class Notifier extends Model
           channel: @channel
 
   subscribe: (channel, onConnect) ->
-    channel = "developers"
     attrs = @player.toJSON()
     delete attrs.active
     @PN.subscribe
