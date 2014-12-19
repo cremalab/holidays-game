@@ -49,7 +49,6 @@ module.exports = class Activist
     if item.proximity and item.proximity.keys
       if item.proximity.keys.hasOwnProperty('action')
         @actionableItems.push item
-        console.log item.id
 
   handleKeyDown: (e) =>
     switch e.keyCode
