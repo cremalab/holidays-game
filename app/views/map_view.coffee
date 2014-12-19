@@ -21,7 +21,7 @@ module.exports = class MapView extends View
       document.body.classList.add('touchDevice')
     @landscaper = new Landscaper
       map: @
-    @subscribeEvent 'map:pan_to_player', @panToPlayerPosition
+    @subscribeEvent 'map:pan_to_player', @centerMapOn
 
     # Detect Standalone Web App
     isWebApp = window.navigator.standalone
@@ -118,32 +118,42 @@ module.exports = class MapView extends View
 
     @repositionMap(parseInt(@offset_x), parseInt(@offset_y), animate)
 
-  centerMapOn: (x, y, offset_x, offset_y) ->
+  centerMapOn: (x, y, offset_x, offset_y, animate) ->
+    if animate
+      @player_centered = false
     viewportCenterX = @viewport.right/2
     viewportCenterY = @viewport.bottom/2
 
-    @offset_x = @offset_x - (x - viewportCenterX - 150) # minus sidebar width
-    @offset_y = @offset_y - (y - viewportCenterY)
-    if Math.abs(@offset_y - (y - viewportCenterY)) >= @height
-      @offset_y = -(y - @viewport.bottom - (@viewport_padding.y/1.6))
+    new_x = viewportCenterX - x + @sidebarWidth
+    new_y = viewportCenterY - y
 
-    if Math.abs(@offset_x - (x - viewportCenterX)) >= @width
-      @offset_x = -(x - @viewport.right - (@viewport_padding.x/1.6))
+    @offset_x = viewportCenterX - x + @sidebarWidth
+    @offset_y = viewportCenterY - y
     
-    @repositionMap(parseInt(@offset_x), parseInt(@offset_y))
+    if y + @viewport_padding.y >= @height
+      @offset_y = new_y + viewportCenterY + @viewport_padding.y/2 - 21
+    if x + @viewport_padding.x >= @width
+      @offset_x = new_x + viewportCenterX
+    if new_y > 0
+      @offset_y = 0
+    if new_x > 0
+      @offset_x = 0
+    
+    @repositionMap(parseInt(@offset_x), parseInt(@offset_y), animate)
 
 
   repositionMap: (left, top, animate) ->
     if animate
-      @el.addEventListener "transitionend", @removeTransition, @
-      @el.style.transition = 'all .5s'
+      @el.style.transition = 'all .8s'
+      setTimeout =>
+        @removeTransition()
+      , 800
     @el.style.webkitTransform = "translate3d(#{left}px, #{top}px, 0)"
     @el.style.MozTransform = "translate3d(#{left}px, #{top}px, 0)"
     @el.style.transform = "translate3d(#{left}px, #{top}px, 0)"
 
   removeTransition: ->
-    @style.transition = null
-    @removeEventListener('transitionend', @addAnimation)
+    @el.style.transition = null
 
   canMoveTo: (x,y, avatar) ->
     if avatar

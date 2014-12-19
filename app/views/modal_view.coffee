@@ -17,7 +17,8 @@ module.exports = class ModalView extends View
       @el.querySelector('.modal-content-box').appendChild(@closeButton)
       @closeButton.setAttribute('href', '#')
       @closeButton.className = 'close icon-close'
-      @closeButton.addEventListener 'click', =>
+      @closeButton.addEventListener 'click', (e) =>
+        e.preventDefault()
         @dispose()
 
       window.addEventListener 'keyup', @checkEsc
