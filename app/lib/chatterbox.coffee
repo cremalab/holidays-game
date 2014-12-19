@@ -19,6 +19,7 @@ module.exports = class ChatterBox extends Model
 
   openDialog: (content) ->
     @speechBubble.dispose() if @speechBubble
+    @dialog.dispose() if @dialog
     @open = true
     @message = new ChatMessage
       uuid: @get('player').id
