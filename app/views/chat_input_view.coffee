@@ -6,8 +6,12 @@ module.exports = class ChatInputView extends View
   className: 'chat-dialog speech-bubble'
   render: ->
     super
+    @input = @el.querySelector('input')
+    if @model.get('content')
+      @input.addEventListener 'focus', =>
+        @input.value = @model.get('content')
     setTimeout =>
-      @el.querySelector('input').focus()
+      @input.focus()
     , 0
-    @el.querySelector('input').addEventListener 'blur', ->
+    @input.addEventListener 'blur', ->
       window.scrollTo(0, 0)

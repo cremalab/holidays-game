@@ -48,20 +48,22 @@ module.exports = class Avatar extends View
     unless @soulless
       @listenTo @model, "change:x_position change:y_position change:orientation", @broadCastMove
       @listenTo @, "availableDirectionsUpdated", @updatePosition
-      @chatterbox = new ChatterBox
-        player: @model
-        avatar: @
+
+    @chatterbox = new ChatterBox
+      player: @model
+      avatar: @
 
     @listenTo @model, "change:orientation", @orient
     @listenTo @model, "change:name", @setName
 
   render: ->
     super
+    @bindEvents()
     if @soulless
       @orient(@model, 0)
     else
       @positionOnMap()
-      @bindEvents()
+      @bindKeyEvents()
       @el.setAttribute('data-pos', 7)
       setTimeout(=>
         @rect = @el.getClientRects()[0]
@@ -81,6 +83,13 @@ module.exports = class Avatar extends View
 
   bindEvents: ->
     @el.addEventListener 'click', @publishClick
+    @el.querySelector('.player-name')
+      .addEventListener 'click', (e) =>
+        e.stopPropagation()
+        content = "@#{@model.get('name')} "
+        mediator.current_player.trigger 'messages:draft', content
+
+  bindKeyEvents: ->
     if @model.isCurrentPlayer()
       document.addEventListener 'keydown', @handleKeyDown
       document.addEventListener 'keyup', @handleKeyUp

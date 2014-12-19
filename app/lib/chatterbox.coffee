@@ -2,11 +2,13 @@ Model            = require 'models/model'
 ChatInputView    = require 'views/chat_input_view'
 ChatMessage      = require 'models/chat_message'
 SpeechBubbleView = require 'views/speech_bubble_view'
+mediator         = require 'lib/mediator'
 
 module.exports = class ChatterBox extends Model
   initialize: ->
     super
-    @subscribeEvent "messages:received:#{@get('player').id}", @renderSpeechBubble
+    @listenTo @get('player'), 'messages:draft', @draftMessage
+    @subscribeEvent "messages:received:#{@get('player').id}", @checkMessageContent
     @subscribeEvent "messages:dismissed:#{@get('player').id}", @disposeBubble
 
   handleEnter: ->
@@ -15,11 +17,13 @@ module.exports = class ChatterBox extends Model
     else
       @openDialog()
 
-  openDialog: ->
+  openDialog: (content) ->
     @speechBubble.dispose() if @speechBubble
+    @dialog.dispose() if @dialog
     @open = true
     @message = new ChatMessage
       uuid: @get('player').id
+      content: content
     @dialog = new ChatInputView
       container: @get('avatar').el
       autoRender: true
@@ -40,6 +44,20 @@ module.exports = class ChatterBox extends Model
       @renderSpeechBubble(@message)
     @dialog.dispose()
 
+  checkMessageContent: (message) ->
+    if @get('avatar').soulless
+      if @mentionsCurrentPlayer(message)
+        @get('avatar').trigger('messages:focus')
+        @renderSpeechBubble(message)
+      else
+        @disposeBubble()
+    else
+      @renderSpeechBubble(message)
+
+  draftMessage: (message) ->
+    unless @get('avatar').soulless
+      @openDialog(message)
+
   renderSpeechBubble: (message) ->
     unless message instanceof ChatMessage
       message = new ChatMessage(message)
@@ -51,6 +69,17 @@ module.exports = class ChatterBox extends Model
       model: message
       chatterBox: @
     @message = message
+
+  mentionsCurrentPlayer: (message) ->
+    pattern = /\B@[a-z0-9_-]+/g
+    usernames = message.content.toLowerCase().match pattern
+    current_name = mediator.current_player.get('name').toLowerCase()
+    if usernames
+      if usernames.indexOf("@everyone") > -1 or usernames.indexOf("@all") > -1
+        return true
+      for username in usernames
+        if username.replace('@', '').toLowerCase() is current_name
+          return true         
 
   disposeBubble: (local) ->
     @open = false
