@@ -16,9 +16,5 @@ module.exports = class PlayerList extends CollectionView
       template: template
     avatar.el.addEventListener 'click', =>
       @publishEvent "map:pan_to_player", model.get('x_position'), model.get('y_position'), 0, 0, true
-    avatar.subscribeEvent "messages:received:#{model.id}", (message) ->
-      if avatar.chatterbox.mentionsCurrentPlayer(message)
-        avatar.chatterbox.renderSpeechBubble(message)
-      else
-        avatar.chatterbox.disposeBubble()
+
     return avatar
