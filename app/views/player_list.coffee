@@ -15,5 +15,5 @@ module.exports = class PlayerList extends CollectionView
       soulless: true
       template: template
     avatar.el.addEventListener 'click', =>
-      @publishEvent "map:pan_to_player", model, avatar, true
+      @publishEvent "map:pan_to_player", model.get('x_position'), model.get('y_position'), 0, 0, true
     return avatar

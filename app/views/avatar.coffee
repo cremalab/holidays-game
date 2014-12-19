@@ -328,7 +328,6 @@ module.exports = class Avatar extends View
         @dispose()
 
   publishClick: (e) =>
-    console.log 'click avatar'
     @publishEvent "clickAvatar", @, @model, e
 
   dispose: ->
