@@ -17,7 +17,6 @@ This is an experiment for spreading Holiday Cheer at [Cremalab](http://cremalab.
 * [SVG Injector](https://github.com/iconic/SVGInjector) - lets us be lazy and just drop in image tags but still use all of the SVG JavaScript stuff.
 * [ImagesLoaded](https://github.com/desandro/imagesloaded) because sometimes you just gotta know when an images is loaded.
 
-## High-level module definitions
 
 ## Development
 *Please use your own PubNub keys!* PubNub's sandbox dev plan is free and awesome. Keys are set at `app/lib/notifier.coffee:11`.
@@ -27,6 +26,7 @@ This is an experiment for spreading Holiday Cheer at [Cremalab](http://cremalab.
 * `bower install`
 * `npm start`
 
+## High-level module definitions
 ### GameController
 This is where the game is instantiated, the map is set up, and a player is created. There are some experimental features still hanging around in there.
 
