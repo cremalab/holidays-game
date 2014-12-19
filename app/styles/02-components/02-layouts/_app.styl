@@ -7,6 +7,7 @@
   top 1em
   right 1em
   z-index 10
+  
 .app-control
   @extend .pad-6
   border-radius 100px
@@ -29,10 +30,11 @@
   transform translate3d(0,0,0)
 
   .touchDevice &
-    *
+    .scroll
       pointer-events none
-    &:active    
-      *
+    &:active
+    &:hover
+      .scroll
         pointer-events auto
   
   .scroll
