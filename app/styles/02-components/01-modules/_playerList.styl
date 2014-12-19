@@ -54,4 +54,28 @@
       width 0
       height 0
       
-        
+  .speech-bubble
+    z-index auto
+    font-size 0.75rem
+    top 50%
+    bottom auto
+    left 100%
+    transform translate(0.75em, -50%)
+    box-shadow 0 0 20px rgba(black, 0.25)
+  
+    &:after
+      content: ""
+      position: absolute
+      top 50%
+      right 100%
+      left auto
+      transform translateY(-50%)
+      border-style: solid
+      border-width: 8px
+      border-color: transparent white transparent transparent
+      display: block
+      width: 0
+      z-index: 1
+      .playerList &
+        z-index 5000
+          
