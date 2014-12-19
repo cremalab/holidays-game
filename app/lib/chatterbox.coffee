@@ -47,6 +47,7 @@ module.exports = class ChatterBox extends Model
   checkMessageContent: (message) ->
     if @get('avatar').soulless
       if @mentionsCurrentPlayer(message)
+        @get('avatar').trigger('messages:focus')
         @renderSpeechBubble(message)
       else
         @disposeBubble()
