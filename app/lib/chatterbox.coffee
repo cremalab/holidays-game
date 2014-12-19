@@ -73,6 +73,8 @@ module.exports = class ChatterBox extends Model
     usernames = message.content.toLowerCase().match pattern
     current_name = mediator.current_player.get('name').toLowerCase()
     if usernames
+      if usernames.indexOf("@everyone") > -1 or usernames.indexOf("@all")
+        return true
       for username in usernames
         if username.replace('@', '').toLowerCase() is current_name
           return true         
