@@ -7,6 +7,7 @@ mediator         = require 'lib/mediator'
 module.exports = class ChatterBox extends Model
   initialize: ->
     super
+    @listenTo @get('player'), 'messages:draft', @draftMessage
     @subscribeEvent "messages:received:#{@get('player').id}", @checkMessageContent
     @subscribeEvent "messages:dismissed:#{@get('player').id}", @disposeBubble
 
@@ -16,11 +17,12 @@ module.exports = class ChatterBox extends Model
     else
       @openDialog()
 
-  openDialog: ->
+  openDialog: (content) ->
     @speechBubble.dispose() if @speechBubble
     @open = true
     @message = new ChatMessage
       uuid: @get('player').id
+      content: content
     @dialog = new ChatInputView
       container: @get('avatar').el
       autoRender: true
@@ -49,6 +51,10 @@ module.exports = class ChatterBox extends Model
         @disposeBubble()
     else
       @renderSpeechBubble(message)
+
+  draftMessage: (message) ->
+    unless @get('avatar').soulless
+      @openDialog(message)
 
   renderSpeechBubble: (message) ->
     unless message instanceof ChatMessage
