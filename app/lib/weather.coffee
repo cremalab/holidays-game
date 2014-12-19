@@ -1,3 +1,5 @@
+# based off of http://stackoverflow.com/questions/13983764/creating-falling-snow-using-html-5-and-js
+
 flakeCount = 200
 mX = -100
 mY = -100
