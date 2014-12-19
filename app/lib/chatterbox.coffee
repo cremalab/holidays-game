@@ -2,12 +2,15 @@ Model            = require 'models/model'
 ChatInputView    = require 'views/chat_input_view'
 ChatMessage      = require 'models/chat_message'
 SpeechBubbleView = require 'views/speech_bubble_view'
+mediator         = require 'lib/mediator'
 
 module.exports = class ChatterBox extends Model
   initialize: ->
     super
-    @subscribeEvent "messages:received:#{@get('player').id}", @renderSpeechBubble
+    unless @get('avatar').soulless
+      @subscribeEvent "messages:received:#{@get('player').id}", @renderSpeechBubble
     @subscribeEvent "messages:dismissed:#{@get('player').id}", @disposeBubble
+    @current_player_name = mediator.current_player.get('name').toLowerCase()
 
   handleEnter: ->
     if @open
@@ -51,6 +54,14 @@ module.exports = class ChatterBox extends Model
       model: message
       chatterBox: @
     @message = message
+
+  mentionsCurrentPlayer: (message) ->
+    pattern = /\B@[a-z0-9_-]+/g
+    usernames = message.content.match pattern
+    if usernames
+      for username in usernames
+        if username.replace('@', '').toLowerCase() is @current_player_name
+          return true         
 
   disposeBubble: (local) ->
     @open = false
