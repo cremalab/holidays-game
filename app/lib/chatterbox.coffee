@@ -70,7 +70,7 @@ module.exports = class ChatterBox extends Model
 
   mentionsCurrentPlayer: (message) ->
     pattern = /\B@[a-z0-9_-]+/g
-    usernames = message.content.match pattern
+    usernames = message.content.toLowerCase().match pattern
     current_name = mediator.current_player.get('name').toLowerCase()
     if usernames
       for username in usernames
