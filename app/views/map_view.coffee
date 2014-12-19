@@ -23,6 +23,11 @@ module.exports = class MapView extends View
       map: @
     @subscribeEvent 'map:pan_to_player', @panToPlayerPosition
 
+    # Detect Standalone Web App
+    isWebApp = window.navigator.standalone
+    if isWebApp
+      document.body.classList.add('isWebApp')
+
   render: ->
     super
     @setDimensions()
