@@ -32,6 +32,8 @@ module.exports = class GameController
   constructor: ->
     @players = new Players []
     @notifier = mediator.notifier = new Notifier
+    @whiteboard = mediator.whiteboard = new Whiteboard
+      plots: []
     @setupDJ()
     @setupMap()
     @setupCanvas()
@@ -46,8 +48,6 @@ module.exports = class GameController
     @createPlayerList()
     mediator.game_state = 'playing'
 
-    @whiteboard = mediator.whiteboard = new Whiteboard
-      plots: []
 
   setupMap: ->
     @mapView = new MapView

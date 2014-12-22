@@ -5,6 +5,7 @@ mediator       = require 'lib/mediator'
 module.exports = class DrawableWhiteboardView extends WhiteboardView
   Backbone.utils.extend @prototype, Modal
   temp: []
+  template: require 'views/templates/whiteboard'
   render: ->
     super
     mediator.game_state = 'modal'
@@ -33,6 +34,17 @@ module.exports = class DrawableWhiteboardView extends WhiteboardView
       @endDraw(e)
     , false
 
+    @canvas.addEventListener 'touchstart', (e) =>
+      @temp = []
+      @startDraw(e)
+    , false
+    @canvas.addEventListener 'touchmove', (e) =>
+      @draw(e)
+    , false
+    @canvas.addEventListener 'touchend', (e) =>
+      @endDraw(e)
+    , false
+
   draw: (e) ->
     return  unless @isActive
     x = e.offsetX or e.layerX - canvas.offsetLeft
@@ -51,6 +63,7 @@ module.exports = class DrawableWhiteboardView extends WhiteboardView
     arr = @model.get('plots')
     arr.push(@temp)
     @model.set('plots', arr)
+    @model.trigger('draw')
     arr   = []
     mediator.notifier.publish({type: "whiteboard", plots: @model.get('plots')})
     @temp = []

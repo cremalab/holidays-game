@@ -6,6 +6,8 @@
   height 1500px
   transform translate3d(0,0,0)
   background url(../images/Map2.png) no-repeat
+  overflow hidden
+  perspective 400
 
 #drawCanvas
   position absolute
@@ -26,16 +28,20 @@
   position absolute
   transition all .3s
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+.whiteboard.mini 
+  perspective-origin 200% center
+  position fixed
+  perspective 1500
+  top: 835px
+  left: 1620px
+  z-index: 9999
+  canvas
+    transform: rotateX(54deg)
+    width: 113px
+    height: 90px
+    background: white
+    
+#whiteboardCanvas
+  border 1px solid #333
+  
+    
