@@ -61,6 +61,8 @@ module.exports = class Notifier extends Model
           @publishEvent "messages:dismissed:#{m.uuid}"
         when 'kick'
           @removePlayer(m.uuid, true)
+        when 'whiteboard'
+          @publishEvent "whiteboard:draw", m
 
   handlePlayers: (message, onConnect) ->
     if message.uuids
@@ -112,6 +114,11 @@ module.exports = class Notifier extends Model
     @PN.publish
       channel: @channel
       message: attributes
+
+  publish: (data) ->
+    @PN.publish
+      channel: @channel
+      message: data
 
   notifyKick: (uuid) ->
     if mediator.current_player.id is uuid

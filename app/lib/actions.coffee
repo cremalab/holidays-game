@@ -1,6 +1,7 @@
 Modal       = require 'views/modal_view'
 mediator    = require 'lib/mediator'
 EventBroker = require 'lib/event_broker'
+DrawableWhiteboardView  = require 'views/drawable_whiteboard_view'
 
 module.exports =
   team_photo: (map) ->
@@ -49,3 +50,11 @@ module.exports =
     else
       classList.add 'disco-time'
       map.DJ.playTrack('disco')
+
+  whiteboard: ->
+    view = new DrawableWhiteboardView
+      container: document.body
+      className: 'modal'
+      template: require 'views/templates/whiteboard'
+      autoRender: true
+      model: mediator.whiteboard

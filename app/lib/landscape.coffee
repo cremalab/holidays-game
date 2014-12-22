@@ -364,7 +364,7 @@ module.exports = [
   x: 1430
   y: 835
   proximity:
-    radius: 60
+    radius: 100
     onEnter: (item) ->
       hint =
         obstruction: item
@@ -373,6 +373,10 @@ module.exports = [
       EventBroker.publishEvent 'navi:hint', hint
     onLeave: ->
       EventBroker.publishEvent 'navi:dismiss_hint', "whiteboard_hint"
+    keys:
+      action: ->
+        EventBroker.publishEvent 'reactor:act', "whiteboard"
+
 ,
   id: "wall_4"
   src: "images/wall4.png"
