@@ -1,5 +1,7 @@
 button
-  @extend .pad-t-5, .pad-r-2, .pad-b-5, .pad-l-2
+  transition 0.1s ease-in-out
+  transition-property background box-shadow
+  @extend .pad-t-5, .pad-r-3, .pad-b-5, .pad-l-3
   @extend $rounded
   font inherit
   font-weight 500
@@ -7,6 +9,10 @@ button
   border none
   color white
   cursor pointer
+  &:hover
+  &:active
+    background darken(green, 5)
+    outline none
   &.sub-width-full
     width 100%
     
@@ -14,3 +20,12 @@ button
     color red
     border 2px solid
     background none
+    
+  &.sub-bigGreen
+    color green
+    border 2px solid
+    background none
+    &:hover
+    &:active
+      background lighten(green, 60)
+      box-shadow 0 0 0 3px rgba(black, 0.075)

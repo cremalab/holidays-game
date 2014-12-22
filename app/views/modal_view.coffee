@@ -16,14 +16,20 @@ module.exports = class ModalView extends View
       @closeButton = document.createElement 'a'
       @el.querySelector('.modal-content-box').appendChild(@closeButton)
       @closeButton.setAttribute('href', '#')
-      @closeButton.className = 'close'
-      @closeButton.addEventListener 'click', =>
+      @closeButton.className = 'close icon-close'
+      @closeButton.addEventListener 'click', (e) =>
+        e.preventDefault()
         @dispose()
 
-      window.addEventListener 'keyup', (e) =>
-        if e.keyCode is 27
-          return @dispose()
+      window.addEventListener 'keyup', @checkEsc
+        
+
+  checkEsc: (e) =>
+    if e.keyCode is 27
+      e.stopPropagation()
+      return @dispose()
 
   dispose: ->
     mediator.game_state = 'playing'
+    window.removeEventListener 'keyup', @checkEsc
     super

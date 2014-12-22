@@ -320,6 +320,7 @@ module.exports = [
         obstruction: item
         text: "[Interact] View the curious photo on the fridge"
         id: "fridge_hint"
+        position: 'right'
       EventBroker.publishEvent 'navi:hint', hint
     onLeave: ->
       EventBroker.publishEvent 'navi:dismiss_hint', "fridge_hint"
@@ -418,8 +419,6 @@ module.exports = [
   proximity:
     radius: 60
     onEnter: (item, options) ->
-      console.log item
-      console.log options
       EventBroker.publishEvent 'reactor:act', 'lamp_light', item
     onLeave: (item, options) ->
       EventBroker.publishEvent 'reactor:act', "lamp_light", item
@@ -431,8 +430,6 @@ module.exports = [
   proximity:
     radius: 60
     onEnter: (item, options) ->
-      console.log item
-      console.log options
       EventBroker.publishEvent 'reactor:act', 'lamp_light_flip', item
     onLeave: (item, options) ->
       EventBroker.publishEvent 'reactor:act', "lamp_light_flip", item
@@ -444,8 +441,6 @@ module.exports = [
   proximity:
     radius: 60
     onEnter: (item, options) ->
-      console.log item
-      console.log options
       EventBroker.publishEvent 'reactor:act', 'lamp_light_flip', item
     onLeave: (item, options) ->
       EventBroker.publishEvent 'reactor:act', "lamp_light_flip", item
@@ -457,8 +452,6 @@ module.exports = [
   proximity:
     radius: 60
     onEnter: (item, options) ->
-      console.log item
-      console.log options
       EventBroker.publishEvent 'reactor:act', 'lamp_light', item
     onLeave: (item, options) ->
       EventBroker.publishEvent 'reactor:act', "lamp_light", item
@@ -553,7 +546,7 @@ module.exports = [
       EventBroker.publishEvent 'navi:dismiss_hint', "nate_talk"
     keys:
       action: ->
-        EventBroker.publishEvent 'reactor:act', 'tweet_friends', 'https://twitter.com/home?status=@cremalab%20developed%20an%20awesome%20holiday%20app%20with%20@brunch,%20@pubnub%20%26%20@github.%20Happy%20Holidays!'
+        EventBroker.publishEvent 'reactor:act', 'tweet_friends', 'https://twitter.com/home?status=Have%20you%20visited%20the%20%23CremaChristmas%20party%20yet?%20@Cremalab%20used%20@PubNub%20@Brunch%20to%20bring%20it%20to%20life.%20Come%20join%20me!%20cremalab.com/party'
 ,
   id: "rob"
   src: "images/rob.png"

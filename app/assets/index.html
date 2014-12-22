@@ -7,31 +7,56 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <title>Crema-Christmas at Cremalab</title>
-  <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="apple-touch-icon" href="images/crema-christmas-logo.png">
+  <!-- <link rel="apple-touch-startup-image" href="images/crema-christmas-startup.png"> -->
+  <meta name="apple-mobile-web-app-title" content="CremaChristmas">
   <link rel="stylesheet" href="stylesheets/app.css">
   <script src="https://cdn.pubnub.com/pubnub.min.js"></script>
   <script src="javascripts/vendor.js"></script>
   <script src="javascripts/app.js"></script>
   <script>require('initialize');</script>
 </head>
-<body>
-
-  <!-- MENU -->
-  <div class="sidebar">
-    <div class="sidebar-brand">
-      <img src="images/crema-christmas-logo.svg" alt="Cremalab Christmas Logo">
-    </div>
-    <div id='game-settings'></div>
-    <div class="sidebar-playerList" id='player_list'>
+<body class="app">
+  <div class="app-controls">
+    <div class="grid spaced align-middle">
+      <div class="grid-items">
+        <div class="col">
+          <div class="app-control"><div class="audioToggle"></div></div>
+        </div>
+        <a class="app-control sub-twitter col" href="https://twitter.com/home?status=Have%20you%20visited%20the%20%23CremaChristmas%20party%20yet?%20@Cremalab%20used%20@PubNub%20@Brunch%20to%20bring%20it%20to%20life.%20Come%20join%20me!%20cremalab.com/party" target="_blank"><span class="icon-twitter"></span></a>
+      </div>
     </div>
   </div>
-  <!-- END MENU -->
+  <div class="grid height-full">
+    <div class="grid-items">
+      <div class="col app-sidebar">
+        <div class="scroll">
+          <div class="scroll-pane">
+            <!-- MENU -->
+            <div class="sidebar">
+              <div class="sidebar-brand">
+                <img src="images/crema-christmas-logo.svg" alt="Cremalab Christmas Logo">
+              </div>
+              <div id='game-settings'></div>
+              <div class="sidebar-playerList" id='player_list'>
+              </div>
+            </div>
+            <!-- END MENU -->
+          </div>
+        </div>
+      </div>
+      <div class="col app-map">
+        <!-- MAP -->
+        <div id='map'></div>
+        <!-- END MAP -->
+      </div>
+    </div>
+  </div>
 
-  <!-- MAP -->
-  <div id='map'></div>
-  <!-- END MAP -->
-
-  <div class="keysHints">
+  <div class="keysHints" id="keysHints">
     <div class="hint">
       <strong>Move</strong> 
       <span class="val">&uarr;</span>

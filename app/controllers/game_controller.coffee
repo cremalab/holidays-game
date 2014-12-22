@@ -1,4 +1,5 @@
 MapView        = require 'views/map_view'
+DJView         = require 'views/dj_view'
 mediator       = require 'lib/mediator'
 EventBroker    = require 'lib/event_broker'
 Player         = require 'models/player'
@@ -15,12 +16,13 @@ EditAvatarView = require 'views/edit_avatar_view'
 AutoPilot      = require 'lib/autopilot'
 Navi           = require 'lib/navi'
 Reactor        = require 'lib/reactor'
+Admin          = require 'lib/admin'
 utils          = require 'lib/utils'
 
 module.exports = class GameController
   Backbone.utils.extend @prototype, EventBroker
   players: []
-  multiplayer: false
+  multiplayer: true
   snow: false
   trails: false
   customNames: true
@@ -29,28 +31,35 @@ module.exports = class GameController
   constructor: ->
     @players = new Players []
     @notifier = new Notifier
+    @setupDJ()
     @setupMap()
     @setupCanvas()
     @setupPlayer()
     @setupSidebar()
+    @admin = new Admin
 
     @subscribeEvent 'addPlayer', @addPlayer
     @subscribeEvent 'triggerIntro', @intro
+    @subscribeEvent 'togglePlayback', ->
+      @DJ.togglePlayback()
     @createPlayerList()
     mediator.game_state = 'playing'
-    EventBroker.publishEvent 'reactor:act', 'playSoundtrack'
 
   setupMap: ->
     @mapView = new MapView
       className: 'map'
       el: document.getElementById("map")
       autoRender: true
+    @mapView.DJ = @DJ
     mediator = mediator
 
     @reactor = new Reactor(@mapView, @players)
     @nav     = new Navi(@mapView)
 
     Weather.snow('snowCanvas') if @snow
+
+  setupDJ: ->
+    @DJ = new DJView
 
   setupCanvas: ->
     @canvas = new DrawingCanvas
@@ -62,8 +71,8 @@ module.exports = class GameController
     mediator.current_player = new Player(attrs)
     mediator.current_player.set
       orientation: 1
-      x_position: 600
-      y_position: 200
+      x_position: 968
+      y_position: 1384
       active: true
       id: Date.now()
 
@@ -73,6 +82,7 @@ module.exports = class GameController
     if @multiplayer
       @notifier.connect mediator.current_player, (channel) =>
         channel = channel.split("players_")[1]
+        @mapView.setDimensions()
 
   drawOrPromptAvatar: ->
     if mediator.current_player.get('name')
@@ -121,6 +131,7 @@ module.exports = class GameController
     if @clickToNavigate
       @mapView.addTouchEvents(avatar, 'click')
     @setupGameMenu()
+    @mapView.centerMapOn(player.get('x_position'), player.get('y_position'), 0, 20)
 
   addPlayer: (uuid, data) ->
     if data
@@ -156,13 +167,19 @@ module.exports = class GameController
       e.preventDefault()
       @promptPlayerName(true)
 
-  intro: ->
+  intro: (triggerVolume) ->
     view = new IntroView
       container: document.body
+      triggerVolume: triggerVolume
     return view
 
   setupSidebar: ->
     logo = document.querySelector('.sidebar-brand')
     logo.addEventListener 'click', =>
-      @publishEvent('triggerIntro')
+      @publishEvent('triggerIntro', false)
+
+    audioToggle = document.querySelector('.audioToggle')
+    audioToggle.addEventListener 'click', =>
+      @publishEvent('togglePlayback')
+      audioToggle.classList.toggle('sub-muted')
 

@@ -16,12 +16,17 @@ module.exports = class MapView extends View
 
   initialize: ->
     super
-    if (navigator.userAgent.match(/iPhone/i)) or (navigator.userAgent.match(/iPod/i))
+    if !!("ontouchstart" of window) or !!("onmsgesturechange" of window)
       @mobile = true
-      @viewport_padding = 150
+      document.body.classList.add('touchDevice')
     @landscaper = new Landscaper
       map: @
-    @subscribeEvent 'map:pan_to_player', @panToPlayerPosition
+    @subscribeEvent 'map:pan_to_player', @centerMapOn
+
+    # Detect Standalone Web App
+    isWebApp = window.navigator.standalone
+    if isWebApp
+      document.body.classList.add('isWebApp')
 
   render: ->
     super
@@ -38,15 +43,28 @@ module.exports = class MapView extends View
       doubleTouchStartTimestamp = now
       return
 
+    if @mobile
+      document.body.removeChild document.getElementById("keysHints")
+
 
 
   setDimensions: ->
     @rect = document.body.getClientRects()[0]
+    if @mobile
+      @viewport_padding = 
+        x: @rect.width * 0.5
+        y: @rect.height * 0.45
+    else
+      @viewport_padding = 
+        x: @rect.width * 0.3
+        y: @rect.height * 0.3
+    @sidebarWidth = document.body.querySelector('.sidebar').getClientRects()[0].width
     @viewport =
-      left:   @rect.left + @viewport_padding
-      top:    @rect.top + @viewport_padding
-      right:  @rect.right - @viewport_padding
-      bottom: @rect.bottom - @viewport_padding
+      left:   @rect.left + @viewport_padding.x - @sidebarWidth
+      top:    @rect.top + @viewport_padding.y
+      right:  @rect.right - @viewport_padding.x
+      bottom: @rect.bottom - @viewport_padding.y
+
 
   spawnPlayer: (player, avatar) ->
     avatar.container = @el
@@ -91,26 +109,51 @@ module.exports = class MapView extends View
       new_y = @rect.top + ((@viewport.bottom - a_height) - py)
 
     # Don't pan if it will reveal beyond the edge of the map
-    left_max_pan   = @offset_x - (@viewport_padding - a_width)
+    left_max_pan   = @offset_x - (@viewport_padding.x - a_width)
 
-    unless (new_x + @offset_x) >= 0 or Math.abs(px + @viewport_padding) >= @width
+    unless (new_x + @offset_x) >= 0 or Math.abs(px + @viewport_padding.x - @sidebarWidth) >= @width
       @offset_x = new_x
-    unless (new_y + @offset_y) >= 0 or Math.abs(py + @viewport_padding) >= @height
+    unless (new_y + @offset_y) >= 0 or Math.abs(py + @viewport_padding.y) >= @height
       @offset_y = new_y
 
-    @repositionMap(@offset_x, @offset_y, animate)
+    @repositionMap(parseInt(@offset_x), parseInt(@offset_y), animate)
+
+  centerMapOn: (x, y, offset_x, offset_y, animate) ->
+    if animate
+      @player_centered = false
+    viewportCenterX = @viewport.right/2
+    viewportCenterY = @viewport.bottom/2
+
+    new_x = viewportCenterX - x + @sidebarWidth
+    new_y = viewportCenterY - y
+
+    @offset_x = viewportCenterX - x + @sidebarWidth
+    @offset_y = viewportCenterY - y
+    
+    if y + @viewport_padding.y >= @height
+      @offset_y = new_y + viewportCenterY + @viewport_padding.y/2 - 21
+    if x + @viewport_padding.x >= @width
+      @offset_x = new_x + viewportCenterX
+    if new_y > 0
+      @offset_y = 0
+    if new_x > 0
+      @offset_x = 0
+    
+    @repositionMap(parseInt(@offset_x), parseInt(@offset_y), animate)
+
 
   repositionMap: (left, top, animate) ->
     if animate
-      @el.addEventListener "transitionend", @removeTransition, @
-      @el.style.transition = 'all .5s'
-
+      @el.style.transition = 'all .8s'
+      setTimeout =>
+        @removeTransition()
+      , 800
     @el.style.webkitTransform = "translate3d(#{left}px, #{top}px, 0)"
     @el.style.MozTransform = "translate3d(#{left}px, #{top}px, 0)"
+    @el.style.transform = "translate3d(#{left}px, #{top}px, 0)"
 
   removeTransition: ->
-    @style.transition = null
-    @removeEventListener('transitionend', @addAnimation)
+    @el.style.transition = null
 
   canMoveTo: (x,y, avatar) ->
     if avatar
@@ -119,7 +162,7 @@ module.exports = class MapView extends View
   addTouchEvents: (avatar, event_name) ->
     @el.addEventListener event_name, (e) =>
       avatar.stopMovement()
-      x = e.touches[0].clientX - (avatar.width /2)
+      x = e.touches[0].clientX - @sidebarWidth - (avatar.width /2)
       y = e.touches[0].clientY - (avatar.height/2)
       @publishEvent 'map:interact', e, x, y
       avatar.travelToPoint(x,y)

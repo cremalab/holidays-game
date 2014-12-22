@@ -1,0 +1,14 @@
+.audioToggle
+  @extend $icon
+  font-size 2em
+  cursor pointer
+  &:hover
+    color red
+  &:after
+    content: "\e099"
+  &.sub-muted
+    &:after
+      content: "\e098"
+    &:hover
+      color green
+    

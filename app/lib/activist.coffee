@@ -29,6 +29,7 @@ module.exports = class Activist
     return ob
 
   addActor: (item) ->
+
     item.addEventListener 'hit_left', (options) ->
       item.onHit.left(item, options) if item.onHit.left
     item.addEventListener 'hit_right', (options) ->
@@ -46,7 +47,7 @@ module.exports = class Activist
       item.current_player_within_proximity = false
       item.proximity.onLeave(item, options) if item.proximity
     if item.proximity and item.proximity.keys
-      if item.proximity.keys.action
+      if item.proximity.keys.hasOwnProperty('action')
         @actionableItems.push item
 
   handleKeyDown: (e) =>
@@ -64,11 +65,6 @@ module.exports = class Activist
           e.preventDefault()
           e.stopPropagation()
           item.proximity.keys.action(item)
-          return false
-        else 
-          return e
-      else
-        return e
 
   fireActionHandlers: ->
     for item in @actionableItems

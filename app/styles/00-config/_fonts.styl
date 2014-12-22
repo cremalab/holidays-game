@@ -1,0 +1,42 @@
+fonts_dir = '/fonts/'
+
+@font-face {
+  font-family: 'crema-christmas';
+  src:url(fonts_dir + 'crema-christmas.eot?-g74vkh');
+  src:url(fonts_dir + 'crema-christmas.eot?#iefix-g74vkh') format('embedded-opentype'),
+    url(fonts_dir + 'crema-christmas.woff?-g74vkh') format('woff'),
+    url(fonts_dir + 'crema-christmas.ttf?-g74vkh') format('truetype'),
+    url(fonts_dir + 'crema-christmas.svg?-g74vkh#crema-christmas') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+$icon
+[class^="icon-"]
+[class*=" icon-"]
+  font-family: 'crema-christmas';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+.icon-close:before {
+  content: "\e601";
+}
+.icon-volume:before {
+  content: "\e098";
+}
+.icon-mute:before {
+  content: "\e099";
+}
+.icon-twitter:before {
+  content: "\e600";
+  font-size: 1.75em;
+  line-height: 1.25em;
+}
