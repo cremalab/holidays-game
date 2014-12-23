@@ -3,9 +3,9 @@ WhiteboardView = require 'views/whiteboard_view'
 mediator       = require 'lib/mediator'
 
 module.exports = class DrawableWhiteboardView extends WhiteboardView
-  Backbone.utils.extend @prototype, Modal
   temp: []
   template: require 'views/templates/whiteboard'
+  className: 'hiross'
   render: ->
     super
     mediator.game_state = 'modal'
