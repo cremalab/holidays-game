@@ -16,5 +16,9 @@ module.exports = class EditAvatarView extends JoinGameView
           input = @el.querySelector("input[name='#{attribute}'][value='#{val}']")
           if input
             input.checked = true
+        else if input.type is 'checkbox'
+          input = @el.querySelector("input[name='#{attribute}'][id='#{val}']")
+          if input
+            input.checked = true          
         else
           input.value = val

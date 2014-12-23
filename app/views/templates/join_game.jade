@@ -75,6 +75,17 @@
                           - var pickerId = "avatar-pants"
                           input(type='radio' name=pickerId value=pickerId + "-" + color id=pickerId + "-" + color)
                           label(for=pickerId + "-" + color, class=pickerId + "-" + color)
+
+                .row
+                  .col
+                    .field-label Facial Hair:
+                  .col
+                    .field-input
+                      input(type="checkbox" name="avatar-moustache" id="avatar-moustache")
+                      label(for="avatar-moustache") Moustache
+                      input(type="checkbox" name="avatar-beard" id="avatar-beard")
+                      label(for='avatar-beard') Beard
+
           .col.nest-reset.avatar-holder
 
         button.sub-width-full Join the party!
