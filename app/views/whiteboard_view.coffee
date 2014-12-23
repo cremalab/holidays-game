@@ -30,17 +30,13 @@ module.exports = class WhiteBoard extends View
     @ctx.lineWidth = '1'
 
   drawOnCanvas: (plots) ->
-    if @scale < 1
-      x_scale = @scale * 1.6
-    else
-      x_scale = @scale
     if plots.length
       @ctx.beginPath()
-      @ctx.moveTo (plots[0].x * (x_scale)), (plots[0].y * @scale)
+      @ctx.moveTo (plots[0].x * @scale), (plots[0].y * @scale)
       i = 1
 
       while i < plots.length
-        @ctx.lineTo (plots[i].x * (x_scale)), (plots[i].y * @scale)
+        @ctx.lineTo (plots[i].x * @scale), (plots[i].y * @scale)
         i++
       @ctx.stroke()
       return
