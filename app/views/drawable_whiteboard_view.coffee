@@ -19,7 +19,11 @@ module.exports = class DrawableWhiteboardView extends WhiteboardView
         @dispose()
 
       window.addEventListener 'keyup', @checkEsc
-    @el.querySelector('.clear').addEventListener 'click', @clearCanvas
+    @el.querySelector('.clear').addEventListener 'click', (e) =>
+      e.stopPropagation()
+      e.preventDefault()
+      @model.set('plots', [])
+      @model.trigger('cleared')
 
   setupCanvas: ->
     super
@@ -69,16 +73,6 @@ module.exports = class DrawableWhiteboardView extends WhiteboardView
     mediator.notifier.publish({type: "whiteboard", plots: @model.get('plots')})
     @temp = []
     return
-
-  clearCanvas: (e) =>
-    e.stopPropagation()
-    e.preventDefault()
-    @temp = []
-    @model.set('plots', [])
-    @endDraw()
-    @ctx.clearRect 0 , 0 , @canvas.width, @canvas.height
-    @drawOnCanvas @model.get('plots')
-    console.log 'clear'
 
   checkEsc: (e) =>
     if e.keyCode is 27

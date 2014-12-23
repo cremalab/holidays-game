@@ -13,6 +13,7 @@ module.exports = class WhiteBoard extends View
     super
   render: ->
     super
+    @listenTo @model, 'cleared', @clearCanvas
     setTimeout =>
       @setupCanvas()
       for path in @model.get('plots')
@@ -29,7 +30,6 @@ module.exports = class WhiteBoard extends View
     @ctx.lineWidth = '1'
 
   drawOnCanvas: (plots) ->
-    console.log 'drawOnCanvas'
     if @scale < 1
       x_scale = @scale * 1.6
     else
@@ -44,11 +44,17 @@ module.exports = class WhiteBoard extends View
         i++
       @ctx.stroke()
       return
-    else
-      @ctx.clearRect 0 , 0 , @canvas.width, @canvas.height
+
+  clearCanvas: =>
+    @temp = []
+    @model.set('plots', [])
+    @ctx.clearRect 0 , 0 , @canvas.width, @canvas.height
 
   drawFromStream: ->
     @ctx.beginPath()
-    for path in @model.get('plots')
-      @drawOnCanvas path
-    return
+    if @model.get('plots').length
+      for path in @model.get('plots')
+        @drawOnCanvas path
+    else
+      @clearCanvas()
+    
