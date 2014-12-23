@@ -1,4 +1,4 @@
-channel_prefix = "players_"
+channel_prefix = "devs_"
 
 # Escorts players to a room with capacity
 

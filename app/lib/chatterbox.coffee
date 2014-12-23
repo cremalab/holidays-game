@@ -78,7 +78,7 @@ module.exports = class ChatterBox extends Model
       if usernames.indexOf("@everyone") > -1 or usernames.indexOf("@all") > -1
         return true
       for username in usernames
-        if username.replace('@', '').toLowerCase() is current_name
+        if current_name.indexOf(username.replace('@', '').toLowerCase()) > -1
           return true         
 
   disposeBubble: (local) ->
