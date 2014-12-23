@@ -52,7 +52,7 @@ module.exports = class MapView extends View
       model: mediator.whiteboard
       container: @el
       autoRender: true
-      scale: 0.47
+      scale: 0.333
 
   setDimensions: ->
     @rect = document.body.getClientRects()[0]
