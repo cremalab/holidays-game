@@ -5,7 +5,6 @@ mediator       = require 'lib/mediator'
 module.exports = class DrawableWhiteboardView extends WhiteboardView
   temp: []
   template: require 'views/templates/whiteboard'
-  className: 'hiross'
   render: ->
     super
     mediator.game_state = 'modal'
