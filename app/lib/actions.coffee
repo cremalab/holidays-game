@@ -1,10 +1,11 @@
 Modal       = require 'views/modal_view'
 mediator    = require 'lib/mediator'
 EventBroker = require 'lib/event_broker'
+DrawableWhiteboardView  = require 'views/drawable_whiteboard_view'
 
 module.exports =
   team_photo: (map) ->
-    unless mediator.game_state is 'modal'
+    unless mediator.game_state is 'modal' or mediator.game_state is 'chatting'
       view = new Modal
         container: document.body
         className: 'modal'
@@ -12,7 +13,7 @@ module.exports =
         autoRender: true
       mediator.game_state = 'modal'
   bathroom_photo: (map) ->
-    unless mediator.game_state is 'modal'
+    unless mediator.game_state is 'modal' or mediator.game_state is 'chatting'
       view = new Modal
         container: document.body
         className: 'modal'
@@ -49,3 +50,12 @@ module.exports =
     else
       classList.add 'disco-time'
       map.DJ.playTrack('disco')
+
+  whiteboard: ->
+    unless mediator.game_state is 'modal' or mediator.game_state is 'chatting'
+      view = new DrawableWhiteboardView
+        container: document.body
+        className: 'modal'
+        template: require 'views/templates/whiteboard'
+        autoRender: true
+        model: mediator.whiteboard

@@ -1,7 +1,9 @@
-Landscaper = require 'lib/landscaper'
-View       = require './view'
-template   = require './templates/map'
+Landscaper        = require 'lib/landscaper'
+View              = require './view'
+template          = require './templates/map'
 transition_events = 'transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd'
+WhiteboardView    = require 'views/whiteboard_view'
+mediator          = require 'lib/mediator'
 
 module.exports = class MapView extends View
   template: template
@@ -46,7 +48,11 @@ module.exports = class MapView extends View
     if @mobile
       document.body.removeChild document.getElementById("keysHints")
 
-
+    @mini_whiteboard_view = new WhiteboardView
+      model: mediator.whiteboard
+      container: @el
+      autoRender: true
+      scale: 0.333
 
   setDimensions: ->
     @rect = document.body.getClientRects()[0]
