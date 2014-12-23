@@ -17,6 +17,7 @@ AutoPilot      = require 'lib/autopilot'
 Navi           = require 'lib/navi'
 Reactor        = require 'lib/reactor'
 Admin          = require 'lib/admin'
+Whiteboard     = require 'models/whiteboard'
 utils          = require 'lib/utils'
 
 module.exports = class GameController
@@ -30,7 +31,9 @@ module.exports = class GameController
 
   constructor: ->
     @players = new Players []
-    @notifier = new Notifier
+    @notifier = mediator.notifier = new Notifier
+    @whiteboard = mediator.whiteboard = new Whiteboard
+      plots: []
     @setupDJ()
     @setupMap()
     @setupCanvas()
@@ -44,6 +47,7 @@ module.exports = class GameController
       @DJ.togglePlayback()
     @createPlayerList()
     mediator.game_state = 'playing'
+
 
   setupMap: ->
     @mapView = new MapView

@@ -363,6 +363,22 @@ module.exports = [
   src: "images/wall3.png"
   x: 1430
   y: 835
+  proximity:
+    radius: 100
+    onEnter: (item) ->
+      unless !!("ontouchstart" of window) or !!("onmsgesturechange" of window)
+        hint =
+          obstruction: item
+          text: "[Interact] Scribble on the white board"
+          id: "whiteboard_hint"
+        EventBroker.publishEvent 'navi:hint', hint
+    onLeave: ->
+      EventBroker.publishEvent 'navi:dismiss_hint', "whiteboard_hint"
+    keys:
+      action: ->
+        EventBroker.publishEvent 'reactor:act', "whiteboard"
+      desktop_only: true
+
 ,
   id: "wall_4"
   src: "images/wall4.png"

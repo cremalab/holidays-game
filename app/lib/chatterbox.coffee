@@ -18,6 +18,7 @@ module.exports = class ChatterBox extends Model
       @openDialog()
 
   openDialog: (content) ->
+    mediator.game_state = 'chatting'
     @speechBubble.dispose() if @speechBubble
     @dialog.dispose() if @dialog
     @open = true
@@ -43,6 +44,7 @@ module.exports = class ChatterBox extends Model
       @message.save()
       @renderSpeechBubble(@message)
     @dialog.dispose()
+    mediator.game_state = 'playing'
 
   checkMessageContent: (message) ->
     if @get('avatar').soulless

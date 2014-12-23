@@ -33,6 +33,8 @@ mediator._callbacks = null
 
 mediator.current_player = null
 mediator.game_state = null
+mediator.notifier = null
+mediator.whiteboard = null
 
 # Request / Response
 # --–---------------

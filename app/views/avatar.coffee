@@ -38,7 +38,7 @@ module.exports = class Avatar extends View
       @template = options.template
     @soulless = options.soulless
     super
-    @listenTo @model, "change:avatar-gender change:avatar-hat change:avatar-hair change:avatar-skin change:avatar-coat change:avatar-pants", @updateLook
+    @listenTo @model, "change:avatar-gender change:avatar-hat change:avatar-hair change:avatar-skin change:avatar-coat change:avatar-pants change:avatar-moustache change:avatar-beard", @updateLook
     @listenTo @model, "dispose", @dispose
     @listenTo @model, "change:z-plane", @updateZIndex
     @subscribeEvent "players:left", @handleLeave
@@ -325,6 +325,17 @@ module.exports = class Avatar extends View
     @el.classList.add @model.get('avatar-skin')
     @el.classList.add @model.get('avatar-coat')
     @el.classList.add @model.get('avatar-pants')
+
+    if @model.get('avatar-moustache')
+      @el.classList.add 'avatar-moustache'
+    else
+      @el.classList.remove 'avatar-moustache'
+
+    if @model.get('avatar-beard')
+      @el.classList.add 'avatar-beard'
+    else
+      @el.classList.remove 'avatar-beard'
+
     if @model.isCurrentPlayer()
       @model.save()
 

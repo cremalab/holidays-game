@@ -1,0 +1,34 @@
+.marker
+  transition all 0.15s ease-in-out
+  display inline-table
+  margin 0 0.25em
+  box-shadow 0 1px 1px rgba(black, 0.1)
+  cursor pointer
+  &.active
+    transform translateY(-100%)
+  
+.marker-cap
+  display table-cell
+  background currentColor
+  width 0.5em
+  height 0.5em
+  position relative
+  box-shadow inset 1px -1px 0 rgba(black, 0.1)
+  &:before
+    content ''
+    display block
+    width 0.15em
+    height 0.25em
+    background currentColor
+    position absolute
+    right 100%
+    top 50%
+    transform translateY(-50%)
+    box-shadow inset 1px -1px 0 rgba(black, 0.1)
+  
+.marker-body
+  display table-cell
+  background white
+  width 2.25em
+  height 0.5em
+  border 1px solid whitesmoke
