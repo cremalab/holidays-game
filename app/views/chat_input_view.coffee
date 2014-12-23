@@ -1,5 +1,6 @@
 View     = require 'views/view'
 template = require './templates/chat_input'
+mediator = require 'lib/mediator'
 
 module.exports = class ChatInputView extends View
   template: template
@@ -15,3 +16,7 @@ module.exports = class ChatInputView extends View
     , 0
     @input.addEventListener 'blur', ->
       window.scrollTo(0, 0)
+
+  dispose: ->
+    mediator.game_state = 'playing'
+    super
