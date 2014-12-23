@@ -36,6 +36,7 @@ module.exports = class WhiteBoard extends View
       i = 1
 
       while i < plots.length
+        @ctx.strokeStyle = plots[i].color
         @ctx.lineTo (plots[i].x * @scale), (plots[i].y * @scale)
         i++
       @ctx.stroke()

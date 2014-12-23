@@ -1,5 +1,6 @@
 Modal          = require 'views/modal_view'
 WhiteboardView = require 'views/whiteboard_view'
+MarkersView    = require 'views/markers_view'
 mediator       = require 'lib/mediator'
 
 module.exports = class DrawableWhiteboardView extends WhiteboardView
@@ -23,6 +24,28 @@ module.exports = class DrawableWhiteboardView extends WhiteboardView
       e.preventDefault()
       @model.set('plots', [])
       @model.trigger('cleared')
+
+    markers = new Backbone.Collection [
+      color: "#ff0000"
+    ,
+      color: "#ff8000"
+    ,
+      color: "#ffff00"
+    ,
+      color: "#00ff00"
+    ,
+      color: "#0000ff"
+    ,
+      color: "#800080"
+    ]
+    @markersView = new MarkersView
+      collection: markers
+      el: @el.querySelector('.whiteboard-markers')
+      autoRender: true
+
+    @listenTo markers, 'chosen', (color) =>
+      @ctx.strokeStyle = color
+      @activeColor = color
 
   setupCanvas: ->
     super
@@ -53,7 +76,7 @@ module.exports = class DrawableWhiteboardView extends WhiteboardView
     return  unless @isActive
     x = e.offsetX or e.layerX - canvas.offsetLeft
     y = e.offsetY or e.layerY - canvas.offsetTop
-    @temp.push({x:x, y:y})
+    @temp.push({x:x, y:y, color: @activeColor})
 
     @drawOnCanvas @temp
     return
