@@ -19,6 +19,7 @@ module.exports = class DrawableWhiteboardView extends WhiteboardView
         @dispose()
 
       window.addEventListener 'keyup', @checkEsc
+    @el.querySelector('.clear').addEventListener 'click', @clearCanvas
 
   setupCanvas: ->
     super
@@ -69,6 +70,15 @@ module.exports = class DrawableWhiteboardView extends WhiteboardView
     @temp = []
     return
 
+  clearCanvas: (e) =>
+    e.stopPropagation()
+    e.preventDefault()
+    @temp = []
+    @model.set('plots', [])
+    @endDraw()
+    @ctx.clearRect 0 , 0 , @canvas.width, @canvas.height
+    @drawOnCanvas @model.get('plots')
+    console.log 'clear'
 
   checkEsc: (e) =>
     if e.keyCode is 27

@@ -29,6 +29,7 @@ module.exports = class WhiteBoard extends View
     @ctx.lineWidth = '1'
 
   drawOnCanvas: (plots) ->
+    console.log 'drawOnCanvas'
     if @scale < 1
       x_scale = @scale * 1.6
     else
@@ -43,9 +44,10 @@ module.exports = class WhiteBoard extends View
         i++
       @ctx.stroke()
       return
+    else
+      @ctx.clearRect 0 , 0 , @canvas.width, @canvas.height
 
   drawFromStream: ->
-    console.log 'draw'
     @ctx.beginPath()
     for path in @model.get('plots')
       @drawOnCanvas path
