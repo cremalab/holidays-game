@@ -12,6 +12,7 @@ module.exports = class JoinGameView extends Modal
   render: ->
     super
     radios = @el.querySelectorAll("input[type='radio']")
+    checkboxes = @el.querySelectorAll("input[type='checkbox']")
     mediator.game_state = 'modal'
 
     @avatarView = new Avatar
@@ -25,6 +26,15 @@ module.exports = class JoinGameView extends Modal
         name = e.target.name
         val  = @el.querySelector("input[name='#{name}']:checked").value
         @model.set(name, val)
+
+    for checkbox in checkboxes
+      checkbox.addEventListener 'change', (e) =>
+        name = e.target.name
+        val  = e.target.id
+        if e.target.checked
+          @model.set(name, val)
+        else
+          @model.unset(name)
 
     @el.addEventListener 'submit', (e) =>
       e.preventDefault()

@@ -2,11 +2,11 @@
 This is an experiment for spreading Holiday Cheer at [Cremalab](http://cremalab.com). It's an entirely client-side Javascript application, written in CoffeeScript and compiled with Brunch. It's basically DOM elements moving around a page with CSS transforms cleverly disguised as a game. Multiplayer is made possible by [PubNub](http://www.pubnub.com)'s stellar realtime messaging service.
 
 ## Superstars
-* Avatar design and markup by @dmdez and @roblafeve
-* Disco and Moonwalk modes by @dmdez
-* UI Design, CSS magic, and front-end magic by @roblafeve
-* Map design and implementation by @MattBishop2
-* Game engine by @albatrocity
+* Avatar design and markup by [@dmdez](https://github.com/dmdez) and [@roblafeve](https://github.com/roblafeve)
+* Disco and Moonwalk modes by [@dmdez](https://github.com/dmdez)
+* UI Design, CSS magic, and front-end magic by [@roblafeve](https://github.com/roblafeve)
+* Map design and implementation by [@MattBishop2](https://github.com/MattBishop2)
+* Game engine by [@albatrocity](https://github.com/albatrocity)
 
 ## Tech
 * [Brunch](http://brunch.io) is the build tool

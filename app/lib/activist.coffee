@@ -64,7 +64,7 @@ module.exports = class Activist
         if @landscaper.avatarOverlaps(av_proxy, item, x - @landscaper.map.offset_x, y - @landscaper.map.offset_y)
           e.preventDefault()
           e.stopPropagation()
-          item.proximity.keys.action(item)
+          item.proximity.keys.action(item) unless item.proximity.keys.desktop_only
 
   fireActionHandlers: ->
     for item in @actionableItems

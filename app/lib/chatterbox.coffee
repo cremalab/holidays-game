@@ -18,6 +18,7 @@ module.exports = class ChatterBox extends Model
       @openDialog()
 
   openDialog: (content) ->
+    mediator.game_state = 'chatting'
     @speechBubble.dispose() if @speechBubble
     @dialog.dispose() if @dialog
     @open = true
@@ -43,6 +44,7 @@ module.exports = class ChatterBox extends Model
       @message.save()
       @renderSpeechBubble(@message)
     @dialog.dispose()
+    mediator.game_state = 'playing'
 
   checkMessageContent: (message) ->
     if @get('avatar').soulless
@@ -78,7 +80,7 @@ module.exports = class ChatterBox extends Model
       if usernames.indexOf("@everyone") > -1 or usernames.indexOf("@all") > -1
         return true
       for username in usernames
-        if username.replace('@', '').toLowerCase() is current_name
+        if current_name.indexOf(username.replace('@', '').toLowerCase()) > -1
           return true         
 
   disposeBubble: (local) ->

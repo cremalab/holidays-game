@@ -7,10 +7,53 @@
   border-width 0 0 1px
   border-style solid
   border-color rgba(0,0,0,.5)
+  box-shadow 0 -.05em 0 0.1em currentColor
+  background-color currentColor
   z-index 8
   position absolute
   top 3.3em
   left 50%
+  
+  .avatar-moustache &
+    &:before
+    &:after
+      content ''
+      display block
+      position absolute
+      width .8em
+      height .25em
+      border-radius 50%
+      top -.15em
+    
+    &:before
+      box-shadow 0.1em 0.1em 0 currentColor
+      left -.4em
+    &:after
+      box-shadow -0.1em 0.1em 0 currentColor
+      left .6em
+
+  .avatar-moustache[data-pos="1"] &
+  .avatar-moustache[data-pos="7"] &
+    &:after
+      left .7em
+      width .7em
+
+  .avatar-moustache[data-pos="2"] &
+  .avatar-moustache[data-pos="6"] &
+    &:after
+      display none
+    &:before
+      width 1em
+      top -.2em
+      left -.3em
+
+  .avatar-moustache[data-pos="3"] &
+  .avatar-moustache[data-pos="4"] &
+  .avatar-moustache[data-pos="5"] &
+    &:before
+    &:after
+      display none
+    
   [data-pos="1"] &,
   [data-pos="7"] &
     transform rotate(-15deg)
