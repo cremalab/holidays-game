@@ -12,7 +12,7 @@
   top 3.3em
   left 50%
   
-  .has-stache &
+  .avatar-moustache &
     &:before
     &:after
       content ''
@@ -30,27 +30,27 @@
       box-shadow -0.1em 0.1em 0 currentColor
       left .6em
 
-    [data-pos="1"] &
-    [data-pos="7"] &
-      &:after
-        left .7em
-        width .7em
+  .avatar-moustache[data-pos="1"] &
+  .avatar-moustache[data-pos="7"] &
+    &:after
+      left .7em
+      width .7em
 
-    [data-pos="2"] &
-    [data-pos="6"] &
-      &:after
-        display none
-      &:before
-        width 1em
-        top -.2em
-        left -.3em
+  .avatar-moustache[data-pos="2"] &
+  .avatar-moustache[data-pos="6"] &
+    &:after
+      display none
+    &:before
+      width 1em
+      top -.2em
+      left -.3em
 
-    [data-pos="3"] &
-    [data-pos="4"] &
-    [data-pos="5"] &
-      &:before
-      &:after
-        display none
+  .avatar-moustache[data-pos="3"] &
+  .avatar-moustache[data-pos="4"] &
+  .avatar-moustache[data-pos="5"] &
+    &:before
+    &:after
+      display none
     
   [data-pos="1"] &,
   [data-pos="7"] &
