@@ -66,6 +66,7 @@ module.exports = class Avatar extends View
       @bindKeyEvents()
       @el.setAttribute('data-pos', 7)
       setTimeout(=>
+        console.log @el.getClientRects()
         @rect = @el.getClientRects()[0]
         @boundingRect = @el.getBoundingClientRect()
         @setDimensions()
@@ -284,8 +285,9 @@ module.exports = class Avatar extends View
       @activeMovementKeys.splice(@activeMovementKeys.indexOf(keyCode), 1)
 
   setDimensions: ->
-    @width = @rect.right - @rect.left
-    @height = @rect.bottom - @rect.top
+    if @rect
+      @width = @rect.right - @rect.left
+      @height = @rect.bottom - @rect.top
 
   checkCollision: ->
     blocked_up    = @isMovingDirection(up) and !@availableDirections.up

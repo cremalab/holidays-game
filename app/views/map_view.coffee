@@ -1,12 +1,10 @@
 Landscaper        = require 'lib/landscaper'
 View              = require './view'
-template          = require './templates/map'
 transition_events = 'transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd'
 WhiteboardView    = require 'views/whiteboard_view'
 mediator          = require 'lib/mediator'
 
 module.exports = class MapView extends View
-  template: template
   className: "map"
   viewport_padding: 300
   offset_x: 0
@@ -16,13 +14,15 @@ module.exports = class MapView extends View
   padding_top: 80
   padding_bottom: 15
 
-  initialize: ->
+  initialize: (options) ->
+    @template = options.template or require('./templates/map')
     super
     if !!("ontouchstart" of window) or !!("onmsgesturechange" of window)
       @mobile = true
       document.body.classList.add('touchDevice')
     @landscaper = new Landscaper
       map: @
+      landscape: options.landscape
     @subscribeEvent 'map:pan_to_player', @centerMapOn
 
     # Detect Standalone Web App
@@ -57,11 +57,11 @@ module.exports = class MapView extends View
   setDimensions: ->
     @rect = document.body.getClientRects()[0]
     if @mobile
-      @viewport_padding = 
+      @viewport_padding =
         x: @rect.width * 0.5
         y: @rect.height * 0.45
     else
-      @viewport_padding = 
+      @viewport_padding =
         x: @rect.width * 0.3
         y: @rect.height * 0.3
     @sidebarWidth = document.body.querySelector('.sidebar').getClientRects()[0].width
@@ -135,7 +135,7 @@ module.exports = class MapView extends View
 
     @offset_x = viewportCenterX - x + @sidebarWidth
     @offset_y = viewportCenterY - y
-    
+
     if y + @viewport_padding.y >= @height
       @offset_y = new_y + viewportCenterY + @viewport_padding.y/2 - 21
     if x + @viewport_padding.x >= @width
@@ -144,7 +144,7 @@ module.exports = class MapView extends View
       @offset_y = 0
     if new_x > 0
       @offset_x = 0
-    
+
     @repositionMap(parseInt(@offset_x), parseInt(@offset_y), animate)
 
 
@@ -172,3 +172,8 @@ module.exports = class MapView extends View
       y = e.touches[0].clientY - (avatar.height/2)
       @publishEvent 'map:interact', e, x, y
       avatar.travelToPoint(x,y)
+
+  dispose: ->
+    @landscaper.dispose()
+    @landscaper = null
+    super

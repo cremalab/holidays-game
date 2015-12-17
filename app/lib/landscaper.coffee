@@ -1,13 +1,15 @@
 Activist = require 'lib/activist'
 
 module.exports = class Landscaper
-  landscape: require 'lib/landscape'
   obstructions: []
   current_player_overlaps: []
   constructor: (options) ->
+    @landscape = options.landscape or require('config/maps/eastside')
     @map = options.map
   init: ->
+    @activist.dispose() if @activist
     @activist = new Activist(@)
+    @obstructions = []
     for obstruction in @landscape
       if obstruction.hasOwnProperty 'src'
         svg = @createObstructionGraphic(obstruction)
@@ -82,7 +84,6 @@ module.exports = class Landscaper
     @ups    = []
     @lefts  = []
     @downs  = []
-
     for obstruction in @obstructions
 
       @getObstructionShape(obstruction, x, y, avatar)
@@ -200,3 +201,9 @@ module.exports = class Landscaper
     aAboveB   = (y + a.height) < b.top
 
     return !( aLeftOfB || aRightOfB || aAboveB || aBelowB )
+
+  dispose: ->
+    @obstructions = null
+    @map = null
+    @activist.dispose() if @activist
+    @activist = null

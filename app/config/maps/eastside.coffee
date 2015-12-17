@@ -482,7 +482,7 @@ module.exports = [
   proximity:
     radius: 60
     onEnter: (item, options) ->
-      hint = 
+      hint =
         obstruction: item
         text: "[Interact] Start the dance party"
         id: "disco_hint"

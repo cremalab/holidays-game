@@ -47,13 +47,17 @@ module.exports = class GameController
       @DJ.togglePlayback()
     @createPlayerList()
     mediator.game_state = 'playing'
+    window.loadMap = @loadMap.bind(@)
 
 
-  setupMap: ->
+  setupMap: (mapOptions = {}) ->
+    template = mapOptions.template or require('views/templates/map')
     @mapView = new MapView
       className: 'map'
       el: document.getElementById("map")
       autoRender: true
+      template: template
+      landscape: mapOptions.landscape
     @mapView.DJ = @DJ
     mediator = mediator
 
@@ -70,7 +74,7 @@ module.exports = class GameController
       el: document.getElementById('drawCanvas')
       autoRender: true
 
-  setupPlayer: ->
+  setupPlayer: (options = {}) ->
     attrs = JSON.parse(localStorage.getItem("CremalabPartyAvatar"))
     mediator.current_player = new Player(attrs)
     mediator.current_player.set
@@ -79,17 +83,19 @@ module.exports = class GameController
       y_position: 1384
       active: true
       id: Date.now()
-
-    view = @intro()
-    @mapView.listenTo view, 'dispose', => 
-      @drawOrPromptAvatar()
+    view = @intro() unless options.skip_intro
+    if view
+      @mapView.listenTo view, 'dispose', =>
+        @drawOrPromptAvatar()
     if @multiplayer
-      @notifier.connect mediator.current_player, (channel) =>
+      @notifier.connect mediator.current_player, "eastside", (channel) =>
         channel = channel.split("players_")[1]
         @mapView.setDimensions()
 
   drawOrPromptAvatar: ->
+    console.log 'drawOrPromptAvatar'
     if mediator.current_player.get('name')
+      console.log 'has a name!'
       return @createPlayerAvatar(mediator.current_player)
     else
       if @customNames
@@ -116,24 +122,24 @@ module.exports = class GameController
 
 
   createPlayerAvatar: (player) ->
-    avatar = new Avatar
+    @currentAvatar.dispose() if @currentAvatar
+    @currentAvatar = new Avatar
       model: player
-    avatar.autopilot = new AutoPilot(avatar, @mapView)
+
+    @currentAvatar.autopilot = new AutoPilot(@currentAvatar, @mapView)
 
     if @trails
-      avatar.trailblazer = new Trailblazer
+      @currentAvatar.trailblazer = new Trailblazer
         player: player
-        avatar: avatar
+        avatar: @currentAvatar
         canvas: @canvas
 
-    @mapView.listenTo avatar, 'playerMove', @mapView.checkPlayerPosition
-
-    @mapView.spawnPlayer(player, avatar)
-    @players.add player, {at: 0}
-    @mapView.addTouchEvents(avatar, 'touchstart')
+    @mapView.spawnPlayer(player, @currentAvatar)
+    @mapView.listenTo @currentAvatar, 'playerMove', @mapView.checkPlayerPosition
+    @mapView.addTouchEvents(@currentAvatar, 'touchstart')
 
     if @clickToNavigate
-      @mapView.addTouchEvents(avatar, 'click')
+      @mapView.addTouchEvents(@currentAvatar, 'click')
     @setupGameMenu()
     @mapView.centerMapOn(player.get('x_position'), player.get('y_position'), 0, 20)
 
@@ -171,6 +177,25 @@ module.exports = class GameController
       e.preventDefault()
       @promptPlayerName(true)
 
+  loadMap: (mapOptions) ->
+    @players.reset()
+    @currentAvatar.dispose() if @currentAvatar
+    mapOptions = {
+      template: require('views/templates/westside')
+      landscape: require('config/maps/westside')
+    }
+    @mapView.dispose() if @mapView
+    newMap = document.createElement("div")
+    newMap.id = "map"
+    document.querySelector(".app-map").appendChild(newMap)
+
+    @setupMap(mapOptions)
+    if @multiplayer
+      @notifier.connect mediator.current_player, "westside", (channel) =>
+        channel = channel.split("players_")[1]
+        @drawOrPromptAvatar()
+        @mapView.setDimensions()
+
   intro: (triggerVolume) ->
     view = new IntroView
       container: document.body
@@ -186,4 +211,3 @@ module.exports = class GameController
     audioToggle.addEventListener 'click', =>
       @publishEvent('togglePlayback')
       audioToggle.classList.toggle('sub-muted')
-

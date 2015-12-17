@@ -4,7 +4,7 @@ Escort   = require 'lib/escort'
 Modal    = require 'views/modal_view'
 
 module.exports = class Notifier extends Model
-  connect: (player, onConnect) ->
+  connect: (player, room, onConnect) ->
     @player = player
     @PN = PUBNUB.init
       # Be cool with these keys, developer dudes
@@ -12,9 +12,9 @@ module.exports = class Notifier extends Model
       subscribe_key: 'sub-c-b9f703c2-7109-11e4-aacc-02ee2ddab7fe'
       uuid: player.get('id')
       heartbeat: 10
-      restore: false
+      restore: true
 
-    Escort.findEmptyRoom @PN, (channel_name) =>
+    Escort.findEmptyRoom @PN, room, (channel_name) =>
       @subscribe(channel_name, onConnect)
       @subscribeEvent 'playerMoved', @publishPlayerMovement
       @subscribeEvent "players:left", @removePlayer
@@ -69,7 +69,7 @@ module.exports = class Notifier extends Model
       for player in message.uuids
         unless parseInt(player.uuid) is parseInt(@player.get('id'))
           @publishEvent 'addPlayer', player.uuid, player.state
-    
+
     onConnect(@channel) if onConnect
 
   handlePresence: (m,a) ->
