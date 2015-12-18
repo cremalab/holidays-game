@@ -94,7 +94,6 @@ module.exports = class Notifier extends Model
 
   removePlayer: (id, kicked) ->
     if mediator.current_player.id is id
-      console.log 'unsubscribe'
       @PN.unsubscribe
         channel: @channel
       if kicked
@@ -122,7 +121,6 @@ module.exports = class Notifier extends Model
 
   notifyKick: (uuid) ->
     if mediator.current_player.id is uuid
-      console.log 'notify!'
       new Modal
         template: require 'views/templates/kick'
         className: 'modal'

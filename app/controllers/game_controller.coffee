@@ -31,17 +31,22 @@ module.exports = class GameController
 
   constructor: ->
     @players = new Players []
-    @notifier = mediator.notifier = new Notifier
     @whiteboard = mediator.whiteboard = new Whiteboard
       plots: []
     @setupDJ()
     @setupMap()
     @setupCanvas()
     @setupPlayer()
+    if @multiplayer
+      @notifier.connect mediator.current_player, "eastside", (channel) =>
+        channel = channel.split("players_")[1]
+        @mapView.setDimensions()
     @setupSidebar()
+    @setupGameMenu()
     @admin = new Admin
 
     @subscribeEvent 'addPlayer', @addPlayer
+    @subscribeEvent 'map:load', @loadMap
     @subscribeEvent 'triggerIntro', @intro
     @subscribeEvent 'togglePlayback', ->
       @DJ.togglePlayback()
@@ -51,7 +56,7 @@ module.exports = class GameController
 
 
   setupMap: (mapOptions = {}) ->
-    template = mapOptions.template or require('views/templates/map')
+    template = mapOptions.template or require('views/templates/eastside')
     @mapView = new MapView
       className: 'map'
       el: document.getElementById("map")
@@ -75,6 +80,8 @@ module.exports = class GameController
       autoRender: true
 
   setupPlayer: (options = {}) ->
+    @notifier.dispose() if @notifier
+    @notifier = mediator.notifier = new Notifier
     attrs = JSON.parse(localStorage.getItem("CremalabPartyAvatar"))
     mediator.current_player = new Player(attrs)
     mediator.current_player.set
@@ -87,21 +94,16 @@ module.exports = class GameController
     if view
       @mapView.listenTo view, 'dispose', =>
         @drawOrPromptAvatar()
-    if @multiplayer
-      @notifier.connect mediator.current_player, "eastside", (channel) =>
-        channel = channel.split("players_")[1]
-        @mapView.setDimensions()
 
-  drawOrPromptAvatar: ->
-    console.log 'drawOrPromptAvatar'
+
+  drawOrPromptAvatar: (options) ->
     if mediator.current_player.get('name')
-      console.log 'has a name!'
-      return @createPlayerAvatar(mediator.current_player)
+      return @createPlayerAvatar(mediator.current_player, options)
     else
       if @customNames
         @promptPlayerName()
       else
-        @createPlayerAvatar(mediator.current_player)
+        @createPlayerAvatar(mediator.current_player, options)
 
   promptPlayerName: (editing) ->
     player = mediator.current_player
@@ -121,7 +123,11 @@ module.exports = class GameController
       @createPlayerAvatar(player) unless editing
 
 
-  createPlayerAvatar: (player) ->
+  createPlayerAvatar: (player, options = {}) ->
+    player.set('moving', false)
+    player.set('x_position', options.spawnX) if options.spawnX
+    player.set('y_position', options.spawnY) if options.spawnY
+
     @currentAvatar.dispose() if @currentAvatar
     @currentAvatar = new Avatar
       model: player
@@ -140,7 +146,6 @@ module.exports = class GameController
 
     if @clickToNavigate
       @mapView.addTouchEvents(@currentAvatar, 'click')
-    @setupGameMenu()
     @mapView.centerMapOn(player.get('x_position'), player.get('y_position'), 0, 20)
 
   addPlayer: (uuid, data) ->
@@ -178,23 +183,23 @@ module.exports = class GameController
       @promptPlayerName(true)
 
   loadMap: (mapOptions) ->
+    mediator.current_player.leaveRoom() if mediator.current_player
     @players.reset()
-    @currentAvatar.dispose() if @currentAvatar
-    mapOptions = {
-      template: require('views/templates/westside')
-      landscape: require('config/maps/westside')
-    }
     @mapView.dispose() if @mapView
     newMap = document.createElement("div")
     newMap.id = "map"
     document.querySelector(".app-map").appendChild(newMap)
 
     @setupMap(mapOptions)
+    @setupPlayer({skip_intro: true})
+    @drawOrPromptAvatar(mapOptions)
+    @mapView.setDimensions()
+
+    mapName = mapOptions.name or "eastside"
+
     if @multiplayer
-      @notifier.connect mediator.current_player, "westside", (channel) =>
+      @notifier.connect mediator.current_player, mapName, (channel) =>
         channel = channel.split("players_")[1]
-        @drawOrPromptAvatar()
-        @mapView.setDimensions()
 
   intro: (triggerVolume) ->
     view = new IntroView

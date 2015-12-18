@@ -85,7 +85,7 @@ module.exports = class MapView extends View
     within_x = px > @viewport.left and px < @viewport.right
     within_y = py > @viewport.top and py < @viewport.bottom
     within_rect = within_x and within_y
-    if avatar
+    if avatar and avatar.model
       @panToPlayerPosition(avatar.model, avatar) if avatar.model.isCurrentPlayer()
 
   panToPlayerPosition: (player, avatar, animate) ->

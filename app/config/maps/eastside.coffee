@@ -862,4 +862,21 @@ module.exports = [
   y: 80
   zIndex: 100
   ghosty: true
+,
+  id: "ws-door"
+  src: "images/john.png"
+  x: 1950
+  y: 500
+  proximity:
+    radius: 20
+    onEnter: (item, options) ->
+      mapOptions =
+        template: require('views/templates/westside')
+        landscape: require('config/maps/westside')
+        name: "westside"
+        spawnX: 100
+        spawnY: 540
+      EventBroker.publishEvent 'map:load', mapOptions
+    onLeave: ->
+      console.log 'leaving eastside'
 ]

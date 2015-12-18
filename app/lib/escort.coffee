@@ -6,7 +6,6 @@ module.exports =
   capacity: 50
   findEmptyRoom: (PN, room, cb) ->
     room = room or ""
-    console.log room
     @testRoom(PN, room, 1, cb)
 
   testRoom: (PN, room, i, cb) ->
