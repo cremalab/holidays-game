@@ -23,6 +23,7 @@ module.exports = class Notifier extends Model
       @subscribeEvent "players:name_changed", @setAttrs
       @subscribeEvent "players:avatar_changed", @setAttrs
       @subscribeEvent "admin:kick", @publishKick
+      @subscribeEvent "throwSnowball", @throwSnowball
 
       pubnub = @PN
 
@@ -63,13 +64,16 @@ module.exports = class Notifier extends Model
           @removePlayer(m.uuid, true)
         when 'whiteboard'
           @publishEvent "whiteboard:draw", m
+        when 'snowball_thrown'
+          console.log('throw')
+          @publishEvent "doThrowSnowball", m.position
 
   handlePlayers: (message, onConnect) ->
     if message.uuids
       for player in message.uuids
         unless parseInt(player.uuid) is parseInt(@player.get('id'))
           @publishEvent 'addPlayer', player.uuid, player.state
-    
+
     onConnect(@channel) if onConnect
 
   handlePresence: (m,a) ->
@@ -142,3 +146,12 @@ module.exports = class Notifier extends Model
     @PN.state
       channel  : @channel
       state    : attrs
+
+  throwSnowball: (position) ->
+    attributes =
+      type: 'snowball_thrown'
+      position: position
+
+    @PN.publish
+      channel: @channel
+      message: attributes

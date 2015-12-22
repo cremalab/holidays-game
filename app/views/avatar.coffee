@@ -117,6 +117,12 @@ module.exports = class Avatar extends View
         @chatterbox.handleEnter(e)
       if e.keyCode is 27 # esc
         @chatterbox.disposeBubble(true)
+      if e.keyCode is 83 # s
+        position =
+          x: @model.get('x_position')
+          y: @model.get('y_position')
+
+        @publishEvent "throwSnowball", position
 
   move: (keys) ->
 

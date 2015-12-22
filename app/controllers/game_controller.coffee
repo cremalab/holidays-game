@@ -19,6 +19,7 @@ Reactor        = require 'lib/reactor'
 Admin          = require 'lib/admin'
 Whiteboard     = require 'models/whiteboard'
 utils          = require 'lib/utils'
+Snowball       = require 'views/snowball'
 
 module.exports = class GameController
   Backbone.utils.extend @prototype, EventBroker
@@ -43,6 +44,8 @@ module.exports = class GameController
 
     @subscribeEvent 'addPlayer', @addPlayer
     @subscribeEvent 'triggerIntro', @intro
+    @subscribeEvent 'doThrowSnowball', @throwSnowball
+
     @subscribeEvent 'togglePlayback', ->
       @DJ.togglePlayback()
     @createPlayerList()
@@ -81,7 +84,7 @@ module.exports = class GameController
       id: Date.now()
 
     view = @intro()
-    @mapView.listenTo view, 'dispose', => 
+    @mapView.listenTo view, 'dispose', =>
       @drawOrPromptAvatar()
     if @multiplayer
       @notifier.connect mediator.current_player, (channel) =>
@@ -137,6 +140,11 @@ module.exports = class GameController
     @setupGameMenu()
     @mapView.centerMapOn(player.get('x_position'), player.get('y_position'), 0, 20)
 
+  throwSnowball: (position) ->
+    snowball = new Snowball
+      position: position
+    @mapView.spawnSnowball(snowball)
+
   addPlayer: (uuid, data) ->
     if data
       unless parseFloat(uuid) is parseFloat(mediator.current_player.id)
@@ -186,4 +194,3 @@ module.exports = class GameController
     audioToggle.addEventListener 'click', =>
       @publishEvent('togglePlayback')
       audioToggle.classList.toggle('sub-muted')
-
