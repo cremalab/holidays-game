@@ -11,30 +11,37 @@ module.exports = class Landscaper
     @activist = new Activist(@)
     @obstructions = []
     for obstruction in @landscape
-      if obstruction.hasOwnProperty 'src'
-        svg = @createObstructionGraphic(obstruction)
-        obstruction = @activist.activate(obstruction)
-        unless obstruction.ghosty
-          @obstructions.push obstruction
+      svg = @createObstructionGraphic(obstruction)
+      obstruction = @activist.activate(obstruction)
+      unless obstruction.ghosty
+        @obstructions.push obstruction
 
 
   createObstructionGraphic: (obstruction) ->
     position = "#{obstruction.x}px, #{obstruction.y}px"
-    img = document.createElement('img')
-    img.id = obstruction.id
-    img.setAttribute('src', obstruction.src)
-    img = @map.el.appendChild(img)
-
-    extension = obstruction.src.split(".")
-    extension = extension[extension.length-1]
-    img.style.top  = "#{obstruction.y}px"
-    img.style.left = "#{obstruction.x}px"
-    img.classList.add 'obstruction'
-
-    if extension is 'svg'
-      @createSVG(obstruction, img)
+    if obstruction.hasOwnProperty('src')
+      el = document.createElement('img')
+      el.setAttribute('src', obstruction.src)
+      extension = obstruction.src.split(".")
+      extension = extension[extension.length-1]
     else
-      @createImage(obstruction, img)
+      el = document.createElement('div')
+      el.style.width = "#{obstruction.width}px"
+      el.style.height = "#{obstruction.height}px"
+
+    el = @map.el.appendChild(el)
+    el.id = obstruction.id
+    el.style.top  = "#{obstruction.y}px"
+    el.style.left = "#{obstruction.x}px"
+    el.classList.add 'obstruction'
+
+    if obstruction.hasOwnProperty('src')
+      if extension is 'svg'
+        @createSVG(obstruction, el)
+      else
+        @createImage(obstruction, el)
+    else
+      @createInvisible(obstruction, el)
 
 
   createSVG: (obstruction, img) ->
@@ -49,6 +56,7 @@ module.exports = class Landscaper
       obstruction.top    = obstruction.y
       obstruction.right  = obstruction.x + box.width
       obstruction.bottom = obstruction.y + box.height
+      img.style.zIndex = obstruction.zIndex or obstruction.y
       img.classList.add 'svg'
       if obstruction.mirror
         img.style.webkitTransform = "scaleX(-1)"
@@ -71,7 +79,24 @@ module.exports = class Landscaper
 
       obstruction.img = img
 
+  createInvisible: (obstruction) ->
+    el  = document.getElementById obstruction.id
+    rect = el.getClientRects()[0]
+    obstruction.left = obstruction.x
+    obstruction.top  = obstruction.y
+    obstruction.right = obstruction.x + rect.width
+    obstruction.bottom = obstruction.y + rect.height
+    el.style.zIndex = obstruction.zIndex or obstruction.y
 
+    el.classList.add 'invisible'
+    el.style.zIndex = obstruction.zIndex or obstruction.y
+    if obstruction.mirror
+      el.style.webkitTransform = "scaleX(-1)"
+
+    if obstruction.backgroundColor
+      el.style.backgroundColor = obstruction.backgroundColor
+
+    obstruction.el = el
 
   checkObstructions: (x, y, avatar, map) ->
     availableDirections =

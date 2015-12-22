@@ -707,8 +707,8 @@ module.exports = [
         template: require('views/templates/westside')
         landscape: require('config/maps/westside')
         name: "westside"
-        spawnX: 100
-        spawnY: 540
+        spawnX: 60
+        spawnY: 450
       EventBroker.publishEvent 'map:load', mapOptions
     onLeave: ->
       console.log 'leaving eastside'

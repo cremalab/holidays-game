@@ -16,6 +16,8 @@ module.exports = class MapView extends View
 
   initialize: (options) ->
     @template = options.template or require('./templates/map')
+    @mapName = options.mapName or 'westside'
+
     super
     if !!("ontouchstart" of window) or !!("onmsgesturechange" of window)
       @mobile = true
@@ -33,6 +35,7 @@ module.exports = class MapView extends View
   render: ->
     super
     @setDimensions()
+    @el.classList.add @mapName
     @landscaper.init()
     window.addEventListener 'resize', =>
       @setDimensions()
@@ -48,6 +51,9 @@ module.exports = class MapView extends View
     if @mobile
       document.body.removeChild document.getElementById("keysHints")
 
+    @renderWhiteboard() if @mapName is 'eastside'
+
+  renderWhiteboard: ->
     @mini_whiteboard_view = new WhiteboardView
       model: mediator.whiteboard
       container: @el

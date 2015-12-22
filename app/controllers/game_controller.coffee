@@ -34,7 +34,11 @@ module.exports = class GameController
     @whiteboard = mediator.whiteboard = new Whiteboard
       plots: []
     @setupDJ()
-    @setupMap()
+    @setupMap
+      template: require('views/templates/westside')
+      landscape: require('config/maps/westside')
+      spawnX: 5000
+      spawnY: 100
     @setupCanvas()
     @setupPlayer()
     if @multiplayer
@@ -56,13 +60,15 @@ module.exports = class GameController
 
 
   setupMap: (mapOptions = {}) ->
+    console.log mapOptions
     template = mapOptions.template or require('views/templates/eastside')
+    mapName = mapOptions.name or 'westside'
     @mapView = new MapView
-      className: 'map'
       el: document.getElementById("map")
       autoRender: true
       template: template
       landscape: mapOptions.landscape
+      mapName: mapOptions.name
     @mapView.DJ = @DJ
     mediator = mediator
 
@@ -127,6 +133,7 @@ module.exports = class GameController
     player.set('moving', false)
     player.set('x_position', options.spawnX) if options.spawnX
     player.set('y_position', options.spawnY) if options.spawnY
+    player.set('orientation', options.orientation) if options.orientation
 
     @currentAvatar.dispose() if @currentAvatar
     @currentAvatar = new Avatar
