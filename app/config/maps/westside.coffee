@@ -16,5 +16,20 @@ module.exports = [
         spawnY: 520
       EventBroker.publishEvent 'map:load', mapOptions
     onLeave: ->
-      # 
+      #
+  ,
+    id: "laura"
+    src: "images/staff/laura.svg"
+    x: 380
+    y: 1170
+    proximity:
+      radius: 60
+      onEnter: (item, options) ->
+        hint =
+          obstruction: item
+          text: "Hi."
+          id: "laura_talk"
+        EventBroker.publishEvent 'navi:hint', hint
+      onLeave: ->
+        EventBroker.publishEvent 'navi:dismiss_hint', "laura_talk"
 ]

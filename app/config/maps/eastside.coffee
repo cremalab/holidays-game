@@ -313,20 +313,6 @@ module.exports = [
   src: "images/fridge.png"
   x: 1125
   y: 50
-  proximity:
-    radius: 60
-    onEnter: (item, options) ->
-      hint =
-        obstruction: item
-        text: "[Interact] View the curious photo on the fridge"
-        id: "fridge_hint"
-        position: 'right'
-      EventBroker.publishEvent 'navi:hint', hint
-    onLeave: ->
-      EventBroker.publishEvent 'navi:dismiss_hint', "fridge_hint"
-    keys:
-      action: ->
-        EventBroker.publishEvent 'reactor:act', 'team_photo'
 ,
   id: "wall"
   src: "images/wall.png"
@@ -479,19 +465,6 @@ module.exports = [
   src: "images/ipad.png"
   x: 435
   y: 515
-  proximity:
-    radius: 60
-    onEnter: (item, options) ->
-      hint =
-        obstruction: item
-        text: "[Interact] Start the dance party"
-        id: "disco_hint"
-      EventBroker.publishEvent 'navi:hint', hint
-    onLeave: ->
-      EventBroker.publishEvent 'navi:dismiss_hint', "disco_hint"
-    keys:
-      action: ->
-        EventBroker.publishEvent 'reactor:act', 'disco'
 ,
   id: "ipad2"
   src: "images/ipad.png"
@@ -510,19 +483,9 @@ module.exports = [
   src: "images/dan.png"
   x: 390
   y: 70
-  proximity:
-    radius: 60
-    onEnter: (item, options) ->
-      hint =
-        obstruction: item
-        text: "Go Jayhawks!"
-        id: "dan_talk"
-      EventBroker.publishEvent 'navi:hint', hint
-    onLeave: ->
-      EventBroker.publishEvent 'navi:dismiss_hint', "dan_talk"
 ,
   id: "george"
-  src: "images/george.png"
+  src: "images/staff/george.png"
   x: 1070
   y: 1170
   proximity:
@@ -530,7 +493,7 @@ module.exports = [
     onEnter: (item, options) ->
       hint =
         obstruction: item
-        text: "Welcome to Cremalab! Try and find the hidden disco mode!"
+        text: "Welcome to Crema!"
         id: "george_talk"
       EventBroker.publishEvent 'navi:hint', hint
     onLeave: ->
@@ -555,7 +518,7 @@ module.exports = [
         EventBroker.publishEvent 'reactor:act', 'tweet_friends', 'https://twitter.com/home?status=Have%20you%20visited%20the%20%23CremaChristmas%20party%20yet?%20@Cremalab%20used%20@PubNub%20@Brunch%20to%20bring%20it%20to%20life.%20Come%20join%20me!%20cremalab.com/party'
 ,
   id: "rob"
-  src: "images/rob.png"
+  src: "images/staff/rob.png"
   x: 1520
   y: 120
   proximity:
@@ -570,7 +533,7 @@ module.exports = [
       EventBroker.publishEvent 'navi:dismiss_hint', "rob_talk"
 ,
   id: "ross"
-  src: "images/ross.png"
+  src: "images/staff/ross.png"
   x: 1450
   y: 900
   proximity:
@@ -578,14 +541,14 @@ module.exports = [
     onEnter: (item, options) ->
       hint =
         obstruction: item
-        text: "Leave me alone! I'm working!"
+        text: "This room smells like brainstorm."
         id: "ross_talk"
       EventBroker.publishEvent 'navi:hint', hint
     onLeave: ->
       EventBroker.publishEvent 'navi:dismiss_hint', "ross_talk"
 ,
   id: "deric"
-  src: "images/deric.png"
+  src: "images/staff/deric.png"
   x: 380
   y: 1170
   proximity:
@@ -598,36 +561,6 @@ module.exports = [
       EventBroker.publishEvent 'navi:hint', hint
     onLeave: ->
       EventBroker.publishEvent 'navi:dismiss_hint', "deric_talk"
-,
-  id: "kelly"
-  src: "images/kelly.png"
-  x: 1410
-  y: 580
-  proximity:
-    radius: 60
-    onEnter: (item, options) ->
-      hint =
-        obstruction: item
-        text: "Welcome to our space. Come back anytime!"
-        id: "kelly_talk"
-      EventBroker.publishEvent 'navi:hint', hint
-    onLeave: ->
-      EventBroker.publishEvent 'navi:dismiss_hint', "kelly_talk"
-,
-  id: "John"
-  src: "images/john.png"
-  x: 820
-  y: 1180
-  proximity:
-    radius: 60
-    onEnter: (item, options) ->
-      hint =
-        obstruction: item
-        text: "Life's a garden... Dig it!"
-        id: "john_talk"
-      EventBroker.publishEvent 'navi:hint', hint
-    onLeave: ->
-      EventBroker.publishEvent 'navi:dismiss_hint', "john_talk"
 ,
   id: "present21"
   src: "images/present_32.png"
@@ -644,31 +577,11 @@ module.exports = [
   src: "images/present_2.png"
   x: 940
   y: 425
-  proximity:
-    radius: 60
-    onEnter: (item, options) ->
-      hint =
-        obstruction: item
-        text: "Ross wants a new synthesizer!"
-        id: "ross_present"
-      EventBroker.publishEvent 'navi:hint', hint
-    onLeave: ->
-      EventBroker.publishEvent 'navi:dismiss_hint', "ross_present"
 ,
   id: "present24"
   src: "images/present_31.png"
   x: 995
   y: 515
-  proximity:
-    radius: 60
-    onEnter: (item, options) ->
-      hint =
-        obstruction: item
-        text: "Rob wants the new Call of Duty!"
-        id: "rob_present"
-      EventBroker.publishEvent 'navi:hint', hint
-    onLeave: ->
-      EventBroker.publishEvent 'navi:dismiss_hint', "rob_present"
 ,
   id: "present1"
   src: "images/present_1.png"
@@ -692,16 +605,6 @@ module.exports = [
   src: "images/present_21.png"
   x: 925
   y: 805
-  proximity:
-    radius: 60
-    onEnter: (item, options) ->
-      hint =
-        obstruction: item
-        text: "Deric wants more Sriracha sauce!"
-        id: "deric_present"
-      EventBroker.publishEvent 'navi:hint', hint
-    onLeave: ->
-      EventBroker.publishEvent 'navi:dismiss_hint', "deric_present"
 ,
   id: "present4"
   src: "images/present_3.png"
@@ -722,16 +625,6 @@ module.exports = [
   zIndex: 100
   x: 803
   y: 68
-  proximity:
-    radius: 60
-    onEnter: (item, options) ->
-      hint =
-        obstruction: item
-        text: "George wants shoes as cool as Bishop's!"
-        id: "george_present"
-      EventBroker.publishEvent 'navi:hint', hint
-    onLeave: ->
-      EventBroker.publishEvent 'navi:dismiss_hint', "george_present"
 ,
   id: "present26"
   src: "images/present_22.png"
@@ -745,16 +638,6 @@ module.exports = [
   zIndex: 1000
   x: 195
   y: 798
-  proximity:
-    radius: 60
-    onEnter: (item, options) ->
-      hint =
-        obstruction: item
-        text: "Matt wants a new messenger bag!"
-        id: "matt_present"
-      EventBroker.publishEvent 'navi:hint', hint
-    onLeave: ->
-      EventBroker.publishEvent 'navi:dismiss_hint', "matt_present"
 ,
   id: "present51"
   src: "images/present_21.png"
@@ -778,76 +661,26 @@ module.exports = [
   src: "images/present_31.png"
   x: 415
   y: 910
-  proximity:
-    radius: 60
-    onEnter: (item, options) ->
-      hint =
-        obstruction: item
-        text: "Michael wants an iPad air 2!"
-        id: "michael_present"
-      EventBroker.publishEvent 'navi:hint', hint
-    onLeave: ->
-      EventBroker.publishEvent 'navi:dismiss_hint', "michael_present"
 ,
   id: "present71"
   src: "images/present_22.png"
   x: 205
   y: 895
-  proximity:
-    radius: 60
-    onEnter: (item, options) ->
-      hint =
-        obstruction: item
-        text: "Bishop wants an iPhone 6+!"
-        id: "bishop_present"
-      EventBroker.publishEvent 'navi:hint', hint
-    onLeave: ->
-      EventBroker.publishEvent 'navi:dismiss_hint', "bishop_present"
 ,
   id: "present8"
   src: "images/present_35.png"
   x: 1015
   y: 785
-  proximity:
-    radius: 60
-    onEnter: (item, options) ->
-      hint =
-        obstruction: item
-        text: "John wants something purple!"
-        id: "john_present"
-      EventBroker.publishEvent 'navi:hint', hint
-    onLeave: ->
-      EventBroker.publishEvent 'navi:dismiss_hint', "john_present"
 ,
   id: "present81"
   src: "images/present_32.png"
   x: 1015
   y: 635
-  proximity:
-    radius: 60
-    onEnter: (item, options) ->
-      hint =
-        obstruction: item
-        text: "Kelly wants more cheese!"
-        id: "kelly_present"
-      EventBroker.publishEvent 'navi:hint', hint
-    onLeave: ->
-      EventBroker.publishEvent 'navi:dismiss_hint', "kelly_present"
 ,
   id: "present9"
   src: "images/present_33.png"
   x: 430
   y: 410
-  proximity:
-    radius: 60
-    onEnter: (item, options) ->
-      hint =
-        obstruction: item
-        text: "Dan wants KU basketball tickets!"
-        id: "dan_present"
-      EventBroker.publishEvent 'navi:hint', hint
-    onLeave: ->
-      EventBroker.publishEvent 'navi:dismiss_hint', "dan_present"
 ,
   id: "present11"
   src: "images/present_2.png"

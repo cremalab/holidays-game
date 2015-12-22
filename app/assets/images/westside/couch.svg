@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="313px" height="142px" viewBox="0 0 313 142" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.4.4 (17249) - http://www.bohemiancoding.com/sketch -->
+    <title>couch</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="couch" sketch:type="MSArtboardGroup">
+            <g id="Rectangle-885-+-Rectangle-832-Copy-3-+-Rectangle-832-Copy-3-+-Line" sketch:type="MSLayerGroup">
+                <rect id="Rectangle-885" fill="#752C11" sketch:type="MSShapeGroup" x="0" y="0" width="29" height="142"></rect>
+                <g id="Rectangle-832-Copy-3-+-Rectangle-832-Copy-3-+-Line" transform="translate(1.000000, 0.000000)" sketch:type="MSShapeGroup">
+                    <g id="Rectangle-832-Copy-3-+-Rectangle-832-Copy-3">
+                        <rect id="Rectangle-832-Copy-3" fill="#8E3614" x="6.62578993" y="0" width="305.163264" height="122"></rect>
+                        <rect id="Rectangle-832-Copy-3" fill="#A43C16" x="36.9811321" y="29" width="122.809998" height="93"></rect>
+                        <rect id="Rectangle-832-Copy-5" fill="#A43C16" x="160" y="29" width="122.809998" height="93"></rect>
+                        <path d="M311.789053,122 L6.62578993,122 L0.210946554,142 L301.708585,142 L311.789053,122 Z" id="Rectangle-832-Copy-3" fill="#8E3614"></path>
+                    </g>
+                    <path d="M159.5,26.5 L159.5,119.5215" id="Line" stroke="#8E3615" stroke-width="5" stroke-linecap="square"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
