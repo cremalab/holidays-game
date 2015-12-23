@@ -1,6 +1,6 @@
 {
-  "author": "Your Name",
-  "name": "package-name",
+  "author": "Crema",
+  "name": "crema-party",
   "description": "Package description",
   "version": "0.0.1",
   "homepage": "",
@@ -16,19 +16,19 @@
     "test": "brunch test"
   },
   "dependencies": {
-    "auto-reload-brunch": "^1.8.1",
-    "autoprefixer-brunch": "^1.8.5",
+    "auto-reload-brunch": "1.8.1",
+    "autoprefixer-brunch": "1.8.5",
     "bower": "1.7.1",
-    "brunch": "^2.0.4",
-    "clean-css-brunch": "^1.8.0",
-    "coffee-script-brunch": "^1.8.3",
-    "css-brunch": "^1.7.0",
-    "jade-brunch": "^1.8.2",
-    "javascript-brunch": "^1.8.0",
+    "brunch": "2.0.4",
+    "clean-css-brunch": "1.8.0",
+    "coffee-script-brunch": "1.8.3",
+    "css-brunch": "1.7.0",
+    "jade-brunch": "1.8.2",
+    "javascript-brunch": "1.8.0",
     "nestle": "1.1.0",
     "progeny": "git://github.com/cremalab/progeny.git",
-    "stylus-brunch": "^1.8.1",
-    "uglify-js-brunch": "^1.7.8"
+    "stylus-brunch": "1.8.1",
+    "uglify-js-brunch": "1.7.8"
   },
   "devDependencies": {
     "mocha": "1.3.0",
