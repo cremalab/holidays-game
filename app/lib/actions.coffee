@@ -50,6 +50,7 @@ module.exports =
     else
       classList.add 'disco-time'
       map.DJ.playTrack('disco')
+    console.log classList
 
   whiteboard: ->
     unless mediator.game_state is 'modal' or mediator.game_state is 'chatting'

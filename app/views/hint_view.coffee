@@ -15,7 +15,7 @@ module.exports = class HintView extends View
       @el.style.position = 'absolute'
       rect = @el.getBoundingClientRect()
       obstruction = @model.get('obstruction')
-      @el.style.zIndex = obstruction.bottom
+      @el.style.zIndex = parseInt(obstruction.bottom)
       ob_width = obstruction.right - obstruction.left
       if @model.get('position') and @model.get('position') is 'right'
         @el.style.left = (obstruction.x + ob_width + @x_offset) + "px"

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="322px" height="121px" viewBox="0 0 322 121" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.4.4 (17249) - http://www.bohemiancoding.com/sketch -->
+    <title>coffee-table</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="coffee-table" sketch:type="MSArtboardGroup">
+            <g id="table-copy-+-Rectangle-458-+-Group" sketch:type="MSLayerGroup">
+                <g id="table-copy" fill="#8B572A" sketch:type="MSShapeGroup">
+                    <rect id="Rectangle-312" x="0" y="0" width="322" height="98.1609195"></rect>
+                    <rect id="Rectangle-313" x="0" y="98.1609195" width="322" height="22.8390805"></rect>
+                </g>
+                <g id="Rectangle-458-+-Group" transform="translate(161.000000, 60.500000) rotate(-90.000000) translate(-161.000000, -60.500000) translate(100.500000, -100.500000)" sketch:type="MSShapeGroup">
+                    <g id="Group" transform="translate(-0.000000, 0.000000)">
+                        <rect id="Rectangle-459" fill="#B57835" x="23" y="314" width="98" height="8"></rect>
+                        <rect id="Rectangle-459-Copy" fill="#B57835" x="23" y="-1.5308085e-15" width="98" height="8"></rect>
+                        <rect id="Rectangle-459-Copy" fill="#B57835" x="23" y="157" width="98" height="8"></rect>
+                        <rect id="Rectangle-460" fill="#C8873F" x="23" y="-1.5308085e-15" width="10" height="322"></rect>
+                        <rect id="Rectangle-461" fill="#C8873F" x="38" y="-2.4492936e-15" width="10" height="322"></rect>
+                        <rect id="Rectangle-461-Copy" fill="#C8873F" x="0" y="0" width="5" height="322"></rect>
+                        <rect id="Rectangle-461-Copy-2" fill="#C8873F" x="10" y="-6.7355574e-16" width="8" height="322"></rect>
+                        <rect id="Rectangle-462" fill="#C8873F" x="52" y="-3.30654636e-15" width="10" height="322"></rect>
+                        <rect id="Rectangle-463" fill="#C8873F" x="66" y="-4.16379912e-15" width="10" height="322"></rect>
+                        <rect id="Rectangle-464" fill="#C8873F" x="80" y="-5.02105188e-15" width="10" height="322"></rect>
+                        <rect id="Rectangle-465" fill="#C8873F" x="95" y="-5.93953698e-15" width="10" height="322"></rect>
+                        <rect id="Rectangle-465-Copy" fill="#C8873F" x="111" y="-6.91925442e-15" width="10" height="322"></rect>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -29,7 +29,6 @@ module.exports = class Activist
     return ob
 
   addActor: (item) ->
-
     item.addEventListener 'hit_left', (options) ->
       item.onHit.left(item, options) if item.onHit.left
     item.addEventListener 'hit_right', (options) ->
@@ -58,7 +57,7 @@ module.exports = class Activist
   handleTap: (e, x, y) ->
     for item in @actionableItems
       if item.current_player_within_proximity
-        av_proxy = 
+        av_proxy =
           width: 10
           height: 10
         if @landscaper.avatarOverlaps(av_proxy, item, x - @landscaper.map.offset_x, y - @landscaper.map.offset_y)
@@ -71,4 +70,7 @@ module.exports = class Activist
       if item.current_player_within_proximity
         item.proximity.keys.action(item)
 
-
+  dispose: ->
+    document.removeEventListener 'keydown', @handleKeyDown
+    @unsubscribeEvent 'map:interact', @handleTap
+    @events = []

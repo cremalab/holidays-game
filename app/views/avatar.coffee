@@ -95,6 +95,7 @@ module.exports = class Avatar extends View
       document.addEventListener 'keyup', @handleKeyUp
 
   broadCastMove: (player) ->
+    return unless player
     unless player.isCurrentPlayer()
       @positionOnMap()
       @trigger('playerMove', player, @)
@@ -119,7 +120,7 @@ module.exports = class Avatar extends View
         @chatterbox.disposeBubble(true)
 
   move: (keys) ->
-
+    return unless @model
     @moving = true
     @model.set('moving', true)
 
@@ -153,6 +154,7 @@ module.exports = class Avatar extends View
     @positionOnMap()
 
   positionOnMap: ->
+    return unless @model
     @position_x = @model.get('x_position')
     @position_y = @model.get('y_position')
     @el.style.webkitTransform = "translate3d(#{@model.position()}, 0)"
@@ -210,6 +212,7 @@ module.exports = class Avatar extends View
     return @activeMovementKeys.indexOf(16) > -1
 
   setMovementClasses: ->
+    return unless @el
     classList = @el.classList
     classToAdd = ''
 
@@ -233,6 +236,7 @@ module.exports = class Avatar extends View
       classList.add 'dir-right'
 
   setOrientation: ->
+    return unless @el
     cl = @el.classList
     if cl.contains('dir-up') and cl.contains('dir-left')
       if @isShiftKeyDown()
@@ -284,8 +288,9 @@ module.exports = class Avatar extends View
       @activeMovementKeys.splice(@activeMovementKeys.indexOf(keyCode), 1)
 
   setDimensions: ->
-    @width = @rect.right - @rect.left
-    @height = @rect.bottom - @rect.top
+    if @rect
+      @width = @rect.right - @rect.left
+      @height = @rect.bottom - @rect.top
 
   checkCollision: ->
     blocked_up    = @isMovingDirection(up) and !@availableDirections.up
@@ -353,4 +358,5 @@ module.exports = class Avatar extends View
   dispose: ->
     document.removeEventListener 'keydown', @handleKeyDown
     document.removeEventListener 'keyup', @handleKeyUp
+    clearInterval @movementLoop
     super

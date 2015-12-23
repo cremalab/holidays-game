@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="388px" height="197px" viewBox="0 0 388 197" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.4.4 (17249) - http://www.bohemiancoding.com/sketch -->
+    <title>receptionist</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="receptionist" sketch:type="MSArtboardGroup">
+            <g id="Rectangle-312-+-Rectangle-313-+-Rectangle-312" sketch:type="MSLayerGroup">
+                <g id="Rectangle-312-+-Rectangle-313" sketch:type="MSShapeGroup">
+                    <rect id="Rectangle-312" fill="#FFFFFF" x="0" y="0" width="321" height="66.7816092"></rect>
+                    <rect id="Rectangle-313" fill="#E3E3E3" x="0" y="66.7816092" width="321" height="6.67816092"></rect>
+                </g>
+                <path d="M406.099114,65.1091954 L255.890805,65.1091954 L255.890805,131.890805 L452.890805,131.890805 L452.890805,76.1091954 L406.099114,65.1091954 Z" id="Rectangle-312" fill="#FFFFFF" sketch:type="MSShapeGroup" transform="translate(354.390805, 98.500000) rotate(-270.000000) translate(-354.390805, -98.500000) "></path>
+            </g>
+        </g>
+    </g>
+</svg>

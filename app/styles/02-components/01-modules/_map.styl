@@ -5,9 +5,13 @@
   width 2002px
   height 1500px
   transform translate3d(0,0,0)
-  background url(../images/Map2.png) no-repeat
   overflow hidden
   perspective 400
+
+  &.eastside
+    background url(../images/Map2.png) no-repeat
+  &.westside
+    background url(../images/westside/west-side.svg) no-repeat
 
 #drawCanvas
   position absolute
@@ -26,5 +30,4 @@
 
 .obstruction
   position absolute
-  transition all .3s  
-    
+  transition all .3s

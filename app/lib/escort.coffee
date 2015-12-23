@@ -4,14 +4,15 @@ channel_prefix = "players_"
 
 module.exports =
   capacity: 50
-  findEmptyRoom: (PN, cb) ->
-    @testRoom(PN, 1, cb)
+  findEmptyRoom: (PN, room, cb) ->
+    room = room or ""
+    @testRoom(PN, room, 1, cb)
 
-  testRoom: (PN, i, cb) ->
+  testRoom: (PN, room, i, cb) ->
     PN.here_now
-      channel : channel_prefix + i
+      channel : channel_prefix + room + i
       callback : (m) =>
         if m.uuids.length >= @capacity
           @testRoom(PN, i+1, cb)
         else
-          cb(channel_prefix + i)
+          cb(channel_prefix + room + i)

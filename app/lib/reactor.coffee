@@ -8,8 +8,15 @@ module.exports = class Reactor
     @map     = mapView
     @players = players
     @actions = actions
-    @subscribeEvent 'reactor:act', (actionName, options...) =>
-      @actions[actionName](@map, options)
+    console.log @actions
+    @subscribeEvent 'reactor:act', @applyAction
 
+  applyAction: (actionName, options...) ->
+    @actions[actionName](@map, options)
 
-
+  dispose: ->
+    console.log 'dispose'
+    @map     = null
+    @players = null
+    @actions = null
+    @unsubscribeEvent 'reactor:act', @applyAction
