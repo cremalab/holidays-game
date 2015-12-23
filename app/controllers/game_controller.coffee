@@ -92,9 +92,9 @@ module.exports = class GameController
     attrs = JSON.parse(localStorage.getItem("CremalabPartyAvatar"))
     mediator.current_player = new Player(attrs)
     mediator.current_player.set
-      orientation: 1
-      x_position: 968
-      y_position: 1384
+      orientation: 6
+      x_position: 1792
+      y_position: 792
       active: true
       id: Date.now()
     view = @intro() unless options.skip_intro

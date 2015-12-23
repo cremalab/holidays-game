@@ -23,13 +23,13 @@ module.exports = [
     id: "laura"
     src: "images/staff/laura.svg"
     y: 700
-    x: 1280
+    x: 1320
     proximity:
-      radius: 60
+      radius: 100
       onEnter: (item, options) ->
         hint =
           obstruction: item
-          text: "Hi."
+          text: "Welcome to Crema!"
           id: "laura_talk"
         EventBroker.publishEvent 'navi:hint', hint
       onLeave: ->
