@@ -5,12 +5,6 @@ module.exports = [
   src: "images/table.svg"
   x: 260
   y: 400
-  # proximity:
-  #   radius: 200
-  #   onEnter: (item, options) ->
-  #     console.log "ENTERING RADIUS"
-  #   onLeave: ->
-  #     console.log "LEAVING RADIUS"
 ,
   id: "table2"
   src: "images/table.svg"
@@ -48,69 +42,69 @@ module.exports = [
   y: 875
 ,
   id: "mac"
-  src: "images/mac.png"
+  src: "images/mac.svg"
   x: 345
   y: 480
   ghosty: true
 ,
   id: "mac2"
-  src: "images/mac.png"
+  src: "images/mac.svg"
   x: 115
   y: 480
   ghosty: true
 ,
   id: "mac3"
-  src: "images/mac.png"
+  src: "images/mac.svg"
   x: 345
   y: 880
   ghosty: true
 ,
   id: "mac4"
-  src: "images/mac.png"
+  src: "images/mac.svg"
   x: 115
   y: 880
   ghosty: true
 ,
   id: "macflip"
-  src: "images/mac_flip.png"
+  src: "images/mac_flip.svg"
   x: 345
   y: 410
   ghosty: true
 ,
   id: "macflip2"
-  src: "images/mac_flip.png"
+  src: "images/mac_flip.svg"
   x: 115
   y: 410
   ghosty: true
 ,
   id: "macflip3"
-  src: "images/mac_flip.png"
+  src: "images/mac_flip.svg"
   x: 345
   y: 810
   ghosty: true
 ,
   id: "macflip4"
-  src: "images/mac_flip.png"
+  src: "images/mac_flip.svg"
   x: 115
   y: 810
 ,
   id: "table_vertical"
-  src: "images/table_vertical.png"
+  src: "images/table_vertical.svg"
   x: 900
   y: 400
 ,
   id: "table_vertical2"
-  src: "images/table_vertical.png"
+  src: "images/table_vertical.svg"
   x: 970
   y: 400
 ,
   id: "table_vertical3"
-  src: "images/table_vertical.png"
+  src: "images/table_vertical.svg"
   x: 970
   y: 635
 ,
   id: "table_vertical4"
-  src: "images/table_vertical.png"
+  src: "images/table_vertical.svg"
   x: 900
   y: 635
 ,
@@ -200,22 +194,22 @@ module.exports = [
   y: 875
 ,
   id: "couch_flip"
-  src: "images/couch_flip.png"
+  src: "images/couch_flip.svg"
   x: 335
   y: 1175
 ,
   id: "sharpie_table"
-  src: "images/sharpie_table.svg"
+  src: "images/sharpie_table.png"
   x: 190
   y: 550
 ,
   id: "sharpie_table2"
-  src: "images/sharpie_table.svg"
+  src: "images/sharpie_table.png"
   x: 215
   y: 740
 ,
   id: "sharpie_table3"
-  src: "images/sharpie_table.svg"
+  src: "images/sharpie_table.png"
   x: 70
   y: 340
 ,
@@ -449,20 +443,20 @@ module.exports = [
       EventBroker.publishEvent 'reactor:act', "lamp_light", item
 ,
   id: "ipad"
-  src: "images/ipad.png"
+  src: "images/ipad.svg"
   x: 990
   y: 480
   ghosty: true
   mirror: true
 ,
   id: "ipad4"
-  src: "images/ipad.png"
+  src: "images/ipad.svg"
   x: 915
   y: 755
   ghosty: true
 ,
   id: "ipad3"
-  src: "images/ipad.png"
+  src: "images/ipad.svg"
   x: 435
   y: 515
   proximity:
@@ -480,20 +474,20 @@ module.exports = [
         EventBroker.publishEvent 'reactor:act', 'disco'
 ,
   id: "ipad2"
-  src: "images/ipad.png"
+  src: "images/ipad.svg"
   x: 630
   y: 75
   ghosty: true
   mirror: true
 ,
   id: "flamingo"
-  src: "images/flamingo.png"
+  src: "images/flamingo.svg"
   x: 930
   y: 525
   ghosty: true
 ,
   id: "nate"
-  src: "images/nate.svg"
+  src: "images/nate.png"
   x: 120
   y: 520
   proximity:
@@ -511,7 +505,7 @@ module.exports = [
         EventBroker.publishEvent 'reactor:act', 'tweet_friends', 'https://twitter.com/home?status=Have%20you%20visited%20the%20%23CremaChristmas%20party%20yet?%20@Cremalab%20used%20@PubNub%20@Brunch%20to%20bring%20it%20to%20life.%20Come%20join%20me!%20cremalab.com/party'
 ,
   id: "rob"
-  src: "images/staff/rob.png"
+  src: "images/staff/rob.svg"
   x: 1520
   y: 120
   proximity:
@@ -526,7 +520,7 @@ module.exports = [
       EventBroker.publishEvent 'navi:dismiss_hint', "rob_talk"
 ,
   id: "ross"
-  src: "images/staff/ross.png"
+  src: "images/staff/ross.svg"
   x: 1450
   y: 900
   proximity:
@@ -539,6 +533,31 @@ module.exports = [
       EventBroker.publishEvent 'navi:hint', hint
     onLeave: ->
       EventBroker.publishEvent 'navi:dismiss_hint', "ross_talk"
+,
+  id: "paul"
+  src: "images/staff/paul.svg"
+  x: 572
+  y: 776
+,
+  id: "michael"
+  src: "images/staff/michael.png"
+  x: 1165
+  y: 120
+,
+  id: "alexa"
+  src: "images/staff/alexa.svg"
+  x: 444
+  y: 284
+,
+  id: "benson"
+  src: "images/staff/benson.svg"
+  x: 804
+  y: 640
+,
+  id: "justin"
+  src: "images/staff/justin.svg"
+  x: 204
+  y: 980
 ,
   id: "present21"
   src: "images/present_32.png"
@@ -562,7 +581,7 @@ module.exports = [
   y: 515
 ,
   id: "present1"
-  src: "images/present_1.png"
+  src: "images/present_31.png"
   x: 1495
   y: 650
   ghosty: true

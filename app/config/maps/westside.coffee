@@ -40,7 +40,7 @@ module.exports = [
     y: 400
     x: 1750
     proximity:
-      radius: 30
+      radius: 50
       onEnter: (item, options) ->
         hint =
           obstruction: item
@@ -52,18 +52,48 @@ module.exports = [
   ,
     id: "scotty"
     src: "images/staff/scotty.svg"
-    y: 484
-    x: 484
+    y: 534
+    x: 594
+    proximity:
+      radius: 60
+      onEnter: (item, options) ->
+        hint =
+          obstruction: item
+          text: "'bout to make some pour-over coffee if you want some!"
+          id: "scotty_talk"
+        EventBroker.publishEvent 'navi:hint', hint
+      onLeave: ->
+        EventBroker.publishEvent 'navi:dismiss_hint', "scotty_talk"
   ,
     id: "george"
     src: "images/staff/george.svg"
-    y: 110
+    y: 270
     x: 580
+    proximity:
+      radius: 60
+      onEnter: (item, options) ->
+        hint =
+          obstruction: item
+          text: "At Crema we’re dedicated to building solutions that solve problems and better lives"
+          id: "george_talk"
+        EventBroker.publishEvent 'navi:hint', hint
+      onLeave: ->
+        EventBroker.publishEvent 'navi:dismiss_hint', "george_talk"
   ,
     id: "dan"
     src: "images/dan.svg"
     x: 880
     y: 70
+    proximity:
+      radius: 60
+      onEnter: (item, options) ->
+        hint =
+          obstruction: item
+          text: "Why hello, what would you say you do here?"
+          id: "dan_talk"
+        EventBroker.publishEvent 'navi:hint', hint
+      onLeave: ->
+        EventBroker.publishEvent 'navi:dismiss_hint', "dan_talk"
   ,
     id: "deric"
     src: "images/staff/deric.svg"
@@ -79,6 +109,16 @@ module.exports = [
     src: "images/staff/kaley.svg"
     x: 360
     y: 1106
+  ,
+    id: "luke"
+    src: "images/staff/luke.svg"
+    x: 230
+    y: 1206
+  ,
+    id: "carla_present"
+    src: "images/present_2.svg"
+    x: 360
+    y: 1206
   ,
     id: "mitch"
     src: "images/staff/mitch.svg"
@@ -117,6 +157,40 @@ module.exports = [
     x: 1160
     y: 280
   ,
+    id: "table_present"
+    src: "images/present_3.png"
+    x: 1260
+    y: 320
+  ,
+    id: "table_plant"
+    src: "images/plant.svg"
+    x: 1420
+    y: 300
+  ,
+    id: "golden_beaker"
+    src: "images/westside/golden-beaker.svg"
+    x: 1108
+    y: 640
+    zIndex: 680
+    proximity:
+      radius: 60
+      onEnter: (item, options) ->
+        hint =
+          obstruction: item
+          text: "[interact] Watch our '25 under 25' award video!"
+          id: "gold_beaker"
+        EventBroker.publishEvent 'navi:hint', hint
+      onLeave: ->
+        EventBroker.publishEvent 'navi:dismiss_hint', "gold_beaker"
+      keys:
+        action: ->
+          EventBroker.publishEvent 'reactor:act', 'watch_award_video'
+  ,
+    id: "eric_table_present"
+    src: "images/present_31.svg"
+    y: 490
+    x: 1770
+  ,
     id: "couch"
     src: "images/westside/couch.svg"
     x: 1165
@@ -135,7 +209,17 @@ module.exports = [
     id: "automan2"
     src: "images/red_chair.svg"
     x: 1305
-    y: 980
+    y: 1000
+  ,
+    id: "couch2"
+    src: "images/couch_flip.svg"
+    x: 1905
+    y: 1000
+  ,
+    id: "couch3"
+    src: "images/couch_flip.svg"
+    x: 1905
+    y: 1200
   ,
     id: "office_chair1"
     src: "images/office_chair_flip.svg"
@@ -169,6 +253,11 @@ module.exports = [
     height: 180
     width: 80
     backgroundColor: "#fff"
+  ,
+    id: "tree"
+    src: "images/tree2.svg"
+    y: 45
+    x: 1520
   ,
     id: "standing_desk1"
     src: "images/westside/long-white-table-tall.svg"

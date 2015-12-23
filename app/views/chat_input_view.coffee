@@ -13,7 +13,7 @@ module.exports = class ChatInputView extends View
         @input.value = @model.get('content')
     setTimeout =>
       @input.focus()
-    , 0
+    , 100
     @input.addEventListener 'blur', ->
       window.scrollTo(0, 0)
 

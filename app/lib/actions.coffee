@@ -60,3 +60,12 @@ module.exports =
         template: require 'views/templates/whiteboard'
         autoRender: true
         model: mediator.whiteboard
+
+  watch_award_video: ->
+    unless mediator.game_state is 'modal' or mediator.game_state is 'chatting'
+      view = new Modal
+        container: document.body
+        className: 'modal'
+        template: require 'views/templates/award_video'
+        autoRender: true
+      mediator.game_state = 'modal'
