@@ -65,7 +65,6 @@ module.exports = class Notifier extends Model
         when 'whiteboard'
           @publishEvent "whiteboard:draw", m
         when 'snowball_thrown'
-          console.log('throw')
           @publishEvent "doThrowSnowball", m.position
 
   handlePlayers: (message, onConnect) ->

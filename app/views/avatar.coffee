@@ -121,7 +121,8 @@ module.exports = class Avatar extends View
         position =
           x: @model.get('x_position')
           y: @model.get('y_position')
-
+          orientation: @model.get('orientation')
+          
         @publishEvent "throwSnowball", position
 
   move: (keys) ->
