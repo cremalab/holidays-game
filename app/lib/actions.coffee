@@ -26,9 +26,11 @@ module.exports =
     if item.img
       if item.lamp_on
         item.img.setAttribute('src', '/images/lamp_1.png')
+        console.log item.img.src
         item.lamp_on = false
       else
         item.img.setAttribute('src', '/images/lamp_2.png')
+        console.log item.img.src
         item.lamp_on = true
   lamp_light_flip: (map, options) ->
     item= options[0]

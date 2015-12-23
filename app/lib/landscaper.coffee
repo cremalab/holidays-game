@@ -141,6 +141,7 @@ module.exports = class Landscaper
     avatarRect.height = avatar.height
     avatarRect.width = avatar.width
     player = avatar.model
+    return unless player
     avatarRect.x = player.get('x_position')
     avatarRect.y = player.get('y_position')
     @checkIntersections(obstruction, avatarRect, player, x, y, avatar)

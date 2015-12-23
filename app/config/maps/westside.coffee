@@ -22,8 +22,8 @@ module.exports = [
   ,
     id: "laura"
     src: "images/staff/laura.svg"
-    x: 380
-    y: 1070
+    y: 700
+    x: 1280
     proximity:
       radius: 60
       onEnter: (item, options) ->
@@ -114,8 +114,67 @@ module.exports = [
     y: 1180
     x: 1220
   ,
+    id: "mac_flip1"
+    src: "images/mac_flip.svg"
+    x: 1300
+    y: 1190
+    ghosty: true
+  ,
+    id: "mac_flip2"
+    src: "images/mac_flip.svg"
+    x: 1070
+    y: 1190
+    ghosty: true
+  ,
+    id: "mac1"
+    src: "images/mac.svg"
+    x: 1300
+    y: 1270
+    ghosty: true
+  ,
+    id: "mac2"
+    src: "images/mac.svg"
+    x: 1070
+    y: 1270
+    ghosty: true
+  ,
     id: "table2"
     src: "images/table.svg"
     y: 1180
     x: 280
+  ,
+    id: "table3"
+    src: "images/table.svg"
+    y: 1180
+    x: 980
+  ,
+    id: "table4"
+    src: "images/table.svg"
+    y: 1255
+    x: 1220
+  ,
+    id: "table5"
+    src: "images/table.svg"
+    y: 1255
+    x: 980
+  ,
+    id: "present1"
+    src: "images/present_31.png"
+    x: 1345
+    y: 1210
+  ,
+    id: "present2"
+    src: "images/present_22.png"
+    x: 485
+    y: 595
+  ,
+    id: "present3"
+    src: "images/present_35.png"
+    x: 1405
+    y: 705
+  ,
+    id: "present4"
+    src: "images/present_32.png"
+    x: 1215
+    y: 675
 ]

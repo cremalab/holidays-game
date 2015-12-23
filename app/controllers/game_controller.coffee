@@ -60,7 +60,6 @@ module.exports = class GameController
 
 
   setupMap: (mapOptions = {}) ->
-    console.log mapOptions
     template = mapOptions.template or require('views/templates/eastside')
     mapName = mapOptions.name or 'westside'
     @mapView = new MapView
@@ -72,7 +71,7 @@ module.exports = class GameController
     @mapView.DJ = @DJ
     mediator = mediator
 
-    @reactor = new Reactor(@mapView, @players)
+    @reactor = new Reactor(@mapView, @players) unless @reactor
     @nav     = new Navi(@mapView)
 
     Weather.snow('snowCanvas') if @snow

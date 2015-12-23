@@ -2,6 +2,7 @@ Landscaper        = require 'lib/landscaper'
 View              = require './view'
 transition_events = 'transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd'
 WhiteboardView    = require 'views/whiteboard_view'
+FireplaceView    = require 'views/fireplace_view'
 mediator          = require 'lib/mediator'
 
 module.exports = class MapView extends View
@@ -52,6 +53,7 @@ module.exports = class MapView extends View
       document.body.removeChild document.getElementById("keysHints")
 
     @renderWhiteboard() if @mapName is 'eastside'
+    @renderFireplace() if @mapName is 'westside'
 
   renderWhiteboard: ->
     @mini_whiteboard_view = new WhiteboardView
@@ -59,6 +61,11 @@ module.exports = class MapView extends View
       container: @el
       autoRender: true
       scale: 0.333
+
+  renderFireplace: ->
+    @fireplaceView = new FireplaceView
+      container: @el
+      autoRender: true
 
   setDimensions: ->
     @rect = document.body.getClientRects()[0]

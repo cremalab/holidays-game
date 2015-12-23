@@ -5,8 +5,9 @@
     <desc>Created with Sketch.</desc>
     <defs></defs>
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
-        <g id="desk-wall" sketch:type="MSArtboardGroup" fill="#AAA4A0">
-            <path d="M227,0 L453,0 L431,94 L226,94 L0,94 L22,4.26325641e-14 L227,1.30563773e-14 Z" id="Rectangle-348" sketch:type="MSShapeGroup"></path>
+        <g id="desk-wall" sketch:type="MSArtboardGroup">
+            <path d="M227,0 L453,0 L431,94 L226,94 L0,94 L22,4.26325641e-14 L227,1.30563773e-14 Z" id="Rectangle-348" fill="#AAA4A0" sketch:type="MSShapeGroup"></path>
+            <path d="M267.018979,94 L172,94 L185.604857,56 L283.3192,56 L267.018979,94 Z" id="Rectangle-348" fill="#000000" sketch:type="MSShapeGroup"></path>
         </g>
     </g>
 </svg>
