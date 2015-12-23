@@ -18,7 +18,7 @@
   "dependencies": {
     "auto-reload-brunch": "^1.8.1",
     "autoprefixer-brunch": "^1.8.5",
-    "bower": "^1.7.1",
+    "bower": "1.7.1",
     "brunch": "^2.0.4",
     "clean-css-brunch": "^1.8.0",
     "coffee-script-brunch": "^1.8.3",
