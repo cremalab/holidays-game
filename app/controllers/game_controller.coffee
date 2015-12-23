@@ -60,7 +60,7 @@ module.exports = class GameController
 
 
   setupMap: (mapOptions = {}) ->
-    template = mapOptions.template or require('views/templates/eastside')
+    template = mapOptions.template or require('views/templates/westside')
     mapName = mapOptions.name or 'westside'
     @mapView = new MapView
       el: document.getElementById("map")
