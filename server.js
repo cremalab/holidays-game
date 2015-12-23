@@ -2,8 +2,6 @@ var http        = require('http');
 var path        = require('path');
 var express     = require('express');
 var compression = require('compression');
-var request     = require('request');
-var httpProxy   = require('node-http-proxy');
 var app         = express();
 var env         = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
