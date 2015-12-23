@@ -45,6 +45,8 @@ module.exports =
     window.open options[0], "twitter"
 
   disco: (map) ->
+    console.log 'disc'
+    console.log map.DJ
     classList = map.el.classList
     if classList.contains('disco-time')
       classList.remove 'disco-time'

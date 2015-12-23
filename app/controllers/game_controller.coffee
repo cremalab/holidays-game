@@ -42,7 +42,7 @@ module.exports = class GameController
     @setupCanvas()
     @setupPlayer()
     if @multiplayer
-      @notifier.connect mediator.current_player, "eastside", (channel) =>
+      @notifier.connect mediator.current_player, "westside", (channel) =>
         channel = channel.split("players_")[1]
         @mapView.setDimensions()
     @setupSidebar()
@@ -203,7 +203,7 @@ module.exports = class GameController
     @drawOrPromptAvatar(mapOptions)
     @mapView.setDimensions()
 
-    mapName = mapOptions.name or "eastside"
+    mapName = mapOptions.name or "westside"
 
     if @multiplayer
       @notifier.connect mediator.current_player, mapName, (channel) =>
