@@ -13,7 +13,8 @@
   },
   "scripts": {
     "start": "brunch watch --server",
-    "test": "brunch test"
+    "test": "brunch test",
+    "postinstall": "./node_modules/bower/bin/bower install; PRODUCTION=true brunch build"
   },
   "dependencies": {
     "auto-reload-brunch": "1.8.1",
