@@ -2,7 +2,7 @@ EventBroker = require 'lib/event_broker'
 
 module.exports = [
   id: "table"
-  src: "images/table.png"
+  src: "images/table.svg"
   x: 260
   y: 400
   # proximity:
@@ -13,37 +13,37 @@ module.exports = [
   #     console.log "LEAVING RADIUS"
 ,
   id: "table2"
-  src: "images/table.png"
+  src: "images/table.svg"
   x: 25
   y: 400
 ,
   id: "table3"
-  src: "images/table.png"
+  src: "images/table.svg"
   x: 25
   y: 475
 ,
   id: "table4"
-  src: "images/table.png"
+  src: "images/table.svg"
   x: 260
   y: 475
 ,
   id: "table5"
-  src: "images/table.png"
+  src: "images/table.svg"
   x: 25
   y: 800
 ,
   id: "table8"
-  src: "images/table.png"
+  src: "images/table.svg"
   x: 260
   y: 800
 ,
   id: "table6"
-  src: "images/table.png"
+  src: "images/table.svg"
   x: 25
   y: 875
 ,
   id: "table7"
-  src: "images/table.png"
+  src: "images/table.svg"
   x: 260
   y: 875
 ,
@@ -205,22 +205,22 @@ module.exports = [
   y: 1175
 ,
   id: "sharpie_table"
-  src: "images/sharpie_table.png"
+  src: "images/sharpie_table.svg"
   x: 190
   y: 550
 ,
   id: "sharpie_table2"
-  src: "images/sharpie_table.png"
+  src: "images/sharpie_table.svg"
   x: 215
   y: 740
 ,
   id: "sharpie_table3"
-  src: "images/sharpie_table.png"
+  src: "images/sharpie_table.svg"
   x: 70
   y: 340
 ,
   id: "office_table"
-  src: "images/office_table.png"
+  src: "images/office_table.svg"
   x: 1640
   y: 1075
 ,
@@ -383,12 +383,12 @@ module.exports = [
   y: 82
 ,
   id: "coffee_table"
-  src: "images/coffee_table.png"
+  src: "images/coffee_table.svg"
   x: 200
   y: 1160
 ,
   id: "front_table"
-  src: "images/front_table.png"
+  src: "images/front_table.svg"
   x: 900
   y: 1060
 ,

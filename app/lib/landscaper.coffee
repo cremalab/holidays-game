@@ -191,10 +191,11 @@ module.exports = class Landscaper
 
 
   determineDirections: (avatarRect, obstruction, array, dir, x, y, avatar) ->
-    if obstruction.svg
-      @determineSVGDirections(avatarRect, obstruction, array, dir, x, y, avatar)
-    else
-      @determineImgDirections(avatarRect, obstruction, array, dir, x, y, avatar)
+    #  This would be cool if it worked in Chrome: hit detection for polygons other than rectangles
+    # if obstruction.svg
+    #   @determineSVGDirections(avatarRect, obstruction, array, dir, x, y, avatar)
+    # else
+    @determineImgDirections(avatarRect, obstruction, array, dir, x, y, avatar)
 
   determineImgDirections: (avatarRect, obstruction, array, dir, x, y, avatar) ->
     # use avatar.width to ignore player name making it wider
