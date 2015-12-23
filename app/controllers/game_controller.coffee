@@ -71,7 +71,9 @@ module.exports = class GameController
     @mapView.DJ = @DJ
     mediator = mediator
 
-    @reactor = new Reactor(@mapView, @players) unless @reactor
+    @reactor.dispose() if @reactor
+    @reactor = null
+    @reactor = new Reactor(@mapView, @players)
     @nav     = new Navi(@mapView)
 
     Weather.snow('snowCanvas') if @snow
