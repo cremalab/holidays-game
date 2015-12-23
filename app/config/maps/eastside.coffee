@@ -115,87 +115,87 @@ module.exports = [
   y: 635
 ,
   id: "orange_chair"
-  src: "images/orange_chair.png"
+  src: "images/orange_chair.svg"
   x: 850
   y: 725
 ,
   id: "red_chair"
-  src: "images/red_chair.png"
+  src: "images/red_chair.svg"
   x: 1050
   y: 680
 ,
   id: "red_chair2"
-  src: "images/red_chair.png"
+  src: "images/red_chair.svg"
   x: 300
   y: 960
 ,
   id: "red_chair3"
-  src: "images/red_chair.png"
+  src: "images/red_chair.svg"
   x: 130
   y: 960
 ,
   id: "orange_chair5"
-  src: "images/orange_chair.png"
+  src: "images/orange_chair.svg"
   x: 310
   y: 1120
 ,
   id: "red_chair5"
-  src: "images/red_chair.png"
+  src: "images/red_chair.svg"
   x: 300
   y: 1260
 ,
   id: "red_chair4"
-  src: "images/red_chair.png"
+  src: "images/red_chair.svg"
   x: 350
   y: 560
 ,
   id: "orange_chair3"
-  src: "images/orange_chair.png"
+  src: "images/orange_chair.svg"
   x: 358
   y: 345
 ,
   id: "orange_chair4"
-  src: "images/orange_chair.png"
+  src: "images/orange_chair.svg"
   x: 375
   y: 745
 ,
   id: "orange_chair2"
-  src: "images/orange_chair.png"
+  src: "images/orange_chair.svg"
   x: 1050
   y: 390
 ,
   id: "bookshelf"
-  src: "images/bookshelf.png"
+  src: "images/bookshelf.svg"
   x: 25
   y: 55
 ,
   id: "bookshelf2"
-  src: "images/bookshelf.png"
+  src: "images/bookshelf.svg"
   x: 110
   y: 55
 ,
   id: "bookshelf3"
-  src: "images/bookshelf.png"
+  src: "images/bookshelf.svg"
   x: 195
   y: 55
 ,
   id: "bookshelf5"
-  src: "images/bookshelf.png"
+  src: "images/bookshelf.svg"
   x: 280
   y: 55
 ,
   id: "bookshelf4"
-  src: "images/bookshelf.png"
+  src: "images/bookshelf.svg"
   x: 690
   y: 55
 ,
   id: "couch"
-  src: "images/couch.png"
+  src: "images/couch.svg"
   x: 495
   y: 475
 ,
   id: "couch2"
-  src: "images/couch.png"
+  src: "images/couch.svg"
   x: 495
   y: 875
 ,
@@ -225,97 +225,97 @@ module.exports = [
   y: 1075
 ,
   id: "long_cabinet"
-  src: "images/long_cabinet.png"
+  src: "images/long_cabinet.svg"
   x: 500
   y: 80
 ,
   id: "long_cabinet2"
-  src: "images/long_cabinet.png"
+  src: "images/long_cabinet.svg"
   x: 775
   y: 80
 ,
   id: "container"
-  src: "images/container.png"
+  src: "images/container.svg"
   x: 965
   y: 80
 ,
   id: "container2"
-  src: "images/container.png"
+  src: "images/container.svg"
   x: 1015
   y: 80
 ,
   id: "container3"
-  src: "images/container.png"
+  src: "images/container.svg"
   x: 1065
   y: 80
 ,
   id: "office_chair"
-  src: "images/office_chair.png"
+  src: "images/office_chair.svg"
   x: 1810
   y: 1130
 ,
   id: "office_chair2"
-  src: "images/office_chair.png"
+  src: "images/office_chair.svg"
   x: 1810
   y: 1230
 ,
   id: "office_chair3"
-  src: "images/office_chair.png"
+  src: "images/office_chair.svg"
   x: 1810
   y: 1330
 ,
   id: "office_chair4"
-  src: "images/office_chair.png"
+  src: "images/office_chair.svg"
   x: 1810
   y: 1430
 ,
   id: "office_chair_flip"
-  src: "images/office_chair_flip.png"
+  src: "images/office_chair_flip.svg"
   x: 1605
   y: 1130
 ,
   id: "office_chair_flip2"
-  src: "images/office_chair_flip.png"
+  src: "images/office_chair_flip.svg"
   x: 1605
   y: 1230
 ,
   id: "office_chair_flip3"
-  src: "images/office_chair_flip.png"
+  src: "images/office_chair_flip.svg"
   x: 1605
   y: 1330
 ,
   id: "office_chair_flip4"
-  src: "images/office_chair_flip.png"
+  src: "images/office_chair_flip.svg"
   x: 1605
   y: 1430
 ,
   id: "desk_chair"
-  src: "images/desk_chair.png"
+  src: "images/desk_chair.svg"
   x: 1055
   y: 500
 ,
   id: "desk_chair2"
-  src: "images/desk_chair.png"
+  src: "images/desk_chair.svg"
   x: 1055
   y: 750
 ,
   id: "desk_chair_flip"
-  src: "images/desk_chair_flip.png"
+  src: "images/desk_chair_flip.svg"
   x: 870
   y: 500
 ,
   id: "desk_chair_flip2"
-  src: "images/desk_chair_flip.png"
+  src: "images/desk_chair_flip.svg"
   x: 870
   y: 750
 ,
   id: "fridge"
-  src: "images/fridge.png"
+  src: "images/fridge.svg"
   x: 1125
   y: 50
 ,
   id: "wall"
-  src: "images/wall.png"
+  src: "images/wall.svg"
   x: 1630
   zIndex: 10
   y: 285
@@ -340,13 +340,13 @@ module.exports = [
         EventBroker.publishEvent 'reactor:act', 'bathroom_photo'
 ,
   id: "wall_2"
-  src: "images/wall_2.png"
+  src: "images/wall_2.svg"
   x: 1630
   zIndex: 20
   y: 0
 ,
   id: "wall_3"
-  src: "images/wall3.png"
+  src: "images/wall3.svg"
   x: 1430
   y: 835
   proximity:
@@ -367,18 +367,18 @@ module.exports = [
 
 ,
   id: "wall_4"
-  src: "images/wall4.png"
+  src: "images/wall4.svg"
   x: 1408
   y: 835
 ,
   id: "counter"
-  src: "images/counter.png"
+  src: "images/counter.svg"
   x: 1590
   y: 80
   zIndex: 25
 ,
   id: "counter_2"
-  src: "images/counter_2.png"
+  src: "images/counter_2.svg"
   x: 1222
   y: 82
 ,
@@ -393,12 +393,12 @@ module.exports = [
   y: 1060
 ,
   id: "tree"
-  src: "images/tree1.png"
+  src: "images/tree1.svg"
   x: 1485
   y: 530
 ,
   id: "plant"
-  src: "images/plant.png"
+  src: "images/plant.svg"
   x: 955
   y: 590
   ghosty: true
@@ -492,28 +492,8 @@ module.exports = [
   y: 525
   ghosty: true
 ,
-  id: "dan"
-  src: "images/dan.png"
-  x: 390
-  y: 70
-,
-  id: "george"
-  src: "images/staff/george.png"
-  x: 1070
-  y: 1170
-  proximity:
-    radius: 60
-    onEnter: (item, options) ->
-      hint =
-        obstruction: item
-        text: "Welcome to Crema!"
-        id: "george_talk"
-      EventBroker.publishEvent 'navi:hint', hint
-    onLeave: ->
-      EventBroker.publishEvent 'navi:dismiss_hint', "george_talk"
-,
   id: "nate"
-  src: "images/nate.png"
+  src: "images/nate.svg"
   x: 120
   y: 520
   proximity:
@@ -559,21 +539,6 @@ module.exports = [
       EventBroker.publishEvent 'navi:hint', hint
     onLeave: ->
       EventBroker.publishEvent 'navi:dismiss_hint', "ross_talk"
-,
-  id: "deric"
-  src: "images/staff/deric.png"
-  x: 380
-  y: 1170
-  proximity:
-    radius: 60
-    onEnter: (item, options) ->
-      hint =
-        obstruction: item
-        text: "We hope you and your family have a great holiday season!"
-        id: "deric_talk"
-      EventBroker.publishEvent 'navi:hint', hint
-    onLeave: ->
-      EventBroker.publishEvent 'navi:dismiss_hint', "deric_talk"
 ,
   id: "present21"
   src: "images/present_32.png"

@@ -23,11 +23,11 @@ utils          = require 'lib/utils'
 module.exports = class GameController
   Backbone.utils.extend @prototype, EventBroker
   players: []
-  multiplayer: true
+  multiplayer: false
   snow: false
   trails: false
   customNames: true
-  clickToNavigate: false
+  clickToNavigate: true
 
   constructor: ->
     @players = new Players []

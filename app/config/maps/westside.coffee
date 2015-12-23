@@ -35,6 +35,56 @@ module.exports = [
       onLeave: ->
         EventBroker.publishEvent 'navi:dismiss_hint', "laura_talk"
   ,
+    id: "eric"
+    src: "images/staff/eric.svg"
+    y: 400
+    x: 1750
+    proximity:
+      radius: 30
+      onEnter: (item, options) ->
+        hint =
+          obstruction: item
+          text: "Go Royals!"
+          id: "eric_talk"
+        EventBroker.publishEvent 'navi:hint', hint
+      onLeave: ->
+        EventBroker.publishEvent 'navi:dismiss_hint', "eric_talk"
+  ,
+    id: "scotty"
+    src: "images/staff/scotty.svg"
+    y: 484
+    x: 484
+  ,
+    id: "george"
+    src: "images/staff/george.svg"
+    y: 110
+    x: 580
+  ,
+    id: "dan"
+    src: "images/dan.svg"
+    x: 880
+    y: 70
+  ,
+    id: "deric"
+    src: "images/staff/deric.svg"
+    x: 1250
+    y: 1300
+  ,
+    id: "matt-c"
+    src: "images/staff/matt-c.svg"
+    x: 1000
+    y: 1300
+  ,
+    id: "kaley"
+    src: "images/staff/kaley.svg"
+    x: 360
+    y: 1106
+  ,
+    id: "mitch"
+    src: "images/staff/mitch.svg"
+    x: 370
+    y: 700
+  ,
     id: "carla_wall"
     src: "images/wall3.svg"
     x: 149
@@ -54,7 +104,7 @@ module.exports = [
     id: "es_bathroom"
     x: 20
     y: 0
-    width: 528
+    width: 548
     height: 352
   ,
     id: "coffee_bar"
@@ -76,6 +126,37 @@ module.exports = [
     src: "images/westside/desk-wall.svg"
     x: 1005
     y: 840
+  ,
+    id: "automan1"
+    src: "images/orange_chair.svg"
+    x: 1105
+    y: 980
+  ,
+    id: "automan2"
+    src: "images/red_chair.svg"
+    x: 1305
+    y: 980
+  ,
+    id: "office_chair1"
+    src: "images/office_chair_flip.svg"
+    x: 920
+    y: 1200
+  ,
+    id: "office_chair2"
+    src: "images/desk_chair.svg"
+    x: 1470
+    y: 1260
+  ,
+    id: "office_chair3"
+    src: "images/desk_chair.svg"
+    x: 530
+    y: 1190
+  ,
+    id: "office_chair4"
+    src: "images/desk_chair.svg"
+    x: 230
+    y: 1190
+    mirror: true
   ,
     id: "receptionist_top"
     src: "images/westside/long-white-table-wide.svg"

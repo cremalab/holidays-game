@@ -48,6 +48,7 @@ module.exports = class Landscaper
 
     SVGInjector img, {}, ->
       img = document.querySelector "svg##{obstruction.id}"
+      throw new Error("img #{obstruction.src} not found") unless img
       box = img.getBBox()
 
       img.x      = obstruction.x
