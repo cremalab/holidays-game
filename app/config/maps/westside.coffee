@@ -81,7 +81,7 @@ module.exports = [
         EventBroker.publishEvent 'navi:dismiss_hint', "george_talk"
   ,
     id: "dan"
-    src: "images/dan.svg"
+    src: "images/staff/dan.svg"
     x: 880
     y: 70
     proximity:
