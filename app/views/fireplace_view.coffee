@@ -15,7 +15,7 @@ module.exports = class FireplaceView extends View
     @el.style.zIndex = "910"
     @el.style.backgroundImage = "url('/images/westside/fire-one.svg')"
 
-    @aniInterval = setInterval @stepFrames.bind(@), 300
+    # @aniInterval = setInterval @stepFrames.bind(@), 300
 
   stepFrames: ->
     switch @step
