@@ -172,6 +172,7 @@ module.exports = [
     x: 1108
     y: 640
     zIndex: 680
+    ghosty: true
     proximity:
       radius: 60
       onEnter: (item, options) ->
